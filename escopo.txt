@@ -1,0 +1,59 @@
+Fazer os redirections
+<
+>
+<<
+>>
+
+Pipes |
+
+handle ''
+handle ""
+
+?? Handle environment variables ($ followed by a sequence of characters) which
+should expand to their values
+
+$?
+
+ctrl-C 
+ctrl-D
+crtl-\
+
+echo com a opção de -n
+
+cd com somente um caminho relativo ou absoluto
+
+pwd com sem opções
+
+export com sem opções
+
+unset with sem opções
+
+env com sem opções ou argumentos
+
+exit com sem opções
+
+o prompt tem que ficar esperando por um novo comando
+
+deve ficar mostrando um histórico de trabalho
+
+a função readline() pode causa leaks, mas não é pra arrumar ela, mas o seu código não pode dar leak
+
+Avoid using more than one global variable to indicate a received signal. Consider
+the implications: this approach ensures that your signal handler will not access your
+main data structures
+
+Not interpret unclosed quotes or special characters which are not required by the
+subject such as \ (backslash) or ; (semicolon).
+
+======================\\===============\\==========================
+Funções permitidas
+readline, rl_clear_history, rl_on_new_line,
+rl_replace_line, rl_redisplay, add_history,
+printf, malloc, free, write, access, open, read,
+close, fork, wait, waitpid, wait3, wait4, signal,
+sigaction, sigemptyset, sigaddset, kill, exit,
+getcwd, chdir, stat, lstat, fstat, unlink, execve,
+dup, dup2, pipe, opendir, readdir, closedir,
+strerror, perror, isatty, ttyname, ttyslot, ioctl,
+getenv, tcsetattr, tcgetattr, tgetent, tgetflag,
+tgetnum, tgetstr, tgoto, tputs
