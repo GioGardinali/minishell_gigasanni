@@ -1,56 +1,85 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: asanni <asanni@student.42.fr>              +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/02/16 16:50:05 by asanni            #+#    #+#              #
-#    Updated: 2024/03/09 15:38:36 by asanni           ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+NAME = libft.a
 
-NAME = minishell
+CFLAGS = -Wall -Werror -Wextra -g3 -I ./
 
-#--------------FLAGS----------------------------#
-CFLAGS = -Wall -Werror -Wextra -g3
-#--------------PATHS----------------------------#
+OBJFOLDER =	objs/
 
-OBJFOLDER = objs/
-SOURCES = sources/
+SRC = ft_atoi.c \
+ ft_atol.c \
+ ft_bzero.c \
+ ft_calloc.c \
+ ft_isalnum.c \
+ ft_isalpha.c \
+ ft_isascii.c \
+ ft_isdigit.c \
+ ft_isprint.c \
+ ft_tolower.c \
+ ft_toupper.c \
+ ft_memchr.c \
+ ft_memcmp.c \
+ ft_memcpy.c \
+ ft_memmove.c \
+ ft_memset.c \
+ ft_strdup.c\
+ ft_strlcpy.c \
+ ft_strlen.c \
+ ft_strncmp.c \
+ ft_strnstr.c \
+ ft_strchr.c \
+ ft_strjoin.c \
+ ft_strrchr.c \
+ ft_putendl_fd.c \
+ ft_putnbr_fd.c \
+ ft_putstr_fd.c \
+ ft_putchar_fd.c \
+ ft_striteri.c \
+ ft_itoa.c \
+ ft_strmapi.c \
+ ft_substr.c \
+ ft_strtrim.c \
+ ft_strlcat.c \
+ ft_split.c \
+ get_next_line_bonus.c\
+ ft_printf.c\
+ ft_puthex_lower.c\
+ ft_puthex_upper.c\
+ ft_put_uns_dec.c\
+ ft_isnum.c\
+ ft_signal.c\
+ ft_put_pointer.c
 
-P_LIBFT = libft/
-LIBFT = $(P_LIBFT)libft.a
-LINCLUDES = -L./libft -lft
-RL = readline
-#--------------FILES----------------------------#
-SRC = sources/main.c \
+SRCB = ft_lstadd_back.c \
+ ft_lstadd_front.c \
+ ft_lstclear.c \
+ ft_lstdelone.c \
+ ft_lstiter.c \
+ ft_lstlast.c \
+ ft_lstmap.c \
+ ft_lstnew.c \
+ ft_lstsize.c \
 
-#--------------RULES----------------------------#
+OBJFILES = $(SRC:%.c=$(OBJFOLDER)%.o)
 
-OBJFILES = $(subst $(SOURCES),$(OBJFOLDER),$(SRC:.c=.o))
+OBJB = $(SRCB:%.c=$(OBJFOLDER)%.o)
 
-all: comp_lib $(OBJFOLDER) $(NAME)
-
-comp_lib:
-	@$(MAKE) -sC $(P_LIBFT)
-
-$(OBJFOLDER):
-	@mkdir $(OBJFOLDER)
+all: make_folder $(NAME)
 
 $(NAME): $(OBJFILES)
-	$(CC) $(OBJFILES) $(H_LIB) $(LIBFT) $(LINCLUDES) $(CFLAGS) -o $(NAME) -g -l $(RL)
+	ar rcs $(NAME) $?
+	echo $?
 
-$(OBJFOLDER)%.o : $(SOURCES)%.c
-	cc $(HEADERS) -c $< -o $@ -g3 
+make_folder:
+	@mkdir -p $(OBJFOLDER)
 
-#----------------CLEAN--------------------------#
+$(OBJFOLDER)%.o: %.c
+	$(CFLAGS) -c $< -o $@
+	ar rcs $(NAME) $@
 
 clean:
-	rm -f $(OBJFILES) -r $(OBJFOLDER)
+	rm -f $(OBJFILES) $(OBJB) -r $(OBJFOLDER)
 
 fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
-.PHONY: all clean fclean re
+.PHONY: all bonus clean fclean re
