@@ -57,3 +57,48 @@ dup, dup2, pipe, opendir, readdir, closedir,
 strerror, perror, isatty, ttyname, ttyslot, ioctl,
 getenv, tcsetattr, tcgetattr, tgetent, tgetflag,
 tgetnum, tgetstr, tgoto, tputs
+
+Todo processo tem um pai quando um processo em execução faz uma chamada de sistema
+fork() ou exec()
+
+Aula 3 01:15:00=quando eu chamo ls no terminal, na hora de executar, 
+ele abre um fork para executar o comando, fork é um clone do processo pai
+
+Processos orfãos é quando o processo pai encerra e o filho continua em execuçãp
+o PID 1 adota os processos órfãos (tipo coisas que ficam rodando em segundo plano)
+(mas em processos no linux, não pode existir processos órfãos)
+
+Processos zumbis
+o processo pai não consegue interpretar o término do processo filho (exit)
+Processo filho termina, mas continua na tabela de processos ativos.
+
+para checar processos zumbis  = ps -ely | grep '^Z'
+
+Como avisar o processo pai que o processo filho já terminou? terminal
+kill -s SIGCHLD <PPID>
+
+estágios de um processo
+R - Em execução (run)
+S - Sono interruptível
+D - Sono não-interruptível (acesso a I/O)
+T - Terminado ou suspenso
+Z - Zumbi
+
+I - (idle) indica que o processo está ocioso e não está consumindo cliclos de CPU
+
+para ver sinais disponíveis
+kill -l
+
+type serve para mostrar como o comando seria executado, exemplo:
+type apti
+R: "aptu está apelidade para 'sudo apt install'
+
+agora se eu utilizo type -a (nome do que eu quero), ele traz o que é aquele comando
++ os caminhos de onde pode encontrar aquele comando. (utilitário)
+
+pstree é um comando para ver a árvore de processos
+
+para melhorar a eficiencia de uma sistema, se usa thread 
+(elas compartilham recursos do processo principal em que estão ligadas)
+
+
