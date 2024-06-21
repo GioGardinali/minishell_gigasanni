@@ -101,4 +101,10 @@ pstree é um comando para ver a árvore de processos
 para melhorar a eficiencia de uma sistema, se usa thread 
 (elas compartilham recursos do processo principal em que estão ligadas)
 
-
+fazer tokenização, pesquisar como fazer em separar as palavras e operadores
+regra de citação (regras das aspas)
+\ este comando permite escapar para a próxima palavra para imprimir na tele 
+tipo echo olá, \ mundo!
+R: olá, mundo!
+\ ` $ ! são 4 exceções dentro da "" aspas duplas, onde vc consegue escapar dentro
+delas
