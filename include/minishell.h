@@ -16,19 +16,31 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <limits.h>
-#include <readline/readline.h>
+# include <readline/readline.h>
 # include "../libft/libft.h" /* mylibft */
 
-//Stack Struct
-typedef struct s_stack
+//Structs
+typedef struct s_env
 {
-	int				value;
-	int				index;
-	struct s_stack	*prev;
-	struct s_stack	*next;
-}t_stack;
+	char			*env_key;
+	char			*env_content;
+	struct s_env	*next;
+}t_env;
+
+typedef struct s_token
+{
+	char			*str;
+	int				type;
+	struct s_token	*next;
+}t_token;
+
+typedef struct s_mini
+{
+	char		*input;
+	t_env		*env_args;
+	t_token		*comands;
+}t_mini;
 
 //Functions
-
 
 #endif
