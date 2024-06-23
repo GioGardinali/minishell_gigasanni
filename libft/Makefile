@@ -23,6 +23,7 @@ SRC = ft_atoi.c \
  ft_strdup.c\
  ft_strlcpy.c \
  ft_strlen.c \
+ ft_strcmp.c \
  ft_strncmp.c \
  ft_strnstr.c \
  ft_strchr.c \
@@ -39,13 +40,13 @@ SRC = ft_atoi.c \
  ft_strtrim.c \
  ft_strlcat.c \
  ft_split.c \
- get_next_line_bonus.c\
- ft_printf.c\
- ft_puthex_lower.c\
- ft_puthex_upper.c\
- ft_put_uns_dec.c\
- ft_isnum.c\
- ft_signal.c\
+ get_next_line_bonus.c \
+ ft_printf.c \
+ ft_puthex_lower.c \
+ ft_puthex_upper.c \
+ ft_put_uns_dec.c \
+ ft_isnum.c \
+ ft_signal.c \
  ft_put_pointer.c
 
 SRCB = ft_lstadd_back.c \
@@ -72,7 +73,7 @@ make_folder:
 	@mkdir -p $(OBJFOLDER)
 
 $(OBJFOLDER)%.o: %.c
-	$(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 	ar rcs $(NAME) $@
 
 clean:

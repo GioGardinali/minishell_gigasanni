@@ -16,7 +16,9 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <limits.h>
-# include <readline/readline.h>
+# include <readline/history.h> // para adicionar no historico
+# include <readline/readline.h> // para fazer tudo funfar
+# include <sys/wait.h> // usar waitpid
 # include "../libft/libft.h" /* mylibft */
 
 //Structs
@@ -31,6 +33,7 @@ typedef struct s_token
 {
 	char			*str;
 	int				type;
+	//struct s_token	*prev;
 	struct s_token	*next;
 }t_token;
 

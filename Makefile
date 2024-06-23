@@ -48,9 +48,11 @@ $(OBJFOLDER)%.o : $(SOURCES)%.c
 
 clean:
 	rm -f $(OBJFILES) -r $(OBJFOLDER)
+	@make clean -C libft
 
 fclean: clean
 	rm -f $(NAME)
+	@make fclean -C libft
 
 re: fclean all
 .PHONY: all clean fclean re
