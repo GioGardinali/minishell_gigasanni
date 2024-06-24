@@ -111,3 +111,6 @@ tipo echo olá, \ mundo!
 R: olá, mundo!
 \ ` $ ! são 4 exceções dentro da "" aspas duplas, onde vc consegue escapar dentro
 delas
+
+
+A função access = função que valida se o arquivo existe ou não e tbm valida permissões especificas do arquivo
