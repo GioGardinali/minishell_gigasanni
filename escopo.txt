@@ -114,3 +114,14 @@ delas
 
 
 A função access = função que valida se o arquivo existe ou não e tbm valida permissões especificas do arquivo
+
+
+TO-DO 25/06
+
+//A gente tem pegar o PATH na lista das envs e fazer a split passar neste PATH 
+//para a gente pegar o caminho correto das pastas para o comando especifico
+//env | grep PATH
+//Falar com o Andre para saber como ele conseguiu fazer esta parte
+
+
+// tokenização e parser fazer as duas juntas
