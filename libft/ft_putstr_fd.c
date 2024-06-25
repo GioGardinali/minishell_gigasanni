@@ -32,7 +32,7 @@ int	ft_putstr_fd(char *s, int fd)
 
 	i = 0;
 	if (!s)
-		return (ft_putstr_fd("(null)", 1));
+		return (ft_putstr_fd("(null)", fd));
 	while (s[i])
 	{
 		write(fd, &s[i], 1);
