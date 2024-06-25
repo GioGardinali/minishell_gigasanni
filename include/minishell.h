@@ -40,7 +40,7 @@ typedef struct s_token
 typedef struct s_mini
 {
 	char		*input;
-	t_env		*env_args;
+	t_env		**env_args;
 	t_token		*comands;
 }t_mini;
 
