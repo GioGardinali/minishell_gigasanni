@@ -25,6 +25,7 @@ LINCLUDES = -L./libft -lft
 RL = readline
 #--------------FILES----------------------------#
 SRC = sources/main.c \
+sources/path_utils.c \
 
 #--------------RULES----------------------------#
 

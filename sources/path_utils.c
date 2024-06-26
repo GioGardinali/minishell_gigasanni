@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 19:23:18 by asanni            #+#    #+#             */
-/*   Updated: 2024/06/25 19:42:42 by asanni           ###   ########.fr       */
+/*   Updated: 2024/06/26 17:13:57 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,19 @@
 // Concatenar com o comando (ex: /pasta/comando - /usr/bin/ls)
 // Checar se a pasta especifica tem acesso ao comando
 
-char	*check_path(t_mini *minishell)
-{
-	// char *path_temp;
-	// if (minishell->env_args)
-}
+// char	*check_path(t_mini *minishell)
+// {
+// 	// char *path_temp;
+// 	// if (minishell->env_args)
+// }
 
-char	*search_path(const char **s, char *str)
+const char *search_path(const char **s, const char *str)
 {
-	if (!s)
-		return (NULL);
-	while (**s != NULL && str != **s)
+	while (*s!= NULL)
+	{
+		if (ft_strcmp(*s, str) == 0)
+			return *s;
 		s++;
-	if (**s == str)
-		return (s);
-	return (NULL);
+	}
+	return NULL;
 }

@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 18:52:55 by asanni            #+#    #+#             */
-/*   Updated: 2024/06/25 20:02:16 by asanni           ###   ########.fr       */
+/*   Updated: 2024/06/26 17:14:43 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,6 @@ static void	start_minishell(t_mini *minishell)
 // 	t_mini minishell;
 // 	minishell = (t_mini){0};
 // 	minishell.env_args = __environ;
-
-	
 // 	while (1)
 // 		start_minishell(&minishell);
 // 	//free_envs(minishell.env_args);
@@ -76,39 +74,20 @@ static void	start_minishell(t_mini *minishell)
 #include <stdio.h>
 #include <string.h>
 
-const char *search_path(const char **s, char *str)
+int main()
 {
-    if (!s)
-        return (NULL);
-    while (*s!= NULL && strcmp(str, *s)!= 0)
-        s++;
-    if (*s == str)
-        return (*s);
-    return (NULL);
-}
-
-int main() 
-{
-    // Caminho de pesquisa simulado
-    const char *paths[] = {"./bin", "./lib", "./src", NULL};
-
-    // Strings para buscar
-    const char *strings = "./lib";
-
-    // Tamanho dos arrays
-    size_t num_paths = sizeof(paths) / sizeof(paths[0]);
-	{
-        char *result = search_path((const char **)paths, strings);
-        
-        if (result) {
-            printf("Encontrado: %s\n", result);
-            // Limpar o buffer de saída para garantir que o próximo resultado comece em uma nova linha
-            printf("\033[H\033[J"); // Comando ANSI para limpar a tela
-        } else {
-            printf("Não encontrado: %s\n", strings);
-        }
-    }
-
+    // Example usage
+    const char *paths[] = {"path/to/file1.txt", "another/path/file2.txt"};
+    const int num_paths = sizeof(paths) / sizeof(paths[0]);
+    
+    const char *target = "another/path/file2.txt";
+    const char *result = search_path(paths, target);
+    
+    if (result!= NULL) 
+        printf("Found '%s' ", result);
+	else 
+        printf("'%s' not found.\n", target);
     return 0;
 }
+
 
