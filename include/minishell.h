@@ -25,7 +25,7 @@
 typedef struct s_env
 {
 	char			*env_key;
-	char			*env_content;
+	char			**env_content;
 	struct s_env	*next;
 }t_env;
 
@@ -33,19 +33,19 @@ typedef struct s_token
 {
 	char			*str;
 	int				type;
-	//struct s_token	*prev;
+	struct s_token	*prev;
 	struct s_token	*next;
 }t_token;
 
 typedef struct s_mini
 {
 	char		*input;
-	t_env		**env_args;
+	t_env		*env_args;
 	t_token		*comands;
 }t_mini;
 
 //Functions
-const char *search_path(const char **s, const char *str);
-char	*check_path(t_mini *minishell);
+const char	*search_path(const char **s, const char *str);
+char		*check_path(t_mini *minishell);
 
 #endif

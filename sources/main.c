@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 18:52:55 by asanni            #+#    #+#             */
-/*   Updated: 2024/06/26 17:14:43 by asanni           ###   ########.fr       */
+/*   Updated: 2024/06/26 19:24:11 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,21 +24,22 @@ void	free_split(char **split)
 
 void	exit_function(void)
 {
-		ft_putendl_fd("exit", 1);
-		exit(EXIT_SUCCESS);
+	ft_putendl_fd("exit", 1);
+	exit(EXIT_SUCCESS);
 }
+
 void	check_pid(t_mini *minishell)
 {
 	char	**cmds;
 	char	*path;
 
 	cmds = ft_split(minishell->input, ' ');
-		path = ft_strjoin(ft_strdup("/usr/bin/"), cmds[0]);
-		execve(path, cmds, __environ);
-		ft_putendl_fd("Execve falhou trouxa!", 2);
-		free_split(cmds);
-		free(path);
-		exit(1);
+	path = ft_strjoin(ft_strdup("/usr/bin/"), cmds[0]);
+	execve(path, cmds, __environ);
+	ft_putendl_fd("Execve falhou trouxa!", 2);
+	free_split(cmds);
+	free(path);
+	exit(1);
 }
 
 static void	start_minishell(t_mini *minishell)
@@ -60,34 +61,15 @@ static void	start_minishell(t_mini *minishell)
 	free(minishell->input);
 	waitpid(pid, NULL, 0);
 }
-// int main (void)
-// {
-// 	t_mini minishell;
-// 	minishell = (t_mini){0};
-// 	minishell.env_args = __environ;
-// 	while (1)
-// 		start_minishell(&minishell);
-// 	//free_envs(minishell.env_args);
-// 	return (0);
-// }
 
-#include <stdio.h>
-#include <string.h>
-
-int main()
+int	main(void)
 {
-    // Example usage
-    const char *paths[] = {"path/to/file1.txt", "another/path/file2.txt"};
-    const int num_paths = sizeof(paths) / sizeof(paths[0]);
-    
-    const char *target = "another/path/file2.txt";
-    const char *result = search_path(paths, target);
-    
-    if (result!= NULL) 
-        printf("Found '%s' ", result);
-	else 
-        printf("'%s' not found.\n", target);
-    return 0;
+	t_mini	minishell;
+
+	minishell = (t_mini){0};
+	minishell.env_args->env_content = __environ;
+	while (1)
+		start_minishell(&minishell);
+	//free_envs(minishell.env_args);
+	return (0);
 }
-
-
