@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 18:52:55 by asanni            #+#    #+#             */
-/*   Updated: 2024/06/26 19:24:11 by asanni           ###   ########.fr       */
+/*   Updated: 2024/06/26 21:01:33 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,14 +62,40 @@ static void	start_minishell(t_mini *minishell)
 	waitpid(pid, NULL, 0);
 }
 
+char	**copy_env(void)
+{
+	int		i;
+	int		size;
+	char	**temp;
+
+	size = 0;
+	i = -1;
+	while (__environ[size])
+		size++;
+	temp = ft_calloc(sizeof(char *), size + 1);
+	while (++i < size)
+		temp[i] = __environ[i];
+	// i = -1;
+	// while (++i < size)
+	// 	printf("%s\n", temp[i]);
+	return (temp);
+}
+
 int	main(void)
 {
-	t_mini	minishell;
+	t_mini		minishell;
+	char		**str_path;
+	int			i;
 
 	minishell = (t_mini){0};
-	minishell.env_args->env_content = __environ;
-	while (1)
-		start_minishell(&minishell);
-	//free_envs(minishell.env_args);
-	return (0);
+	//str_path = copy_env();
+	minishell.env.env_content = copy_env();
+	str_path = ft_split(search_path(minishell.env.env_content, "PATH"), ':');
+	i = -1;
+	while (str_path[++i])
+		printf("%s\n", str_path[i]);
+	// while (1)
+	// 	start_minishell(&minishell);
+	// //free_envs(minishell.env_args);
+	// return (0);
 }

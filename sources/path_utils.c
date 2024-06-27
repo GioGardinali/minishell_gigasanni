@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 19:23:18 by asanni            #+#    #+#             */
-/*   Updated: 2024/06/26 19:10:14 by asanni           ###   ########.fr       */
+/*   Updated: 2024/06/26 20:58:29 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@
 // 	// if (minishell->env_args)
 // }
 
-const char	*search_path(const char **s, const char *str)
+char	*search_path(char **s, char *str)
 {
 	while (*s != NULL)
 	{
-		if (ft_strcmp(*s, str) == 0)
+		if (ft_strncmp(*s, str, 4) == 0)
 			return (*s);
 		s++;
 	}

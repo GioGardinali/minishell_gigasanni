@@ -16,6 +16,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <limits.h>
+# include <stdio.h>
 # include <readline/history.h> // para adicionar no historico
 # include <readline/readline.h> // para fazer tudo funfar
 # include <sys/wait.h> // usar waitpid
@@ -40,12 +41,12 @@ typedef struct s_token
 typedef struct s_mini
 {
 	char		*input;
-	t_env		*env_args;
+	t_env		env;
 	t_token		*comands;
 }t_mini;
 
 //Functions
-const char	*search_path(const char **s, const char *str);
+char	*search_path(char **s, char *str);
 char		*check_path(t_mini *minishell);
 
 #endif
