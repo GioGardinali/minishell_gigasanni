@@ -125,3 +125,14 @@ TO-DO 25/06
 
 
 // tokenização e parser fazer as duas juntas
+
+
+andar até o igual e dar o retorno depois do igual 
+do espaco ate o \0 colocar numa var char ponteiro 
+
+
+
+
+
+depois substiruir no no path a string que esta no strjoin pelo que está na variavel
+

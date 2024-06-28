@@ -47,6 +47,8 @@ typedef struct s_mini
 
 //Functions
 char	*search_path(char **s, char *str);
-char		*check_path(t_mini *minishell);
+char	*check_path(t_mini *minishell);
+char	*remove_path(char *str);
+char	**copy_env(void);
 
 #endif
