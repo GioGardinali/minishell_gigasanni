@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 19:23:18 by asanni            #+#    #+#             */
-/*   Updated: 2024/06/28 18:48:23 by asanni           ###   ########.fr       */
+/*   Updated: 2024/07/01 20:27:40 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,6 @@
 // Passar a split pelo path
 // Concatenar com o comando (ex: /pasta/comando - /usr/bin/ls)
 // Checar se a pasta especifica tem acesso ao comando
-
-// char	*check_path(t_mini *minishell)
-// {
-// 	// char *path_temp;
-// 	// if (minishell->env_args)
-// }
 
 char	*search_path(char **s, char *str)
 {
@@ -62,5 +56,28 @@ char	*remove_path(char *str)
 
 	i = 0;
 	path = ft_strchr(str, '/');
+	return (path);
+}
+
+char	*verify_path(t_mini *minishell)
+{
+	char	**str_path;
+	char	*path_line;
+	char	*path;
+	int		result;
+	int		i;
+
+	minishell->env.env_content = copy_env();
+	path_line = search_path(minishell->env.env_content, "PATH");
+	str_path = ft_split(remove_path(path_line), ':');
+	i = 0;
+	while (result != 0)
+	{
+		result = access(ft_strjoin(str_path[i], minishell->input), F_OK | R_OK);
+		path = str_path[i];
+		if (result == -1)
+			perror("Erro ao acessar o arquivo:");
+		i++;
+	}
 	return (path);
 }

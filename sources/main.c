@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 18:52:55 by asanni            #+#    #+#             */
-/*   Updated: 2024/06/28 18:47:16 by asanni           ###   ########.fr       */
+/*   Updated: 2024/07/01 20:19:45 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,22 +65,22 @@ static void	start_minishell(t_mini *minishell)
 int	main(void)
 {
 	t_mini		minishell;
-	char		**str_path;
-	char		*path_file;
-	int			i;
+	// char		**str_path;
+	// char		*path_file;
+	// int			i;
 
 	minishell = (t_mini){0};
-	//str_path = copy_env();
-	minishell.env.env_content = copy_env();
-	path_file = search_path(minishell.env.env_content, "PATH");
-	str_path = ft_split(remove_path(path_file), ':');
-	i = -1;
-	while (str_path[++i])
-		printf("%s\n", str_path[i]);
-	// while (1)
-	// 	start_minishell(&minishell);
-	// //free_envs(minishell.env_args);
-	// return (0);
+	// str_path = copy_env();
+	// minishell.env.env_content = copy_env();
+	// path_file = search_path(minishell.env.env_content, "PATH");
+	// str_path = ft_split(remove_path(path_file), ':');
+	//i = -1;
+	// while (str_path[++i])
+	// 	printf("%s\n", str_path[i]);
+	//  while (1)
+	//  	start_minishell(&minishell);
+	//  free_envs(minishell.env_args);
+	 return (0);
 }
 // andar até o igual e dar o retorno depois do igual 
 // do espaco ate o \0 colocar numa var char ponteiro 
@@ -91,7 +91,7 @@ int	main(void)
 // 	char	**path_;
 
 // 	str_path = search_path(minishell->env.env_content, "PATH");
-
 	
 // 	//str_path = ft_split(search_path(minishell->env.env_content, "PATH"), ':');
 // }
+
