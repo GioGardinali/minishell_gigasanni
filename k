@@ -1,0 +1,13 @@
+4
+d
+escopo.txt
+include
+k
+libft
+ls
+Makefile
+minishell
+objs
+README.md
+sources
+teste

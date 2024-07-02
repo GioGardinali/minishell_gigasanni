@@ -45,8 +45,7 @@ typedef struct s_mini
 	t_token		*comands;
 }t_mini;
 
-
-typedef enum e_token
+typedef enum e_type
 {
 	VAR = 1,
 	WORD,
@@ -55,7 +54,7 @@ typedef enum e_token
 	TRUNC,
 	HERE_DOC,
 	END,
-}	t_token;
+}	t_type;
 
 //Functions
 char	*search_path(char **s, char *str);
