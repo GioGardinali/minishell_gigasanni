@@ -136,3 +136,18 @@ do espaco ate o \0 colocar numa var char ponteiro
 
 depois substiruir no no path a string que esta no strjoin pelo que está na variavel
 
+
+
+tokenização:
+
+passar por toda a linha de inputs do readline e separar cada um dos cmds em 1 node da lista linkada
+classificar cada comando em seus respectivos tipos : variable, word, especial, input(<), append(>>), trunc(>), heredoc(<<) e end(\0)
+a classificação será feita com o uso de e_num;
+
+
+Para tokenizar tomar cuidado com as aspas
+
+
+checar aspas =  se elas não fecham: erro
+checar redirect sempre tem que ter um arquivo depois dele, não pode > |
+não pode comecar e nem terminar a str com pipe 

@@ -45,10 +45,24 @@ typedef struct s_mini
 	t_token		*comands;
 }t_mini;
 
+
+typedef enum e_token
+{
+	VAR = 1,
+	WORD,
+	INPUT,
+	APPEND,
+	TRUNC,
+	HERE_DOC,
+	END,
+}	t_token;
+
 //Functions
 char	*search_path(char **s, char *str);
 char	*check_path(t_mini *minishell);
 char	*remove_path(char *str);
 char	**copy_env(void);
+char	*verify_path(t_mini *minishell);
+char	*normalize_input(t_mini *minishell);
 
 #endif

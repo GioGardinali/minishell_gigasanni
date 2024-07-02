@@ -26,6 +26,7 @@ RL = readline
 #--------------FILES----------------------------#
 SRC = sources/main.c \
 sources/path_utils.c \
+sources/input_verif.c \
 
 #--------------RULES----------------------------#
 

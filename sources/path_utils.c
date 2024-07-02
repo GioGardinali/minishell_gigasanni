@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 19:23:18 by asanni            #+#    #+#             */
-/*   Updated: 2024/07/01 20:27:40 by asanni           ###   ########.fr       */
+/*   Updated: 2024/07/02 16:19:10 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,6 @@ char	**copy_env(void)
 	temp = ft_calloc(sizeof(char *), size + 1);
 	while (++i < size)
 		temp[i] = __environ[i];
-	// i = -1;
-	// while (++i < size)
-	// 	printf("%s\n", temp[i]);
 	return (temp);
 }
 
@@ -67,17 +64,39 @@ char	*verify_path(t_mini *minishell)
 	int		result;
 	int		i;
 
-	minishell->env.env_content = copy_env();
 	path_line = search_path(minishell->env.env_content, "PATH");
 	str_path = ft_split(remove_path(path_line), ':');
+	result = 1;
 	i = 0;
 	while (result != 0)
 	{
-		result = access(ft_strjoin(str_path[i], minishell->input), F_OK | R_OK);
+		result = access(ft_strjoin(str_path[i],
+					normalize_input(minishell)), F_OK | R_OK);
 		path = str_path[i];
-		if (result == -1)
-			perror("Erro ao acessar o arquivo:");
 		i++;
 	}
+	if (result == -1)
+		perror("Erro ao acessar o arquivo:");
 	return (path);
 }
+/*___________________________________________________*/
+/* 
+Com comentário
+char	**copy_env(void)
+{
+	int		i;
+	int		size;
+	char	**temp;
+
+	size = 0;
+	i = -1;
+	while (__environ[size])
+		size++;
+	temp = ft_calloc(sizeof(char *), size + 1);
+	while (++i < size)
+		temp[i] = __environ[i];
+	// i = -1;
+	// while (++i < size)
+	// 	printf("%s\n", temp[i]);
+	return (temp);
+}*/
