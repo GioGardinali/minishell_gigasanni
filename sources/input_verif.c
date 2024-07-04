@@ -6,30 +6,11 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 19:12:09 by asanni            #+#    #+#             */
-/*   Updated: 2024/07/02 20:31:41 by asanni           ###   ########.fr       */
+/*   Updated: 2024/07/04 20:30:46 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
-char	*normalize_input(t_mini *minishell)
-{
-	char	*input;
-	char	**cmds;
-	char	*cmd;
-	int		i;
-
-	input = minishell->input;
-	cmds = ft_split(input, ' ');
-	i = 0;
-	while (cmds[i] != NULL)
-	{
-		cmd = ft_strjoin("/", cmds[i]);
-		i++;
-	}
-	printf("%s", cmd);
-	return (cmd);
-}
 
 int	check_quotes(char	*str)
 {
@@ -67,50 +48,66 @@ int	check_pipes(char	*str)
 
 int	check_redirect(char	*str)
 {
+	int		validate;
+
+	if (check_input_and_trunc(str) == -1 || check_append(str) == -1)
+		validate = -1;
+	return (validate);
+}
+
+int	check_input_and_trunc(char	*str)
+{
 	char	*new_str;
 	int		validate;
 	int		i;
 
+	validate = 0;
+	i = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] == '>' || str[i] == '<')
+		{	
+			while (str[++i] != '\0')
+			{
+				if (!ft_isprint(str[i]))
+					validate = -1;
+				i++;
+			}
+		}
+		i++;
+	}
+	return (validate);
+}
+
+int	check_append(char	*str)
+{
+	char	*new_str;
+	int		validate;
+	int		i;
+	int		j;
+
+	validate = 0;
+	i = 0;
 	while (str[i] != '\0')
 	{
 		if (str[i] == '>')
 		{
 			if (str[i + 1] == '>')
-			{
-				//remove_spaces(ft_strchr(str, ">>")); fazer uma strstr para este caso;
-				printf(">>");
+			{	
+				while (str[++i] != '\0')
+				{
+					if (!ft_isprint(str[i]))
+						validate = -1;
+					i++;
+				}
 			}
-			else
-			{
-				remove_spaces(ft_strchr(str, ">"));
-			}
-		}
-		if (str[i] == '<')
-			remove_spaces(ft_strchr(str, "<"));
-		i++;
-	}
-}
-//fazer o tratamento para o pipe e do NULL para o redirect; > |
-
-char	remove_spaces(char *str)
-{
-	int		i;
-	char	*str_temp;
-
-	i = 0;
-	while (str[i] == ' ' || str[i] == '\t')
-		i++;
-	while (str[i] && (str[i] == ' ' || str[i] == '\t'))
-	{
-		if (!(str[i] == ' ' || str[i] == '\t'))
-		{
-			*str_temp = str[i];
-			str_temp++;
 		}
 		i++;
 	}
-	return (str_temp);
+	return (validate);
 }
+
+//fazer o tratamento para o pipe e do NULL para o redirect > |
 
 // int	check_input(char *input)
 // {
@@ -128,3 +125,5 @@ Criar funções para verificar o input da readline
 arruma-los e retorná-los certinho para passar
 para a execve
 */
+
+///colocar a validação do path nos redirects
