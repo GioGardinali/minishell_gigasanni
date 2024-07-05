@@ -63,5 +63,6 @@ char	*remove_path(char *str);
 char	**copy_env(void);
 char	*verify_path(t_mini *minishell);
 char	*normalize_input(t_mini *minishell);
+void	error_function(char *str)
 
 #endif

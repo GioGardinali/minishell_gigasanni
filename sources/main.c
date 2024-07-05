@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 18:52:55 by asanni            #+#    #+#             */
-/*   Updated: 2024/07/02 16:21:23 by asanni           ###   ########.fr       */
+/*   Updated: 2024/07/05 17:57:36 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,12 @@ void	free_split(char **split)
 	while (split[++i])
 		free(split[i]);
 	free(split);
+}
+
+void	error_function(char *str)
+{
+	ft_putendl_fd(str, 2);
+	exit(EXIT_FAILURE);
 }
 
 void	exit_function(void)
@@ -63,19 +69,19 @@ static void	start_minishell(t_mini *minishell)
 	waitpid(pid, NULL, 0);
 }
 
-int	main(void)
-{
-	t_mini		minishell;
-	int			i;
+// int	main(void)
+// {
+// 	t_mini		minishell;
+// 	int			i;
 
-	minishell = (t_mini){0};
-	minishell.env.env_content = copy_env();
-	i = -1;
-	while (1)
-		start_minishell(&minishell);
-	free(minishell.env.env_content);
-	return (0);
-}
+// 	minishell = (t_mini){0};
+// 	minishell.env.env_content = copy_env();
+// 	i = -1;
+// 	while (1)
+// 		start_minishell(&minishell);
+// 	free(minishell.env.env_content);
+// 	return (0);
+// }
 
 /*________________________________________________________*/
 // andar até o igual e dar o retorno depois do igual 

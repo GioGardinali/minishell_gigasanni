@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 19:12:09 by asanni            #+#    #+#             */
-/*   Updated: 2024/07/04 20:30:46 by asanni           ###   ########.fr       */
+/*   Updated: 2024/07/05 17:14:13 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,8 @@ int	check_input_and_trunc(char	*str)
 	{
 		if (str[i] == '>' || str[i] == '<')
 		{	
-			while (str[++i] != '\0')
+			i + 1;
+			if (str[++i] != '\0')
 			{
 				if (!ft_isprint(str[i]))
 					validate = -1;
@@ -127,3 +128,6 @@ para a execve
 */
 
 ///colocar a validação do path nos redirects
+
+// achar as aspas andar a string até achar uma igual a ela 
+// dps
