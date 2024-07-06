@@ -151,3 +151,6 @@ Para tokenizar tomar cuidado com as aspas
 checar aspas =  se elas não fecham: erro
 checar redirect sempre tem que ter um arquivo depois dele, não pode | ou outro redirect ou null;
 não pode comecar e nem terminar a str com pipe 
+
+
+estamos tendo erro quando antes da 

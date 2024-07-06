@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 20:21:11 by asanni            #+#    #+#             */
-/*   Updated: 2024/07/06 17:46:58 by asanni           ###   ########.fr       */
+/*   Updated: 2024/07/06 20:41:33 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ char	*normalize_input(t_mini *minishell)
 char	*adjust_spaces(char	*input)
 {
 	char	*temp;
+	char	quote;
 	int		flg;
 	int		i;
 	int		j;
@@ -90,16 +91,37 @@ char	*adjust_spaces(char	*input)
 		i++;
 	while (input[i])
 	{
-		temp[j] = input[i];
-		if (input[i] == ' ' || input[i] == '\t')
-			flg = 1;
-		else if (!(input[i] == ' ' || input[i] == '\t'))
+		if (input[i] == 34 || input[i] == 39)
 		{
 			if (flg)
-				temp[j++] = ' ';
-			flg = 0;
+					temp[j++] = ' ';
+			quote = input[i];
 			temp[j] = input[i];
+			i++;
 			j++;
+			while (input[i] != quote)
+			{
+				temp[j] = input[i];
+				i++;
+				j++;
+			}
+			temp[j] = input[i];
+			i++;
+			j++;
+		}
+		else
+		{
+			temp[j] = input[i];
+			if (input[i] == ' ' || input[i] == '\t')
+				flg = 1;
+			else if (!(input[i] == ' ' || input[i] == '\t'))
+			{
+				if (flg)
+					temp[j++] = ' ';
+				flg = 0;
+				temp[j] = input[i];
+				j++;
+			}
 		}
 		i++;
 	}

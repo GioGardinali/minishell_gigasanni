@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 18:52:55 by asanni            #+#    #+#             */
-/*   Updated: 2024/07/06 17:45:19 by asanni           ###   ########.fr       */
+/*   Updated: 2024/07/06 20:41:54 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	main(void)
 	int			i;
 	char		*str;
 
-	str = "   adedayo               sanni         'ade          asa'              oi";
+	str = "   adedayo               sanni         'ade          sanni' e 'oi gio va    nna'             oi";
 	printf("%s.\n", adjust_spaces(str));
 	// minishell = (t_mini){0};
 	// minishell.env.env_content = copy_env();
