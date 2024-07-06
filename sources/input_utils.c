@@ -6,32 +6,32 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 20:21:11 by asanni            #+#    #+#             */
-/*   Updated: 2024/07/05 18:52:50 by asanni           ###   ########.fr       */
+/*   Updated: 2024/07/06 17:46:58 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-char	remove_spaces(char	*str)
-{
-	int		i;
-	char	*str_temp;
+// char	*remove_spaces(char	*str)
+// {
+// 	int		i;
+// 	char	*str_temp;
 
-	i = 0;
-	while (str[i] == ' ' || str[i] == '\t')
-		i++;
-	while (str[i] && (str[i] == ' ' || str[i] == '\t'))
-	{
-		if (!(str[i] == ' ' || str[i] == '\t'))
-		{
-			*str_temp = str[i];
-			str_temp++;
-		}
-		i++;
-	}
-	*str_temp = '\0';
-	return (str_temp);
-}
+// 	i = 0;
+// 	while (str[i] == ' ' || str[i] == '\t')
+// 		i++;
+// 	while (str[i] && (str[i] == ' ' || str[i] == '\t'))
+// 	{
+// 		if (!(str[i] == ' ' || str[i] == '\t'))
+// 		{
+// 			*str_temp = str[i];
+// 			str_temp++;
+// 		}
+// 		i++;
+// 	}
+// 	*str_temp = '\0';
+// 	return (str_temp);
+// }
 
 char	*normalize_input(t_mini *minishell)
 {
@@ -41,6 +41,7 @@ char	*normalize_input(t_mini *minishell)
 	int		i;
 
 	input = minishell->input;
+	check_input(input);
 	cmds = ft_split(input, ' ');
 	i = 0;
 	while (cmds[i] != NULL)
@@ -52,99 +53,83 @@ char	*normalize_input(t_mini *minishell)
 	return (cmd);
 }
 
-// marcela's version
-int	check_redirects(char *str)
+// char	*adjust_spaces(char	*str)
+// {
+// 	char	*temp;
+// 	int		i;
+// 	int		j;
+
+// 	i = -1;
+// 	j = 0;
+// 	while (str[++i] != '\0')
+// 	{
+// 		if (str[i] == ' ')
+// 			continue ;
+// 		else
+// 			j++;
+// 	}
+// 	temp = malloc(sizeof(char) * j + 1);
+// 	i = -1;
+// 	while (str)
+// }
+
+//usar a memmove ou a strlcpy
+
+char	*adjust_spaces(char	*input)
 {
-	int	validate;
-	int	i;
-
-	validate = 0;
-	i = 0;
-	while (str[i] != '\0')
-	{
-		skip_quotes (str, &i);
-		if (str[i] == '>' || str[i] == '<')
-		{
-			i++;
-			if (str[i] != str[i + 1] && (str[i] == '>' || str[i] == '<'))
-				return (-1);
-			else
-				i++;
-			while (str[i] == ' ' || str[i] == '\t')
-				i++;
-			if (str[i] == '\0' || str[i] == '|'
-				|| str[i] == '>' || str[i] == '<')
-				validate = -1;
-		}
-		i++;
-	}
-	return (validate);
-}
-
-// marcela's version
-int	check_pipes(char *str)
-{
-	int	validate;
-	int	i;
-
-	validate = 0;
-	i = 0;
-	while (str[i] == ' ' || str[i] == '\t')
-		i++;
-	if (str[i] == '|')
-		return (-1);
-	while (str[i] != '\0')
-	{
-		skip_quotes (str, &i);
-		if (str[i] == '|')
-		{
-			i++;
-			while (str[i] == ' ' || str[i] == '\t')
-				i++;
-			if (str[i] == '\0' || str[i] == '|')
-				validate = -1;
-		}
-	}
-	return (validate);
-}
-
-//Renan's version
-int	check_quotes(char *str)
-{
-	char	quote;
-	int		validate;
+	char	*temp;
+	int		flg;
 	int		i;
+	int		j;
 
-	validate = 0;
 	i = 0;
-	while (str[i] != '\0')
+	j = 0;
+	flg = 0;
+	temp = malloc(sizeof(char) * ft_strlen(input) + 1);
+	while (input[i] == ' ' || input[i] == '\t')
+		i++;
+	while (input[i])
 	{
-		if (str[i] == 34 || str[i] == 39)
+		temp[j] = input[i];
+		if (input[i] == ' ' || input[i] == '\t')
+			flg = 1;
+		else if (!(input[i] == ' ' || input[i] == '\t'))
 		{
-			quote = str[i];
-			i++;
-			while (str[i] != quote && (str[i] != '\0'))
-			{
-				i++;
-			}
-			if (str[i] != quote)
-			{
-				validate = -1;
-				break ;
-			}
+			if (flg)
+				temp[j++] = ' ';
+			flg = 0;
+			temp[j] = input[i];
+			j++;
 		}
+		i++;
 	}
-	return (validate);
+	temp[j] = '\0';
+	return (temp);
 }
 
-void	skip_quotes(char	*str, int	*i)
-{
-	char	quote;
+// char	*adjust_spaces(char	*input)
+// {
+// 	char	*temp;
+// 	int	i;
 
-	if (str[(*i)] == 34 || str[(*i)] == 39)
-	{
-		quote = str[(*i)];
-		while (str[(*i)] != quote)
-			(*i)++;
-	}
-}
+// 	i = 0;
+// 	while (input[i] != '\0')
+// 		ft_memmove(temp, input, ft_strlen(input));
+// }
+
+// char	*flag_str(char *str)
+// {
+// 	int	i;
+
+// 	i = 0;
+// 	while (str[i] != '\0')
+// 		i++;
+// 	while (str[i] != '\0')
+// 	{
+// 		if (ft_isprint(str[i - 1]) && (str[i] == ' ' || str[i] == '\t'))
+// 		{
+// 			str[i] = '|';
+// 		}
+// 		i++;
+// 	}
+// }

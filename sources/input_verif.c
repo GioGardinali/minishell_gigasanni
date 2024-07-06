@@ -6,120 +6,122 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 19:12:09 by asanni            #+#    #+#             */
-/*   Updated: 2024/07/05 17:14:13 by asanni           ###   ########.fr       */
+/*   Updated: 2024/07/06 18:01:32 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int	check_quotes(char	*str)
+void	skip_quotes(char	*str, int	*i)
 {
-	int	quote_nbr;
+	char	quote;
+
+	if (str[(*i)] == 34 || str[(*i)] == 39)
+	{
+		quote = str[(*i)];
+		while (str[(*i)] != quote)
+			(*i)++;
+	}
+}
+
+int	check_redirects(char *str)
+{
 	int	validate;
 	int	i;
 
-	quote_nbr = 0;
-	i = 0;
 	validate = 0;
+	i = 0;
+	while (str[i] != '\0')
+	{
+		skip_quotes (str, &i);
+		if (str[i] == '>' || str[i] == '<')
+		{
+			i++;
+			if (str[i] != str[i + 1] && (str[i] == '>' || str[i] == '<'))
+				return (-1);
+			else
+				i++;
+			while (str[i] == ' ' || str[i] == '\t')
+				i++;
+			if (str[i] == '\0' || str[i] == '|'
+				|| str[i] == '>' || str[i] == '<')
+				validate = -1;
+		}
+		i++;
+	}
+	return (validate);
+}
+
+int	check_pipes(char *str)
+{
+	int	validate;
+	int	i;
+
+	validate = 0;
+	i = 0;
+	while (str[i] == ' ' || str[i] == '\t')
+		i++;
+	if (str[i] == '|')
+		return (-1);
+	while (str[i] != '\0')
+	{
+		skip_quotes (str, &i);
+		if (str[i] == '|')
+		{
+			i++;
+			while (str[i] == ' ' || str[i] == '\t')
+				i++;
+			if (str[i] == '\0' || str[i] == '|')
+				validate = -1;
+		}
+	}
+	return (validate);
+}
+
+int	check_quotes(char *str)
+{
+	char	quote;
+	int		validate;
+	int		i;
+
+	validate = 0;
+	i = 0;
 	while (str[i] != '\0')
 	{
 		if (str[i] == 34 || str[i] == 39)
-			quote_nbr++;
-		i++;
-	}
-	if (quote_nbr % 2 != 0)
-		validate = -1;
-	return (validate);
-}
-
-int	check_pipes(char	*str)
-{
-	int	validate;
-	int	i;
-
-	validate = 0;
-	i = 0;
-	while (str[i])
-		i++;
-	if (str[0] == 124 || str[i] == 124)
-		validate = -1;
-	return (validate);
-}
-
-int	check_redirect(char	*str)
-{
-	int		validate;
-
-	if (check_input_and_trunc(str) == -1 || check_append(str) == -1)
-		validate = -1;
-	return (validate);
-}
-
-int	check_input_and_trunc(char	*str)
-{
-	char	*new_str;
-	int		validate;
-	int		i;
-
-	validate = 0;
-	i = 0;
-	while (str[i] != '\0')
-	{
-		if (str[i] == '>' || str[i] == '<')
-		{	
-			i + 1;
-			if (str[++i] != '\0')
+		{
+			quote = str[i];
+			i++;
+			while (str[i] != quote && (str[i] != '\0'))
 			{
-				if (!ft_isprint(str[i]))
-					validate = -1;
 				i++;
 			}
-		}
-		i++;
-	}
-	return (validate);
-}
-
-int	check_append(char	*str)
-{
-	char	*new_str;
-	int		validate;
-	int		i;
-	int		j;
-
-	validate = 0;
-	i = 0;
-	while (str[i] != '\0')
-	{
-		if (str[i] == '>')
-		{
-			if (str[i + 1] == '>')
-			{	
-				while (str[++i] != '\0')
-				{
-					if (!ft_isprint(str[i]))
-						validate = -1;
-					i++;
-				}
+			if (str[i] != quote)
+			{
+				validate = -1;
+				break ;
 			}
 		}
-		i++;
 	}
 	return (validate);
 }
 
-//fazer o tratamento para o pipe e do NULL para o redirect > |
-
-// int	check_input(char *input)
-// {
-// 	if (check_quotes(input))
-// 		return (-1);
-// 	if (check_redirect(input))
-// 		return (-1);
-// 	if (check_pipes(input))
-// 		return (-1);
-// 	return (0);
-// }
+int	check_input(char *input)
+{
+	if (check_quotes(input))
+		return (-1);
+	if (check_redirects(input))
+	{
+		error_function("syntax error near unexpected token `newline'");
+		return (-1);
+	}
+	if (check_pipes(input))
+	{
+		error_function("syntax error near unexpected token `|'");
+		return (-1);
+	}
+	return (0);
+}
 
 /*
 Criar funções para verificar o input da readline

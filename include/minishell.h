@@ -49,6 +49,8 @@ typedef enum e_type
 {
 	VAR = 1,
 	WORD,
+	ESPECIAL,
+	PIPE,
 	INPUT,
 	APPEND,
 	TRUNC,
@@ -63,6 +65,13 @@ char	*remove_path(char *str);
 char	**copy_env(void);
 char	*verify_path(t_mini *minishell);
 char	*normalize_input(t_mini *minishell);
-void	error_function(char *str)
+int		check_input(char *input);
+void	free_split(char **split);
+void	error_function(char *str);
+void	exit_function(void);
+char	*adjust_spaces(char	*str);
+char	*remove_spaces(char	*str);
+void	make_tokens(t_token **token, char *split);
+void	skip_quotes(char	*str, int	*i);
 
 #endif
