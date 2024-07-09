@@ -34,6 +34,7 @@ typedef struct s_token
 {
 	char			*str;
 	int				type;
+	int				flg;
 	struct s_token	*prev;
 	struct s_token	*next;
 }t_token;
@@ -72,5 +73,6 @@ char	*adjust_spaces(char	*str);
 char	*remove_spaces(char	*str);
 void	make_tokens(t_token **token, char *split);
 void	skip_quotes(char	*str, int	*i);
+void	skip_quotes2(char *input, int *i, char *temp, int *j);
 
 #endif
