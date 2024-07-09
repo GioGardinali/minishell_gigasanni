@@ -49,7 +49,6 @@ typedef enum e_type
 {
 	VAR = 1,
 	WORD,
-	ESPECIAL,
 	PIPE,
 	INPUT,
 	APPEND,
