@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 16:32:48 by asanni            #+#    #+#             */
-/*   Updated: 2024/07/09 14:17:11 by asanni           ###   ########.fr       */
+/*   Updated: 2024/07/09 19:37:35 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,19 +41,19 @@ void	make_tokens(t_token **token, char *split)
 	}
 }
 
-int	find_etype(char	*str)
+int	find_etype(char *str)
 {
 	if (str[1] == '$')
 		return (VAR);
-	else if (*str == '|')
+	else if (ft_strcmp(str, "|") == 0)
 		return (PIPE);
-	else if (*str == '>')
+	else if (ft_strcmp(str, ">") == 0)
 		return (TRUNC);
-	else if (*str == '>>')
+	else if (ft_strcmp(str, ">>") == 0)
 		return (APPEND);
-	else if (*str == '<')
+	else if (ft_strcmp(str, "<") == 0)
 		return (INPUT);
-	else if (*str == '<<')
+	else if (ft_strcmp(str, "<<") == 0)
 		return (HERE_DOC);
 	else
 		return (WORD);
