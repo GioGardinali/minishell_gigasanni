@@ -70,7 +70,6 @@ void	free_split(char **split);
 void	error_function(char *str);
 void	exit_function(void);
 char	*adjust_spaces(char	*str);
-char	*remove_spaces(char	*str);
 void	make_tokens(t_token **token, char *split);
 void	skip_quotes(char	*str, int	*i);
 void	skip_quotes2(char *input, int *i, char *temp, int *j);

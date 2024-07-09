@@ -6,7 +6,7 @@
 /*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 20:21:11 by asanni            #+#    #+#             */
-/*   Updated: 2024/07/09 16:49:46 by gigardin         ###   ########.fr       */
+/*   Updated: 2024/07/09 19:50:55 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,9 @@ char	*normalize_input(t_mini *minishell)
 
 void skip_quotes2(char *input, int *i, char *temp, int *j)
 {
-	char quote = input[*i];
+	char quote;
+
+	quote = input[*i];
 	temp[(*j)] = input[(*i)];
 	(*j)++;
 	(*i)++;
@@ -41,28 +43,33 @@ void skip_quotes2(char *input, int *i, char *temp, int *j)
 		temp[(*j)++] = input[(*i)++];
 	temp[(*j)] = input[(*i)];
 	(*j)++;
-	(*i)++;
 }
 
-void process_char(char *temp, int *i, int *j, int flg, int c) 
+void process_char(char *temp, int *j, int flg, int c) 
 {
-	temp[(*j)] = c; 
 	if (c == ' ' || c == '\t')
 		flg = 1;
 	else if (!(c == ' ' || c == '\t'))
 	{
-		if (flg)
+		if (flg == 1)
+		{
 			temp[(*j)++] = ' ';
-		flg = 0;
+			flg = 0;
+		}
 		temp[(*j)] = c;
 		(*j)++;
 	}
 }
 
+void remove_spaces(char *str, int i)
+{
+	while(str[i] == ' ' || str[i] == '\t')
+		i++;
+}
+
 char	*adjust_spaces(char	*input)
 {
 	char	*temp;
-	char	quote;
 	int		flg;
 	int		i;
 	int		j;
@@ -71,7 +78,7 @@ char	*adjust_spaces(char	*input)
 	j = 0;
 	flg = 0;
 	temp = malloc(sizeof(char) * ft_strlen(input) + 1);
-	while (input[i++] == ' ' || input[i++] == '\t')
+	remove_spaces(input, i);
 	while (input[i])
 	{
 		if (input[i] == 34 || input[i] == 39)
@@ -79,9 +86,10 @@ char	*adjust_spaces(char	*input)
 			if (flg)
 				temp[j++] = ' ';
 			skip_quotes2(input, &i, temp, &j);
+			flg = 0;
 		}
 		else
-			process_char(temp, &i, &j, flg, input[i]);
+			process_char(temp, &j, flg, input[i]);
 		i++;
 	}
 	temp[j] = '\0';
