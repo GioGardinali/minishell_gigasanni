@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 20:21:11 by asanni            #+#    #+#             */
-/*   Updated: 2024/07/09 19:50:55 by gigardin         ###   ########.fr       */
+/*   Updated: 2024/07/10 16:17:33 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ char	*normalize_input(t_mini *minishell)
 	return (cmd);
 }
 
-void skip_quotes2(char *input, int *i, char *temp, int *j)
+void	skip_quotes2(char *input, int *i, char *temp, int *j)
 {
-	char quote;
+	char	quote;
 
 	quote = input[*i];
 	temp[(*j)] = input[(*i)];
@@ -45,7 +45,7 @@ void skip_quotes2(char *input, int *i, char *temp, int *j)
 	(*j)++;
 }
 
-void process_char(char *temp, int *j, int flg, int c) 
+void	process_char(char *temp, int *j, int flg, int c)
 {
 	if (c == ' ' || c == '\t')
 		flg = 1;
@@ -61,9 +61,9 @@ void process_char(char *temp, int *j, int flg, int c)
 	}
 }
 
-void remove_spaces(char *str, int i)
+void	remove_spaces(char *str, int i)
 {
-	while(str[i] == ' ' || str[i] == '\t')
+	while (str[i] == ' ' || str[i] == '\t')
 		i++;
 }
 
@@ -95,7 +95,6 @@ char	*adjust_spaces(char	*input)
 	temp[j] = '\0';
 	return (temp);
 }
-
 
 // char	*adjust_spaces(char	*input)
 // {
