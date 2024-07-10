@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 20:21:11 by asanni            #+#    #+#             */
-/*   Updated: 2024/07/10 20:29:14 by asanni           ###   ########.fr       */
+/*   Updated: 2024/07/10 20:35:08 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,45 +184,42 @@ char	*adjust_spaces(char	*input)
 	j = 0;
 	flg = 0;
 	temp = malloc(sizeof(char) * ft_strlen(input) + 1);
-	while (input[i] == ' ' || input[i] == '\t')
-		i++;
 	while (input[i])
 	{
 		if (input[i] == 34 || input[i] == 39)
 		{
-			if (flg)
-					temp[j++] = -1;
+			temp[j++] = -1;
 			quote = input[i];
-			temp[j] = input[i];
-			i++;
-			j++;
+			temp[j++] = input[i++];
 			while (input[i] != quote)
 			{
 				temp[j++] = input[i++];
 			}
-			temp[j] = input[i];
+			temp[j++] = input[i];
+			temp[j] = -1;
+			j++;
 			i++;
+		}
+		else if (input[i] == ' ' || input[i] == '\t')
+		{
+			temp[j] = -1;
 			j++;
 		}
 		else
-		{
-			temp[j] = input[i];
-			if (input[i] == ' ' || input[i] == '\t')
-				flg = 1;
-			else if (!(input[i] == ' ' || input[i] == '\t'))
-			{
-				if (flg)
-					temp[j++] = -1;
-				flg = 0;
-				temp[j] = input[i];
-				j++;
-			}
-		}
+			temp[j++] = input[i];
 		i++;
 	}
 	temp[j] = '\0';
 	return (temp);
 }
+// Tá imprimindo assim, falta tirar este lixo de memoria que está vindo junto
+// ||
+// |>>oi>>|
+// |'ade    sanni'|
+// |e|
+// |'  gi    gardinali'|
+// |!|
+// |A|
 // não precisa da adjust space
 // transformar todos os espaços exceto as aspas em -1
 // tratar o caso dos pipes e dos redirects grudados 
