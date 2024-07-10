@@ -29,6 +29,7 @@ sources/path_utils.c \
 sources/input_verif.c \
 sources/error_functions.c\
 sources/input_utils.c\
+sources/tokennizer.c\
 
 #--------------RULES----------------------------#
 

@@ -6,11 +6,21 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 20:21:11 by asanni            #+#    #+#             */
-/*   Updated: 2024/07/10 17:31:55 by asanni           ###   ########.fr       */
+/*   Updated: 2024/07/10 20:29:14 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+
+
+/*
+esta função pega o input e faz todos os tratamentos que ele precisa
+ela checa o prompt da readline
+lida com os espaços da split
+e cria os tokens com o resultado da split
+tenho que arrumar a parte que lida com os cmds para passar para a execv
+provavelmente melhor lidar com isso em outra função
+*/
 
 char	*normalize_input(t_mini *minishell)
 {
@@ -213,7 +223,7 @@ char	*adjust_spaces(char	*input)
 	temp[j] = '\0';
 	return (temp);
 }
-// não precisa da adjust space ->
+// não precisa da adjust space
 // transformar todos os espaços exceto as aspas em -1
 // tratar o caso dos pipes e dos redirects grudados 
 // tem que colocar um espçao antes de tokennizar ex: oi>>oi

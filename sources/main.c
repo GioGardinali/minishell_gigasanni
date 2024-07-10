@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 18:52:55 by asanni            #+#    #+#             */
-/*   Updated: 2024/07/10 17:27:29 by asanni           ###   ########.fr       */
+/*   Updated: 2024/07/10 20:24:07 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,17 +50,19 @@ static void	start_minishell(t_mini *minishell)
 int	main(void)
 {
 	t_mini		minishell;
+	t_token		token;
 	int			i;
 	char		*str;
 	char		**split;
 
 	i = 0;
-	str = "     >>oi>>  'ade    sanni' e '  gi    gardinali' !    ";
+	token = (t_token){0};
+	str = "  $cd   > oi >> < <<  'ade    sanni' e '  gi    gardinali' !  |  ";
 	split = ft_split(adjust_spaces(str), -1);
-	//printf("original |%s|\n", adjust_spaces(str));
 	while (split[i])
 	{
-		printf("|%s|\n", split[i]);
+		make_tokens(&token, split[i]);
+		print_tokens(&token);
 		i++;
 	}
 	// minishell = (t_mini){0};
@@ -71,6 +73,29 @@ int	main(void)
 	// free(minishell.env.env_content);
 	// return (0);
 }
+// int main() {
+//     t_token *tokens = NULL; // Pointer to the head of the token list
+
+//     // Example test string
+//     char *test_string = "This is a test string";
+
+//     // Call make_tokens function to tokenize the test string
+//     make_tokens(&tokens, test_string);
+
+//     // Print out the tokens
+//     printf("Tokens:\n");
+//     print_tokens(tokens);
+
+//     // Free the memory allocated for the tokens
+//     while (tokens) {
+//         t_token *temp = tokens;
+//         tokens = tokens->next;
+//         free(temp);
+//     }
+
+//     return 0;
+// }
+
 
 /*________________________________________________________*/
 // andar até o igual e dar o retorno depois do igual 
