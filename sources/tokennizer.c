@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 16:32:48 by asanni            #+#    #+#             */
-/*   Updated: 2024/07/09 19:39:30 by asanni           ###   ########.fr       */
+/*   Updated: 2024/07/10 17:07:51 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,18 +59,19 @@ int	find_etype(char *str)
 		return (WORD);
 }
 
-// void	case_consecutive_quotes(t_token *token, char *str)
-// {
-// 	char	quote;
-// 	int		i;
+void	case_consecutive_quotes(t_token *token)
+{
+	char	*str;
+	int		i;
+	int		flg_sing;
 
-// 	i = 0;
-// 	while (str[i] != '\0')
-// 	{
-// 		skip_quotes (str, &i);
-// 		if ((str[i] == 34 || str[i] == 39)
-// 			&& (str[i + 1] == 34 || str[i + 1] == 39))
-// 			token->flag = 1;
-// 		i++;
-// 	}
-// }
+	i = 0;
+	flg_sing = 1;
+	str = token->str;
+	while (str[i] != '\0')
+	{
+		if ((str[0] == 34 || str[0] == 39))
+			token->flg = 1;
+		i++;
+	}
+}

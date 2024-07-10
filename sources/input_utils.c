@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 20:21:11 by asanni            #+#    #+#             */
-/*   Updated: 2024/07/10 16:17:33 by asanni           ###   ########.fr       */
+/*   Updated: 2024/07/10 17:31:55 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,70 +31,70 @@ char	*normalize_input(t_mini *minishell)
 	return (cmd);
 }
 
-void	skip_quotes2(char *input, int *i, char *temp, int *j)
-{
-	char	quote;
+// void	skip_quotes2(char *input, int *i, char *temp, int *j)
+// {
+// 	char	quote;
 
-	quote = input[*i];
-	temp[(*j)] = input[(*i)];
-	(*j)++;
-	(*i)++;
-	while (input[(*i)] != quote)
-		temp[(*j)++] = input[(*i)++];
-	temp[(*j)] = input[(*i)];
-	(*j)++;
-}
+// 	quote = input[*i];
+// 	temp[(*j)] = input[(*i)];
+// 	(*j)++;
+// 	(*i)++;
+// 	while (input[(*i)] != quote)
+// 		temp[(*j)++] = input[(*i)++];
+// 	temp[(*j)] = input[(*i)];
+// 	(*j)++;
+// }
 
-void	process_char(char *temp, int *j, int flg, int c)
-{
-	if (c == ' ' || c == '\t')
-		flg = 1;
-	else if (!(c == ' ' || c == '\t'))
-	{
-		if (flg == 1)
-		{
-			temp[(*j)++] = ' ';
-			flg = 0;
-		}
-		temp[(*j)] = c;
-		(*j)++;
-	}
-}
+// void	process_char(char *temp, int *j, int flg, int c)
+// {
+// 	if (c == ' ' || c == '\t')
+// 		flg = 1;
+// 	else if (!(c == ' ' || c == '\t'))
+// 	{
+// 		if (flg == 1)
+// 		{
+// 			temp[(*j)++] = ' ';
+// 			flg = 0;
+// 		}
+// 		temp[(*j)] = c;
+// 		(*j)++;
+// 	}
+// }
 
-void	remove_spaces(char *str, int i)
-{
-	while (str[i] == ' ' || str[i] == '\t')
-		i++;
-}
+// void	remove_spaces(char *str, int i)
+// {
+// 	while (str[i] == ' ' || str[i] == '\t')
+// 		i++;
+// }
 
-char	*adjust_spaces(char	*input)
-{
-	char	*temp;
-	int		flg;
-	int		i;
-	int		j;
+// char	*adjust_spaces(char	*input)
+// {
+// 	char	*temp;
+// 	int		flg;
+// 	int		i;
+// 	int		j;
 
-	i = 0;
-	j = 0;
-	flg = 0;
-	temp = malloc(sizeof(char) * ft_strlen(input) + 1);
-	remove_spaces(input, i);
-	while (input[i])
-	{
-		if (input[i] == 34 || input[i] == 39)
-		{
-			if (flg)
-				temp[j++] = ' ';
-			skip_quotes2(input, &i, temp, &j);
-			flg = 0;
-		}
-		else
-			process_char(temp, &j, flg, input[i]);
-		i++;
-	}
-	temp[j] = '\0';
-	return (temp);
-}
+// 	i = 0;
+// 	j = 0;
+// 	flg = 0;
+// 	temp = malloc(sizeof(char) * ft_strlen(input) + 1);
+// 	//remove_spaces(input, i);
+// 	while (input[i])
+// 	{
+// 		if (input[i] == 34 || input[i] == 39)
+// 		{
+// 			if (flg)
+// 				temp[j++] = ' ';
+// 			skip_quotes2(input, &i, temp, &j);
+// 			flg = 0;
+// 		}
+// 		else
+// 			process_char(temp, &j, flg, input[i]);
+// 		i++;
+// 	}
+// 	temp[j] = '\0';
+// 	return (temp);
+// }
 
 // char	*adjust_spaces(char	*input)
 // {
@@ -113,8 +113,7 @@ char	*adjust_spaces(char	*input)
 // 	while (input[i])
 // 	{
 // 		if (input[i] == 34 || input[i] == 39)
-// 		{
-			
+// 		{		
 // 		}
 // 		else
 // 		{
@@ -135,8 +134,6 @@ char	*adjust_spaces(char	*input)
 // 	temp[j] = '\0';
 // 	return (temp);
 // }
-
-
 
 // t_temp_input	*adjust_spaces_quotes(t_temp_input	*temp_value)
 // {
@@ -165,56 +162,58 @@ char	*adjust_spaces(char	*input)
 // 	return (&value_temp);
 // }
 
+char	*adjust_spaces(char	*input)
+{
+	char	*temp;
+	char	quote;
+	int		flg;
+	int		i;
+	int		j;
 
-
-// char	*adjust_spaces(char	*input)
-// {
-// 	char	*temp;
-// 	char	quote;
-// 	int		flg;
-// 	int		i;
-// 	int		j;
-
-// 	i = 0;
-// 	j = 0;
-// 	flg = 0;
-// 	temp = malloc(sizeof(char) * ft_strlen(input) + 1);
-// 	while (input[i] == ' ' || input[i] == '\t')
-// 		i++;
-// 	while (input[i])
-// 	{
-// 		if (input[i] == 34 || input[i] == 39)
-// 		{
-// 			if (flg)
-// 					temp[j++] = ' ';
-// 			quote = input[i];
-// 			temp[j] = input[i];
-// 			i++;
-// 			j++;
-// 			while (input[i] != quote)
-// 			{
-// 				temp[j++] = input[i++];
-// 			}
-// 			temp[j] = input[i];
-// 			i++;
-// 			j++;
-// 		}
-// 		else
-// 		{
-// 			temp[j] = input[i];
-// 			if (input[i] == ' ' || input[i] == '\t')
-// 				flg = 1;
-// 			else if (!(input[i] == ' ' || input[i] == '\t'))
-// 			{
-// 				if (flg)
-// 					temp[j++] = ' ';
-// 				flg = 0;
-// 				temp[j] = input[i];
-// 				j++;
-// 			}
-// 		}
-// 		i++;
-// 	}
-// 	temp[j] = '\0';
-// 	return (temp);
-// }
+	i = 0;
+	j = 0;
+	flg = 0;
+	temp = malloc(sizeof(char) * ft_strlen(input) + 1);
+	while (input[i] == ' ' || input[i] == '\t')
+		i++;
+	while (input[i])
+	{
+		if (input[i] == 34 || input[i] == 39)
+		{
+			if (flg)
+					temp[j++] = -1;
+			quote = input[i];
+			temp[j] = input[i];
+			i++;
+			j++;
+			while (input[i] != quote)
+			{
+				temp[j++] = input[i++];
+			}
+			temp[j] = input[i];
+			i++;
+			j++;
+		}
+		else
+		{
+			temp[j] = input[i];
+			if (input[i] == ' ' || input[i] == '\t')
+				flg = 1;
+			else if (!(input[i] == ' ' || input[i] == '\t'))
+			{
+				if (flg)
+					temp[j++] = -1;
+				flg = 0;
+				temp[j] = input[i];
+				j++;
+			}
+		}
+		i++;
+	}
+	temp[j] = '\0';
+	return (temp);
+}
+// não precisa da adjust space ->
+// transformar todos os espaços exceto as aspas em -1
+// tratar o caso dos pipes e dos redirects grudados 
+// tem que colocar um espçao antes de tokennizar ex: oi>>oi

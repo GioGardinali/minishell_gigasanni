@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 18:52:55 by asanni            #+#    #+#             */
-/*   Updated: 2024/07/09 16:14:01 by gigardin         ###   ########.fr       */
+/*   Updated: 2024/07/10 17:27:29 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,17 @@ int	main(void)
 	t_mini		minishell;
 	int			i;
 	char		*str;
+	char		**split;
 
-	str = "   adedayo               sanni         'ade          sanni' e'oi gio va    nna'             oi";
-	printf("%s.\n", adjust_spaces(str));
+	i = 0;
+	str = "     >>oi>>  'ade    sanni' e '  gi    gardinali' !    ";
+	split = ft_split(adjust_spaces(str), -1);
+	//printf("original |%s|\n", adjust_spaces(str));
+	while (split[i])
+	{
+		printf("|%s|\n", split[i]);
+		i++;
+	}
 	// minishell = (t_mini){0};
 	// minishell.env.env_content = copy_env();
 	// i = -1;
