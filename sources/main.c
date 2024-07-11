@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 18:52:55 by asanni            #+#    #+#             */
-/*   Updated: 2024/07/10 20:24:07 by asanni           ###   ########.fr       */
+/*   Updated: 2024/07/11 19:45:04 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	main(void)
 
 	i = 0;
 	token = (t_token){0};
-	str = "  $cd   > oi >> < <<  'ade    sanni' e '  gi    gardinali' !  |  ";
+	str = "  $c 'ade sanni' ";
 	split = ft_split(adjust_spaces(str), -1);
 	while (split[i])
 	{
