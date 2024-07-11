@@ -6,7 +6,7 @@
 /*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 20:21:11 by asanni            #+#    #+#             */
-/*   Updated: 2024/07/10 20:35:08 by gigardin         ###   ########.fr       */
+/*   Updated: 2024/07/11 18:42:58 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,7 +188,6 @@ char	*adjust_spaces(char	*input)
 	{
 		if (input[i] == 34 || input[i] == 39)
 		{
-			temp[j++] = -1;
 			quote = input[i];
 			temp[j++] = input[i++];
 			while (input[i] != quote)
