@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 20:21:11 by asanni            #+#    #+#             */
-/*   Updated: 2024/07/11 20:20:23 by asanni           ###   ########.fr       */
+/*   Updated: 2024/07/11 20:31:00 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,7 +185,9 @@ char	*adjust_spaces(char	*input)
 	temp = malloc(sizeof(char) * ft_strlen(input) + 1);
 	while (input[i])
 	{
-		if (input[i] == 34 || input[i] == 39)
+		if (input[i] == ' ' || input[i] == '\t')
+			temp[j++] = -1;
+		else if (input[i] == 34 || input[i] == 39)
 		{
 			quote = input[i];
 			temp[j++] = input[i++];
@@ -193,15 +195,8 @@ char	*adjust_spaces(char	*input)
 			{
 				temp[j++] = input[i++];
 			}
-			temp[j++] = input[i];
-			temp[j] = -1;
-			j++;
-			i++;
-		}
-		else if (input[i] == ' ' || input[i] == '\t')
-		{
-			temp[j] = -1;
-			j++;
+			temp[j++] = input[i++];
+			temp[j++] = -1;
 		}
 		else
 			temp[j++] = input[i];
@@ -209,6 +204,13 @@ char	*adjust_spaces(char	*input)
 	}
 	temp[j] = '\0';
 	return (temp);
+}
+void search_quotes(char *input, int *i, char *temp, int *j)
+{
+	if (input[i] == '>' && input[i + 1] == '>')
+	{
+		
+	}
 }
 // Tá imprimindo assim, falta tirar este lixo de memoria que está vindo junto
 // ||
