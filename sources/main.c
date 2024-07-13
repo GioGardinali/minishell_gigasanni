@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 18:52:55 by asanni            #+#    #+#             */
-/*   Updated: 2024/07/13 18:24:32 by asanni           ###   ########.fr       */
+/*   Updated: 2024/07/13 19:16:59 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,10 @@ int	main(void)
 
 	i = 0;
 	token = (t_token){0};
-	str = " a $c 'ade sanni'  e 'dsadsd'  << < >> > |  ";
+	str = "a $c 'ade sanni'  e 'dsadsd'  << < >> > |";
 	split = ft_split(adjust_spaces(str), -1);
-	printf("%s\n", adjust_spaces(str));
-	while (split[i])
+	//printf("%s\n", adjust_spaces(str));
+	while (split[i] != NULL)
 	{
 		make_tokens(&token, split[i]);
 		printf("%s\n", split[i]);
