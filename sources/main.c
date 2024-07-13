@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 18:52:55 by asanni            #+#    #+#             */
-/*   Updated: 2024/07/13 15:48:33 by asanni           ###   ########.fr       */
+/*   Updated: 2024/07/13 18:24:32 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,13 @@ int	main(void)
 
 	i = 0;
 	token = (t_token){0};
-	str = "  $c 'ade sanni'  e 'dsadsd'    ";
+	str = " a $c 'ade sanni'  e 'dsadsd'  << < >> > |  ";
 	split = ft_split(adjust_spaces(str), -1);
 	printf("%s\n", adjust_spaces(str));
 	while (split[i])
 	{
 		make_tokens(&token, split[i]);
+		printf("%s\n", split[i]);
 		i++;
 	}
 	print_tokens(&token);
@@ -74,29 +75,6 @@ int	main(void)
 	// free(minishell.env.env_content);
 	// return (0);
 }
-// int main() {
-//     t_token *tokens = NULL; // Pointer to the head of the token list
-
-//     // Example test string
-//     char *test_string = "This is a test string";
-
-//     // Call make_tokens function to tokenize the test string
-//     make_tokens(&tokens, test_string);
-
-//     // Print out the tokens
-//     printf("Tokens:\n");
-//     print_tokens(tokens);
-
-//     // Free the memory allocated for the tokens
-//     while (tokens) {
-//         t_token *temp = tokens;
-//         tokens = tokens->next;
-//         free(temp);
-//     }
-
-//     return 0;
-// }
-
 
 /*________________________________________________________*/
 // andar até o igual e dar o retorno depois do igual 

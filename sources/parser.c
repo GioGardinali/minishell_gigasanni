@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 20:21:55 by asanni            #+#    #+#             */
-/*   Updated: 2024/07/13 15:47:16 by asanni           ###   ########.fr       */
+/*   Updated: 2024/07/13 15:57:35 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,21 @@
 
 void	check_built_ins(t_token *token)
 {
-	if (ft_strcmp(token->str, "echo") == 0)
+	if (ft_strcmp(token->str, "echo"))
 		return ();
-	if (ft_strcmp(token->str, "cd") == 0)
+	if (ft_strcmp(token->str, "cd"))
 		return ();
-	if (ft_strcmp(token->str, "pwd") == 0)
+	if (ft_strcmp(token->str, "pwd"))
 		return ();
-	if (ft_strcmp(token->str, "export") == 0)
+	if (ft_strcmp(token->str, "export"))
 		return ();
-	if (ft_strcmp(token->str, "env") == 0)
+	if (ft_strcmp(token->str, "env"))
 		return ();
-	if (ft_strcmp(token->str, "exit") == 0)
+	if (ft_strcmp(token->str, "exit"))
 		return ();
 }
 
-/*
-BUILT INS
+/* BUILT INS
 ◦ echo with option -n
 ◦ cd with only a relative or absolute path
 ◦ pwd with no options

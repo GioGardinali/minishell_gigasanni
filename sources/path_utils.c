@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 19:23:18 by asanni            #+#    #+#             */
-/*   Updated: 2024/07/10 20:26:11 by asanni           ###   ########.fr       */
+/*   Updated: 2024/07/13 18:54:29 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,24 +79,3 @@ char	*verify_path(t_mini *minishell)
 		perror("Erro ao acessar o arquivo:");
 	return (path);
 }
-/*___________________________________________________*/
-/* 
-Com comentário
-char	**copy_env(void)
-{
-	int		i;
-	int		size;
-	char	**temp;
-
-	size = 0;
-	i = -1;
-	while (__environ[size])
-		size++;
-	temp = ft_calloc(sizeof(char *), size + 1);
-	while (++i < size)
-		temp[i] = __environ[i];
-	// i = -1;
-	// while (++i < size)
-	// 	printf("%s\n", temp[i]);
-	return (temp);
-}*/
