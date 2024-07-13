@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 20:21:11 by asanni            #+#    #+#             */
-/*   Updated: 2024/07/13 19:14:00 by asanni           ###   ########.fr       */
+/*   Updated: 2024/07/13 19:21:26 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,6 @@ char	*adjust_spaces(char	*input)
 // {
 // 	while (str[i] == ' ' || str[i] == '\t')
 // 		i++;
-	
 // }
 
 // char	*adjust_spaces(char	*input)
@@ -131,7 +130,6 @@ char	*adjust_spaces(char	*input)
 // 			j++;
 // 			i++;
 // 			temp[j++] = -1;
-			
 // 		}
 // 		else if (input[i] == ' ' || input[i] == '\t')
 // 			while (input[i] == ' ' || input[i] == '\t')

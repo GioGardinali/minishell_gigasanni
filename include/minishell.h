@@ -75,5 +75,6 @@ void	make_tokens(t_token *token, char *split);
 void	print_tokens(t_token *token);
 int		find_etype(char *str);
 void	prepare_split(char *str);
+int		built_pwd(void);
 
 #endif
