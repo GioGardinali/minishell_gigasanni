@@ -6,7 +6,7 @@
 /*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 20:21:11 by asanni            #+#    #+#             */
-/*   Updated: 2024/07/13 15:12:02 by gigardin         ###   ########.fr       */
+/*   Updated: 2024/07/13 15:16:49 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ char	*adjust_spaces(char	*input)
 		if (input[i] == 34 || input[i] == 39)
 		{
 		    if (flg)
-					temp[j++] = ' ';
+					temp[j++] = -1;
 			quote = input[i];
 			temp[j] = input[i];
 			i++;
@@ -89,7 +89,7 @@ char	*adjust_spaces(char	*input)
 			else if (!(input[i] == ' ' || input[i] == '\t'))
 			{
 				if (flg)
-					temp[j++] = ' ';
+					temp[j++] = -1;
 				flg = 0;
 				temp[j] = input[i];
 				j++;
