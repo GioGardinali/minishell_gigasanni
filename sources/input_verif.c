@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 19:12:09 by asanni            #+#    #+#             */
-/*   Updated: 2024/07/09 14:32:17 by asanni           ###   ########.fr       */
+/*   Updated: 2024/07/13 14:28:31 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,4 +133,3 @@ para a execve
 
 // achar as aspas andar a string até achar uma igual a ela 
 // dps
-

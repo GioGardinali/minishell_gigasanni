@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 20:21:11 by asanni            #+#    #+#             */
-/*   Updated: 2024/07/11 20:31:00 by gigardin         ###   ########.fr       */
+/*   Updated: 2024/07/13 15:01:59 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,13 +87,13 @@ char	*normalize_input(t_mini *minishell)
 // 	j = 0;
 // 	flg = 0;
 // 	temp = malloc(sizeof(char) * ft_strlen(input) + 1);
-// 	//remove_spaces(input, i);
+// 	remove_spaces(input, i);
 // 	while (input[i])
 // 	{
 // 		if (input[i] == 34 || input[i] == 39)
 // 		{
 // 			if (flg)
-// 				temp[j++] = ' ';
+// 				temp[j++] =-1;
 // 			skip_quotes2(input, &i, temp, &j);
 // 			flg = 0;
 // 		}
@@ -205,21 +205,14 @@ char	*adjust_spaces(char	*input)
 	temp[j] = '\0';
 	return (temp);
 }
-void search_quotes(char *input, int *i, char *temp, int *j)
-{
-	if (input[i] == '>' && input[i + 1] == '>')
-	{
-		
-	}
-}
-// Tá imprimindo assim, falta tirar este lixo de memoria que está vindo junto
-// ||
-// |>>oi>>|
-// |'ade    sanni'|
-// |e|
-// |'  gi    gardinali'|
-// |!|
-// |A|
+
+// void	search_quotes(char *input, int *i, char *temp, int *j)
+// {
+// 	if (input[i] == '>' && input[i++] == '>')
+// 	{
+// 	}
+// }
+
 // não precisa da adjust space
 // transformar todos os espaços exceto as aspas em -1
 // tratar o caso dos pipes e dos redirects grudados 

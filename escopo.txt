@@ -154,3 +154,7 @@ não pode comecar e nem terminar a str com pipe
 
 
 estamos tendo erro quando antes da 
+
+
+
+Fazer a expansão de variavel

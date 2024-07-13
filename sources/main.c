@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 18:52:55 by asanni            #+#    #+#             */
-/*   Updated: 2024/07/11 19:45:04 by asanni           ###   ########.fr       */
+/*   Updated: 2024/07/13 14:33:14 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,15 @@ int	main(void)
 
 	i = 0;
 	token = (t_token){0};
-	str = "  $c 'ade sanni' ";
+	str = "  $c 'ade sanni'  e 'dsadsd'    ";
 	split = ft_split(adjust_spaces(str), -1);
+	printf("%s\n", adjust_spaces(str));
 	while (split[i])
 	{
 		make_tokens(&token, split[i]);
-		print_tokens(&token);
 		i++;
 	}
+	print_tokens(&token);
 	// minishell = (t_mini){0};
 	// minishell.env.env_content = copy_env();
 	// i = -1;
