@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 16:32:48 by asanni            #+#    #+#             */
-/*   Updated: 2024/07/13 14:31:45 by asanni           ###   ########.fr       */
+/*   Updated: 2024/07/13 15:34:07 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ void	make_tokens(t_token *token, char *split)
 	t_token	*new_token;
 
 	if (token == NULL)
-		printf("O token fornecido não pode ser NULL.\n");
+		return ;
 	new_token = malloc(sizeof(t_token));
 	if (new_token == NULL)
-		error_function("Erro na alocação de memória para o novo token.");
+		return ;
 	new_token->str = split;
 	new_token->type = find_etype(split);
 	new_token->next = NULL;
