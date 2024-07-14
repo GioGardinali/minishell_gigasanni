@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 18:52:55 by asanni            #+#    #+#             */
-/*   Updated: 2024/07/14 11:35:43 by asanni           ###   ########.fr       */
+/*   Updated: 2024/07/14 11:54:00 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,8 @@ int	main(void)
 
 	i = 0;
 	token = (t_token){0};
-	str = "a $c 'ade sanni'  e 'dsadsd'  << < >> > |";
+	str = "a $c 'ade sanni'  e 'dsadsd'  <<as<>>|";
 	split = ft_split(adjust_spaces(str), -1);
-	//built_pwd();
 	//printf("%s\n", adjust_spaces(str));
 	while (split[i] != NULL)
 	{

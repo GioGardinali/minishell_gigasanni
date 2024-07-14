@@ -28,6 +28,7 @@ SRC = sources/main.c \
 sources/path_utils.c \
 sources/input_verif.c \
 sources/error_functions.c\
+sources/adjust_spaces.c\
 sources/input_utils.c\
 sources/tokennizer.c\
 sources/built_ins_init.c\

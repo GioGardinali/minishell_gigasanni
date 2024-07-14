@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   built_ins_init.c                                   :+:      :+:    :+:   */
+/*   built_ins.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 15:38:49 by asanni            #+#    #+#             */
-/*   Updated: 2024/07/13 19:42:07 by asanni           ###   ########.fr       */
+/*   Updated: 2024/07/14 11:49:42 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,14 @@
 ◦ exit with no options
 */
 
-int	built_pwd(void)
-{
-	char	*str;
+// int	built_pwd(void)
+// {
+// 	char	*str;
 
-	str = getcwd(NULL, 0);
-	printf("%s\n", str);
-	return (0);
-}
+// 	str = getcwd(NULL, 0);
+// 	printf("%s\n", str);
+// 	return (0);
+// }
 
 // aqui vai chamar o que estiver apos o cd na linha
 //ex cd adedayo , a função vai ser built_cd(adedayo)

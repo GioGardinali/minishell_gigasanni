@@ -17,6 +17,7 @@
 # include <unistd.h>
 # include <limits.h>
 # include <stdio.h>
+# include <stdbool.h>
 # include <readline/history.h> // para adicionar no historico
 # include <readline/readline.h> // para fazer tudo funfar
 # include <sys/wait.h> // usar waitpid

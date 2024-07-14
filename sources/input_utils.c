@@ -6,11 +6,12 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 20:21:11 by asanni            #+#    #+#             */
-/*   Updated: 2024/07/13 19:45:13 by asanni           ###   ########.fr       */
+/*   Updated: 2024/07/14 12:16:15 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+#include <stdbool.h>
 
 /*
 esta função pega o input e faz todos os tratamentos que ele precisa
@@ -40,57 +41,57 @@ char	*normalize_input(t_mini *minishell)
 	return (cmd);
 }
 
-char	*adjust_spaces(char	*input)
-{
-	char	*temp;
-	char	quote;
-	int		flg;
-	int		i;
-	int		j;
+// char	*adjust_spaces(char	*input)
+// {
+// 	char	*temp;
+// 	char	quote;
+// 	int		flg;
+// 	int		i;
+// 	int		j;
 
-	i = 0;
-	j = 0;
-	flg = 0;
-	temp = malloc(sizeof(char) * ft_strlen(input) + 1);
-	while (input[i] == ' ' || input[i] == '\t')
-		i++;
-	while (input[i])
-	{
-		if (input[i] == 34 || input[i] == 39)
-		{
-			if (flg)
-					temp[j++] = -1;
-			quote = input[i];
-			temp[j] = input[i];
-			i++;
-			j++;
-			while (input[i] != quote)
-			{
-				temp[j++] = input[i++];
-			}
-			temp[j] = input[i];
-			i++;
-			j++;
-		}
-		else
-		{
-			temp[j] = input[i];
-			if (input[i] == ' ' || input[i] == '\t')
-				flg = 1;
-			else if (!(input[i] == ' ' || input[i] == '\t'))
-			{
-				if (flg)
-					temp[j++] = -1;
-				flg = 0;
-				temp[j] = input[i];
-				j++;
-			}
-		}
-		i++;
-	}
-	temp[j] = '\0';
-	return (temp);
-}
+// 	i = 0;
+// 	j = 0;
+// 	flg = 0;
+// 	temp = malloc(sizeof(char) * ft_strlen(input) + 1);
+// 	while (input[i] == ' ' || input[i] == '\t')
+// 		i++;
+// 	while (input[i])
+// 	{
+// 		if (input[i] == 34 || input[i] == 39)
+// 		{
+// 			if (flg)
+// 					temp[j++] = -1;
+// 			quote = input[i];
+// 			temp[j] = input[i];
+// 			i++;
+// 			j++;
+// 			while (input[i] != quote)
+// 			{
+// 				temp[j++] = input[i++];
+// 			}
+// 			temp[j] = input[i];
+// 			i++;
+// 			j++;
+// 		}
+// 		else
+// 		{
+// 			temp[j] = input[i];
+// 			if (input[i] == ' ' || input[i] == '\t')
+// 				flg = 1;
+// 			else if (!(input[i] == ' ' || input[i] == '\t'))
+// 			{
+// 				if (flg)
+// 					temp[j++] = -1;
+// 				flg = 0;
+// 				temp[j] = input[i];
+// 				j++;
+// 			}
+// 		}
+// 		i++;
+// 	}
+// 	temp[j] = '\0';
+// 	return (temp);
+// }
 
 // void	remove_spaces(char *str, int i)
 // {
@@ -105,7 +106,6 @@ char	*adjust_spaces(char	*input)
 // 	int		i;
 // 	int		j;
 // 	t_token	token;
-
 // 	i = 0;
 // 	j = 0;
 // 	token = (t_token){0};
@@ -150,7 +150,6 @@ char	*adjust_spaces(char	*input)
 // 	return (temp);
 // }
 
-
 // void	search_quotes(char *input, int *i, char *temp, int *j)
 // {
 // 	if (input[i] == '>' && input[i++] == '>')
@@ -161,4 +160,4 @@ char	*adjust_spaces(char	*input)
 // não precisa da adjust space
 // transformar todos os espaços exceto as aspas em -1
 // tratar o caso dos pipes e dos redirects grudados 
-// tem que colocar um espçao antes de tokennizar ex: oi>>oi
+// tem que colocar um espaço antes de tokennizar ex: oi>>oi
