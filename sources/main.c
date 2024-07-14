@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 18:52:55 by asanni            #+#    #+#             */
-/*   Updated: 2024/07/14 16:32:59 by asanni           ###   ########.fr       */
+/*   Updated: 2024/07/14 17:08:47 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,31 +53,16 @@ static void	start_minishell(t_mini *minishell)
 int	main(void)
 {
 	t_mini		minishell;
-	//t_token		token;
 	int			i;
 	char		*str;
 	char		**split;
 
-	//i = 0;
-	//token = (t_token){0};
-	// str = "a $c 'ade sanni'  e 'dsadsd'  <<as<>>|";
-	// split = ft_split(adjust_spaces(str), -1);
-	// printf("%s\n", adjust_spaces(str));
-	// while (split[i] != NULL)
-	// {
-	// 	make_tokens(&token, split[i]);
-	// 	i++;
-	// }
-	// print_tokens(&token);
 	minishell = (t_mini){0};
-	//minishell.env.env_content = copy_env();
 	i = -1;
-	while (1)
+	while (42)
 	{
 		start_minishell(&minishell);
-		
 	}
-	//free(minishell.env.env_content);
 	return (0);
 }
 
