@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 20:21:11 by asanni            #+#    #+#             */
-/*   Updated: 2024/07/14 15:51:00 by asanni           ###   ########.fr       */
+/*   Updated: 2024/07/14 16:43:42 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,14 @@ void	norme(t_mini *minishell, t_token *token)
 	char		**split;
 
 	i = 0;
-	check_input(minishell->input);
+	if (!check_input(minishell->input))
+		return ;
 	input = adjust_spaces(minishell->input);
 	split = ft_split(input, -1);
 	while (split[i] != NULL)
 	{
-		make_tokens(token, split[i]);
+		make_tokens(&token, split[i]);
 		i++;
 	}
+	print_tokens(token);
 }

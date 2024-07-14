@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 18:52:55 by asanni            #+#    #+#             */
-/*   Updated: 2024/07/14 15:32:52 by asanni           ###   ########.fr       */
+/*   Updated: 2024/07/14 16:32:59 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ void	check_pid(t_mini *minishell)
 static void	start_minishell(t_mini *minishell)
 {
 	pid_t	pid;
-	t_token	token;
+	t_token	*token;
 
-	token = (t_token){0};
+	token = NULL;
 	minishell->input = readline("Minishelby> ");
 	if (!minishell->input)
 		minishell->input = ft_strdup("exit");
@@ -40,7 +40,7 @@ static void	start_minishell(t_mini *minishell)
 		add_history(minishell->input);
 	if (ft_strcmp(minishell->input, "exit") == 0)
 		exit_function();
-	norme(minishell, &token);
+	norme(minishell, token);
 	pid = fork();
 	if (pid == -1)
 		exit(1);

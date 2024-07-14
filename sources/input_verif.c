@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 19:12:09 by asanni            #+#    #+#             */
-/*   Updated: 2024/07/14 15:46:07 by asanni           ###   ########.fr       */
+/*   Updated: 2024/07/14 16:43:20 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,16 +111,16 @@ int	check_quotes(char *str)
 int	check_input(char *input)
 {
 	if (check_quotes(input))
-		return (-1);
+		return (1);
 	if (check_redirects(input))
 	{
 		ft_putendl_fd("syntax error near unexpected token `newline'", 2);
-		return (-1);
+		return (1);
 	}
 	if (check_pipes(input))
 	{
 		ft_putendl_fd("syntax error near unexpected token `|'", 2);
-		return (-1);
+		return (1);
 	}
 	return (0);
 }

@@ -6,18 +6,27 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 16:32:48 by asanni            #+#    #+#             */
-/*   Updated: 2024/07/14 12:26:17 by asanni           ###   ########.fr       */
+/*   Updated: 2024/07/14 16:39:50 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	make_tokens(t_token *token, char *split)
+static	t_token	*get_last_token(t_token **token)
+{
+	t_token	*temp;
+
+	temp = *token;
+	while (temp->next)
+		temp = temp->next;
+	return (temp);
+}
+
+void	make_tokens(t_token **token, char *split)
 {
 	t_token	*new_token;
+	t_token	*temp;
 
-	if (token == NULL)
-		return ;
 	new_token = malloc(sizeof(t_token));
 	if (new_token == NULL)
 		return ;
@@ -25,18 +34,14 @@ void	make_tokens(t_token *token, char *split)
 	new_token->type = find_etype(split);
 	new_token->next = NULL;
 	new_token->prev = NULL;
-	if (token->next != NULL)
+	if (!*token)
 	{
-	new_token->next = token->next;
-	new_token->next->prev = new_token;
-	token->next = new_token;
-	new_token->prev = token;
+		*token = new_token;
+		return ;
 	}
-	else
-	{
-	token->next = new_token;
-	new_token->prev = token;
-	}
+	temp = get_last_token(token);
+	temp->next = new_token;
+	new_token->prev = temp;
 }
 
 int	find_etype(char *str)
@@ -53,8 +58,6 @@ int	find_etype(char *str)
 		return (INPUT);
 	else if (ft_strcmp(str, "<<") == 0)
 		return (HERE_DOC);
-	else if (ft_strcmp(str, "\0") == 0 || str == NULL)
-		return (END);
 	else
 		return (WORD);
 }
