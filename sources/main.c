@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 18:52:55 by asanni            #+#    #+#             */
-/*   Updated: 2024/07/14 11:54:00 by asanni           ###   ########.fr       */
+/*   Updated: 2024/07/14 13:18:00 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,25 +55,29 @@ int	main(void)
 	char		*str;
 	char		**split;
 
-	i = 0;
+	//i = 0;
 	token = (t_token){0};
-	str = "a $c 'ade sanni'  e 'dsadsd'  <<as<>>|";
-	split = ft_split(adjust_spaces(str), -1);
-	//printf("%s\n", adjust_spaces(str));
-	while (split[i] != NULL)
+	// str = "a $c 'ade sanni'  e 'dsadsd'  <<as<>>|";
+	// split = ft_split(adjust_spaces(str), -1);
+	// printf("%s\n", adjust_spaces(str));
+	// while (split[i] != NULL)
+	// {
+	// 	make_tokens(&token, split[i]);
+	// 	i++;
+	// }
+	// print_tokens(&token);
+	minishell = (t_mini){0};
+	//minishell.env.env_content = copy_env();
+	i = -1;
+	while (1)
 	{
-		make_tokens(&token, split[i]);
-		printf("%s\n", split[i]);
-		i++;
+		start_minishell(&minishell);
+		//printf("%s", minishell.input);
+		noma(&minishell, &token);
+		
 	}
-	print_tokens(&token);
-	// minishell = (t_mini){0};
-	// minishell.env.env_content = copy_env();
-	// i = -1;
-	// while (1)
-	// 	start_minishell(&minishell);
-	// free(minishell.env.env_content);
-	// return (0);
+	//free(minishell.env.env_content);
+	return (0);
 }
 
 /*________________________________________________________*/

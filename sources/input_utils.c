@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 20:21:11 by asanni            #+#    #+#             */
-/*   Updated: 2024/07/14 12:16:15 by asanni           ###   ########.fr       */
+/*   Updated: 2024/07/14 13:32:13 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,20 +25,40 @@ provavelmente melhor lidar com isso em outra função
 char	*normalize_input(t_mini *minishell)
 {
 	char	*input;
-	char	**cmds;
+	char	**tokens;
 	char	*cmd;
 	int		i;
 
 	check_input(minishell->input);
 	input = adjust_spaces(minishell->input);
 	i = 0;
-	while (cmds[i] != NULL)
+	while (tokens[i] != NULL)
 	{
-		cmd = ft_strjoin("/", cmds[i]);
+		cmd = ft_strjoin("/", tokens[i]);
 		i++;
 	}
 	printf("%s", cmd);
 	return (cmd);
+}
+
+void	noma(t_mini *minishell, t_token *token)
+{
+	int			i;
+	char		*input;
+	char		**split;
+
+	i = 0;
+	check_input(minishell->input);
+	printf("check norma\n");
+	adjust_spaces(minishell->input);
+	printf("%s", input);
+	split = ft_split(minishell->input, -1);
+	while (split[i] != NULL)
+	{
+		make_tokens(token, split[i]);
+		i++;
+	}
+	//print_tokens(token);
 }
 
 // char	*adjust_spaces(char	*input)

@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 16:32:48 by asanni            #+#    #+#             */
-/*   Updated: 2024/07/13 19:12:29 by asanni           ###   ########.fr       */
+/*   Updated: 2024/07/14 12:26:17 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	find_etype(char *str)
 		return (INPUT);
 	else if (ft_strcmp(str, "<<") == 0)
 		return (HERE_DOC);
-	else if (ft_strcmp(str, "\0") == 0)
+	else if (ft_strcmp(str, "\0") == 0 || str == NULL)
 		return (END);
 	else
 		return (WORD);

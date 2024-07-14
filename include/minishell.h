@@ -77,5 +77,6 @@ void	print_tokens(t_token *token);
 int		find_etype(char *str);
 void	prepare_split(char *str);
 int		built_pwd(void);
+void	noma(t_mini *minishell, t_token *token);
 
 #endif
