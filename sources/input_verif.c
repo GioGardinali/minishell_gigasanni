@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 19:12:09 by asanni            #+#    #+#             */
-/*   Updated: 2024/07/14 13:28:31 by asanni           ###   ########.fr       */
+/*   Updated: 2024/07/14 15:46:07 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ int	check_redirects(char *str)
 	i = 0;
 	while (str[i] != '\0')
 	{
-		printf("redir\n");
 		skip_quotes (str, &i);
 		if (str[i] == '>' || str[i] == '<')
 		{
@@ -66,7 +65,6 @@ int	check_pipes(char *str)
 		return (-1);
 	while (str[i] != '\0')
 	{
-		printf("pipe\n");
 		skip_quotes (str, &i);
 		if (str[i] == '|')
 		{
@@ -91,7 +89,6 @@ int	check_quotes(char *str)
 	i = 0;
 	while (str[i] != '\0')
 	{
-		printf("quote\n");
 		if (str[i] == 34 || str[i] == 39)
 		{
 			quote = str[i];
@@ -113,17 +110,16 @@ int	check_quotes(char *str)
 
 int	check_input(char *input)
 {
-	printf("aqui\n");
 	if (check_quotes(input))
 		return (-1);
 	if (check_redirects(input))
 	{
-		error_function("syntax error near unexpected token `newline'");
+		ft_putendl_fd("syntax error near unexpected token `newline'", 2);
 		return (-1);
 	}
 	if (check_pipes(input))
 	{
-		error_function("syntax error near unexpected token `|'");
+		ft_putendl_fd("syntax error near unexpected token `|'", 2);
 		return (-1);
 	}
 	return (0);

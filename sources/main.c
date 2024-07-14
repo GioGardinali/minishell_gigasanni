@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 18:52:55 by asanni            #+#    #+#             */
-/*   Updated: 2024/07/14 13:18:00 by asanni           ###   ########.fr       */
+/*   Updated: 2024/07/14 15:32:52 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,9 @@ void	check_pid(t_mini *minishell)
 static void	start_minishell(t_mini *minishell)
 {
 	pid_t	pid;
+	t_token	token;
 
+	token = (t_token){0};
 	minishell->input = readline("Minishelby> ");
 	if (!minishell->input)
 		minishell->input = ft_strdup("exit");
@@ -38,6 +40,7 @@ static void	start_minishell(t_mini *minishell)
 		add_history(minishell->input);
 	if (ft_strcmp(minishell->input, "exit") == 0)
 		exit_function();
+	norme(minishell, &token);
 	pid = fork();
 	if (pid == -1)
 		exit(1);
@@ -50,13 +53,13 @@ static void	start_minishell(t_mini *minishell)
 int	main(void)
 {
 	t_mini		minishell;
-	t_token		token;
+	//t_token		token;
 	int			i;
 	char		*str;
 	char		**split;
 
 	//i = 0;
-	token = (t_token){0};
+	//token = (t_token){0};
 	// str = "a $c 'ade sanni'  e 'dsadsd'  <<as<>>|";
 	// split = ft_split(adjust_spaces(str), -1);
 	// printf("%s\n", adjust_spaces(str));
@@ -72,8 +75,6 @@ int	main(void)
 	while (1)
 	{
 		start_minishell(&minishell);
-		//printf("%s", minishell.input);
-		noma(&minishell, &token);
 		
 	}
 	//free(minishell.env.env_content);
