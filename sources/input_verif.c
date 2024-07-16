@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 19:12:09 by asanni            #+#    #+#             */
-/*   Updated: 2024/07/15 20:29:35 by asanni           ###   ########.fr       */
+/*   Updated: 2024/07/16 19:08:40 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,34 +24,33 @@ void	skip_quotes(char	*str, int	*i)
 	}
 }
 
-int    check_redirects(char *str)
+int	check_redirects(char *str)
 {
-    char    redir;
-    int        validate;
-    int        i;
+	char	redir;
+	int		validate;
+	int		i;
 
-    validate = 0;
-    i = 0;
-    while (str[i] != '\0')
-    {
-        skip_quotes (str, &i);
-        if (str[i] == '>' || str[i] == '<')
-        {
-            redir = str[i];
-            i++;
-            if ((str[i] == '>' || str[i] == '<') && str[i - 1] != str[i])
-                return (1);
-            if (str[i] == redir)
-                i++;
-            while (str[i] == ' ' || str[i] == '\t')
-                i++;
-            if (str[i] == '\0' || str[i] == '|'
-                || str[i] == '>' || str[i] == '<')
-                validate = 1;
-        }
-        i++;
-    }
-    return (validate);
+	validate = 0;
+	i = 0;
+	while (str[i] != '\0')
+	{
+		skip_quotes (str, &i);
+		if (str[i] == '>' || str[i] == '<')
+		{
+			redir = str[i];
+			i++;
+			if ((str[i] == '>' || str[i] == '<') && str[i - 1] != str[i])
+				return (1);
+			if (str[i] == redir)
+				i++;
+			while (str[i] == ' ' || str[i] == '\t')
+				i++;
+			if (str[i] == 0 || str[i] == '|' || str[i] == '>' || str[i] == '<')
+				validate = 1;
+		}
+		i++;
+	}
+	return (validate);
 }
 
 int	check_pipes(char *str)
