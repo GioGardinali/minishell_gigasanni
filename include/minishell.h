@@ -39,6 +39,15 @@ typedef struct s_token
 	struct s_token	*next;
 }t_token;
 
+typedef struct s_cmd
+{
+	char			*str;
+	char			**options;
+	char			*path;
+	struct s_cmd	*prev;
+	struct s_cmd	*next;
+}t_cmd;
+
 typedef struct s_mini
 {
 	char		*input;
@@ -55,15 +64,18 @@ typedef enum e_type
 	APPEND,
 	TRUNC,
 	HERE_DOC,
-	END,
+	QUOTES,
 }	t_type;
 
 //Functions
 char	*search_path(char **s, char *str);
 char	*check_path(t_mini *minishell);
 char	*remove_path(char *str);
-char	**copy_env(void);
-char	*verify_path(t_mini *minishell);
+//char	**copy_env(void);
+char	**copy_env(t_mini *minishell);
+//char	*verify_path(t_mini *minishell);
+//char	*verify_path(t_mini *minishell, t_cmd *cmd);
+char	*verify_path(t_mini *minishell, char *str);
 char	*normalize_input(t_mini *minishell);
 int		check_input(char *input);
 void	free_split(char **split);

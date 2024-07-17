@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 19:23:18 by asanni            #+#    #+#             */
-/*   Updated: 2024/07/13 19:03:00 by asanni           ###   ########.fr       */
+/*   Updated: 2024/07/17 20:31:00 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,24 @@
 // Passar a split pelo path
 // Concatenar com o comando (ex: /pasta/comando - /usr/bin/ls)
 // Checar se a pasta especifica tem acesso ao comando
+
+char	**copy_env(t_mini *minishell)
+{
+	int		i;
+	int		size;
+	char	**temp;
+
+	size = 0;
+	i = -1;
+	while (__environ[size])
+		size++;
+	temp = malloc(sizeof(char *) * (size + 1));
+	while (++i < size)
+		temp[i] = __environ[i];
+	temp[i] = NULL;
+	minishell->env.env_content = temp;
+	return (minishell->env.env_content);
+}
 
 char	*search_path(char **s, char *str)
 {
@@ -30,22 +48,6 @@ char	*search_path(char **s, char *str)
 	return (NULL);
 }
 
-char	**copy_env(void)
-{
-	int		i;
-	int		size;
-	char	**temp;
-
-	size = 0;
-	i = -1;
-	while (__environ[size])
-		size++;
-	temp = ft_calloc(sizeof(char *), size + 1);
-	while (++i < size)
-		temp[i] = __environ[i];
-	return (temp);
-}
-
 char	*remove_path(char *str)
 {
 	char	*path;
@@ -56,7 +58,7 @@ char	*remove_path(char *str)
 	return (path);
 }
 
-char	*verify_path(t_mini *minishell)
+char	*verify_path(t_mini *minishell, char *str)
 {
 	char	**str_path;
 	char	*path_line;
@@ -70,8 +72,7 @@ char	*verify_path(t_mini *minishell)
 	i = 0;
 	while (result != 0)
 	{
-		result = access(ft_strjoin(str_path[i],
-					normalize_input(minishell)), F_OK | R_OK);
+		result = access(ft_strjoin(str_path[i], str), F_OK | R_OK);
 		path = str_path[i];
 		i++;
 	}
@@ -79,3 +80,7 @@ char	*verify_path(t_mini *minishell)
 		perror("Erro ao acessar o arquivo:");
 	return (path);
 }
+//arrumnar a entrada do str para colocar uma / antes do cmd
+
+//criar uma var estatica [ tam max_path]
+//colocar dentro dessa var o caminho juntar uma / e o cmd

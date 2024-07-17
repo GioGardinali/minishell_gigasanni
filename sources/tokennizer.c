@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 16:32:48 by asanni            #+#    #+#             */
-/*   Updated: 2024/07/14 16:39:50 by asanni           ###   ########.fr       */
+/*   Updated: 2024/07/17 16:24:57 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ int	find_etype(char *str)
 {
 	if (str[0] == '$')
 		return (VAR);
+	else if (str[0] == '\"')
+		return (QUOTES);
 	else if (ft_strcmp(str, "|") == 0)
 		return (PIPE);
 	else if (ft_strcmp(str, ">") == 0)
