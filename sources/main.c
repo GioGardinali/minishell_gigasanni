@@ -6,26 +6,26 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 18:52:55 by asanni            #+#    #+#             */
-/*   Updated: 2024/07/17 20:25:45 by asanni           ###   ########.fr       */
+/*   Updated: 2024/07/18 19:13:04 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-// void	check_pid(t_mini *minishell)
-// {
-// 	char	**cmds;
-// 	char	*path;
+void	check_pid(t_mini *minishell)
+{
+	char	**cmds;
+	char	*path;
 
-// 	//cmds = normalize_input(minishell);
-// 	path = verify_path(minishell);
-// 	printf("%d", path == NULL);
-// 	execve(path, cmds, __environ);
-// 	ft_putendl_fd("Execve falhou", 2);
-// 	free_split(cmds);
-// 	free(path);
-// 	exit(1);
-// }
+	//cmds = normalize_input(minishell);
+	path = verify_path(minishell, minishell->cmd->str);
+	printf("%d", path == NULL);
+	execve(path, cmds, __environ);
+	ft_putendl_fd("Execve falhou", 2);
+	free_split(cmds);
+	free(path);
+	exit(1);
+}
 
 static void	start_minishell(t_mini *minishell)
 {
@@ -62,18 +62,11 @@ int	main(void)
 	copy_env(&minishell);
 	str = search_path(minishell.env.env_content, "PATH");
 	split = ft_split(remove_path(str), ':');
-	while (split[i])
+	while (42)
 	{
-		printf("%s\n", ft_strjoin(ft_strjoin(split[i], "/"), "ls"));
-		i++;
+		start_minishell(&minishell);
 	}
-	// printf("%s", str);
-	printf("%s\n", verify_path(&minishell, "ls"));
-	// while (42)
-	// {
-	// 	start_minishell(&minishell);
-	// }
-	// return (0);
+	return (0);
 }
 
 /*________________________________________________________*/

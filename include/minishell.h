@@ -52,7 +52,7 @@ typedef struct s_mini
 {
 	char		*input;
 	t_env		env;
-	t_token		*comands;
+	t_cmd		*cmd;
 }t_mini;
 
 typedef enum e_type
@@ -65,6 +65,7 @@ typedef enum e_type
 	TRUNC,
 	HERE_DOC,
 	QUOTES,
+	DOC,
 }	t_type;
 
 //Functions
@@ -86,7 +87,8 @@ void	skip_quotes(char	*str, int	*i);
 void	skip_quotes2(char *input, int *i, char *temp, int *j);
 void	make_tokens(t_token **token, char *split);
 void	print_tokens(t_token *token);
-int		find_etype(char *str);
+//int		find_etype(char *str);
+int		find_etype(t_token *token, char *str);
 void	prepare_split(char *str);
 int		built_pwd(void);
 void	norme(t_mini *minishell, t_token *token);

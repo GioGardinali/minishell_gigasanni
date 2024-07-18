@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 16:32:48 by asanni            #+#    #+#             */
-/*   Updated: 2024/07/17 16:24:57 by asanni           ###   ########.fr       */
+/*   Updated: 2024/07/18 20:22:42 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	make_tokens(t_token **token, char *split)
 	if (new_token == NULL)
 		return ;
 	new_token->str = split;
-	new_token->type = find_etype(split);
+	new_token->type = find_etype(*token, split);
 	new_token->next = NULL;
 	new_token->prev = NULL;
 	if (!*token)
@@ -44,7 +44,7 @@ void	make_tokens(t_token **token, char *split)
 	new_token->prev = temp;
 }
 
-int	find_etype(char *str)
+int	find_etype(t_token *token, char *str)
 {
 	if (str[0] == '$')
 		return (VAR);
@@ -60,6 +60,12 @@ int	find_etype(char *str)
 		return (INPUT);
 	else if (ft_strcmp(str, "<<") == 0)
 		return (HERE_DOC);
+	else if (token != NULL && token->prev != NULL
+		&& (ft_strcmp(token->prev->str, "<<") == 0
+			|| ft_strcmp(token->prev->str, "<") == 0
+			|| ft_strcmp(token->prev->str, ">>") == 0
+			|| ft_strcmp(token->prev->str, ">") == 0))
+		return (DOC);
 	else
 		return (WORD);
 }

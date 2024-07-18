@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 19:23:18 by asanni            #+#    #+#             */
-/*   Updated: 2024/07/17 20:31:00 by asanni           ###   ########.fr       */
+/*   Updated: 2024/07/18 19:03:35 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,20 @@ char	*remove_path(char *str)
 	return (path);
 }
 
+char	*append_slash(char *path, char *cmd)
+{
+	static char	new_str[4096];
+	int			len;
+	int			cmd_len;
+
+	len = ft_strlen(path);
+	cmd_len = ft_strlen(cmd);
+	ft_strlcpy(new_str, path, len + 1);
+	ft_strlcpy(&new_str[len], "/", 2);
+	ft_strlcpy(&new_str[len + 1], cmd, cmd_len + 1);
+	return (new_str);
+}
+
 char	*verify_path(t_mini *minishell, char *str)
 {
 	char	**str_path;
@@ -72,7 +86,7 @@ char	*verify_path(t_mini *minishell, char *str)
 	i = 0;
 	while (result != 0)
 	{
-		result = access(ft_strjoin(str_path[i], str), F_OK | R_OK);
+		result = access(append_slash(str_path[i], str), F_OK | R_OK);
 		path = str_path[i];
 		i++;
 	}
@@ -80,7 +94,7 @@ char	*verify_path(t_mini *minishell, char *str)
 		perror("Erro ao acessar o arquivo:");
 	return (path);
 }
-//arrumnar a entrada do str para colocar uma / antes do cmd
 
+//arrumnar a entrada do str para colocar uma / antes do cmd
 //criar uma var estatica [ tam max_path]
 //colocar dentro dessa var o caminho juntar uma / e o cmd
