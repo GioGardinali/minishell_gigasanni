@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 16:39:02 by asanni            #+#    #+#             */
-/*   Updated: 2024/07/20 17:47:30 by asanni           ###   ########.fr       */
+/*   Updated: 2024/07/20 19:56:42 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char	**make_options(t_token *token)
 		return (NULL);
 	while (token != NULL && token->type != PIPE)
 	{
-		if (find_redir(token->type))
+		if (find_redir(token) == 1)
 			token = token->next->next;
 		else
 			len++;
@@ -44,7 +44,7 @@ char	**make_options(t_token *token)
 	options = malloc(sizeof(char *) * (len + 1));
 	while (token != NULL && token->type != PIPE)
 	{
-		if (find_redir(token->type))
+		if (find_redir(token) == 1)
 			token = token->next->next;
 		else
 			*options++ = ft_strdup(temp->str);
@@ -53,7 +53,17 @@ char	**make_options(t_token *token)
 	return (options);
 }
 
-static void	make_cmds(t_cmd **cmd, t_token *token, t_mini *minishell)
+t_cmd	*get_last_cmd(t_cmd **cmd)
+{
+	t_cmd	*temp;
+
+	temp = *cmd;
+	while (temp->next)
+		temp = temp->next;
+	return (temp);
+}
+
+void	make_cmds(t_cmd **cmd, t_token *token, t_mini *minishell)
 {
 	t_cmd	*new_cmd;
 	t_cmd	*temp;
@@ -73,7 +83,7 @@ static void	make_cmds(t_cmd **cmd, t_token *token, t_mini *minishell)
 		*cmd = new_cmd;
 		return ;
 	}
-	temp = get_last_token(cmd);
+	temp = get_last_cmd(cmd);
 	temp->next = new_cmd;
 	new_cmd->prev = temp;
 }

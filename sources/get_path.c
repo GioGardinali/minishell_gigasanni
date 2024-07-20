@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   path_utils.c                                       :+:      :+:    :+:   */
+/*   get_path.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 19:23:18 by asanni            #+#    #+#             */
-/*   Updated: 2024/07/20 17:42:02 by asanni           ###   ########.fr       */
+/*   Updated: 2024/07/20 20:02:39 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ char	*verify_path(t_mini *minishell, char *str)
 	str_path = ft_split(remove_path(path_line), ':');
 	result = 1;
 	i = 0;
-	while (result != 0)
+	while (result != 0 && str_path[i] != NULL)
 	{
 		result = access(append_slash(str_path[i], str), F_OK | R_OK);
 		path = str_path[i];

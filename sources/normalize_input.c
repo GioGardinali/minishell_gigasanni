@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   input_utils.c                                      :+:      :+:    :+:   */
+/*   normalize_input.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 20:21:11 by asanni            #+#    #+#             */
-/*   Updated: 2024/07/20 17:44:35 by asanni           ###   ########.fr       */
+/*   Updated: 2024/07/20 20:04:54 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,17 @@ void	norme(t_mini *minishell, t_token *token)
 		return ;
 	input = adjust_spaces(minishell->input);
 	split = ft_split(input, -1);
+	copy_env(minishell);
 	while (split[i] != NULL)
 	{
 		make_tokens(&token, split[i]);
 		i++;
 	}
+	while (token != NULL)
+	{
+		make_cmds(&minishell->cmd, token, minishell);
+		token = token->next;
+	}
 	print_tokens(token);
+	//print_cmd(minishell->cmd);
 }

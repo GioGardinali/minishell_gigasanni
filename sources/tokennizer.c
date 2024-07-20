@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 16:32:48 by asanni            #+#    #+#             */
-/*   Updated: 2024/07/20 17:39:27 by asanni           ###   ########.fr       */
+/*   Updated: 2024/07/20 19:23:15 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,21 @@ void	print_tokens(t_token *token)
 	while (current != NULL)
 	{
 		printf("Token: |%s| -> Type: %d,\n", current->str, current->type);
+		current = current->next;
+	}
+}
+
+void	print_cmd(t_cmd *cmd)
+{
+	t_cmd	*current;
+	int		i;
+
+	i = 0;
+	current = cmd;
+	while (current != NULL)
+	{
+		printf("cmd: |%s| -> option: %s,\n", current->str, current->options[i]);
+		i++;
 		current = current->next;
 	}
 }
