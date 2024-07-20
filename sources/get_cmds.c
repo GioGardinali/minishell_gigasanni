@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_cmds.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 16:39:02 by asanni            #+#    #+#             */
-/*   Updated: 2024/07/18 19:59:07 by asanni           ###   ########.fr       */
+/*   Updated: 2024/07/20 15:50:20 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	make_cmds(t_cmd **cmd, t_token token, t_mini *minishell)
 	if (new_cmd == NULL)
 		return ;
 	new_cmd->str = token.str;
-	if (token.next->str == "|")
+	if (ft_strcmp(token.next->str, "|") == 0)
 		new_cmd->options = NULL;
 	new_cmd->options = token.next->str;
 	new_cmd->path = verify_path(minishell, new_cmd->str);
@@ -49,7 +49,6 @@ void	make_options(t_cmd **cmd, t_token token, t_mini *minishell)
 	{
 		temp->options[i] = token.next->str;
 		i++;
-		token.next->str.
 	}
 	
 }
