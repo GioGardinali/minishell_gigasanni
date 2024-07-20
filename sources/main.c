@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 18:52:55 by asanni            #+#    #+#             */
-/*   Updated: 2024/07/18 19:13:04 by asanni           ###   ########.fr       */
+/*   Updated: 2024/07/20 17:43:15 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,6 @@ int	main(void)
 	minishell = (t_mini){0};
 	i = 0;
 	copy_env(&minishell);
-	str = search_path(minishell.env.env_content, "PATH");
-	split = ft_split(remove_path(str), ':');
 	while (42)
 	{
 		start_minishell(&minishell);

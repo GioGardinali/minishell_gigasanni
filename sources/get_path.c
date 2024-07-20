@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 19:23:18 by asanni            #+#    #+#             */
-/*   Updated: 2024/07/18 19:03:35 by asanni           ###   ########.fr       */
+/*   Updated: 2024/07/20 17:42:02 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char	**copy_env(t_mini *minishell)
 	return (minishell->env.env_content);
 }
 
-char	*search_path(char **s, char *str)
+static char	*search_path(char **s, char *str)
 {
 	char	*str_path;
 
@@ -48,7 +48,7 @@ char	*search_path(char **s, char *str)
 	return (NULL);
 }
 
-char	*remove_path(char *str)
+static char	*remove_path(char *str)
 {
 	char	*path;
 	int		i;
@@ -58,7 +58,7 @@ char	*remove_path(char *str)
 	return (path);
 }
 
-char	*append_slash(char *path, char *cmd)
+static char	*append_slash(char *path, char *cmd)
 {
 	static char	new_str[4096];
 	int			len;

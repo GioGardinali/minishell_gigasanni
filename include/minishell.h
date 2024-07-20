@@ -69,13 +69,8 @@ typedef enum e_type
 }	t_type;
 
 //Functions
-char	*search_path(char **s, char *str);
 char	*check_path(t_mini *minishell);
-char	*remove_path(char *str);
-//char	**copy_env(void);
 char	**copy_env(t_mini *minishell);
-//char	*verify_path(t_mini *minishell);
-//char	*verify_path(t_mini *minishell, t_cmd *cmd);
 char	*verify_path(t_mini *minishell, char *str);
 char	*normalize_input(t_mini *minishell);
 int		check_input(char *input);
@@ -86,11 +81,12 @@ char	*adjust_spaces(char	*str);
 void	skip_quotes(char	*str, int	*i);
 void	skip_quotes2(char *input, int *i, char *temp, int *j);
 void	make_tokens(t_token **token, char *split);
+t_token	*get_last_token(t_token **token);
 void	print_tokens(t_token *token);
-//int		find_etype(char *str);
 int		find_etype(t_token *token, char *str);
 void	prepare_split(char *str);
 int		built_pwd(void);
 void	norme(t_mini *minishell, t_token *token);
+void	make_cmds(t_cmd **cmd, t_token *token, t_mini *minishell);
 
 #endif

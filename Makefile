@@ -25,12 +25,13 @@ LINCLUDES = -L./libft -lft
 RL = readline
 #--------------FILES----------------------------#
 SRC = sources/main.c \
-sources/path_utils.c \
+sources/get_path.c \
 sources/input_verif.c \
 sources/error_functions.c\
 sources/adjust_spaces.c\
-sources/input_utils.c\
+sources/normalize_input.c\
 sources/tokennizer.c\
+sources/get_cmds.c\
 
 
 #--------------RULES----------------------------#
