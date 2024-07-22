@@ -6,51 +6,33 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 16:39:02 by asanni            #+#    #+#             */
-/*   Updated: 2024/07/20 19:56:42 by asanni           ###   ########.fr       */
+/*   Updated: 2024/07/22 20:13:58 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-static int	find_redir(t_token *token)
+char	**make_options(t_token **token)
 {
-	return ((token->type == APPEND) || (token->type == HERE_DOC)
-		|| (token->type == TRUNC) || (token->type == INPUT));
-}
-
-static int	search_options(t_token *token)
-{
-	return (token == NULL || token->str == NULL
-		|| (ft_strcmp(token->str, "|") == 0));
-}
-
-char	**make_options(t_token *token)
-{
-	t_token	*temp;
 	char	**options;
+	char	**opt_bkp;
 	int		len;
 
 	len = 0;
-	temp = token;
-	if (search_options(token))
+	if (search_options(*token))
 		return (NULL);
-	while (token != NULL && token->type != PIPE)
+	len = return_len(*token);
+	options = ft_calloc(sizeof(char *), (len + 1));
+	opt_bkp = options;
+	while (*token != NULL && (*token)->type != PIPE)
 	{
-		if (find_redir(token) == 1)
-			token = token->next->next;
+		if (find_redir(*token) == 1)
+			*token = (*token)->next;
 		else
-			len++;
+			(*options++) = ft_strdup((*token)->str);
+		*token = (*token)->next;
 	}
-	options = malloc(sizeof(char *) * (len + 1));
-	while (token != NULL && token->type != PIPE)
-	{
-		if (find_redir(token) == 1)
-			token = token->next->next;
-		else
-			*options++ = ft_strdup(temp->str);
-	}
-	options[len] = NULL;
-	return (options);
+	return (opt_bkp);
 }
 
 t_cmd	*get_last_cmd(t_cmd **cmd)
@@ -63,7 +45,7 @@ t_cmd	*get_last_cmd(t_cmd **cmd)
 	return (temp);
 }
 
-void	make_cmds(t_cmd **cmd, t_token *token, t_mini *minishell)
+void	make_cmds(t_cmd **cmd, t_token **token, t_mini *minishell)
 {
 	t_cmd	*new_cmd;
 	t_cmd	*temp;
@@ -73,8 +55,10 @@ void	make_cmds(t_cmd **cmd, t_token *token, t_mini *minishell)
 	new_cmd = malloc(sizeof(t_cmd));
 	if (new_cmd == NULL)
 		return ;
-	new_cmd->str = token->str;
-	new_cmd->options = make_options(token->next);
+	new_cmd->str = (*token)->str;
+	new_cmd->options = make_options(token);
+	puts(new_cmd->str);
+	print_matrix(new_cmd->options);
 	new_cmd->path = verify_path(minishell, new_cmd->str);
 	new_cmd->next = NULL;
 	new_cmd->prev = NULL;

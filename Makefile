@@ -32,6 +32,8 @@ sources/adjust_spaces.c\
 sources/normalize_input.c\
 sources/tokennizer.c\
 sources/get_cmds.c\
+sources/get_cmds_utils.c\
+
 
 
 #--------------RULES----------------------------#
@@ -50,7 +52,7 @@ $(NAME): $(OBJFILES)
 	$(CC) $(OBJFILES) $(H_LIB) $(LIBFT) $(LINCLUDES) $(CFLAGS) -o $(NAME) -g -l $(RL)
 
 $(OBJFOLDER)%.o : $(SOURCES)%.c
-	cc $(HEADERS) -c $< -o $@ -g3 
+	cc $(CFLAGS) -c $< -o $@ -g3 
 
 #----------------CLEAN--------------------------#
 

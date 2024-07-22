@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 19:23:18 by asanni            #+#    #+#             */
-/*   Updated: 2024/07/20 20:02:39 by asanni           ###   ########.fr       */
+/*   Updated: 2024/07/22 19:54:34 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,6 @@ char	**copy_env(t_mini *minishell)
 
 static char	*search_path(char **s, char *str)
 {
-	char	*str_path;
-
 	while (*s != NULL)
 	{
 		if (ft_strncmp(*s, str, 4) == 0)
@@ -84,17 +82,16 @@ char	*verify_path(t_mini *minishell, char *str)
 	str_path = ft_split(remove_path(path_line), ':');
 	result = 1;
 	i = 0;
-	while (result != 0 && str_path[i] != NULL)
+	while (result != 0)
 	{
-		result = access(append_slash(str_path[i], str), F_OK | R_OK);
 		path = str_path[i];
+		if (str_path[i] == NULL)
+			break ;
+		path = append_slash(str_path[i], str);
+		result = access(append_slash(str_path[i], str), F_OK | R_OK);
 		i++;
 	}
 	if (result == -1)
 		perror("Erro ao acessar o arquivo:");
 	return (path);
 }
-
-//arrumnar a entrada do str para colocar uma / antes do cmd
-//criar uma var estatica [ tam max_path]
-//colocar dentro dessa var o caminho juntar uma / e o cmd

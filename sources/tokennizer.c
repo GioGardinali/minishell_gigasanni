@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 16:32:48 by asanni            #+#    #+#             */
-/*   Updated: 2024/07/20 19:23:15 by asanni           ###   ########.fr       */
+/*   Updated: 2024/07/22 20:33:30 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	make_tokens(t_token **token, char *split)
 	if (new_token == NULL)
 		return ;
 	new_token->str = split;
-	new_token->type = find_etype(*token, split);
+	new_token->type = find_etype(split);
 	new_token->next = NULL;
 	new_token->prev = NULL;
 	if (!*token)
@@ -42,9 +42,10 @@ void	make_tokens(t_token **token, char *split)
 	temp = get_last_token(token);
 	temp->next = new_token;
 	new_token->prev = temp;
+	printf("token\n");
 }
 
-int	find_etype(t_token *token, char *str)
+int	find_etype(char *str)
 {
 	if (str[0] == '$')
 		return (VAR);

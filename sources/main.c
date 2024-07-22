@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 18:52:55 by asanni            #+#    #+#             */
-/*   Updated: 2024/07/20 19:33:55 by asanni           ###   ########.fr       */
+/*   Updated: 2024/07/22 20:19:09 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,9 @@
 
 void	check_pid(t_mini *minishell)
 {
-	char	**cmds;
-	char	*path;
-
-	//cmds = normalize_input(minishell);
-	path = verify_path(minishell, minishell->cmd->str);
-	printf("%d", path == NULL);
-	execve(path, cmds, __environ);
+	execve(minishell->cmd->path, minishell->cmd->options, __environ);
 	ft_putendl_fd("Execve falhou", 2);
-	free_split(cmds);
-	free(path);
+	free(minishell->cmd->options);
 	exit(1);
 }
 
@@ -53,12 +46,8 @@ static void	start_minishell(t_mini *minishell)
 int	main(void)
 {
 	t_mini		minishell;
-	int			i;
-	char		*str;
-	char		**split;
 
 	minishell = (t_mini){0};
-	i = 0;
 	copy_env(&minishell);
 	while (42)
 	{

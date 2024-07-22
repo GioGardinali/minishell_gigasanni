@@ -84,12 +84,16 @@ void	skip_quotes(char	*str, int	*i);
 void	skip_quotes2(char *input, int *i, char *temp, int *j);
 void	make_tokens(t_token **token, char *split);
 t_token	*get_last_token(t_token **token);
-int		find_etype(t_token *token, char *str);
+int		find_etype(char *str);
 void	prepare_split(char *str);
-int		built_pwd(void);
+int		build_pwd(void);
 void	norme(t_mini *minishell, t_token *token);
-void	make_cmds(t_cmd **cmd, t_token *token, t_mini *minishell);
-void	print_tokens(t_token *token); //apagar
+void	make_cmds(t_cmd **cmd, t_token **token, t_mini *minishell);
+int		find_redir(t_token *token);
+int		search_options(t_token *token);
+int		return_len(t_token *token);
 void	print_cmd(t_cmd *cmd); //apagar
+void	print_tokens(t_token *token); //apagar
+void	print_matrix(char **matrix); // apagar
 
 #endif
