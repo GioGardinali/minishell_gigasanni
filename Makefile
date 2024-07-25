@@ -33,7 +33,7 @@ sources/normalize_input.c\
 sources/make_token.c\
 sources/make_cmds.c\
 sources/make_cmds_utils.c\
-
+sources/delete_later.c\
 
 
 #--------------RULES----------------------------#

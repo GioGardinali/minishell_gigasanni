@@ -92,7 +92,6 @@ void	make_cmds(t_cmd **cmd, t_token **token, t_mini *minishell);
 int		find_redir(t_token *token);
 int		search_options(t_token *token);
 int		return_len(t_token *token);
-void	print_cmd(t_cmd *cmd); //apagar
 void	print_tokens(t_token *token); //apagar
 void	print_matrix(char **matrix); // apagar
 

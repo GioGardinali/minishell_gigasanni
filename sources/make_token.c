@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tokennizer.c                                       :+:      :+:    :+:   */
+/*   make_token.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 16:32:48 by asanni            #+#    #+#             */
-/*   Updated: 2024/07/22 20:33:30 by asanni           ###   ########.fr       */
+/*   Updated: 2024/07/25 15:12:46 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,31 +63,4 @@ int	find_etype(char *str)
 		return (HERE_DOC);
 	else
 		return (WORD);
-}
-
-void	print_tokens(t_token *token)
-{
-	t_token	*current;
-
-	current = token;
-	while (current != NULL)
-	{
-		printf("Token: |%s| -> Type: %d,\n", current->str, current->type);
-		current = current->next;
-	}
-}
-
-void	print_cmd(t_cmd *cmd)
-{
-	t_cmd	*current;
-	int		i;
-
-	i = 0;
-	current = cmd;
-	while (current != NULL)
-	{
-		printf("cmd: |%s| -> option: %s,\n", current->str, current->options[i]);
-		i++;
-		current = current->next;
-	}
 }
