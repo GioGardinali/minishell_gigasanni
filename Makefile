@@ -30,9 +30,9 @@ sources/input_verif.c \
 sources/error_functions.c\
 sources/adjust_spaces.c\
 sources/normalize_input.c\
-sources/tokennizer.c\
-sources/get_cmds.c\
-sources/get_cmds_utils.c\
+sources/make_token.c\
+sources/make_cmds.c\
+sources/make_cmds_utils.c\
 
 
 
