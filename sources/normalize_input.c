@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 20:21:11 by asanni            #+#    #+#             */
-/*   Updated: 2024/07/22 20:23:33 by asanni           ###   ########.fr       */
+/*   Updated: 2024/07/25 19:15:46 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	norme(t_mini *minishell, t_token *token)
 		make_tokens(&token, split[i]);
 		i++;
 	}
+	free(split);
 	while (token != NULL)
 	{
 		make_cmds(&minishell->cmd, &token, minishell);

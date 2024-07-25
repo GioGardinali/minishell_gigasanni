@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_cmds.c                                         :+:      :+:    :+:   */
+/*   make_cmds.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 16:39:02 by asanni            #+#    #+#             */
-/*   Updated: 2024/07/22 20:13:58 by asanni           ###   ########.fr       */
+/*   Updated: 2024/07/25 18:56:46 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char	**make_options(t_token **token)
 {
 	char	**options;
-	char	**opt_bkp;
+	char	**opt_bckp;
 	int		len;
 
 	len = 0;
@@ -23,7 +23,7 @@ char	**make_options(t_token **token)
 		return (NULL);
 	len = return_len(*token);
 	options = ft_calloc(sizeof(char *), (len + 1));
-	opt_bkp = options;
+	opt_bckp = options;
 	while (*token != NULL && (*token)->type != PIPE)
 	{
 		if (find_redir(*token) == 1)
@@ -32,7 +32,7 @@ char	**make_options(t_token **token)
 			(*options++) = ft_strdup((*token)->str);
 		*token = (*token)->next;
 	}
-	return (opt_bkp);
+	return (opt_bckp);
 }
 
 t_cmd	*get_last_cmd(t_cmd **cmd)

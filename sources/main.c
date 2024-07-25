@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 18:52:55 by asanni            #+#    #+#             */
-/*   Updated: 2024/07/22 20:19:09 by asanni           ###   ########.fr       */
+/*   Updated: 2024/07/25 19:44:19 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	check_pid(t_mini *minishell)
 {
 	execve(minishell->cmd->path, minishell->cmd->options, __environ);
 	ft_putendl_fd("Execve falhou", 2);
-	free(minishell->cmd->options);
+	free_matrix(minishell->cmd->options);
 	exit(1);
 }
 
@@ -52,6 +52,12 @@ int	main(void)
 	while (42)
 	{
 		start_minishell(&minishell);
+		free_matrix(minishell.cmd->options);
+		minishell.cmd->options = NULL;
+		free(minishell.cmd);
+		minishell.cmd = NULL;
+		free_token(&minishell.token);
+		minishell.token = NULL;
 	}
 	return (0);
 }

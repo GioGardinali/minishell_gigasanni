@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 16:32:48 by asanni            #+#    #+#             */
-/*   Updated: 2024/07/25 15:12:46 by asanni           ###   ########.fr       */
+/*   Updated: 2024/07/25 15:30:02 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ void	make_tokens(t_token **token, char *split)
 	temp = get_last_token(token);
 	temp->next = new_token;
 	new_token->prev = temp;
-	printf("token\n");
 }
 
 int	find_etype(char *str)
