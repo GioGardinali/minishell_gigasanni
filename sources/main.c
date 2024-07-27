@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 18:52:55 by asanni            #+#    #+#             */
-/*   Updated: 2024/07/25 19:44:19 by asanni           ###   ########.fr       */
+/*   Updated: 2024/07/27 15:46:15 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int	main(void)
 	while (42)
 	{
 		start_minishell(&minishell);
+		print_cmds(minishell.cmd);
 		free_matrix(minishell.cmd->options);
 		minishell.cmd->options = NULL;
 		free(minishell.cmd);

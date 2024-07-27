@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 16:39:02 by asanni            #+#    #+#             */
-/*   Updated: 2024/07/25 18:56:46 by asanni           ###   ########.fr       */
+/*   Updated: 2024/07/27 15:40:33 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ t_cmd	*get_last_cmd(t_cmd **cmd)
 	return (temp);
 }
 
-void	make_cmds(t_cmd **cmd, t_token **token, t_mini *minishell)
+void	make_one_cmd(t_cmd **cmd, t_token **token, t_mini *minishell)
 {
 	t_cmd	*new_cmd;
 	t_cmd	*temp;
@@ -57,8 +57,6 @@ void	make_cmds(t_cmd **cmd, t_token **token, t_mini *minishell)
 		return ;
 	new_cmd->str = (*token)->str;
 	new_cmd->options = make_options(token);
-	puts(new_cmd->str);
-	print_matrix(new_cmd->options);
 	new_cmd->path = verify_path(minishell, new_cmd->str);
 	new_cmd->next = NULL;
 	new_cmd->prev = NULL;
@@ -70,6 +68,26 @@ void	make_cmds(t_cmd **cmd, t_token **token, t_mini *minishell)
 	temp = get_last_cmd(cmd);
 	temp->next = new_cmd;
 	new_cmd->prev = temp;
+}
+
+void	make_cmds(t_cmd **cmd, t_token **token, t_mini *minishell)
+{
+	if (cmd == NULL || token == NULL || *token == NULL)
+		return ;
+	while (*token != NULL)
+	{
+		make_one_cmd(cmd, token, minishell);
+		while (*token != NULL && (*token)->type != PIPE)
+		{
+			if (find_redir(*token) == 1)
+				*token = (*token)->next;
+			else
+				*token = (*token)->next;
+		}
+		if (*token != NULL && (*token)->type == PIPE)
+			*token = (*token)->next;
+	}
+	print_matrix((*cmd)->options);
 }
 
 // gerenciar error de malloc
