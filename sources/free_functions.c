@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 15:45:06 by asanni            #+#    #+#             */
-/*   Updated: 2024/07/25 19:38:20 by asanni           ###   ########.fr       */
+/*   Updated: 2024/07/27 19:29:20 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	free_cmds(t_cmd **cmd)
 	t_cmd	*temp;
 
 	temp = *cmd;
-	while (temp!= NULL)
+	while (temp != NULL)
 	{
 		temp = (*cmd)->next;
 		free(cmd);
