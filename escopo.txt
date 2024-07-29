@@ -165,7 +165,7 @@ ter uma estrutura para o heredoc e mallocar
 - vai ser necessário ter o tamanho dos tokens (cmd) e um para 
 	armazenar array de arquivos do heredoc
 
-percorrer todos os tokens até achar o heredoc
+percorrer todos os tokens até achar o heredoc [ X ]
 
 função para checar heredoc
 	função para iniciar [ X ]
