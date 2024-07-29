@@ -158,3 +158,48 @@ estamos tendo erro quando antes da
 
 
 Fazer a expansão de variavel
+
+
+construção do heredoc
+ter uma estrutura para o heredoc e mallocar
+- vai ser necessário ter o tamanho dos tokens (cmd) e um para 
+	armazenar array de arquivos do heredoc
+
+percorrer todos os tokens até achar o heredoc
+
+função para checar heredoc
+	função para iniciar
+		função para contar comandos
+		colocar o heredoc na estrutura da struct minishell
+	função para executar o heredoc
+		Vai ser necessário usar o signal para comunicação
+		armazenar o primeiro documento apos o token de heredoc
+		adicionar o documento no array do heredoc
+		armazenar o pid do fork (filho)
+		se ocorrer conforme o esperado, é necessário passar o 
+			documento + checar se o delimitador tem aspas + passar o delimitador
+		colocar um waitpid (pid, exit_status, 0) para saida da função
+		após ocorrer o processo do filho
+		armazenar o status de saída na struct
+		função da linha 179 realizada para abrir o documento,
+			puxar a função para imprimir o arquivo no terminal
+			foi utilizado um while até ser verdadeiro
+				se não exitir a linha de impressão "> ", trazer mensagem de erro e break
+				se a linha de impressão for igual ao delimitador, free na linha e break
+				se não existir aspas, aplicar expand_vars na linha e atribuir nela
+			solicitar a impressão da linha de impressão com o conteúdo do arquivo
+			dar free na linha
+criar funções para armazenar um:
+	novo documento e atribuir em um nó da struct heredoc
+	pegar o ultimo documento do nó heredoc
+	adicionar um novo documento ao nó (usa a função que pega o ultimo doucmento e atribui ao proximo)
+	(criar uma função para dar free em tudo do heredoc)
+	função para contar comandos (checar se existe)
+	criar função para checar se tem aspas (checar se a que tem hoje atende)
+	Entender função para fazer remoção de aspas (??)
+	Construção da expand_vars para a linha de impressão da função linha 185-191
+	(entender o arquivo de variáveis (??))
+Pensando na construção de struct de heredoc e como adicionar na atual estrutura
+do atual minishell
+	t_heredoc 
+
