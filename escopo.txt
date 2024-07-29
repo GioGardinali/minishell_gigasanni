@@ -168,9 +168,9 @@ ter uma estrutura para o heredoc e mallocar
 percorrer todos os tokens até achar o heredoc
 
 função para checar heredoc
-	função para iniciar
-		função para contar comandos
-		colocar o heredoc na estrutura da struct minishell
+	função para iniciar [ X ]
+		função para contar comandos [ X ]
+		colocar o heredoc na estrutura da struct minishell [ X ]
 	função para executar o heredoc
 		Vai ser necessário usar o signal para comunicação
 		armazenar o primeiro documento apos o token de heredoc
