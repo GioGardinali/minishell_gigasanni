@@ -6,7 +6,7 @@
 /*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 16:36:39 by gigardin          #+#    #+#             */
-/*   Updated: 2024/07/29 19:50:18 by gigardin         ###   ########.fr       */
+/*   Updated: 2024/07/29 20:01:13 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,10 @@ static void	init_heredoc(t_mini *temp_minishell)
 	temp_minishell->heredocs = heredoc;
 }
 
-static int	execute_heredoc(char *str, int unsigned index, t_heredoc *heredoc, int is_first)
-{
-	int	validate;
-	validate = 0;
+// static int	execute_heredoc(char *str, int unsigned index, t_heredoc *heredoc, int is_first)
+// {
+// 	int	validate;
+// 	validate = 0;
 
-	return (validate);
-}
+// 	return (validate);
+// }
