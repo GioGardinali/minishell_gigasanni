@@ -110,9 +110,15 @@ int		search_options(t_token *token);
 int		return_len(t_token *token);
 void	print_tokens(t_token *token); //apagar
 void	print_matrix(char **matrix); // apagar
+void	print_cmds(t_cmd *cmd); //apagar
+void	print_options(char **options); // apagar
 void	free_cmds(t_cmd **cmd);
 void	free_token(t_token **token);
 //void	prepare_split(char *str);
 //void	skip_quotes2(char *input, int *i, char *temp, int *j);
 
+int	check_quotes_in_token(char *str);
+int unsigned count_cmd(t_token *temp_token);
+int	check_here_docs(t_mini *minishell);
+t_file_heredoc	*new_file(char *file);
 #endif
