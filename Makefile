@@ -35,6 +35,7 @@ sources/make_cmds.c\
 sources/make_cmds_utils.c\
 sources/delete_later.c\
 sources/free_functions.c\
+sources/pipes.c\
 
 
 #--------------RULES----------------------------#

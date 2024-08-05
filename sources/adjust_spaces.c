@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 12:13:30 by asanni            #+#    #+#             */
-/*   Updated: 2024/07/14 13:23:25 by asanni           ###   ########.fr       */
+/*   Updated: 2024/07/29 15:31:06 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ char	*adjust_spaces(char *input)
 	result = malloc(length * 4 + 1);
 	res_ptr = result;
 	in_quotes = false;
+	while (*input == ' ')
+		input++;
 	while (*input)
 	{
 		if (*input == '"' || *input == '\'')
