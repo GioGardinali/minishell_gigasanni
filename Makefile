@@ -37,6 +37,7 @@ sources/delete_later.c\
 sources/free_functions.c\
 sources/heredoc_init.c\
 sources/heredoc_utils.c\
+sources/heredoc_new_file.c\
 
 
 #--------------RULES----------------------------#
