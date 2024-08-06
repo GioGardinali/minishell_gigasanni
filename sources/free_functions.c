@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 15:45:06 by asanni            #+#    #+#             */
-/*   Updated: 2024/07/27 19:29:20 by asanni           ###   ########.fr       */
+/*   Updated: 2024/08/05 20:07:37 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,22 +54,3 @@ void	free_matrix(char **matrix)
 	}
 	free(matrix);
 }
-
-//void	free_cmds(t_cmd **cmd)
-// {
-// 	t_cmd	*temp;
-
-// 	while (*cmd != NULL)
-// 	{
-// 		temp = (*cmd)->next;
-// 		if ((*cmd)->str)
-// 			free((*cmd)->str);
-// 		if ((*cmd)->options)
-// 			free_matrix((*cmd)->options);
-// 		if ((*cmd)->path)
-// 			free((*cmd)->path);
-// 		free(*cmd);
-// 		*cmd = temp;
-// 	}
-// 	*cmd = NULL;
-// }

@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 15:48:38 by asanni            #+#    #+#             */
-/*   Updated: 2024/08/05 19:52:19 by asanni           ###   ########.fr       */
+/*   Updated: 2024/08/06 16:45:21 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,3 +50,14 @@ void	process_two_cmds(t_mini minishell)
 	waitpid(pid1, NULL, 0);
 	waitpid(pid2, NULL, 0);
 }
+
+// void	two_process_cont(char *path, char *options, char **env, int fd)
+// {
+// 	int	fds[2];
+
+// 	dup2(fds[0], fd);
+// 	close(fds[1]);
+// 	close(fds[0]);
+// 	execve(path, options, env);
+// 	exit(EXIT_FAILURE);
+// }
