@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 18:52:55 by asanni            #+#    #+#             */
-/*   Updated: 2024/08/07 19:26:07 by asanni           ###   ########.fr       */
+/*   Updated: 2024/08/07 20:02:36 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	check_pid(t_mini *minishell)
 {
 	//if (minishell->input[0] != '\0' || is_blank(minishell->input) == 0)
 	//process_two_cmds(*minishell);
-		execve(minishell->cmd->path, minishell->cmd->options, __environ);
+	execve(minishell->cmd->path, minishell->cmd->options, __environ);
 	ft_putendl_fd("Execve falhou", 2);
 	free_matrix(minishell->cmd->options);
 	exit(1);
@@ -32,7 +32,10 @@ static void	start_minishell(t_mini *minishell)
 	if (!minishell->input)
 		minishell->input = ft_strdup("exit");
 	if (minishell->input[0] == '\0' || (is_blank(minishell->input) == 1))
+	{
+		add_history(minishell->input);
 		return ;
+	}
 	else
 		add_history(minishell->input);
 	if (ft_strcmp(minishell->input, "exit") == 0)
