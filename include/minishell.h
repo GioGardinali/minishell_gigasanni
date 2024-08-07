@@ -99,6 +99,7 @@ void	print_matrix(char **matrix); // apagar
 void	free_token(t_token **token);
 void	free_cmds(t_cmd **cmd);
 void	process_two_cmds(t_mini minishell);
+int		is_blank(char *str);
 //void	prepare_split(char *str);
 //void	skip_quotes2(char *input, int *i, char *temp, int *j);
 

@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 18:52:55 by asanni            #+#    #+#             */
-/*   Updated: 2024/08/06 16:52:07 by asanni           ###   ########.fr       */
+/*   Updated: 2024/08/07 19:26:07 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 
 void	check_pid(t_mini *minishell)
 {
-	process_two_cmds(*minishell);
-	execve(minishell->cmd->path, minishell->cmd->options, __environ);
+	//if (minishell->input[0] != '\0' || is_blank(minishell->input) == 0)
+	//process_two_cmds(*minishell);
+		execve(minishell->cmd->path, minishell->cmd->options, __environ);
 	ft_putendl_fd("Execve falhou", 2);
 	free_matrix(minishell->cmd->options);
 	exit(1);
@@ -30,7 +31,9 @@ static void	start_minishell(t_mini *minishell)
 	minishell->input = readline("Minishelby> ");
 	if (!minishell->input)
 		minishell->input = ft_strdup("exit");
-	if (ft_strcmp(minishell->input, "") != 0)
+	if (minishell->input[0] == '\0' || (is_blank(minishell->input) == 1))
+		return ;
+	else
 		add_history(minishell->input);
 	if (ft_strcmp(minishell->input, "exit") == 0)
 		exit_function();
@@ -53,11 +56,13 @@ int	main(void)
 	while (42)
 	{
 		start_minishell(&minishell);
-		print_cmds(minishell.cmd);
-		free_matrix(minishell.cmd->options);
-		minishell.cmd->options = NULL;
-		free(minishell.cmd);
-		minishell.cmd = NULL;
+		if (minishell.cmd != NULL)
+		{
+			free_matrix(minishell.cmd->options);
+			minishell.cmd->options = NULL;
+			free(minishell.cmd);
+			minishell.cmd = NULL;
+		}
 		free_token(&minishell.token);
 		minishell.token = NULL;
 	}

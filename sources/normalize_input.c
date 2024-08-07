@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 20:21:11 by asanni            #+#    #+#             */
-/*   Updated: 2024/08/06 16:55:40 by asanni           ###   ########.fr       */
+/*   Updated: 2024/08/07 19:26:15 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,22 @@ tenho que arrumar a parte que lida com os cmds para passar para a execv
 provavelmente melhor lidar com isso em outra função
 */
 
+int	is_blank(char *str)
+{
+	int	i;
+	int	verif;
+
+	i = 0;
+	verif = 0;
+	while (!(ft_isprint(str[i])) && str[i] != '\0')
+	{
+		if (str[i + 1] == '\0')
+			verif = 1;
+		i++;
+	}
+	return (verif);
+}
+
 void	norme(t_mini *minishell, t_token *token)
 {
 	int			i;
@@ -31,7 +47,8 @@ void	norme(t_mini *minishell, t_token *token)
 	i = 0;
 	if (check_input(minishell->input))
 		return ;
-	
+	if (!(minishell->input[0] != '\0'))
+		return ;
 	input = adjust_spaces(minishell->input);
 	split = ft_split(input, -1);
 	copy_env(minishell);
