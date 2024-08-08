@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 15:45:06 by asanni            #+#    #+#             */
-/*   Updated: 2024/08/05 20:07:37 by asanni           ###   ########.fr       */
+/*   Updated: 2024/08/08 20:25:53 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,3 +54,19 @@ void	free_matrix(char **matrix)
 	}
 	free(matrix);
 }
+
+void	free_token_bc(t_token **token)
+{
+	t_token	*temp;
+
+	temp = *token;
+	while (temp != NULL)
+	{
+		temp = (*token)->prev;
+		free(*token);
+		(*token) = temp;
+	}
+	token = NULL;
+}
+
+mudar na main o free bc pelo free token normal

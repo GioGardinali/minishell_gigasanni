@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 20:21:11 by asanni            #+#    #+#             */
-/*   Updated: 2024/08/07 19:26:15 by asanni           ###   ########.fr       */
+/*   Updated: 2024/08/08 19:45:56 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,22 +21,6 @@ e cria os tokens com o resultado da split
 tenho que arrumar a parte que lida com os cmds para passar para a execv
 provavelmente melhor lidar com isso em outra função
 */
-
-int	is_blank(char *str)
-{
-	int	i;
-	int	verif;
-
-	i = 0;
-	verif = 0;
-	while (!(ft_isprint(str[i])) && str[i] != '\0')
-	{
-		if (str[i + 1] == '\0')
-			verif = 1;
-		i++;
-	}
-	return (verif);
-}
 
 void	norme(t_mini *minishell, t_token *token)
 {
@@ -54,10 +38,11 @@ void	norme(t_mini *minishell, t_token *token)
 	copy_env(minishell);
 	while (split[i] != NULL)
 	{
-		make_tokens(&token, split[i]);
+		make_tokens(&minishell->token, split[i]);
 		i++;
 	}
 	free(split);
+	token = minishell->token;
 	while (token != NULL)
 	{
 		make_cmds(&minishell->cmd, &token, minishell);

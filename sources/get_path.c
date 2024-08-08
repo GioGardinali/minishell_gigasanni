@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 19:23:18 by asanni            #+#    #+#             */
-/*   Updated: 2024/08/05 19:27:45 by asanni           ###   ########.fr       */
+/*   Updated: 2024/08/08 19:58:08 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static char	*append_slash(char *path, char *cmd)
 
 	len = ft_strlen(path);
 	cmd_len = ft_strlen(cmd);
-	new_str = malloc((len + cmd_len + 1) * sizeof(char));
+	new_str = malloc((len + cmd_len + 2) * sizeof(char));
 	ft_strlcpy(new_str, path, len + 1);
 	ft_strlcpy(&new_str[len], "/", 2);
 	ft_strlcpy(&new_str[len + 1], cmd, cmd_len + 1);

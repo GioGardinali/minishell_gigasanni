@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 18:52:55 by asanni            #+#    #+#             */
-/*   Updated: 2024/08/07 20:02:36 by asanni           ###   ########.fr       */
+/*   Updated: 2024/08/08 20:22:16 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	check_pid(t_mini *minishell)
 {
-	//if (minishell->input[0] != '\0' || is_blank(minishell->input) == 0)
-	//process_two_cmds(*minishell);
-	execve(minishell->cmd->path, minishell->cmd->options, __environ);
+	printf("pipes: %d %p\n", count_token_type(minishell, PIPE), minishell->token);
+	process_two_cmds(*minishell);
+	//execve(minishell->cmd->path, minishell->cmd->options, __environ);
 	ft_putendl_fd("Execve falhou", 2);
 	free_matrix(minishell->cmd->options);
 	exit(1);
@@ -33,7 +33,8 @@ static void	start_minishell(t_mini *minishell)
 		minishell->input = ft_strdup("exit");
 	if (minishell->input[0] == '\0' || (is_blank(minishell->input) == 1))
 	{
-		add_history(minishell->input);
+		if (minishell->input[0] != '\0')
+			add_history(minishell->input);
 		return ;
 	}
 	else
@@ -66,7 +67,8 @@ int	main(void)
 			free(minishell.cmd);
 			minishell.cmd = NULL;
 		}
-		free_token(&minishell.token);
+		if (minishell.token != NULL)
+		free_token_bc(&minishell.token);
 		minishell.token = NULL;
 	}
 	return (0);
