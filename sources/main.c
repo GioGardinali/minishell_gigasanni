@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 18:52:55 by asanni            #+#    #+#             */
-/*   Updated: 2024/08/08 20:22:16 by asanni           ###   ########.fr       */
+/*   Updated: 2024/08/10 14:43:45 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 
 void	check_pid(t_mini *minishell)
 {
-	printf("pipes: %d %p\n", count_token_type(minishell, PIPE), minishell->token);
-	process_two_cmds(*minishell);
-	//execve(minishell->cmd->path, minishell->cmd->options, __environ);
+	if (count_token_type(minishell, PIPE) > 0)
+		process_two_cmds(*minishell);
+	else
+		execve(minishell->cmd->path, minishell->cmd->options, __environ);
 	ft_putendl_fd("Execve falhou", 2);
 	free_matrix(minishell->cmd->options);
 	exit(1);
@@ -68,7 +69,7 @@ int	main(void)
 			minishell.cmd = NULL;
 		}
 		if (minishell.token != NULL)
-		free_token_bc(&minishell.token);
+			free_token_bc(&minishell.token);
 		minishell.token = NULL;
 	}
 	return (0);
