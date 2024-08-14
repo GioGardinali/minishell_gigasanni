@@ -24,6 +24,15 @@
 # include "../libft/libft.h" /* mylibft */
 
 //Structs
+
+typedef struct s_env_exp
+{
+	char				*key;
+	char				*content;
+	struct s_env_exp	*prev;
+	struct s_env_exp	*next;
+}t_env_exp;
+
 typedef struct s_env
 {
 	char			*env_key;
@@ -54,6 +63,7 @@ typedef struct s_mini
 	t_env		env;
 	t_token		*token;
 	t_cmd		*cmd;
+	t_env_exp	*env_exp;
 
 }t_mini;
 
