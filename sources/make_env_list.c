@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 19:27:26 by asanni            #+#    #+#             */
-/*   Updated: 2024/08/14 20:00:02 by asanni           ###   ########.fr       */
+/*   Updated: 2024/08/16 19:07:35 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,26 +22,31 @@ t_env_exp	*get_last_env(t_env_exp **token)
 	return (temp);
 }
 
-void	make_tokens(t_env_exp **token, char *split)
+char	**return_pair(char **env)
 {
-	t_env_exp	*new_token;
+	ft_split();
+}
+
+void	list_env(t_env_exp **token, char *split)
+{
+	t_env_exp	*env_pair;
 	t_env_exp	*temp;
 
-	new_token = malloc(sizeof(t_env_exp));
-	if (new_token == NULL)
+	env_pair = malloc(sizeof(t_env_exp));
+	if (env_pair == NULL)
 		return ;
-	new_token->key = ;
-	new_token->content = ;
-	new_token->next = NULL;
-	new_token->prev = NULL;
+	env_pair->key = ;
+	env_pair->content = ;
+	env_pair->next = NULL;
+	env_pair->prev = NULL;
 	if (!*token)
 	{
-		*token = new_token;
+		*token = env_pair;
 		return ;
 	}
 	temp = get_last_token(token);
-	temp->next = new_token;
-	new_token->prev = temp;
+	temp->next = env_pair;
+	env_pair->prev = temp;
 }
 
 //criar uma função que retorna o valor 
