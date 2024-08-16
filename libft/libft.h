@@ -72,7 +72,7 @@ int		ft_puthex_lower(unsigned int n);
 int		ft_puthex_upper(unsigned int n);
 int		ft_put_uns_dec(unsigned int n);
 int		ft_put_pointer(unsigned long int p);
-size_t	ft_len_between(const char *s, char start, char end);
+size_t	ft_strclen(const char *s, char c);
 
 //bonus
 typedef struct s_list
