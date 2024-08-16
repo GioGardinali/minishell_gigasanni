@@ -6,7 +6,7 @@
 /*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 16:36:39 by gigardin          #+#    #+#             */
-/*   Updated: 2024/07/31 19:52:04 by gigardin         ###   ########.fr       */
+/*   Updated: 2024/08/16 20:05:39 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,46 @@ static void	init_heredoc(t_mini *temp_minishell)
 	temp_minishell->heredocs = heredoc;
 }
 
-int	check_here_docs(t_mini *minishell)
+static void	write_file(char *file, int quotes, char *str_end)
+{
+	int	fd;
+	//signal(SIGINT, copy_heredoc)
+	
+	//ft_rlstnew(str_end)
+	fd = open(file, O_CREAT | O_RDWR | O_TRUNC, 0644);
+
+	//função para fazer loop do heredoc (fd, quotes, str_end)
+	close(fd);
+	//ft_update_shell()->exit_status = 0; (refatorar função)
+	clear_exit(ft_update_shell(), 1);
+}
+
+static int	execute_heredoc(char *str_end, unsigned int index, t_heredoc *heredoc, int is_first)
+{
+	char 		*file;
+	pid_token	pid;
+	int			exit_status;
+	int			validate;
+	validate = 0;
+
+	file = get_file(is_first);
+	add_file(&heredoc->array[index], new_file(file));
+
+	pid = fork();
+	if (pid == 0)
+		write_file(file, check_quotes_in_token(str_end), remove_quotes(str_end));
+	waitpid(pid, &exit_status, 0);
+	exit_status = WEXITSTATUS(exit_status);
+	
+	//função para atualizar status de saída do shell
+	if (exit_status == 130)
+		return validate;
+	else
+		validate = 1;
+	return (validate);
+}
+
+int	check_heredocs(t_mini *minishell)
 {
 	t_token	*temp_token;
 	t_mini	*temp_minishell;
@@ -43,8 +82,8 @@ int	check_here_docs(t_mini *minishell)
 		{
 			temp_minishell->heredocs->array[0] = new_file(temp_token->str);
 			printf("%s", temp_minishell->heredocs->array[0]->file);
-			// if (!execute_heredoc(temp_token->next->str, cmd_index, minishell->heredocs, temp_token->prev = NULL))//função para executar o heredoc, chamar aqui e checando erro se não for o primeiro
-			// 	return (validate);
+			if (!execute_heredoc(temp_token->next->str, cmd_index, minishell->heredocs, temp_token->prev = NULL))//função para executar o heredoc, chamar aqui e checando erro se não for o primeiro
+			return (validate);
 		}
 		temp_token = temp_token->next;
 		
@@ -53,10 +92,3 @@ int	check_here_docs(t_mini *minishell)
 	return (validate);
 }
 
-// static int	execute_heredoc(char *str, int unsigned index, t_heredoc *heredoc, int is_first)
-// {
-// 	int	validate;
-// 	validate = 0;
-
-// 	return (validate);
-// }

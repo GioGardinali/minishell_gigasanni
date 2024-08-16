@@ -6,7 +6,7 @@
 /*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 18:30:41 by gigardin          #+#    #+#             */
-/*   Updated: 2024/08/13 19:47:06 by gigardin         ###   ########.fr       */
+/*   Updated: 2024/08/16 19:32:45 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,23 +39,23 @@ int	check_quotes_in_token(char *str)
 	}
 	return (validate);
 }
-char	*remove_quotes(char *str_token)
+char	*remove_quotes(char *str_end)
 {
 	int		len;
 	char	*new;
 	char	*temp;
 	int		i;
 
-	if (!check_quotes_in_token(str_token))
-		return (ft_strdup(str_token));
-	len = ft_strlen(str_token);
+	if (!check_quotes_in_token(str_end))
+		return (ft_strdup(str_end));
+	len = ft_strlen(str_end);
 	new = ft_calloc(sizeof(char *), len + 1);
 	temp = new;
-	while (str_token[i])
+	while (str_end[i])
 	{
-		if (str_token[i] != 34 && str_token[i] != 39)
+		if (str_end[i] != 34 && str_end[i] != 39)
 		{
-			*temp = str_token[i];
+			*temp = str_end[i];
 			temp++;
 		}
 		i++;

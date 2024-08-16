@@ -22,6 +22,8 @@
 # include <readline/readline.h> // para fazer tudo funfar
 # include <sys/wait.h> // usar waitpid
 # include "../libft/libft.h" /* mylibft */
+# include <signal.h> // fuction signal
+# include <fcntl.h> // function open, close
 
 //Structs
 typedef struct s_env
@@ -119,7 +121,7 @@ void			free_token(t_token **token);
 
 int				check_quotes_in_token(char *str);
 int unsigned 	count_cmd(t_token *temp_token);
-int				check_here_docs(t_mini *minishell);
+int				check_heredocs(t_mini *minishell);
 t_file_heredoc	*new_file(char *file);
 t_file_heredoc 	*get_last_file(t_file_heredoc *array_file);
 void			add_file(t_file_heredoc *new_file, t_file_heredoc **array_file);
