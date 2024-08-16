@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 18:52:55 by asanni            #+#    #+#             */
-/*   Updated: 2024/08/14 17:54:58 by asanni           ###   ########.fr       */
+/*   Updated: 2024/08/16 20:49:45 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,7 @@
 
 void	check_pid(t_mini *minishell)
 {
-	//if (count_token_type(minishell, PIPE) > 0)
-		process_multiple_cmds(*minishell, -1);
-	// else
-	// 	execve(minishell->cmd->path, minishell->cmd->options, __environ);
+	process_multiple_cmds(*minishell, -1);
 	ft_putendl_fd("Execve falhou", 2);
 	free_matrix(minishell->cmd->options);
 	exit(1);

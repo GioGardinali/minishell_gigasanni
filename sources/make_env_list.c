@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 19:27:26 by asanni            #+#    #+#             */
-/*   Updated: 2024/08/16 19:07:35 by asanni           ###   ########.fr       */
+/*   Updated: 2024/08/16 20:34:53 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,6 @@ t_env_exp	*get_last_env(t_env_exp **token)
 	while (temp->next)
 		temp = temp->next;
 	return (temp);
-}
-
-char	**return_pair(char **env)
-{
-	ft_split();
 }
 
 void	list_env(t_env_exp **token, char *split)

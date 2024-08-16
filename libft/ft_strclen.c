@@ -1,21 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expand_var.c                                       :+:      :+:    :+:   */
+/*   ft_strclen.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/14 17:57:37 by asanni            #+#    #+#             */
-/*   Updated: 2024/08/16 20:51:27 by asanni           ###   ########.fr       */
+/*   Created: 2024/08/16 19:20:23 by asanni            #+#    #+#             */
+/*   Updated: 2024/08/16 20:46:42 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "libft.h"
 
-void	expand_var(t_mini minishell, char *env_name)
+size_t	ft_strclen(const char *s, char c)
 {
-	char	**temp_env;
-	char	*result;
+	size_t	len;
 
-	temp_env = minishell.env.env_content;
+	len = 0;
+	while (s[len] && s[len] != c)
+	{
+		len++;
+	}
+	return (len);
 }
