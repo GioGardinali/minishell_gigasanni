@@ -47,7 +47,8 @@ SRC = ft_atoi.c \
  ft_put_uns_dec.c \
  ft_isnum.c \
  ft_signal.c \
- ft_put_pointer.c
+ ft_put_pointer.c\
+ ft_len_between.c\
 
 SRCB = ft_lstadd_back.c \
  ft_lstadd_front.c \
