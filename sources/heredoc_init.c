@@ -6,7 +6,7 @@
 /*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 16:36:39 by gigardin          #+#    #+#             */
-/*   Updated: 2024/08/16 20:05:39 by gigardin         ###   ########.fr       */
+/*   Updated: 2024/08/16 20:48:58 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,31 @@ static void	init_heredoc(t_mini *temp_minishell)
 	heredoc->size = count_cmd(temp_minishell->token);
 	heredoc->array = ft_calloc(sizeof(t_file_heredoc *), heredoc->size);
 	temp_minishell->heredocs = heredoc;
+}
+
+static void loop_exec_heredoc(int fd, int quotes, char *str_end)
+{
+	char *line;
+
+	while(1)
+	{
+		line = readline("> ");
+		if (!line)
+		{
+			//print error
+			//ft_printf_fd(2, "%s %s %s (wanted `%s')\n, "Minishell:", "warning:", "here-document delimited by end-of-file". str_end)
+			break ;
+		}
+		if (!ft_strcmp(line, str_end))
+		{
+			free(line);
+			break ;
+		}
+		if (!quotes)
+			line = expand_vars(line);
+		ft_putendl_fd(line, fd);
+		free(line);
+	}
 }
 
 static void	write_file(char *file, int quotes, char *str_end)
