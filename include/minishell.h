@@ -25,18 +25,11 @@
 
 //Structs
 
-typedef struct s_env_exp
-{
-	char				*key;
-	char				*content;
-	struct s_env_exp	*prev;
-	struct s_env_exp	*next;
-}t_env_exp;
-
 typedef struct s_env
 {
-	char			*env_key;
-	char			**env_content;
+	char			*key;
+	char			*content;
+	struct s_env	*prev;
 	struct s_env	*next;
 }t_env;
 
@@ -60,10 +53,10 @@ typedef struct s_cmd
 typedef struct s_mini
 {
 	char		*input;
-	t_env		env;
+	char		**env_content;
 	t_token		*token;
 	t_cmd		*cmd;
-	t_env_exp	*env_exp;
+	t_env		*env_exp;
 
 }t_mini;
 

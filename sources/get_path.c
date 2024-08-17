@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 19:23:18 by asanni            #+#    #+#             */
-/*   Updated: 2024/08/08 19:58:08 by asanni           ###   ########.fr       */
+/*   Updated: 2024/08/17 16:35:17 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ char	**copy_env(t_mini *minishell)
 	while (++i < size)
 		temp[i] = __environ[i];
 	temp[i] = NULL;
-	minishell->env.env_content = temp;
-	return (minishell->env.env_content);
+	minishell->env_content = temp;
+	return (minishell->env_content);
 }
 
 static char	*search_path(char **s, char *str)
@@ -79,7 +79,7 @@ char	*verify_path(t_mini *minishell, char *str)
 	int		result;
 	int		i;
 
-	path_line = search_path(minishell->env.env_content, "PATH");
+	path_line = search_path(minishell->env_content, "PATH");
 	str_path = ft_split(remove_path(path_line), ':');
 	result = 1;
 	i = 0;

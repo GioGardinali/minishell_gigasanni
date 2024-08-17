@@ -18,18 +18,13 @@ ctrl-C
 ctrl-D
 crtl-\
 
+BUILT INS
 echo com a opção de -n
-
 cd com somente um caminho relativo ou absoluto
-
 pwd com sem opções
-
-export com sem opções
-
+export com sem argumentos
 unset with sem opções
-
 env com sem opções ou argumentos
-
 exit com sem opções
 
 o prompt tem que ficar esperando por um novo comando

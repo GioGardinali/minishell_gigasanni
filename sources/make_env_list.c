@@ -6,15 +6,15 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 19:27:26 by asanni            #+#    #+#             */
-/*   Updated: 2024/08/16 20:34:53 by asanni           ###   ########.fr       */
+/*   Updated: 2024/08/17 16:31:56 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-t_env_exp	*get_last_env(t_env_exp **token)
+t_env	*get_last_env(t_env **token)
 {
-	t_env_exp	*temp;
+	t_env	*temp;
 
 	temp = *token;
 	while (temp->next)
@@ -22,28 +22,40 @@ t_env_exp	*get_last_env(t_env_exp **token)
 	return (temp);
 }
 
-void	list_env(t_env_exp **token, char *split)
+void	list_env(t_env **env, char *split)
 {
-	t_env_exp	*env_pair;
-	t_env_exp	*temp;
+	t_env	*env_pair;
+	t_env	*temp;
+	char	**env_split;
 
-	env_pair = malloc(sizeof(t_env_exp));
+	env_pair = malloc(sizeof(t_env));
+	env_split = ft_split_two(split, '=');
 	if (env_pair == NULL)
 		return ;
-	env_pair->key = ;
-	env_pair->content = ;
+	env_pair->key = env_split[0];
+	env_pair->content = env_split[1];
 	env_pair->next = NULL;
 	env_pair->prev = NULL;
-	if (!*token)
+	free(split);
+	if (!*env)
 	{
-		*token = env_pair;
+		*env = env_pair;
 		return ;
 	}
-	temp = get_last_token(token);
+	temp = get_last_env(env);
 	temp->next = env_pair;
 	env_pair->prev = temp;
 }
 
-//criar uma função que retorna o valor 
-// key: tudo antes do =
-// content: tudo depois do =
+void	make_env_list(t_mini *minishell)
+{
+	int	i;
+
+	i = 0;
+	while (minishell->env_content[i] != NULL)
+	{
+		list_env(&minishell->env_exp, minishell->env_content[i]);
+		i++;
+	}
+	free_matrix(minishell->env_content);
+}
