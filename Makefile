@@ -38,6 +38,7 @@ sources/free_functions.c\
 sources/heredoc_init.c\
 sources/heredoc_utils.c\
 sources/heredoc_new_file.c\
+sources/signal.c\
 
 
 #--------------RULES----------------------------#

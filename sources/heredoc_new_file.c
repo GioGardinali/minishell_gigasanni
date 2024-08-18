@@ -6,7 +6,7 @@
 /*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 10:11:35 by gigardin          #+#    #+#             */
-/*   Updated: 2024/08/03 10:19:53 by gigardin         ###   ########.fr       */
+/*   Updated: 2024/08/18 18:47:37 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,31 @@ t_file_heredoc 	*get_last_file(t_file_heredoc *array_file)
 	return (array_file);
 }
 
-void	add_file(t_file_heredoc *new_file, t_file_heredoc **array_file)
+t_file_heredoc	*new_file(char *file)
+{
+	t_file_heredoc	*n_file;
+
+	n_file = ft_calloc(1, sizeof(t_file_heredoc));
+	n_file->file = file;
+	return (n_file);
+}
+
+char	*get_file(int is_first)
+{
+	char				*file_name;
+	char				*tmp;
+	static int unsigned	number;
+
+	if (is_first)
+		number = 0;
+	tmp = ft_itoa(number);
+	file_name = ft_strjoin(HERE_DOC_FILE, tmp);
+	free(tmp);
+	number++;
+	return (file_name);
+}
+
+void	add_file(t_file_heredoc **new_file, t_file_heredoc **array_file)
 {
 	if (!new_file)
 		return ;

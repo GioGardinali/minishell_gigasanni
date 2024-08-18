@@ -24,7 +24,9 @@
 # include "../libft/libft.h" /* mylibft */
 # include <signal.h> // fuction signal
 # include <fcntl.h> // function open, close
+# include <sys/stat.h> // criação de diretórios
 
+# define HERE_DOC_FILE "/tmp/heredoc"
 //Structs
 typedef struct s_env
 {
@@ -64,6 +66,12 @@ typedef struct s_heredoc
 
 } t_heredoc;
 
+typedef struct s_gc
+{
+	void				*content;
+	struct s_gc			*next;
+}						t_gc;
+
 typedef struct s_mini
 {
 	char		*input;
@@ -71,6 +79,8 @@ typedef struct s_mini
 	t_token		*token;
 	t_cmd		*cmd;
 	t_heredoc	*heredocs;
+	t_gc		*gc;
+	int			exit_status;
 
 }t_mini;
 
@@ -124,6 +134,12 @@ int unsigned 	count_cmd(t_token *temp_token);
 int				check_heredocs(t_mini *minishell);
 t_file_heredoc	*new_file(char *file);
 t_file_heredoc 	*get_last_file(t_file_heredoc *array_file);
-void			add_file(t_file_heredoc *new_file, t_file_heredoc **array_file);
+void			add_file(t_file_heredoc **new_file, t_file_heredoc *array_file);
 char			*remove_quotes(char *str_token);
+void			copy_heredoc(int signal);
+void			free_here_docs(t_heredoc **heredoc);
+void			ft_rlstnew(void *content);
+char			*get_file(int is_first);
+
+
 #endif
