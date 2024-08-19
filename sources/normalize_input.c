@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 20:21:11 by asanni            #+#    #+#             */
-/*   Updated: 2024/08/17 18:21:51 by asanni           ###   ########.fr       */
+/*   Updated: 2024/08/19 19:30:08 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,7 @@ void	norme(t_mini *minishell, t_token *token)
 	split = ft_split(input, -1);
 	copy_env(minishell);
 	while (split[i] != NULL)
-	{
-		make_tokens(&minishell->token, split[i]);
-		i++;
-	}
-	free(split);
+		make_tokens(&minishell->token, split[i++]);
 	token = minishell->token;
 	while (token != NULL)
 	{
@@ -49,4 +45,6 @@ void	norme(t_mini *minishell, t_token *token)
 		if (token != NULL)
 			token = token->next;
 	}
+	free(split);
+	free(input);
 }
