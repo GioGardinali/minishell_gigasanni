@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 19:23:18 by asanni            #+#    #+#             */
-/*   Updated: 2024/08/19 19:12:05 by asanni           ###   ########.fr       */
+/*   Updated: 2024/08/19 19:42:13 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ char	*verify_path(t_mini *minishell, char *str)
 		if (str_path[i] == NULL)
 			break ;
 		path = append_slash(str_path[i], str);
-		result = access(append_slash(str_path[i], str), F_OK | R_OK);
+		result = access(path, F_OK | R_OK);
 		i++;
 	}
 	if (result == -1)

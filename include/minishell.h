@@ -82,7 +82,7 @@ void	free_split(char **split);
 void	free_cmds(t_cmd **cmd);
 void	free_matrix(char **matrix);
 void	error_function(char *str);
-void	exit_function(void);
+void	exit_function(t_mini *minishell);
 char	*adjust_spaces(char	*str);
 void	skip_quotes(char	*str, int	*i);
 void	make_tokens(t_token **token, char *split);

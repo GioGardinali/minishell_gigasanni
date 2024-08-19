@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 15:45:06 by asanni            #+#    #+#             */
-/*   Updated: 2024/08/10 14:37:36 by asanni           ###   ########.fr       */
+/*   Updated: 2024/08/19 20:30:34 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	free_token(t_token **token)
 	while (temp != NULL)
 	{
 		temp = (*token)->next;
-		free(token);
+		free(*token);
 		(*token) = temp;
 	}
 	token = NULL;

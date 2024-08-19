@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 12:39:12 by asanni            #+#    #+#             */
-/*   Updated: 2024/07/06 12:39:43 by asanni           ###   ########.fr       */
+/*   Updated: 2024/08/19 20:30:06 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,11 @@ void	error_function(char *str)
 	exit(EXIT_FAILURE);
 }
 
-void	exit_function(void)
+void	exit_function(t_mini *minishell)
 {
 	ft_putendl_fd("exit", 1);
+	free(minishell->env_content);
+	free(minishell->input);
+	free_token(&minishell->token);
 	exit(EXIT_SUCCESS);
 }

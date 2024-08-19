@@ -46,7 +46,7 @@ all: comp_lib $(OBJFOLDER) $(NAME)
 
 v: all
 	valgrind --leak-check=full --show-leak-kinds=all --trace-children=yes --trace-children-skip='*/bin/*,*/sbin/*' --keep-debuginfo=yes \
-	--suppressions=leak_readline --track-fds=yes ./$(NAME)
+	--suppressions=leak_readline --track-fds=yes -s ./$(NAME)
 
 comp_lib:
 	@$(MAKE) -sC $(P_LIBFT)
