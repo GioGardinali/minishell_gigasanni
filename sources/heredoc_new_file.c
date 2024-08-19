@@ -6,13 +6,13 @@
 /*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 10:11:35 by gigardin          #+#    #+#             */
-/*   Updated: 2024/08/18 18:47:37 by gigardin         ###   ########.fr       */
+/*   Updated: 2024/08/19 19:12:46 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-t_file_heredoc 	*get_last_file(t_file_heredoc *array_file)
+t_file_heredoc	*get_last_file(t_file_heredoc *array_file)
 {
 	while (array_file->next)
 		array_file = array_file->next;
@@ -43,7 +43,7 @@ char	*get_file(int is_first)
 	return (file_name);
 }
 
-void	add_file(t_file_heredoc **new_file, t_file_heredoc **array_file)
+void	add_file(t_file_heredoc **array_file, t_file_heredoc *new_file)
 {
 	if (!new_file)
 		return ;

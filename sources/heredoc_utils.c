@@ -6,7 +6,7 @@
 /*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 18:30:41 by gigardin          #+#    #+#             */
-/*   Updated: 2024/08/18 16:28:01 by gigardin         ###   ########.fr       */
+/*   Updated: 2024/08/19 19:19:34 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int	check_quotes_in_token(char *str)
 	}
 	return (validate);
 }
+
 char	*remove_quotes(char *str_end)
 {
 	int		len;
@@ -37,6 +38,7 @@ char	*remove_quotes(char *str_end)
 	char	*temp;
 	int		i;
 
+	i = 0;
 	if (!check_quotes_in_token(str_end))
 		return (ft_strdup(str_end));
 	len = ft_strlen(str_end);
@@ -54,7 +56,7 @@ char	*remove_quotes(char *str_end)
 	return (new);
 }
 
-int unsigned count_cmd(t_token *temp_token)
+int unsigned	count_cmd(t_token *temp_token)
 {
 	int unsigned	count;
 
@@ -66,6 +68,23 @@ int unsigned count_cmd(t_token *temp_token)
 		temp_token = temp_token->next;
 	}
 	return (count + 1); // add + 1 para contar ultimo comando que não é seguido por PIPE
+}
+
+void	clear_exit(t_mini *minishell, int to_exit)
+{
+	//ft_free_ptr((void **) &minishell->user_input);
+	//ft_free_tokens(minishell);
+	//free_cmd_list(&minishell->cmd);
+	free_here_docs(&minishell->heredocs);
+	//ft_garbage_clear(&minishell->gc);
+	// ft_delete_matrice(minishell->env);
+	//minishell->env = NULL;
+	if (to_exit)
+	{
+		//ft_free_env(minishell);
+		//close_all_fds();
+		exit(minishell->exit_status);
+	}
 }
 
 void	free_here_docs(t_heredoc **heredoc)
