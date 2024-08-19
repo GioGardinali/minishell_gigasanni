@@ -28,6 +28,7 @@ int		ft_signal(char c);
 int		ft_isalnum(int c);
 int		ft_isalpha(int c);
 int		ft_isascii(int c);
+int		is_blank(char *str);
 int		ft_isdigit(int c);
 int		ft_isnum(char *c);
 int		ft_isprint(int c);
@@ -73,6 +74,7 @@ int		ft_puthex_upper(unsigned int n);
 int		ft_put_uns_dec(unsigned int n);
 int		ft_put_pointer(unsigned long int p);
 size_t	ft_strclen(const char *s, char c);
+char	**ft_split_two(char const *s, char c);
 
 //bonus
 typedef struct s_list
