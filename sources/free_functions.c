@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 15:45:06 by asanni            #+#    #+#             */
-/*   Updated: 2024/08/19 20:30:34 by asanni           ###   ########.fr       */
+/*   Updated: 2024/08/21 20:25:02 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,20 @@ void	free_cmds(t_cmd **cmd)
 		(*cmd) = temp;
 	}
 	cmd = NULL;
+}
+
+void	free_env(t_env **env)
+{
+	t_env	*temp;
+
+	temp = *env;
+	while (temp != NULL)
+	{
+		temp = (*env)->next;
+		free(env);
+		(*env) = temp;
+	}
+	env = NULL;
 }
 
 void	free_token(t_token **token)

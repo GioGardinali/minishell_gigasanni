@@ -100,6 +100,7 @@ int		return_len(t_token *token);
 void	free_token(t_token **token);
 void	free_cmds(t_cmd **cmd);
 void	free_token_bc(t_token **token);
+void	free_env(t_env **env);
 void	process_two_cmds(t_mini minishell);
 void	process_multiple_cmds(t_mini minishell, int prev_fd);
 void	print_cmds(t_cmd *cmd); //apagar
