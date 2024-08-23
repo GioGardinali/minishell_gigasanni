@@ -6,7 +6,7 @@
 /*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 16:36:39 by gigardin          #+#    #+#             */
-/*   Updated: 2024/08/23 19:50:34 by gigardin         ###   ########.fr       */
+/*   Updated: 2024/08/23 19:57:16 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,10 @@ int	check_heredocs(t_mini *minishell)
 			temp_minishell->heredocs->array[0] = new_file(temp_token->str);
 			printf("%s", temp_minishell->heredocs->array[0]->file);
 			if (!execute_heredoc(temp_token->next->str, cmd_index, minishell->heredocs, temp_token->prev == NULL))//função para executar o heredoc, chamar aqui e checando erro se não for o primeiro
+			{
+				validate = 1;
 				return (validate);
+			}
 		}
 		temp_token = temp_token->next;
 	}
