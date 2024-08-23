@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 15:48:38 by asanni            #+#    #+#             */
-/*   Updated: 2024/08/21 20:13:34 by asanni           ###   ########.fr       */
+/*   Updated: 2024/08/23 19:42:30 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,11 @@
 
 void	execute_command(t_mini minishell, int input_fd, int output_fd)
 {
+	char	*path;
+	char	**options;
+
+	path = minishell.cmd->path;
+	options = minishell.cmd->options;
 	if (input_fd != -1)
 	{
 		dup2(input_fd, STDIN_FILENO);
@@ -25,8 +30,11 @@ void	execute_command(t_mini minishell, int input_fd, int output_fd)
 		close(output_fd);
 	}
 	free_token(&minishell.token);
-	if (minishell.cmd->path != NULL)
-		execve(minishell.cmd->path, minishell.cmd->options, __environ);
+	free_cmds(&minishell.cmd);
+	free(minishell.input);
+	free(minishell.env_content);
+	if (path != NULL)
+		execve(path, options, __environ);
 	exit(EXIT_FAILURE);
 }
 
