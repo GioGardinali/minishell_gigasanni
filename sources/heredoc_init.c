@@ -6,7 +6,7 @@
 /*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 16:36:39 by gigardin          #+#    #+#             */
-/*   Updated: 2024/08/19 19:16:18 by gigardin         ###   ########.fr       */
+/*   Updated: 2024/08/23 19:50:34 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ int	check_heredocs(t_mini *minishell)
 	t_token	*temp_token;
 	t_mini	*temp_minishell;
 	int		validate;
-	int		cmd_index; //para contabilizar todos cmds que tenho até chegar no hd
+	int		cmd_index;   //para contabilizar todos cmds que tenho até chegar no hd
 
 	validate = 0;
 	cmd_index = 0;
