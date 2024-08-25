@@ -1,38 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_functions.c                                  :+:      :+:    :+:   */
+/*   ft_isblank.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/06 12:39:12 by asanni            #+#    #+#             */
-/*   Updated: 2024/08/25 15:34:48 by gigardin         ###   ########.fr       */
+/*   Created: 2024/08/08 16:15:29 by asanni            #+#    #+#             */
+/*   Updated: 2024/08/25 17:30:04 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "libft.h"
 
-void	free_split(char **split)
+int	is_blank(char *str)
 {
 	int	i;
+	int	verif;
 
-	i = -1;
-	while (split[++i])
-		free(split[i]);
-	free(split);
-}
-
-void	error_function(char *str)
-{
-	ft_putendl_fd(str, 2);
-	exit(EXIT_FAILURE);
-}
-
-void	exit_function(t_mini *minishell)
-{
-	ft_putendl_fd("exit", 1);
-	free(minishell->env_content);
-	free(minishell->input);
-	free_token(&minishell->token);
-	exit(EXIT_SUCCESS);
+	i = 0;
+	verif = 0;
+	while (!(ft_isprint(str[i])) && str[i] != '\0')
+	{
+		if (str[i + 1] == '\0')
+			verif = 1;
+		i++;
+	}
+	return (verif);
 }

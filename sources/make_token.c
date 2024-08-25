@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   make_token.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 16:32:48 by asanni            #+#    #+#             */
-/*   Updated: 2024/07/25 15:30:02 by asanni           ###   ########.fr       */
+/*   Updated: 2024/08/25 17:18:22 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,34 @@ int	find_etype(char *str)
 		return (HERE_DOC);
 	else
 		return (WORD);
+}
+
+int	has_token_type(t_mini minishell, int type_to_find)
+{
+	t_token	*current_token;
+
+	current_token = minishell.token;
+	while (current_token != NULL)
+	{
+		if (current_token->type == type_to_find)
+			return (1);
+		current_token = current_token->next;
+	}
+	return (0);
+}
+
+int	count_token_type(t_mini *minishell, int type_to_count)
+{
+	t_token	*current_token;
+	int		count;
+
+	current_token = minishell->token;
+	count = 0;
+	while (current_token != NULL)
+	{
+		if (current_token->type == type_to_count)
+			count++;
+		current_token = current_token->next;
+	}
+	return (count);
 }

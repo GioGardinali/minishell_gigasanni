@@ -27,11 +27,13 @@
 # include <sys/stat.h> // criação de diretórios
 
 # define HERE_DOC_FILE "/tmp/heredoc"
+
 //Structs
 typedef struct s_env
 {
-	char			*env_key;
-	char			**env_content;
+	char			*key;
+	char			*content;
+	struct s_env	*prev;
 	struct s_env	*next;
 }t_env;
 
@@ -75,9 +77,10 @@ typedef struct s_gc
 typedef struct s_mini
 {
 	char		*input;
-	t_env		env;
+	char		**env_content;
 	t_token		*token;
 	t_cmd		*cmd;
+	t_env		*env_exp;
 	t_heredoc	*heredocs;
 	t_gc		*gc;
 	int			exit_status;
@@ -101,16 +104,17 @@ typedef enum e_type
 char			*check_path(t_mini *minishell);
 char			**copy_env(t_mini *minishell);
 char			*verify_path(t_mini *minishell, char *str);
-char			*normalize_input(t_mini *minishell);
 int				check_input(char *input);
 void			free_split(char **split);
 void			free_cmds(t_cmd **cmd);
 void			free_matrix(char **matrix);
 void			error_function(char *str);
-void			exit_function(void);
+void			exit_function(t_mini *minishell);
 char			*adjust_spaces(char	*str);
 void			skip_quotes(char	*str, int	*i);
 void			make_tokens(t_token **token, char *split);
+int				count_token_type(t_mini *minishell, int type_to_count);
+int				has_token_type(t_mini minishell, int type_to_find);
 t_token			*get_last_token(t_token **token);
 t_cmd			*get_last_cmd(t_cmd **cmd);
 int				find_etype(char *str);
@@ -120,12 +124,17 @@ void			make_cmds(t_cmd **cmd, t_token **token, t_mini *minishell);
 int				find_redir(t_token *token);
 int				search_options(t_token *token);
 int				return_len(t_token *token);
+void			free_token(t_token **token);
+void			free_cmds(t_cmd **cmd);
+void			free_token_bc(t_token **token);
+void			free_env(t_env **env);
+void			process_two_cmds(t_mini minishell);
+void			process_multiple_cmds(t_mini minishell, int prev_fd);
+void			print_cmds(t_cmd *cmd); //apagar
+void			print_options(char **options); //apagar
 void			print_tokens(t_token *token); //apagar
 void			print_matrix(char **matrix); // apagar
-void			print_cmds(t_cmd *cmd); //apagar
-void			print_options(char **options); // apagar
-void			free_cmds(t_cmd **cmd);
-void			free_token(t_token **token);
+//void	process_multiple_cmds(t_mini minishell);
 //void	prepare_split(char *str);
 //void	skip_quotes2(char *input, int *i, char *temp, int *j);
 

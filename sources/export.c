@@ -1,38 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_functions.c                                  :+:      :+:    :+:   */
+/*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/06 12:39:12 by asanni            #+#    #+#             */
-/*   Updated: 2024/08/25 15:34:48 by gigardin         ###   ########.fr       */
+/*   Created: 2024/08/17 16:18:36 by asanni            #+#    #+#             */
+/*   Updated: 2024/08/25 17:11:02 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
-
-void	free_split(char **split)
-{
-	int	i;
-
-	i = -1;
-	while (split[++i])
-		free(split[i]);
-	free(split);
-}
-
-void	error_function(char *str)
-{
-	ft_putendl_fd(str, 2);
-	exit(EXIT_FAILURE);
-}
-
-void	exit_function(t_mini *minishell)
-{
-	ft_putendl_fd("exit", 1);
-	free(minishell->env_content);
-	free(minishell->input);
-	free_token(&minishell->token);
-	exit(EXIT_SUCCESS);
-}

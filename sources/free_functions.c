@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_functions.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 15:45:06 by asanni            #+#    #+#             */
-/*   Updated: 2024/07/27 19:29:20 by asanni           ###   ########.fr       */
+/*   Updated: 2024/08/25 17:12:16 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,24 @@ void	free_cmds(t_cmd **cmd)
 	while (temp != NULL)
 	{
 		temp = (*cmd)->next;
-		free(cmd);
+		free(*cmd);
 		(*cmd) = temp;
 	}
 	cmd = NULL;
+}
+
+void	free_env(t_env **env)
+{
+	t_env	*temp;
+
+	temp = *env;
+	while (temp != NULL)
+	{
+		temp = (*env)->next;
+		free(env);
+		(*env) = temp;
+	}
+	env = NULL;
 }
 
 void	free_token(t_token **token)
@@ -34,7 +48,7 @@ void	free_token(t_token **token)
 	while (temp != NULL)
 	{
 		temp = (*token)->next;
-		free(token);
+		free(*token);
 		(*token) = temp;
 	}
 	token = NULL;
@@ -55,21 +69,16 @@ void	free_matrix(char **matrix)
 	free(matrix);
 }
 
-//void	free_cmds(t_cmd **cmd)
-// {
-// 	t_cmd	*temp;
+void	free_token_bc(t_token **token)
+{
+	t_token	*temp;
 
-// 	while (*cmd != NULL)
-// 	{
-// 		temp = (*cmd)->next;
-// 		if ((*cmd)->str)
-// 			free((*cmd)->str);
-// 		if ((*cmd)->options)
-// 			free_matrix((*cmd)->options);
-// 		if ((*cmd)->path)
-// 			free((*cmd)->path);
-// 		free(*cmd);
-// 		*cmd = temp;
-// 	}
-// 	*cmd = NULL;
-// }
+	temp = *token;
+	while (temp != NULL)
+	{
+		temp = (*token)->prev;
+		free(*token);
+		(*token) = temp;
+	}
+	token = NULL;
+}

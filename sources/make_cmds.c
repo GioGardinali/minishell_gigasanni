@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   make_cmds.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 16:39:02 by asanni            #+#    #+#             */
-/*   Updated: 2024/07/27 15:40:33 by asanni           ###   ########.fr       */
+/*   Updated: 2024/08/25 17:15:52 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ void	make_cmds(t_cmd **cmd, t_token **token, t_mini *minishell)
 		if (*token != NULL && (*token)->type == PIPE)
 			*token = (*token)->next;
 	}
-	print_matrix((*cmd)->options);
 }
 
 // gerenciar error de malloc

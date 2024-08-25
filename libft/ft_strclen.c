@@ -1,38 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_functions.c                                  :+:      :+:    :+:   */
+/*   ft_strclen.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/06 12:39:12 by asanni            #+#    #+#             */
-/*   Updated: 2024/08/25 15:34:48 by gigardin         ###   ########.fr       */
+/*   Created: 2024/08/16 19:20:23 by asanni            #+#    #+#             */
+/*   Updated: 2024/08/25 17:43:46 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "libft.h"
 
-void	free_split(char **split)
+size_t	ft_strclen(const char *s, char c)
 {
-	int	i;
+	size_t	len;
 
-	i = -1;
-	while (split[++i])
-		free(split[i]);
-	free(split);
-}
-
-void	error_function(char *str)
-{
-	ft_putendl_fd(str, 2);
-	exit(EXIT_FAILURE);
-}
-
-void	exit_function(t_mini *minishell)
-{
-	ft_putendl_fd("exit", 1);
-	free(minishell->env_content);
-	free(minishell->input);
-	free_token(&minishell->token);
-	exit(EXIT_SUCCESS);
+	len = 0;
+	while (s[len] && s[len] != c)
+	{
+		len++;
+	}
+	return (len);
 }

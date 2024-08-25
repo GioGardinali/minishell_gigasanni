@@ -1,38 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_functions.c                                  :+:      :+:    :+:   */
+/*   expand_var.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/06 12:39:12 by asanni            #+#    #+#             */
-/*   Updated: 2024/08/25 15:34:48 by gigardin         ###   ########.fr       */
+/*   Created: 2024/08/14 17:57:37 by asanni            #+#    #+#             */
+/*   Updated: 2024/08/25 15:35:31 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	free_split(char **split)
+void	expand_var(t_mini minishell, char *env_name)
 {
-	int	i;
+	char	**temp_env;
+	char	*result;
 
-	i = -1;
-	while (split[++i])
-		free(split[i]);
-	free(split);
-}
-
-void	error_function(char *str)
-{
-	ft_putendl_fd(str, 2);
-	exit(EXIT_FAILURE);
-}
-
-void	exit_function(t_mini *minishell)
-{
-	ft_putendl_fd("exit", 1);
-	free(minishell->env_content);
-	free(minishell->input);
-	free_token(&minishell->token);
-	exit(EXIT_SUCCESS);
+	temp_env = minishell.env.env_content;
 }
