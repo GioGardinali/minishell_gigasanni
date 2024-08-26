@@ -19,7 +19,7 @@
 # include <stdio.h>
 # include <stdbool.h>
 # include <readline/history.h> // para adicionar no historico
-# include <readline/readline.h> // para fazer tudo funfar
+# include <readline/readline.h> // para fazer tudo funcionar
 # include <sys/wait.h> // usar waitpid
 # include "../libft/libft.h" /* mylibft */
 # include <signal.h> // fuction signal
@@ -59,14 +59,14 @@ typedef struct s_file_heredoc
 	char					*file;
 	struct s_file_heredoc	*next;
 
-} t_file_heredoc;
+}	t_file_heredoc;
 
 typedef struct s_heredoc
 {
 	t_file_heredoc		**array;
 	int unsigned		size;
 
-} t_heredoc;
+}	t_heredoc;
 
 typedef struct s_gc
 {
@@ -130,14 +130,6 @@ void			free_token_bc(t_token **token);
 void			free_env(t_env **env);
 void			process_two_cmds(t_mini minishell);
 void			process_multiple_cmds(t_mini minishell, int prev_fd);
-void			print_cmds(t_cmd *cmd); //apagar
-void			print_options(char **options); //apagar
-void			print_tokens(t_token *token); //apagar
-void			print_matrix(char **matrix); // apagar
-//void	process_multiple_cmds(t_mini minishell);
-//void	prepare_split(char *str);
-//void	skip_quotes2(char *input, int *i, char *temp, int *j);
-
 int				check_quotes_in_token(char *str);
 int unsigned	count_cmd(t_token *temp_token);
 int				check_heredocs(t_mini *minishell);
@@ -151,5 +143,12 @@ void			ft_rlstnew(void *content);
 char			*get_file(int is_first);
 t_mini			*ft_get_shell(void);
 void			clear_exit(t_mini *minishell, int to_exit);
+void			print_cmds(t_cmd *cmd); //apagar
+void			print_options(char **options); //apagar
+void			print_tokens(t_token *token); //apagar
+void			print_matrix(char **matrix); // apagar
+//void	process_multiple_cmds(t_mini minishell);
+//void	prepare_split(char *str);
+//void	skip_quotes2(char *input, int *i, char *temp, int *j);
 
 #endif
