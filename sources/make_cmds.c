@@ -49,9 +49,9 @@ void	make_one_cmd(t_cmd **cmd, t_token **token, t_mini *minishell)
 {
 	t_cmd	*new_cmd;
 	t_cmd	*temp;
-	int		i;
+	//int		i;
 
-	i = 0;
+	//i = 0; (variavel não usada)
 	new_cmd = malloc(sizeof(t_cmd));
 	if (new_cmd == NULL)
 		return ;

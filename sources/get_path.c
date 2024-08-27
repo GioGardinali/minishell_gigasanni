@@ -49,9 +49,9 @@ static char	*search_path(char **s, char *str)
 static char	*remove_path(char *str)
 {
 	char	*path;
-	int		i;
+	// int		i;
 
-	i = 0;
+	// i = 0; (váriavel não usada)
 	path = ft_strchr(str, '/');
 	return (path);
 }
