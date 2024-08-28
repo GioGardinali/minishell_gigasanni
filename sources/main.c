@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 18:52:55 by asanni            #+#    #+#             */
-/*   Updated: 2024/08/26 17:44:28 by asanni           ###   ########.fr       */
+/*   Updated: 2024/08/28 19:45:37 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,16 @@ void	check_pid(t_mini *minishell)
 {
 	if (minishell->cmd->path != NULL)
 		process_multiple_cmds(*minishell, -1);
-	ft_putendl_fd("Execve falhou", 2);
-	free_matrix(minishell->cmd->options);
-	free(minishell->cmd->path);
-	free_token_bc(&minishell->token);
-	free_cmds(&minishell->cmd);
-	free(minishell->env_content);
-	exit(1);
+	// free_matrix(minishell->cmd->options);
+	// free(minishell->cmd->path);
+	// free_token_bc(&minishell->token);
+	// free_cmds(&minishell->cmd);
+	// free(minishell->env_content);
 }
 
 static void	start_minishell(t_mini *minishell)
 {
-	pid_t	pid;
+	// pid_t	pid;
 	t_token	*token;
 
 	token = NULL;
@@ -45,13 +43,13 @@ static void	start_minishell(t_mini *minishell)
 	if (ft_strcmp(minishell->input, "exit") == 0)
 		exit_function(minishell);
 	norme(minishell, token);
-	pid = fork();
-	if (pid == -1)
-		exit(1);
-	else if (pid == 0)
-		check_pid(minishell);
-	free(minishell->input);
-	waitpid(pid, NULL, 0);
+	// pid = fork();
+	// if (pid == -1)
+	// 	exit(1);
+	// else if (pid == 0)
+	check_pid(minishell);
+	// free(minishell->input);
+	// waitpid(pid, NULL, 0);
 }
 
 int	main(void)
