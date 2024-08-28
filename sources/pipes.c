@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 15:48:38 by asanni            #+#    #+#             */
-/*   Updated: 2024/08/28 20:12:42 by asanni           ###   ########.fr       */
+/*   Updated: 2024/08/28 20:16:09 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void	execute_command(
 		close(output_fd);
 	}
 	free_token(&minishell.token);
-	//free_cmds(&minishell.cmd);
 	free(minishell.input);
 	free(minishell.env_content);
 	if (path != NULL)
