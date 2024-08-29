@@ -6,16 +6,11 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 19:23:18 by asanni            #+#    #+#             */
-/*   Updated: 2024/08/21 19:56:28 by asanni           ###   ########.fr       */
+/*   Updated: 2024/08/29 16:23:36 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
-// Pegar o PATH certo
-// Passar a split pelo path
-// Concatenar com o comando (ex: /pasta/comando - /usr/bin/ls)
-// Checar se a pasta especifica tem acesso ao comando
 
 char	**copy_env(t_mini *minishell)
 {
@@ -49,9 +44,7 @@ static char	*search_path(char **s, char *str)
 static char	*remove_path(char *str)
 {
 	char	*path;
-	// int		i;
 
-	// i = 0; (váriavel não usada)
 	path = ft_strchr(str, '/');
 	return (path);
 }
