@@ -6,14 +6,13 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 15:48:38 by asanni            #+#    #+#             */
-/*   Updated: 2024/08/28 20:16:09 by asanni           ###   ########.fr       */
+/*   Updated: 2024/08/29 16:25:44 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	execute_command(
-	t_mini minishell, int input_fd, int output_fd, t_cmd cmd)
+void	execute_command(t_mini minishell, int input_fd, int out_fd, t_cmd cmd)
 {
 	char	*path;
 	char	**options;
@@ -25,10 +24,10 @@ void	execute_command(
 		dup2(input_fd, STDIN_FILENO);
 		close(input_fd);
 	}
-	if (output_fd != -1)
+	if (out_fd != -1)
 	{
-		dup2(output_fd, STDOUT_FILENO);
-		close(output_fd);
+		dup2(out_fd, STDOUT_FILENO);
+		close(out_fd);
 	}
 	free_token(&minishell.token);
 	free(minishell.input);
@@ -39,7 +38,7 @@ void	execute_command(
 }
 
 pid_t	fork_and_execute(
-	t_mini minishell, int input_fd, int output_fd, t_cmd cmd)
+	t_mini minishell, int input_fd, int out_fd, t_cmd cmd)
 {
 	pid_t	pid;
 
@@ -47,7 +46,7 @@ pid_t	fork_and_execute(
 	if (pid == -1)
 		exit(EXIT_FAILURE);
 	if (pid == 0)
-		execute_command(minishell, input_fd, output_fd, cmd);
+		execute_command(minishell, input_fd, out_fd, cmd);
 	return (pid);
 }
 
