@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 18:52:55 by asanni            #+#    #+#             */
-/*   Updated: 2024/08/29 19:44:16 by asanni           ###   ########.fr       */
+/*   Updated: 2024/08/30 20:39:01 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ void	check_pid(t_mini *minishell)
 {
 	if (minishell->cmd->path != NULL)
 		process_multiple_cmds(*minishell, -1);
-	free_token(&minishell->token);
-	free(minishell->cmd->path);
-	free_cmds(&minishell->cmd);
+	// free_token(&minishell->token);
+	// free(minishell->cmd->path);
+	// //free_cmds(&minishell->cmd);
 }
 
 static void	start_minishell(t_mini *minishell)
@@ -53,17 +53,12 @@ int	main(void)
 	{
 		start_minishell(&minishell);
 		if (minishell.cmd != NULL)
-		{
-			free(minishell.cmd->path);
-			free_matrix(minishell.cmd->options);
-			minishell.cmd->options = NULL;
 			free_cmds(&minishell.cmd);
-			minishell.cmd = NULL;
-		}
 		if (minishell.token != NULL)
 			free_token_bc(&minishell.token);
 		minishell.token = NULL;
 	}
+	free_cmds(&minishell.cmd);
 	free(minishell.env_content);
 	return (0);
 }
