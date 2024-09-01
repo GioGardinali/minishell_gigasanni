@@ -21,7 +21,7 @@
 # include <readline/history.h> // para adicionar no historico
 # include <readline/readline.h> // para fazer tudo funcionar
 # include <sys/wait.h> // usar waitpid
-# include "../libft/libft.h" /* mylibft */
+# include "../libft/libft.h" // libft
 # include <signal.h> // fuction signal
 # include <fcntl.h> // function open, close
 # include <sys/stat.h> // criação de diretórios
@@ -80,6 +80,7 @@ typedef struct s_mini
 	char		**env_content;
 	t_token		*token;
 	t_cmd		*cmd;
+	t_env		*env;
 	t_env		*env_exp;
 	t_heredoc	*heredocs;
 	t_gc		*gc;
