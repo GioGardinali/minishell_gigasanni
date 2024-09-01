@@ -40,6 +40,7 @@ sources/heredoc_init.c\
 sources/heredoc_utils.c\
 sources/heredoc_new_file.c\
 sources/signal.c\
+sources/make_env_list.c\
 
 
 #--------------RULES----------------------------#
