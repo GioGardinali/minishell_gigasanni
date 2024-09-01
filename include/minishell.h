@@ -145,7 +145,7 @@ t_mini			*ft_get_shell(void);
 void			clear_exit(t_mini *minishell, int to_exit);
 void			make_env_list(t_mini *minishell);
 void			print_env_list(t_env *env_list);
-void			expand_var(t_mini minishell);
+void			expand_and_print_tokens(t_mini *minishell);
 void			print_cmds(t_cmd *cmd); //apagar
 void			print_options(char **options); //apagar
 void			print_tokens(t_token *token); //apagar

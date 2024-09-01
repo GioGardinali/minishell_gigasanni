@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 20:21:11 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/01 14:47:14 by asanni           ###   ########.fr       */
+/*   Updated: 2024/09/01 17:03:08 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,13 @@ void	norme(t_mini *minishell, t_token *token)
 	while (split[i] != NULL)
 		make_tokens(&minishell->token, split[i++]);
 	token = minishell->token;
+	make_env_list(minishell);
 	while (token != NULL)
 	{
 		make_cmds(&minishell->cmd, &token, minishell);
 		if (token != NULL)
 			token = token->next;
 	}
-	make_env_list(minishell);
-	//print_env_list(minishell->env);
 	free_matrix(split);
 	free(input);
 }

@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 19:27:26 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/01 14:31:21 by asanni           ###   ########.fr       */
+/*   Updated: 2024/09/01 17:22:28 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void	list_env(t_env **env, char *split)
 	env_pair->content = env_split[1];
 	env_pair->next = NULL;
 	env_pair->prev = NULL;
-	//free(split);
 	if (!*env)
 	{
 		*env = env_pair;
@@ -57,5 +56,4 @@ void	make_env_list(t_mini *minishell)
 		list_env(&minishell->env_exp, minishell->env_content[i]);
 		i++;
 	}
-	//free_matrix(minishell->env_content);
 }

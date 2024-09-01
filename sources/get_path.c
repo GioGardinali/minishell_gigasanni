@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 19:23:18 by asanni            #+#    #+#             */
-/*   Updated: 2024/08/29 16:23:36 by asanni           ###   ########.fr       */
+/*   Updated: 2024/09/01 17:18:35 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ char	*verify_path(t_mini *minishell, char *str)
 	if (result == -1)
 	{
 		free(path);
-		perror("Erro ao acessar o arquivo");
 		return (NULL);
 	}
 	free_matrix(str_path);
