@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 15:12:09 by asanni            #+#    #+#             */
-/*   Updated: 2024/07/27 15:45:23 by asanni           ###   ########.fr       */
+/*   Updated: 2024/09/01 14:35:53 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,17 @@ void	print_options(char **options)
 	{
 		printf("  %s\n", *options);
 		options++;
+	}
+}
+
+void	print_env_list(t_env *env_list)
+{
+	t_env *current = env_list;
+
+	// Percorre a lista e imprime cada par de chave-valor
+	while (current != NULL)
+	{
+		printf("%s=%s\n", current->key, current->content);
+		current = current->next;
 	}
 }
