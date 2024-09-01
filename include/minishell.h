@@ -80,7 +80,6 @@ typedef struct s_mini
 	char		**env_content;
 	t_token		*token;
 	t_cmd		*cmd;
-	t_env		*env;
 	t_env		*env_exp;
 	t_heredoc	*heredocs;
 	t_gc		*gc;
@@ -146,6 +145,7 @@ t_mini			*ft_get_shell(void);
 void			clear_exit(t_mini *minishell, int to_exit);
 void			make_env_list(t_mini *minishell);
 void			print_env_list(t_env *env_list);
+void			expand_var(t_mini minishell);
 void			print_cmds(t_cmd *cmd); //apagar
 void			print_options(char **options); //apagar
 void			print_tokens(t_token *token); //apagar
