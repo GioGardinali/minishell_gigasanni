@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 20:21:11 by asanni            #+#    #+#             */
-/*   Updated: 2024/08/23 19:47:28 by asanni           ###   ########.fr       */
+/*   Updated: 2024/09/01 14:47:14 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ void	norme(t_mini *minishell, t_token *token)
 		if (token != NULL)
 			token = token->next;
 	}
+	make_env_list(minishell);
+	//print_env_list(minishell->env);
 	free_matrix(split);
 	free(input);
 }
