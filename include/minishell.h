@@ -143,6 +143,8 @@ void			ft_rlstnew(void *content);
 char			*get_file(int is_first);
 t_mini			*ft_get_shell(void);
 void			clear_exit(t_mini *minishell, int to_exit);
+void			make_env_list(t_mini *minishell);
+void			print_env_list(t_env *env_list);
 void			print_cmds(t_cmd *cmd); //apagar
 void			print_options(char **options); //apagar
 void			print_tokens(t_token *token); //apagar
