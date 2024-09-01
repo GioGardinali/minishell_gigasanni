@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 18:52:55 by asanni            #+#    #+#             */
-/*   Updated: 2024/08/30 20:50:50 by asanni           ###   ########.fr       */
+/*   Updated: 2024/09/01 17:14:48 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,6 @@ void	check_pid(t_mini *minishell)
 {
 	if (minishell->cmd->path != NULL)
 		process_multiple_cmds(*minishell, -1);
-	// free_token(&minishell->token);
-	// free(minishell->cmd->path);
-	// //free_cmds(&minishell->cmd);
 }
 
 static void	start_minishell(t_mini *minishell)
