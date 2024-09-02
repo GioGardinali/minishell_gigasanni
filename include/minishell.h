@@ -50,6 +50,9 @@ typedef struct s_cmd
 	char			*str;
 	char			**options;
 	char			*path;
+	char			*input_file;  // redir input
+    char			*output_file; // redir output
+    char			*append_file; // redir append
 	struct s_cmd	*prev;
 	struct s_cmd	*next;
 }t_cmd;
