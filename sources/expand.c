@@ -44,7 +44,7 @@ void	expand_and_print_tokens(t_mini *minishell)
 			if (value)
 				printf("%s ", value);
 			else
-				printf("");
+				printf("%d", '\0');
 		}
 		else
 		{

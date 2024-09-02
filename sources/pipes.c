@@ -69,7 +69,7 @@ void	close_unused_fds(int input_fd, int *fd)
 void	process_multiple_cmds(t_mini minishell, int prev_fd)
 {
 	int		fd[2];
-	pid_t	pid;
+	// pid_t	pid;
 	t_cmd	*current_cmd;
 
 	current_cmd = minishell.cmd;
@@ -78,9 +78,11 @@ void	process_multiple_cmds(t_mini minishell, int prev_fd)
 		if (current_cmd->next != NULL)
 			create_pipe(fd);
 		if (current_cmd->next == NULL)
-			pid = fork_and_execute(minishell, prev_fd, -1, *current_cmd);
+			//pid = fork_and_execute(minishell, prev_fd, -1, *current_cmd);
+		fork_and_execute(minishell, prev_fd, -1, *current_cmd);
 		else
-			pid = fork_and_execute(minishell, prev_fd, fd[1], *current_cmd);
+			//pid = fork_and_execute(minishell, prev_fd, fd[1], *current_cmd);
+		fork_and_execute(minishell, prev_fd, fd[1], *current_cmd);
 		if (current_cmd->next != NULL)
 			close_unused_fds(prev_fd, fd);
 		else
