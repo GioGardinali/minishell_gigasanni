@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 18:52:55 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/02 19:44:45 by asanni           ###   ########.fr       */
+/*   Updated: 2024/09/03 20:16:54 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ static void	start_minishell(t_mini *minishell)
 		add_history(minishell->input);
 	if (ft_strcmp(minishell->input, "exit") == 0)
 		exit_function(minishell);
-	norme(minishell, token);
 	make_env_list(minishell);
+	norme(minishell, token);
 	check_pid(minishell);
 }
 
