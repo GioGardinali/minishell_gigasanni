@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 15:31:39 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/02 19:44:23 by asanni           ###   ########.fr       */
+/*   Updated: 2024/09/03 20:01:58 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,18 @@ char	*return_var(char *str)
 	return (var);
 }
 
-int	env_check(t_mini *minishell)
+int	env_check(t_mini *minishell, char *var_key)
 {
-	minishell->token
+	t_env	*current;
+
+	current = minishell->env_exp;
+	while (current != NULL)
+	{
+		if (ft_strcmp(current->key, var_key) == 0)
+			return (1);
+		current = current->next;
+	}
+	return (0);
 }
 
 // char	*get_env_value(t_env *env_list, const char *key)

@@ -41,7 +41,8 @@ sources/heredoc_utils.c\
 sources/heredoc_new_file.c\
 sources/signal.c\
 sources/make_env_list.c\
-sources/expand.c\
+sources/expand_var_utils.c\
+sources/expand_var.c\
 
 
 #--------------RULES----------------------------#
