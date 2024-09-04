@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 15:31:39 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/03 20:01:58 by asanni           ###   ########.fr       */
+/*   Updated: 2024/09/04 19:41:33 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,14 +63,14 @@ char	*return_var(char *str)
 				len--;
 				i++;
 				j++;
-			}
+			}	
 		}
 	}
 	var[j] = '\0';
 	return (var);
 }
 
-int	env_check(t_mini *minishell, char *var_key)
+char	*env_check(t_mini *minishell, char *var_key)
 {
 	t_env	*current;
 
@@ -78,51 +78,21 @@ int	env_check(t_mini *minishell, char *var_key)
 	while (current != NULL)
 	{
 		if (ft_strcmp(current->key, var_key) == 0)
-			return (1);
+			return (current->content);
 		current = current->next;
 	}
-	return (0);
+	return (NULL);
 }
 
-// char	*get_env_value(t_env *env_list, const char *key)
-// {
-// 	t_env	*current;
+void	copy_content(char *token, int *i, char *cont)
+{
+	int	j;
 
-// 	current = env_list;
-// 	while (current != NULL)
-// 	{
-// 		if (strcmp(current->key, key) == 0)
-// 			return (current->content);
-// 		current = current->next;
-// 	}
-// 	return (NULL);
-// }
-
-// void	expand_and_print_tokens(t_mini *minishell)
-// {
-// 	t_token	*current_token;
-// 	char	*env_key;
-// 	char	*value;
-
-// 	current_token = minishell->token;
-// 	env_key = NULL;
-// 	value = NULL;
-// 	while (current_token != NULL)
-// 	{
-// 		if (current_token->str[0] == '$')
-// 		{
-// 			env_key = current_token->str + 1;
-// 			value = get_env_value(minishell->env_exp, env_key);
-// 			if (value)
-// 				printf("%s ", value);
-// 			else
-// 				printf("");
-// 		}
-// 		else
-// 		{
-// 			printf("%s ", current_token->str);
-// 		}
-// 		current_token = current_token->next;
-// 	}
-// 	printf("\n");
-// }
+	j = 0;
+	while (cont[j] != '\0')
+	{
+		token[*i] = cont[j];
+		(*i)++;
+		j++;
+	}
+}

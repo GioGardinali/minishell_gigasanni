@@ -6,13 +6,13 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 19:12:09 by asanni            #+#    #+#             */
-/*   Updated: 2024/07/16 19:08:40 by asanni           ###   ########.fr       */
+/*   Updated: 2024/09/04 20:14:08 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	skip_quotes(char	*str, int	*i)
+static void	skip_quotes(char	*str, int	*i)
 {
 	char	quote;
 

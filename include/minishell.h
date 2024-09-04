@@ -104,35 +104,63 @@ typedef enum e_type
 }	t_type;
 
 //Functions
-char			*check_path(t_mini *minishell);
-char			**copy_env(t_mini *minishell);
-char			*verify_path(t_mini *minishell, char *str);
-int				check_input(char *input);
+
+/*adjust spaces*/
+char			*adjust_spaces(char	*str);
+
+/* error functions*/
 void			free_split(char **split);
 void			free_cmds(t_cmd **cmd);
 void			free_matrix(char **matrix);
 void			error_function(char *str);
 void			exit_function(t_mini *minishell);
-char			*adjust_spaces(char	*str);
-void			skip_quotes(char	*str, int	*i);
-void			make_tokens(t_token **token, char *split);
-int				count_token_type(t_mini *minishell, int type_to_count);
-int				has_token_type(t_mini minishell, int type_to_find);
-t_token			*get_last_token(t_token **token);
-t_cmd			*get_last_cmd(t_cmd **cmd);
-int				find_etype(char *str);
-int				build_pwd(void);
-void			norme(t_mini *minishell, t_token *token);
-void			make_cmds(t_cmd **cmd, t_token **token, t_mini *minishell);
-int				find_redir(t_token *token);
-int				search_options(t_token *token);
-int				return_len(t_token *token);
+
+/*expand_var_utils*/
+int				ft_valid_var(char c);
+int				var_len(char *str);
+char			*env_check(t_mini *minishell, char *var_key);
+char			*return_var(char *str);
+void			copy_content(char *token, int *i, char *cont);
+
+/*expand_var*/
+char			*expand_token(t_mini *minishell, char *token);
+
+/*free_functions*/
 void			free_token(t_token **token);
 void			free_cmds(t_cmd **cmd);
 void			free_token_bc(t_token **token);
 void			free_env(t_env **env);
-void			process_two_cmds(t_mini minishell);
+
+/*get_path*/
+char			**copy_env(t_mini *minishell);
+char			*verify_path(t_mini *minishell, char *str);
+
+/*input_verif*/
+void			skip_quotes(char	*str, int	*i);
+int				check_input(char *input);
+char			*check_path(t_mini *minishell);
+
+/*make_cmds_utils*/
+int				find_redir(t_token *token);
+int				return_len(t_token *token);
+int				search_options(t_token *token);
+
+/*make_cmd*/
+void			make_cmds(t_cmd **cmd, t_token **token, t_mini *minishell);
+t_cmd			*get_last_cmd(t_cmd **cmd);
 void			process_multiple_cmds(t_mini minishell, int prev_fd);
+
+/*make_token*/
+t_token			*get_last_token(t_token **token);
+void			make_tokens(t_token **token, char *split);
+int				count_token_type(t_mini *minishell, int type_to_count);
+int				has_token_type(t_mini minishell, int type_to_find);
+int				find_etype(char *str);
+
+/*normalize*/
+void			norme(t_mini *minishell, t_token *token);
+
+/*giovanna*/
 int				check_quotes_in_token(char *str);
 int unsigned	count_cmd(t_token *temp_token);
 int				check_heredocs(t_mini *minishell);
@@ -147,9 +175,12 @@ char			*get_file(int is_first);
 t_mini			*ft_get_shell(void);
 void			clear_exit(t_mini *minishell, int to_exit);
 void			make_env_list(t_mini *minishell);
+
+/*função perdida*/
+int				build_pwd(void);
+
+/*delete_later*/
 void			print_env_list(t_env *env_list);
-void			expand_and_print_tokens(t_mini *minishell);
-int				ft_valid_var(char c);
 void			print_cmds(t_cmd *cmd); //apagar
 void			print_options(char **options); //apagar
 void			print_tokens(t_token *token); //apagar
