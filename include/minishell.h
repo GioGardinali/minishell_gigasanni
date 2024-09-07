@@ -45,17 +45,22 @@ typedef struct s_token
 	struct s_token	*next;
 }t_token;
 
-typedef struct s_cmd
+typedef struct	s_redir
+{
+    int				type; // Tipo de redirecionamento: REDIR_INPUT, REDIR_OUTPUT, REDIR_APPEND
+    char			*file; // Nome do arquivo
+    struct s_redir	*next;
+} t_redir;
+
+typedef struct	s_cmd
 {
 	char			*str;
 	char			**options;
 	char			*path;
-	char			*input_file;  // redir input
-    char			*output_file; // redir output
-    char			*append_file; // redir append
-	struct s_cmd	*prev;
+	t_redir			*redirs; // List redirects
 	struct s_cmd	*next;
-}t_cmd;
+	struct s_cmd	*prev;
+} t_cmd;
 
 typedef struct s_file_heredoc
 {
@@ -77,18 +82,17 @@ typedef struct s_gc
 	struct s_gc			*next;
 }						t_gc;
 
-typedef struct s_mini
+typedef struct	s_mini
 {
 	char		*input;
 	char		**env_content;
 	t_token		*token;
 	t_cmd		*cmd;
 	t_env		*env_exp;
-	t_heredoc	*heredocs;
+	t_heredoc 	*heredocs;
 	t_gc		*gc;
 	int			exit_status;
-
-}t_mini;
+} t_mini;
 
 typedef enum e_type
 {
