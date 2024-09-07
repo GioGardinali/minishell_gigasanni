@@ -6,15 +6,28 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 15:31:39 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/04 19:41:33 by asanni           ###   ########.fr       */
+/*   Updated: 2024/09/07 15:31:48 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int	ft_valid_var(char c)
+int	valid_var(char *str)
 {
-	return (isalpha(c) || isdigit(c) || (c == '_'));
+	int	i;
+
+	if (!str || str[0] != '$')
+		return (0);
+	if (!ft_isalpha(str[1]) && str[1] != '_')
+		return (0);
+	i = 2;
+	while (str[i] != '\0')
+	{
+		if (!(ft_isalpha(str[i]) || ft_isdigit(str[i]) || (str[i] == '_')))
+			return (0);
+		i++;
+	}
+	return (1);
 }
 
 int	var_len(char *str)
@@ -28,7 +41,6 @@ int	var_len(char *str)
 	{
 		if (str[i] == '$')
 		{
-			i++;
 			while (ft_valid_var(str[i]))
 			{
 				len++;
