@@ -180,6 +180,12 @@ t_mini			*ft_get_shell(void);
 void			clear_exit(t_mini *minishell, int to_exit);
 void			make_env_list(t_mini *minishell);
 
+/*execução redirect*/
+void			apply_redirections(t_redir *redirs);
+void			execute_cmd_redir(t_cmd *cmd, char **env_content);
+void			execute_cmds_redir(t_cmd *cmd, char **env_content);
+
+
 /*função perdida*/
 int				build_pwd(void);
 
