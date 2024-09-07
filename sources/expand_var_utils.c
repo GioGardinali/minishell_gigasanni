@@ -6,26 +6,23 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 15:31:39 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/07 15:34:28 by asanni           ###   ########.fr       */
+/*   Updated: 2024/09/07 17:11:27 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int	valid_var(char *str)
+int	is_valid(char c, int position)
 {
-	int	i;
-
-	if (!str || str[0] != '$')
-		return (0);
-	if (!ft_isalpha(str[1]) && str[1] != '_')
-		return (0);
-	i = 2;
-	while (str[i] != '\0')
+	if (position == 1)
 	{
-		if (!(ft_isalpha(str[i]) || ft_isdigit(str[i]) || (str[i] == '_')))
+		if (!ft_isalpha(c) && c != '_')
 			return (0);
-		i++;
+	}
+	else
+	{
+		if (!(ft_isalpha(c) || ft_isdigit(c) || c == '_'))
+			return (0);
 	}
 	return (1);
 }
@@ -37,17 +34,11 @@ int	var_len(char *str)
 
 	i = 0;
 	len = 0;
-	while (str[i] != '\0')
+	if (str[i] == '$')
+		i++;
+	while (str[i] != '\0' && is_valid(str[i], len + 1))
 	{
-		if (str[i] == '$')
-		{
-			while (ft_valid_var(str[i]))
-			{
-				len++;
-				i++;
-			}
-			break ;
-		}
+		len++;
 		i++;
 	}
 	return (len);
@@ -61,22 +52,18 @@ char	*return_var(char *str)
 	int		j;
 
 	len = var_len(str);
-	i = -1;
-	j = 0;
+	if (len == 0)
+		return (NULL);
 	var = malloc((len + 1) * sizeof(char));
-	while (str[++i] != '\0')
+	if (!var)
+		return (NULL);
+	i = 1;
+	j = 0;
+	while (str[i] != '\0' && is_valid(str[i], j + 1))
 	{
-		if (str[i] == '$')
-		{
-			i++;
-			while (len > 0)
-			{
-				var[j] = str[i];
-				len--;
-				i++;
-				j++;
-			}	
-		}
+		var[j] = str[i];
+		i++;
+		j++;
 	}
 	var[j] = '\0';
 	return (var);
@@ -94,17 +81,4 @@ char	*env_check(t_mini *minishell, char *var_key)
 		current = current->next;
 	}
 	return (NULL);
-}
-
-void	copy_content(char *token, int *i, char *cont)
-{
-	int	j;
-
-	j = 0;
-	while (cont[j] != '\0')
-	{
-		token[*i] = cont[j];
-		(*i)++;
-		j++;
-	}
 }
