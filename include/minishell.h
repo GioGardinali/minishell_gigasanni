@@ -123,7 +123,7 @@ void			exit_function(t_mini *minishell);
 int				ft_valid_var(char c);
 int				is_valid(char c, int position);
 int				var_len(char *str);
-char			*env_check(t_mini *minishell, char *var_key);
+char			*return_key_content(t_mini *minishell, char *var_key);
 char			*return_var(char *str);
 void			copy_content(char *token, int *i, char *cont, int *j);
 

@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 17:57:37 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/07 20:26:54 by asanni           ###   ########.fr       */
+/*   Updated: 2024/09/08 18:38:26 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	extra_len(t_mini *minishell, char *token)
 			var = return_var(&token[i]);
 			if (var)
 			{
-				exp = env_check(minishell, var);
+				exp = return_key_content(minishell, var);
 				if (exp != NULL)
 					len_diff += ft_strlen(exp) - var_len(&token[i]);
 				free(var);
@@ -65,8 +65,7 @@ char	*expand_token(t_mini *minishell, char *token)
 	int		i;
 
 	var = return_var(token);
-	exp = env_check(minishell, var);
-	token = minishell->token->str;
+	exp = return_key_content(minishell, var);
 	new_len = ft_strlen(token) + extra_len(minishell, token);
 	new_token = malloc((sizeof(char) * (new_len + 1)));
 	new_len = 0;
@@ -83,5 +82,6 @@ char	*expand_token(t_mini *minishell, char *token)
 		}
 	}
 	new_token[new_len] = '\0';
+	printf("%s\n", new_token);
 	return (new_token);
 }

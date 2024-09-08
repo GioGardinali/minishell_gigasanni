@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 15:31:39 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/07 17:11:27 by asanni           ###   ########.fr       */
+/*   Updated: 2024/09/08 18:53:24 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ char	*return_var(char *str)
 	len = var_len(str);
 	if (len == 0)
 		return (NULL);
-	var = malloc((len + 1) * sizeof(char));
+	var = malloc((len) * sizeof(char));
 	if (!var)
 		return (NULL);
 	i = 1;
@@ -69,11 +69,13 @@ char	*return_var(char *str)
 	return (var);
 }
 
-char	*env_check(t_mini *minishell, char *var_key)
+char	*return_key_content(t_mini *minishell, char *var_key)
 {
 	t_env	*current;
 
 	current = minishell->env_exp;
+	if (!var_key)
+		return (NULL);
 	while (current != NULL)
 	{
 		if (ft_strcmp(current->key, var_key) == 0)
