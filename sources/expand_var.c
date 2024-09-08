@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 17:57:37 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/07 17:12:55 by asanni           ###   ########.fr       */
+/*   Updated: 2024/09/07 20:26:54 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,16 +46,13 @@ int	extra_len(t_mini *minishell, char *token)
 	return (len_diff);
 }
 
-void	copy_content(char *token, int *i, char *cont)
+void	copy_content(char *token, int *i, char *cont, int *j)
 {
-	int	j;
-
-	j = 0;
-	while (cont[j] != '\0')
+	while (cont[*j] != '\0')
 	{
-		token[*i] = cont[j];
+		token[*i] = cont[*j];
 		(*i)++;
-		j++;
+		(*j)++;
 	}
 }
 
@@ -73,15 +70,16 @@ char	*expand_token(t_mini *minishell, char *token)
 	new_len = ft_strlen(token) + extra_len(minishell, token);
 	new_token = malloc((sizeof(char) * (new_len + 1)));
 	new_len = 0;
-	i = -1;
-	while (token[++i] != '\0')
+	i = 0;
+	while (token[i] != '\0')
 	{
 		if (token[i] == '$')
-			copy_content(new_token, &new_len, exp);
+			copy_content(new_token, &new_len, exp, &i);
 		else
 		{
 			new_token[new_len] = token[i];
 			new_len++;
+			i++;
 		}
 	}
 	new_token[new_len] = '\0';
