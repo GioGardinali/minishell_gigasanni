@@ -6,7 +6,7 @@
 /*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 19:38:24 by gigardin          #+#    #+#             */
-/*   Updated: 2024/09/07 16:53:36 by gigardin         ###   ########.fr       */
+/*   Updated: 2024/09/07 19:15:53 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,14 +55,14 @@ void apply_redirections(t_redir *redirs)
 	}
 }
 
-void execute_cmd(t_cmd *cmd, char **env_content)
+void execute_cmd_redir(t_cmd *cmd, char **env_content)
 {
 	apply_redirections(cmd->redirs);
 	execve(cmd->path, cmd->options, env_content);
 	perror("execve");
 }
 
-void execute_cmds(t_cmd *cmd, char **env_content)
+void execute_cmds_redir(t_cmd *cmd, char **env_content)
 {
 	pid_t pid;
 	int status;
@@ -72,7 +72,7 @@ void execute_cmds(t_cmd *cmd, char **env_content)
 		pid = fork();
 		if (pid == 0)
 		{
-			execute_cmd(cmd, env_content);
+			execute_cmd_redir(cmd, env_content);
 			exit(EXIT_FAILURE);
 		}
 		else if (pid < 0)
