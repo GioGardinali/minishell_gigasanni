@@ -121,10 +121,11 @@ void			exit_function(t_mini *minishell);
 
 /*expand_var_utils*/
 int				ft_valid_var(char c);
+int				is_valid(char c, int position);
 int				var_len(char *str);
 char			*env_check(t_mini *minishell, char *var_key);
 char			*return_var(char *str);
-void			copy_content(char *token, int *i, char *cont);
+void			copy_content(char *token, int *i, char *cont, int *j);
 
 /*expand_var*/
 char			*expand_token(t_mini *minishell, char *token);
@@ -184,7 +185,6 @@ void			make_env_list(t_mini *minishell);
 void			apply_redirections(t_redir *redirs);
 void			execute_cmd_redir(t_cmd *cmd, char **env_content);
 void			execute_cmds_redir(t_cmd *cmd, char **env_content);
-
 
 /*função perdida*/
 int				build_pwd(void);
