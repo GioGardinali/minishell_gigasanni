@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 15:31:39 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/10 19:02:33 by asanni           ###   ########.fr       */
+/*   Updated: 2024/09/10 20:29:02 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ char	*return_var(char *str)
 	var = malloc(sizeof(char) * (len + 1));
 	if (!var)
 		return (NULL);
-	i = 1;
+	i = 0;
 	j = 0;
 	while (str[i] != '\0' && is_valid(str[i], j + 1))
 	{
