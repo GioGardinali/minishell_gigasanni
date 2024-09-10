@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 17:57:37 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/08 19:09:59 by asanni           ###   ########.fr       */
+/*   Updated: 2024/09/10 18:57:02 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,71 +17,101 @@
 //ignore casos que não serão expandidos
 //cuidado com as aspas
 
-int	extra_len(t_mini *minishell, char *token)
-{
-	char	*var;
-	char	*exp;
-	int		i;
-	int		len_diff;
+// int	extra_len(t_mini *minishell, char *token)
+// {
+// 	char	*var;
+// 	char	*exp;
+// 	int		i;
+// 	int		len_diff;
 
-	i = 0;
-	len_diff = 0;
-	while (token[i] != '\0')
+// 	i = 0;
+// 	len_diff = 0;
+// 	while (token[i] != '\0')
+// 	{
+// 		if (token[i] == '$' && is_valid(token[i + 1], 1))
+// 		{
+// 			var = return_var(&token[i]);
+// 			if (var)
+// 			{
+// 				exp = return_key_content(minishell, var);
+// 				if (exp != NULL)
+// 					len_diff += ft_strlen(exp) - var_len(&token[i]);
+// 				free(var);
+// 			}
+// 			i += var_len(&token[i]) + 1;
+// 		}
+// 		else
+// 			i++;
+// 	}
+// 	return (len_diff);
+// }
+
+// void	copy_content(char *token, int *i, char *cont, int *j)
+// {
+// 	while (cont[*j] != '\0')
+// 	{
+// 		token[*i] = cont[*j];
+// 		(*i)++;
+// 		(*j)++;
+// 	}
+// }
+
+char	*str_rest(const char *str, const char *var_name)
+{
+	size_t	var_len;
+	size_t	rest_len;
+	char	*rest;
+
+	var_len = strlen(var_name);
+	rest_len = strlen(str) - var_len;
+	if (strncmp(str, var_name, var_len) == 0)
 	{
-		if (token[i] == '$' && is_valid(token[i + 1], 1))
-		{
-			var = return_var(&token[i]);
-			if (var)
-			{
-				exp = return_key_content(minishell, var);
-				if (exp != NULL)
-					len_diff += ft_strlen(exp) - var_len(&token[i]);
-				free(var);
-			}
-			i += var_len(&token[i]) + 1;
-		}
-		else
-			i++;
+		rest = (char *)malloc(rest_len + 1);
+		if (!rest)
+			return (NULL);
+		strcpy(rest, str + var_len);
+		return (rest);
 	}
-	return (len_diff);
+	return (NULL);
 }
 
-void	copy_content(char *token, int *i, char *cont, int *j)
+char	*test(t_mini *minishell, char *str)
 {
-	while (cont[*j] != '\0')
-	{
-		token[*i] = cont[*j];
-		(*i)++;
-		(*j)++;
-	}
+	char	*var;
+	char	*key_content;
+	char	*rest;
+	char	*exp;
+
+	var = return_var(str);
+	key_content = return_key_content(minishell, var);
+	rest = str_rest(str, var);
+	exp = (ft_strjoin(key_content, rest));
+	return (exp);
 }
 
 char	*expand_token(t_mini *minishell, char *token)
 {
-	char	*var;
-	char	*exp;
-	char	*new_token;
-	int		new_len;
+	char	**temp;
+	char	*expanded;
+	char	*key_content;
 	int		i;
 
-	var = return_var(token);
-	exp = return_key_content(minishell, var);
-	new_len = ft_strlen(token) + extra_len(minishell, token);
-	new_token = malloc((sizeof(char) * (new_len + 1)));
-	new_len = 0;
+	expanded = ft_strdup("");
 	i = 0;
-	while (token[i] != '\0')
+	if (ft_strchr(token, '$') == NULL)
+		return (ft_strdup(token));
+	temp = ft_split(token, '$');
+	if (!temp)
+		return (NULL);
+	while (temp[i] != NULL)
 	{
-		if (token[i] == '$')
-			copy_content(new_token, &new_len, exp, &i);
+		key_content = return_key_content(minishell, temp[i]);
+		if (key_content != NULL)
+			expanded = ft_strjoin(expanded, key_content);
 		else
-		{
-			new_token[new_len] = token[i];
-			new_len++;
-			i++;
-		}
+			expanded = ft_strjoin(expanded, temp[i]);
+		i++;
 	}
-	new_token[new_len] = '\0';
-	printf("%s\n", new_token);
-	return (new_token);
+	free_matrix(temp);
+	return (expanded);
 }
