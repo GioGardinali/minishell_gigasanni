@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 17:57:37 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/10 18:57:02 by asanni           ###   ########.fr       */
+/*   Updated: 2024/09/10 20:29:36 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ char	*expand_token(t_mini *minishell, char *token)
 		return (NULL);
 	while (temp[i] != NULL)
 	{
-		key_content = return_key_content(minishell, temp[i]);
+		key_content = test(minishell, temp[i]);
 		if (key_content != NULL)
 			expanded = ft_strjoin(expanded, key_content);
 		else
