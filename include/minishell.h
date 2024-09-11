@@ -195,6 +195,7 @@ void			print_cmds(t_cmd *cmd); //apagar
 void			print_options(char **options); //apagar
 void			print_tokens(t_token *token); //apagar
 void			print_matrix(char **matrix); // apagar
+void			print_cmds_r(t_cmd *cmd); //apagar
 //void	process_multiple_cmds(t_mini minishell);
 //void	prepare_split(char *str);
 //void	skip_quotes2(char *input, int *i, char *temp, int *j);

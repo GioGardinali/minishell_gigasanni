@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 18:52:55 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/10 16:24:35 by asanni           ###   ########.fr       */
+/*   Updated: 2024/09/11 20:09:28 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ static void	start_minishell(t_mini *minishell)
 		exit_function(minishell);
 	make_env_list(minishell);
 	norme(minishell, token);
+	execute_cmds_redir(minishell->cmd, minishell->env_content);
+	//print_cmds(minishell->cmd);
 	check_pid(minishell);
 }
 

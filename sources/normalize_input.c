@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   normalize_input.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 20:21:11 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/11 17:35:57 by asanni           ###   ########.fr       */
+/*   Updated: 2024/09/11 20:08:47 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	norme(t_mini *minishell, t_token *token)
 	while (split[i] != NULL)
 		make_tokens(&minishell->token, split[i++]);
 	token = minishell->token;
-	printf("%s\n", expand_token(minishell, minishell->token->str));
+	//printf("%s\n", expand_token(minishell, minishell->token->str));
 	while (token != NULL)
 	{
 		make_cmds(&minishell->cmd, &token, minishell);
