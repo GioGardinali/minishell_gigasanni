@@ -65,7 +65,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		new_str[index1 + index2] = s2[index2];
 		index2++;
 	}
-	free((char *)s1);
+	//free((char *)s1);
 	new_str[index1 + index2] = '\0';
 	return (new_str);
 }
