@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 17:57:37 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/12 20:19:27 by asanni           ###   ########.fr       */
+/*   Updated: 2024/09/12 20:28:17 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ char	*expand_token(t_mini *minishell, char *token)
 	int		i;
 	int		j;
 
-	result = malloc(sizeof(char) * calculate_size(minishell, token));
+	result = ft_calloc(sizeof(char), calculate_size(minishell, token));
 	i = 0;
 	j = 0;
 	if (!result)
@@ -118,6 +118,5 @@ char	*expand_token(t_mini *minishell, char *token)
 		else
 			result[j++] = token[i++];
 	}
-	result[j] = '\0';
 	return (result);
 }
