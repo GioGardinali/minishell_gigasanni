@@ -157,6 +157,7 @@ void			process_multiple_cmds(t_mini minishell, int prev_fd);
 /*make_token*/
 t_token			*get_last_token(t_token **token);
 void			make_tokens(t_token **token, char *split);
+//void			make_tokens(t_mini *minishell, t_token **token, char *split);
 int				count_token_type(t_mini *minishell, int type_to_count);
 int				has_token_type(t_mini minishell, int type_to_find);
 int				find_etype(char *str);
