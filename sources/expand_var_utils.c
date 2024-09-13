@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 15:31:39 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/11 17:59:04 by asanni           ###   ########.fr       */
+/*   Updated: 2024/09/13 15:52:40 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,4 +81,28 @@ char	*return_key_content(t_mini *minishell, char *var_key)
 		current = current->next;
 	}
 	return (NULL);
+}
+
+int	add_variable_size(t_mini *minishell, char *token, int *i)
+{
+	char	*var_key;
+	char	*var_value;
+	int		size;
+
+	var_key = return_var(&token[*i + 1]);
+	size = 0;
+	if (var_key)
+	{
+		var_value = return_key_content(minishell, var_key);
+		if (var_value)
+			size = ft_strlen(var_value);
+		*i += ft_strlen(var_key) + 1;
+		free(var_key);
+	}
+	else
+	{
+		size = 1;
+		(*i)++;
+	}
+	return (size);
 }

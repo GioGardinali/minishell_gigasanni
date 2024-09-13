@@ -44,7 +44,6 @@ sources/make_env_list.c\
 sources/expand_var_utils.c\
 sources/expand_var.c\
 
-
 #--------------RULES----------------------------#
 
 OBJFILES = $(subst $(SOURCES),$(OBJFOLDER),$(SRC:.c=.o))

@@ -45,14 +45,14 @@ typedef struct s_token
 	struct s_token	*next;
 }t_token;
 
-typedef struct	s_redir
+typedef struct s_redir
 {
-    int				type; // Tipo de redirecionamento: REDIR_INPUT, REDIR_OUTPUT, REDIR_APPEND
-    char			*file; // Nome do arquivo
-    struct s_redir	*next;
-} t_redir;
+	int				type; // Tipo de redirecionamento: REDIR_INPUT, REDIR_OUTPUT, REDIR_APPEND
+	char			*file; // Nome do arquivo
+	struct s_redir	*next;
+}	t_redir;
 
-typedef struct	s_cmd
+typedef struct s_cmd
 {
 	char			*str;
 	char			**options;
@@ -60,7 +60,7 @@ typedef struct	s_cmd
 	t_redir			*redirs; // List redirects
 	struct s_cmd	*next;
 	struct s_cmd	*prev;
-} t_cmd;
+}	t_cmd;
 
 typedef struct s_file_heredoc
 {
@@ -82,17 +82,17 @@ typedef struct s_gc
 	struct s_gc			*next;
 }						t_gc;
 
-typedef struct	s_mini
+typedef struct s_mini
 {
 	char		*input;
 	char		**env_content;
 	t_token		*token;
 	t_cmd		*cmd;
 	t_env		*env_exp;
-	t_heredoc 	*heredocs;
+	t_heredoc	*heredocs;
 	t_gc		*gc;
 	int			exit_status;
-} t_mini;
+}	t_mini;
 
 typedef enum e_type
 {
@@ -120,12 +120,11 @@ void			error_function(char *str);
 void			exit_function(t_mini *minishell);
 
 /*expand_var_utils*/
-int				ft_valid_var(char c);
 int				is_valid(char c, int position);
 int				var_len(char *str);
-char			*return_key_content(t_mini *minishell, char *var_key);
 char			*return_var(char *str);
-void			copy_content(char *token, int *i, char *cont, int *j);
+char			*return_key_content(t_mini *minishell, char *var_key);
+int				add_variable_size(t_mini *minishell, char *token, int *i);
 
 /*expand_var*/
 char			*expand_token(t_mini *minishell, char *token);

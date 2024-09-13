@@ -6,40 +6,11 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 17:57:37 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/12 20:28:17 by asanni           ###   ########.fr       */
+/*   Updated: 2024/09/13 16:47:38 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
-//quero que esta função percorra a token list 
-//ache as var para expandir em todos os casos 
-//ignore casos que não serão expandidos
-//cuidado com as aspas
-
-int	add_variable_size(t_mini *minishell, char *token, int *i)
-{
-	char	*var_key;
-	char	*var_value;
-	int		size;
-
-	var_key = return_var(&token[*i + 1]);
-	size = 0;
-	if (var_key)
-	{
-		var_value = return_key_content(minishell, var_key);
-		if (var_value)
-			size = ft_strlen(var_value);
-		*i += ft_strlen(var_key) + 1;
-		free(var_key);
-	}
-	else
-	{
-		size = 1;
-		(*i)++;
-	}
-	return (size);
-}
 
 int	calculate_size(t_mini *minishell, char *token)
 {
@@ -92,6 +63,57 @@ int	expand_variable(t_mini *minishell, char *result, int *i, int *j)
 	return (1);
 }
 
+// char	*expand_token(t_mini *minishell, char *token)
+// {
+// 	char	*result;
+// 	int		i;
+// 	int		j;
+
+// 	result = ft_calloc(sizeof(char), calculate_size(minishell, token));
+// 	i = 0;
+// 	j = 0;
+// 	if (!result)
+// 		return (NULL);
+// 	while (token[i])
+// 	{
+// 		if (token[i] == '$')
+// 		{
+// 			if (is_valid(token[i + 1], 0))
+// 				expand_variable(minishell, result, &i, &j);
+// 			else
+// 			{
+// 				result[j++] = '$';
+// 				i++;
+// 			}
+// 		}
+// 		else
+// 			result[j++] = token[i++];
+// 	}
+// 	return (result);
+// }
+
+int	is_variable_expandable(char *token, int pos)
+{
+	int		i;
+	int		in_double_quotes;
+	int		in_single_quotes;
+
+	i = 0;
+	in_double_quotes = 0;
+	in_single_quotes = 0;
+	while (i < pos)
+	{
+		if (token[i] == '"' && !in_single_quotes)
+			in_double_quotes = !in_double_quotes;
+		else if (token[i] == '\'' && !in_double_quotes)
+			in_single_quotes = !in_single_quotes;
+		i++;
+	}
+	if (in_single_quotes)
+		return (0);
+	return (1);
+}
+
 char	*expand_token(t_mini *minishell, char *token)
 {
 	char	*result;
@@ -107,7 +129,7 @@ char	*expand_token(t_mini *minishell, char *token)
 	{
 		if (token[i] == '$')
 		{
-			if (is_valid(token[i + 1], 0))
+			if (is_variable_expandable(token, i + 1))
 				expand_variable(minishell, result, &i, &j);
 			else
 			{
