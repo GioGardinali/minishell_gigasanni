@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 17:57:37 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/13 16:47:38 by asanni           ###   ########.fr       */
+/*   Updated: 2024/09/13 19:19:48 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,35 +62,6 @@ int	expand_variable(t_mini *minishell, char *result, int *i, int *j)
 	free(var_key);
 	return (1);
 }
-
-// char	*expand_token(t_mini *minishell, char *token)
-// {
-// 	char	*result;
-// 	int		i;
-// 	int		j;
-
-// 	result = ft_calloc(sizeof(char), calculate_size(minishell, token));
-// 	i = 0;
-// 	j = 0;
-// 	if (!result)
-// 		return (NULL);
-// 	while (token[i])
-// 	{
-// 		if (token[i] == '$')
-// 		{
-// 			if (is_valid(token[i + 1], 0))
-// 				expand_variable(minishell, result, &i, &j);
-// 			else
-// 			{
-// 				result[j++] = '$';
-// 				i++;
-// 			}
-// 		}
-// 		else
-// 			result[j++] = token[i++];
-// 	}
-// 	return (result);
-// }
 
 int	is_variable_expandable(char *token, int pos)
 {
