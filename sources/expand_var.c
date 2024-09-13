@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 17:57:37 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/13 19:19:48 by asanni           ###   ########.fr       */
+/*   Updated: 2024/09/13 20:28:38 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,11 @@ int	expand_variable(t_mini *minishell, char *result, int *i, int *j)
 		(*i)++;
 		return (1);
 	}
+	printf("var Key: %s\n", var_key);
 	var_value = return_key_content(minishell, var_key);
 	if (var_value)
 	{
+		printf("var: %s\n", var_value);
 		append_to_result(result, var_value, j);
 	}
 	*i += strlen(var_key) + 1;
@@ -101,7 +103,10 @@ char	*expand_token(t_mini *minishell, char *token)
 		if (token[i] == '$')
 		{
 			if (is_variable_expandable(token, i + 1))
+			{
 				expand_variable(minishell, result, &i, &j);
+				printf("exp var\n");
+			}
 			else
 			{
 				result[j++] = '$';
@@ -111,5 +116,7 @@ char	*expand_token(t_mini *minishell, char *token)
 		else
 			result[j++] = token[i++];
 	}
+	printf ("len: %d\n", calculate_size(minishell, token));
+	printf("str: %zu\n", ft_strlen(result));
 	return (result);
 }
