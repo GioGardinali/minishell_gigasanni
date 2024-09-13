@@ -6,117 +6,139 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 17:57:37 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/11 20:15:18 by asanni           ###   ########.fr       */
+/*   Updated: 2024/09/13 16:47:38 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-//quero que esta função percorra a token list 
-//ache as var para expandir em todos os casos 
-//ignore casos que não serão expandidos
-//cuidado com as aspas
-
-char	*str_rest(const char *str, const char *var_name)
+int	calculate_size(t_mini *minishell, char *token)
 {
-	size_t	var_len;
-	size_t	rest_len;
-	char	*rest;
+	int	total_size;
+	int	i;
 
-	var_len = ft_strlen(var_name);
-	rest_len = ft_strlen(str) - var_len;
-	if (ft_strncmp(str, var_name, var_len) == 0)
+	total_size = 0;
+	i = 0;
+	while (token[i])
 	{
-		rest = ft_strdup(str + var_len);
-		return (rest);
+		if (token[i] == '$' && is_valid(token[i + 1], 0))
+			total_size += add_variable_size(minishell, token, &i);
+		else
+		{
+			total_size++;
+			i++;
+		}
 	}
-	return (NULL);
+	return (total_size);
 }
 
-char	*test(t_mini *minishell, char *str)
+void	append_to_result(char *result, char *str, int *j)
 {
-	char	*var;
-	char	*key_content;
-	char	*rest;
-	char	*exp;
+	int	len;
 
-	var = return_var(str);
-	key_content = return_key_content(minishell, var);
-	rest = str_rest(str, var);
-	exp = ft_strjoin(key_content, rest);
-	return (exp);
+	len = ft_strlen(str);
+	ft_strcpy(&result[*j], str);
+	*j += len;
+}
+
+int	expand_variable(t_mini *minishell, char *result, int *i, int *j)
+{
+	char	*var_key;
+	char	*var_value;
+
+	var_key = return_var(&minishell->token->str[*i + 1]);
+	if (!var_key)
+	{
+		result[(*j)++] = '$';
+		(*i)++;
+		return (1);
+	}
+	var_value = return_key_content(minishell, var_key);
+	if (var_value)
+	{
+		append_to_result(result, var_value, j);
+	}
+	*i += strlen(var_key) + 1;
+	free(var_key);
+	return (1);
 }
 
 // char	*expand_token(t_mini *minishell, char *token)
 // {
-// 	char	**temp;
-// 	char	*expanded;
-// 	char	*key_content;
+// 	char	*result;
 // 	int		i;
+// 	int		j;
 
-// 	expanded = ft_strdup("");
+// 	result = ft_calloc(sizeof(char), calculate_size(minishell, token));
 // 	i = 0;
-// 	if (ft_strchr(token, '$') == NULL)
-// 		return (token);
-// 	temp = ft_split(token, '$');
-// 	if (!temp)
+// 	j = 0;
+// 	if (!result)
 // 		return (NULL);
-// 	while (temp[i] != NULL)
+// 	while (token[i])
 // 	{
-// 		key_content = test(minishell, temp[i]);
-// 		if (key_content != NULL)
-// 			expanded = ft_strjoin(expanded, key_content);
+// 		if (token[i] == '$')
+// 		{
+// 			if (is_valid(token[i + 1], 0))
+// 				expand_variable(minishell, result, &i, &j);
+// 			else
+// 			{
+// 				result[j++] = '$';
+// 				i++;
+// 			}
+// 		}
 // 		else
-// 			expanded = ft_strjoin(expanded, temp[i]);
-// 		i++;
+// 			result[j++] = token[i++];
 // 	}
-// 	free_matrix(temp);
-// 	return (expanded);
+// 	return (result);
 // }
+
+int	is_variable_expandable(char *token, int pos)
+{
+	int		i;
+	int		in_double_quotes;
+	int		in_single_quotes;
+
+	i = 0;
+	in_double_quotes = 0;
+	in_single_quotes = 0;
+	while (i < pos)
+	{
+		if (token[i] == '"' && !in_single_quotes)
+			in_double_quotes = !in_double_quotes;
+		else if (token[i] == '\'' && !in_double_quotes)
+			in_single_quotes = !in_single_quotes;
+		i++;
+	}
+	if (in_single_quotes)
+		return (0);
+	return (1);
+}
 
 char	*expand_token(t_mini *minishell, char *token)
 {
-	char	**temp;
-	char	*expanded;
-	char	*key_content;
-	char	*new_expanded;
+	char	*result;
 	int		i;
-	char	*dollar_pos;
+	int		j;
 
-	expanded = ft_strdup("");
-	if (!expanded)
-		return (NULL);
-	dollar_pos = ft_strchr(token, '$');
-	if (dollar_pos == NULL)
-		return (ft_strdup(token));
-	if (token != dollar_pos)
-	{
-		char *prefix = ft_substr(token, 0, dollar_pos - token);
-		new_expanded = ft_strjoin(expanded, prefix);
-		free(expanded);
-		expanded = new_expanded;
-		free(prefix);
-	}
-	temp = ft_split(dollar_pos, '$');
-	if (!temp)
-	{
-		free(expanded);
-		return (NULL);
-	}
+	result = ft_calloc(sizeof(char), calculate_size(minishell, token));
 	i = 0;
-	while (temp[i] != NULL)
+	j = 0;
+	if (!result)
+		return (NULL);
+	while (token[i])
 	{
-		key_content = test(minishell, temp[i]);
-		if (key_content != NULL)
-			new_expanded = ft_strjoin(expanded, key_content);
+		if (token[i] == '$')
+		{
+			if (is_variable_expandable(token, i + 1))
+				expand_variable(minishell, result, &i, &j);
+			else
+			{
+				result[j++] = '$';
+				i++;
+			}
+		}
 		else
-			new_expanded = ft_strjoin(expanded, temp[i]);
-		free(expanded);
-		expanded = new_expanded;
-		if (key_content)
-			free(key_content);
-		i++;
+			result[j++] = token[i++];
 	}
-	free_matrix(temp);
-	return (expanded);
+	return (result);
 }

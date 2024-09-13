@@ -45,7 +45,6 @@ sources/expand_var_utils.c\
 sources/expand_var.c\
 sources/exec_redir.c\
 
-
 #--------------RULES----------------------------#
 
 OBJFILES = $(subst $(SOURCES),$(OBJFOLDER),$(SRC:.c=.o))
