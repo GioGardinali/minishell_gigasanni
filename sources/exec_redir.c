@@ -6,7 +6,7 @@
 /*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 19:38:24 by gigardin          #+#    #+#             */
-/*   Updated: 2024/09/11 20:08:19 by gigardin         ###   ########.fr       */
+/*   Updated: 2024/09/13 20:21:52 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,35 +55,35 @@ void apply_redirections(t_redir *redirs)
 	}
 }
 
-void execute_cmd_redir(t_cmd *cmd, char **env_content)
-{
-	apply_redirections(cmd->redirs);
-	execve(cmd->path, cmd->options, env_content);
-	perror("execve");
-}
+// void execute_cmd_redir(t_cmd *cmd, char **env_content)
+// {
+// 	apply_redirections(cmd->redirs);
+// 	execve(cmd->path, cmd->options, env_content);
+// 	perror("execve");
+// }
 
-void execute_cmds_redir(t_cmd *cmd, char **env_content)
-{
-	pid_t pid;
-	int status;
+// void execute_cmds_redir(t_cmd *cmd, char **env_content)
+// {
+// 	pid_t pid;
+// 	int status;
 
-	while (cmd)
-	{
-		pid = fork();
-		if (pid == 0)
-		{
-			execute_cmd_redir(cmd, env_content);
-			exit(EXIT_FAILURE);
-		}
-		else if (pid < 0)
-		{
-			perror("fork");
-			return;
-		}
-		else
-		{
-			waitpid(pid, &status, 0);
-		}
-		cmd = cmd->next;
-	}
-}
+// 	while (cmd)
+// 	{
+// 		pid = fork();
+// 		if (pid == 0)
+// 		{
+// 			execute_cmd_redir(cmd, env_content);
+// 			exit(EXIT_FAILURE);
+// 		}
+// 		else if (pid < 0)
+// 		{
+// 			perror("fork");
+// 			return;
+// 		}
+// 		else
+// 		{
+// 			waitpid(pid, &status, 0);
+// 		}
+// 		cmd = cmd->next;
+// 	}
+// }

@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 17:57:37 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/13 16:47:38 by asanni           ###   ########.fr       */
+/*   Updated: 2024/09/13 20:28:38 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,44 +53,17 @@ int	expand_variable(t_mini *minishell, char *result, int *i, int *j)
 		(*i)++;
 		return (1);
 	}
+	printf("var Key: %s\n", var_key);
 	var_value = return_key_content(minishell, var_key);
 	if (var_value)
 	{
+		printf("var: %s\n", var_value);
 		append_to_result(result, var_value, j);
 	}
 	*i += strlen(var_key) + 1;
 	free(var_key);
 	return (1);
 }
-
-// char	*expand_token(t_mini *minishell, char *token)
-// {
-// 	char	*result;
-// 	int		i;
-// 	int		j;
-
-// 	result = ft_calloc(sizeof(char), calculate_size(minishell, token));
-// 	i = 0;
-// 	j = 0;
-// 	if (!result)
-// 		return (NULL);
-// 	while (token[i])
-// 	{
-// 		if (token[i] == '$')
-// 		{
-// 			if (is_valid(token[i + 1], 0))
-// 				expand_variable(minishell, result, &i, &j);
-// 			else
-// 			{
-// 				result[j++] = '$';
-// 				i++;
-// 			}
-// 		}
-// 		else
-// 			result[j++] = token[i++];
-// 	}
-// 	return (result);
-// }
 
 int	is_variable_expandable(char *token, int pos)
 {
@@ -130,7 +103,10 @@ char	*expand_token(t_mini *minishell, char *token)
 		if (token[i] == '$')
 		{
 			if (is_variable_expandable(token, i + 1))
+			{
 				expand_variable(minishell, result, &i, &j);
+				printf("exp var\n");
+			}
 			else
 			{
 				result[j++] = '$';
@@ -140,5 +116,7 @@ char	*expand_token(t_mini *minishell, char *token)
 		else
 			result[j++] = token[i++];
 	}
+	printf ("len: %d\n", calculate_size(minishell, token));
+	printf("str: %zu\n", ft_strlen(result));
 	return (result);
 }

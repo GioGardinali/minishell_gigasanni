@@ -6,7 +6,7 @@
 /*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 16:39:02 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/11 20:07:14 by gigardin         ###   ########.fr       */
+/*   Updated: 2024/09/13 20:24:10 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ static char **make_options(t_token **token, t_cmd **cmd)
 	char	**options;
 	char	**opt_bckp;
 	int		len;
+	int		type;
 
 	len = 0;
 	if (search_options(*token))
@@ -26,16 +27,16 @@ static char **make_options(t_token **token, t_cmd **cmd)
 	len = return_len(*token);
 	options = ft_calloc(sizeof(char *), (len + 1));
 	opt_bckp = options;
-
 	while (*token != NULL && (*token)->type != PIPE)
 	{
 		if (find_redir(*token) == 1)
-			{
-				int type = (*token)->type;
-				*token = (*token)->next;
-				if (*token != NULL)
-					add_redir(&(*cmd)->redirs, type, (*token)->str);
-			}
+		{
+			type = (*token)->type;
+			*token = (*token)->next;
+			if (*token != NULL)
+				add_redir(&(*cmd)->redirs, type, (*token)->str);
+			*token = (*token)->next;
+		}
 		else
 		{
 			(*options++) = ft_strdup((*token)->str);
@@ -83,13 +84,12 @@ void make_one_cmd(t_cmd **cmd, t_token **token, t_mini *minishell)
 	t_cmd *new_cmd;
 	t_cmd *temp;
 
-	new_cmd = malloc(sizeof(t_cmd));
+	new_cmd = ft_calloc(sizeof(t_cmd), 1);
 	if (new_cmd == NULL)
 		return;
 	new_cmd->str = (*token)->str;
-	new_cmd->options = make_options(token, cmd);
+	new_cmd->options = make_options(token, &new_cmd);
 	new_cmd->path = verify_path(minishell, new_cmd->str);
-	new_cmd->redirs = NULL;
 	new_cmd->next = NULL;
 	new_cmd->prev = NULL;
 
