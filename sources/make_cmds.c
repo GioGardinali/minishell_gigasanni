@@ -6,20 +6,39 @@
 /*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 16:39:02 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/13 20:24:10 by gigardin         ###   ########.fr       */
+/*   Updated: 2024/09/13 23:16:32 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void add_redir(t_redir **redirs, int type, char *file);
+void	add_redir(t_redir **redirs, int type, char *file);
 
-static char **make_options(t_token **token, t_cmd **cmd)
+static void	process_token(t_token **token, t_cmd **cmd, char ***options)
+{
+	int	type;
+
+	if (find_redir(*token) == 1)
+	{
+		type = (*token)->type;
+		*token = (*token)->next;
+		if (*token != NULL)
+			add_redir(&(*cmd)->redirs, type, (*token)->str);
+		*token = (*token)->next;
+	}
+	else
+	{
+		**options = ft_strdup((*token)->str);
+		(*options)++;
+		*token = (*token)->next;
+	}
+}
+
+static char	**make_options(t_token **token, t_cmd **cmd)
 {
 	char	**options;
 	char	**opt_bckp;
 	int		len;
-	int		type;
 
 	len = 0;
 	if (search_options(*token))
@@ -28,21 +47,7 @@ static char **make_options(t_token **token, t_cmd **cmd)
 	options = ft_calloc(sizeof(char *), (len + 1));
 	opt_bckp = options;
 	while (*token != NULL && (*token)->type != PIPE)
-	{
-		if (find_redir(*token) == 1)
-		{
-			type = (*token)->type;
-			*token = (*token)->next;
-			if (*token != NULL)
-				add_redir(&(*cmd)->redirs, type, (*token)->str);
-			*token = (*token)->next;
-		}
-		else
-		{
-			(*options++) = ft_strdup((*token)->str);
-			*token = (*token)->next;
-		}
-	}
+		process_token(token, cmd, &options);
 	return (opt_bckp);
 }
 
@@ -56,139 +61,57 @@ t_cmd	*get_last_cmd(t_cmd **cmd)
 	return (temp);
 }
 
-void add_redir(t_redir **redirs, int type, char *file)
+void	add_redir(t_redir **redirs, int type, char *file)
 {
-	t_redir *new_redir = malloc(sizeof(t_redir));
-	t_redir *temp;
+	t_redir	*new_redir;
+	t_redir	*temp;
 
+	new_redir = malloc(sizeof(t_redir));
 	if (!new_redir)
-		return;
+		return ;
 	new_redir->type = type;
 	new_redir->file = ft_strdup(file);
 	new_redir->next = NULL;
-
 	if (!*redirs)
 	{
 		*redirs = new_redir;
-		return;
+		return ;
 	}
-
 	temp = *redirs;
 	while (temp->next)
 		temp = temp->next;
 	temp->next = new_redir;
 }
 
-void make_one_cmd(t_cmd **cmd, t_token **token, t_mini *minishell)
+void	make_one_cmd(t_cmd **cmd, t_token **token, t_mini *minishell)
 {
-	t_cmd *new_cmd;
-	t_cmd *temp;
+	t_cmd	*new_cmd;
+	t_cmd	*temp;
 
 	new_cmd = ft_calloc(sizeof(t_cmd), 1);
 	if (new_cmd == NULL)
-		return;
+		return ;
 	new_cmd->str = (*token)->str;
 	new_cmd->options = make_options(token, &new_cmd);
 	new_cmd->path = verify_path(minishell, new_cmd->str);
 	new_cmd->next = NULL;
 	new_cmd->prev = NULL;
-
 	if (!*cmd)
 	{
 		*cmd = new_cmd;
-		return;
+		return ;
 	}
 	temp = get_last_cmd(cmd);
 	temp->next = new_cmd;
 	new_cmd->prev = temp;
 }
 
-void make_cmds(t_cmd **cmd, t_token **token, t_mini *minishell)
+void	make_cmds(t_cmd **cmd, t_token **token, t_mini *minishell)
 {
 	while (*token != NULL)
 	{
 		make_one_cmd(cmd, token, minishell);
-
-		// while (*token != NULL && (*token)->type != PIPE)
-		// {
-		// 	if (find_redir(*token) == 1)
-		// 	{
-		// 		int type = (*token)->type;
-		// 		*token = (*token)->next;
-		// 		if (*token != NULL)
-		// 			add_redir(&(*cmd)->redirs, type, (*token)->str);
-		// 	}
-		// 	*token = (*token)->next;
-		// }
-
 		if (*token != NULL && (*token)->type == PIPE)
 			*token = (*token)->next;
 	}
 }
-
-//gerenciar error de malloc
-
-// char	**make_options(t_token **token)
-// {
-// 	char	**options;
-// 	char	**opt_bckp;
-// 	int		len;
-
-// 	len = 0;
-// 	if (search_options(*token))
-// 		return (NULL);
-// 	len = return_len(*token);
-// 	options = ft_calloc(sizeof(char *), (len + 1));
-// 	opt_bckp = options;
-// 	while (*token != NULL && (*token)->type != PIPE)
-// 	{
-// 		if (find_redir(*token) == 1)
-// 			*token = (*token)->next;
-// 		else
-// 			(*options++) = ft_strdup((*token)->str);
-// 		*token = (*token)->next;
-// 	}
-// 	return (opt_bckp);
-// }
-
-// void	make_one_cmd(t_cmd **cmd, t_token **token, t_mini *minishell)
-// {
-// 	t_cmd	*new_cmd;
-// 	t_cmd	*temp;
-
-// 	new_cmd = malloc(sizeof(t_cmd));
-// 	if (new_cmd == NULL)
-// 		return ;
-// 	new_cmd->str = (*token)->str;
-// 	new_cmd->options = make_options(token);
-// 	new_cmd->path = verify_path(minishell, new_cmd->str);
-// 	new_cmd->next = NULL;
-// 	new_cmd->prev = NULL;
-// 	if (!*cmd)
-// 	{
-// 		*cmd = new_cmd;
-// 		return ;
-// 	}
-// 	temp = get_last_cmd(cmd);
-// 	temp->next = new_cmd;
-// 	new_cmd->prev = temp;
-// }
-
-// void	make_cmds(t_cmd **cmd, t_token **token, t_mini *minishell)
-// {
-// 	if (cmd == NULL || token == NULL || *token == NULL)
-// 		return ;
-// 	while (*token != NULL)
-// 	{
-// 		make_one_cmd(cmd, token, minishell);
-// 		while (*token != NULL && (*token)->type != PIPE)
-// 		{
-// 			if (find_redir(*token) == 1)
-// 				*token = (*token)->next;
-// 			else
-// 				*token = (*token)->next;
-// 		}
-// 		if (*token != NULL && (*token)->type == PIPE)
-// 			*token = (*token)->next;
-// 	}
-// }

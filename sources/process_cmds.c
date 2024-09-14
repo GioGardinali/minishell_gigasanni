@@ -6,7 +6,7 @@
 /*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 15:48:38 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/13 20:14:34 by gigardin         ###   ########.fr       */
+/*   Updated: 2024/09/13 23:16:54 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,9 @@ void	process_multiple_cmds(t_mini minishell, int prev_fd)
 		if (current_cmd->next != NULL)
 			create_pipe(fd);
 		if (current_cmd->next == NULL)
-		fork_and_execute(minishell, prev_fd, -1, current_cmd);
+			fork_and_execute(minishell, prev_fd, -1, current_cmd);
 		else
-		fork_and_execute(minishell, prev_fd, fd[1], current_cmd);
+			fork_and_execute(minishell, prev_fd, fd[1], current_cmd);
 		if (current_cmd->next != NULL)
 			close_unused_fds(prev_fd, fd);
 		else

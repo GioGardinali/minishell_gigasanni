@@ -70,6 +70,7 @@ $(OBJFOLDER)%.o : $(SOURCES)%.c
 #----------------CLEAN--------------------------#
 
 clean:
+
 	rm -f $(OBJFILES) -r $(OBJFOLDER)
 	@make clean -C libft
 
@@ -77,5 +78,8 @@ fclean: clean
 	rm -f $(NAME)
 	@make fclean -C libft
 
+gdb:	all
+	gdb --tui -ex 'set follow-fork-mode child' -ex 'b main' -ex 'b make_one_cmd' -ex 'run' ./$(NAME)
+
 re: fclean all
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re gdb

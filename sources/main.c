@@ -6,7 +6,7 @@
 /*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 18:52:55 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/11 20:09:28 by gigardin         ###   ########.fr       */
+/*   Updated: 2024/09/13 20:14:47 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	start_minishell(t_mini *minishell)
 		exit_function(minishell);
 	make_env_list(minishell);
 	norme(minishell, token);
-	execute_cmds_redir(minishell->cmd, minishell->env_content);
+	//execute_cmds_redir(minishell->cmd, minishell->env_content);
 	//print_cmds(minishell->cmd);
 	check_pid(minishell);
 }
