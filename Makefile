@@ -36,10 +36,6 @@ sources/make_cmds_utils.c\
 sources/delete_later.c\
 sources/free_functions.c\
 sources/process_cmds.c\
-sources/heredoc_init.c\
-sources/heredoc_utils.c\
-sources/heredoc_new_file.c\
-sources/signal.c\
 sources/make_env_list.c\
 sources/expand_var_utils.c\
 sources/expand_var.c\

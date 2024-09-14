@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   make_cmds_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 20:03:25 by asanni            #+#    #+#             */
-/*   Updated: 2024/07/25 15:12:29 by asanni           ###   ########.fr       */
+/*   Updated: 2024/09/14 00:50:04 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,14 @@ int	return_len(t_token *token)
 		token = token->next;
 	}
 	return (len);
+}
+
+t_cmd	*get_last_cmd(t_cmd **cmd)
+{
+	t_cmd	*temp;
+
+	temp = *cmd;
+	while (temp->next)
+		temp = temp->next;
+	return (temp);
 }
