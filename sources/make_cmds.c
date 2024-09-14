@@ -6,23 +6,13 @@
 /*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 16:39:02 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/14 00:50:35 by gigardin         ###   ########.fr       */
+/*   Updated: 2024/09/14 05:02:04 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
 void	add_redir(t_redir **redirs, int type, char *file);
-
-// static void	init_heredoc(t_mini *temp_minishell)
-// {
-// 	t_heredoc	*heredoc;
-
-// 	heredoc = ft_calloc(sizeof(t_heredoc), 1);
-// 	heredoc->size = count_cmd(temp_minishell->token);
-// 	heredoc->array = ft_calloc(sizeof(t_file_heredoc *), heredoc->size);
-// 	ft_get_shell()->heredocs = heredoc;
-// }
 
 static void	identify_type_cmd(t_token **token, t_cmd **cmd, char ***options,
 	int *count_cmd)
