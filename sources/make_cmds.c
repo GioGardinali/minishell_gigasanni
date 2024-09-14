@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   make_cmds.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 16:39:02 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/14 05:02:04 by gigardin         ###   ########.fr       */
+/*   Updated: 2024/09/14 15:23:47 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,11 +92,13 @@ void	make_one_cmd(t_cmd **cmd, t_token **token, t_mini *minishell,
 {
 	t_cmd	*new_cmd;
 	t_cmd	*temp;
+	char	**split;
 
+	split = ft_split((*token)->str, ' ');
 	new_cmd = ft_calloc(sizeof(t_cmd), 1);
 	if (new_cmd == NULL)
 		return ;
-	new_cmd->str = (*token)->str;
+	new_cmd->str = ft_strdup(split [0]);
 	new_cmd->options = make_options(token, &new_cmd, count_cmd);
 	new_cmd->path = verify_path(minishell, new_cmd->str);
 	new_cmd->next = NULL;
@@ -109,6 +111,7 @@ void	make_one_cmd(t_cmd **cmd, t_token **token, t_mini *minishell,
 	temp = get_last_cmd(cmd);
 	temp->next = new_cmd;
 	new_cmd->prev = temp;
+	free_matrix(split);
 }
 
 void	make_cmds(t_cmd **cmd, t_token **token, t_mini *minishell)

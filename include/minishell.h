@@ -120,6 +120,9 @@ typedef enum e_type
 /*adjust spaces*/
 char			*adjust_spaces(char	*str);
 
+/*alphabetical_sort*/
+void			sort_env_list(t_env **env);
+
 /* error functions*/
 void			free_split(char **split);
 void			free_cmds(t_cmd **cmd);
@@ -135,7 +138,7 @@ char			*return_key_content(t_mini *minishell, char *var_key);
 int				add_variable_size(t_mini *minishell, char *token, int *i);
 
 /*expand_var*/
-char	*expand_token(t_mini *minishell, t_aux *aux);
+char			*expand_token(t_mini *minishell, t_aux *aux);
 
 /*free_functions*/
 void			free_token(t_token **token);
@@ -188,7 +191,6 @@ char			*get_file(int is_first);
 t_mini			*ft_get_shell(void);
 void			clear_exit(t_mini *minishell, int to_exit);
 void			make_env_list(t_mini *minishell);
-//int				execute_heredoc(char *str_end, unsigned int index, t_heredoc *heredoc, int is_first);
 
 /*execução redirect*/
 void			apply_redirections(t_redir *redirs);
@@ -208,5 +210,6 @@ void			print_cmds_r(t_cmd *cmd); //apagar
 //void	process_multiple_cmds(t_mini minishell);
 //void	prepare_split(char *str);
 //void	skip_quotes2(char *input, int *i, char *temp, int *j);
+//int				execute_heredoc(char *str_end, unsigned int index, t_heredoc *heredoc, int is_first);
 
 #endif

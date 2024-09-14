@@ -40,6 +40,7 @@ sources/make_env_list.c\
 sources/expand_var_utils.c\
 sources/expand_var.c\
 sources/exec_redir.c\
+sources/alphabetical_sort.c\
 
 #--------------RULES----------------------------#
 
