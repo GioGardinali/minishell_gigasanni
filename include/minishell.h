@@ -180,6 +180,7 @@ char			*get_file(int is_first);
 t_mini			*ft_get_shell(void);
 void			clear_exit(t_mini *minishell, int to_exit);
 void			make_env_list(t_mini *minishell);
+//int				execute_heredoc(char *str_end, unsigned int index, t_heredoc *heredoc, int is_first);
 
 /*execução redirect*/
 void			apply_redirections(t_redir *redirs);
