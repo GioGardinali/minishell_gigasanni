@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 17:57:37 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/13 20:28:38 by asanni           ###   ########.fr       */
+/*   Updated: 2024/09/14 13:49:05 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,26 +41,22 @@ void	append_to_result(char *result, char *str, int *j)
 	*j += len;
 }
 
-int	expand_variable(t_mini *minishell, char *result, int *i, int *j)
+int	expand_variable(t_mini *minishell, t_aux *aux)
 {
 	char	*var_key;
 	char	*var_value;
 
-	var_key = return_var(&minishell->token->str[*i + 1]);
+	var_key = return_var(&aux->token[*aux->i + 1]);
 	if (!var_key)
 	{
-		result[(*j)++] = '$';
-		(*i)++;
+		aux->result[(*aux->j)++] = '$';
+		(*aux->i)++;
 		return (1);
 	}
-	printf("var Key: %s\n", var_key);
 	var_value = return_key_content(minishell, var_key);
 	if (var_value)
-	{
-		printf("var: %s\n", var_value);
-		append_to_result(result, var_value, j);
-	}
-	*i += strlen(var_key) + 1;
+		append_to_result(aux->result, var_value, aux->j);
+	*aux->i += strlen(var_key) + 1;
 	free(var_key);
 	return (1);
 }
@@ -87,36 +83,32 @@ int	is_variable_expandable(char *token, int pos)
 	return (1);
 }
 
-char	*expand_token(t_mini *minishell, char *token)
+char	*expand_token(t_mini *minishell, t_aux *aux)
 {
-	char	*result;
 	int		i;
 	int		j;
 
-	result = ft_calloc(sizeof(char), calculate_size(minishell, token));
+	aux->result = ft_calloc(1, calculate_size(minishell, aux->token));
 	i = 0;
 	j = 0;
-	if (!result)
+	aux->i = &i;
+	aux->j = &j;
+	if (!aux->result)
 		return (NULL);
-	while (token[i])
+	while (aux->token[i])
 	{
-		if (token[i] == '$')
+		if (aux->token[i] == '$')
 		{
-			if (is_variable_expandable(token, i + 1))
-			{
-				expand_variable(minishell, result, &i, &j);
-				printf("exp var\n");
-			}
+			if (is_variable_expandable(aux->token, i + 1))
+				expand_variable(minishell, aux);
 			else
 			{
-				result[j++] = '$';
+				aux->result[j++] = '$';
 				i++;
 			}
 		}
 		else
-			result[j++] = token[i++];
+			aux->result[j++] = aux->token[i++];
 	}
-	printf ("len: %d\n", calculate_size(minishell, token));
-	printf("str: %zu\n", ft_strlen(result));
-	return (result);
+	return (aux->result);
 }

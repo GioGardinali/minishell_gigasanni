@@ -37,6 +37,14 @@ typedef struct s_env
 	struct s_env	*next;
 }t_env;
 
+typedef struct s_aux
+{
+	char	*result;
+	char	*token;
+	int		*i;
+	int		*j;
+}t_aux;
+
 typedef struct s_token
 {
 	char			*str;
@@ -127,7 +135,7 @@ char			*return_key_content(t_mini *minishell, char *var_key);
 int				add_variable_size(t_mini *minishell, char *token, int *i);
 
 /*expand_var*/
-char			*expand_token(t_mini *minishell, char *token);
+char	*expand_token(t_mini *minishell, t_aux *aux);
 
 /*free_functions*/
 void			free_token(t_token **token);
