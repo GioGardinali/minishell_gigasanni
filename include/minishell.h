@@ -60,16 +60,6 @@ typedef struct s_redir
 	struct s_redir	*next;
 }	t_redir;
 
-typedef struct s_cmd
-{
-	char			*str;
-	char			**options;
-	char			*path;
-	t_redir			*redirs; // List redirects
-	struct s_cmd	*next;
-	struct s_cmd	*prev;
-}	t_cmd;
-
 typedef struct s_file_heredoc
 {
 	char					*file;
@@ -84,6 +74,17 @@ typedef struct s_heredoc
 
 }	t_heredoc;
 
+typedef struct s_cmd
+{
+	char			*str;
+	char			**options;
+	char			*path;
+	t_heredoc		*heredocs;
+	t_redir			*redirs; // List redirects
+	struct s_cmd	*next;
+	struct s_cmd	*prev;
+}	t_cmd;
+
 typedef struct s_gc
 {
 	void				*content;
@@ -97,7 +98,6 @@ typedef struct s_mini
 	t_token		*token;
 	t_cmd		*cmd;
 	t_env		*env_exp;
-	t_heredoc	*heredocs;
 	t_gc		*gc;
 	int			exit_status;
 }	t_mini;
@@ -185,12 +185,14 @@ void			copy_heredoc(int signal);
 void			free_here_docs(t_heredoc **heredoc);
 void			ft_rlstnew(void *content);
 char			*get_file(int is_first);
-t_mini			*ft_get_shell(void);
+// t_mini			*ft_get_shell(void);
 void			clear_exit(t_mini *minishell, int to_exit);
 void			make_env_list(t_mini *minishell);
 int				execute_heredoc(char *str_end, unsigned int index,
-						t_heredoc *heredoc, int is_first);
+					t_heredoc *heredoc, int is_first);
 void			loop_exec_heredoc(int fd, int quotes, char *str_end);
+void			write_file(char *file, int quotes, char *str_end);
+t_heredoc		*init_heredoc(t_mini *minishell);
 
 /*execução redirect*/
 void			apply_redirections(t_redir *redirs);
