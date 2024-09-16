@@ -113,6 +113,7 @@ typedef enum e_type
 	HERE_DOC,
 	QUOTES,
 	DOC,
+	EXPORT,
 }	t_type;
 
 //Functions
@@ -133,7 +134,8 @@ void			exit_function(t_mini *minishell);
 /*expand_var_utils*/
 int				is_valid(char c, int position);
 int				var_len(char *str);
-char			*return_var(char *str);
+char			*return_var(char *str, int add);
+// char			*return_var(char *str);
 char			*return_key_content(t_mini *minishell, char *var_key);
 int				add_variable_size(t_mini *minishell, char *token, int *i);
 
