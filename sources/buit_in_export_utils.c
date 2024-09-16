@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 14:18:26 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/16 18:50:50 by asanni           ###   ########.fr       */
+/*   Updated: 2024/09/16 20:29:26 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,16 +40,16 @@ int	var_exists(t_mini *minishell)
 	return (0);
 }
 
-void	put_new_value(t_mini *minishell, char *var_key)
+void	put_new_value(t_mini *minishell, char *var)
 {
 	t_env	*current;
 	char	**split;
 
 	current = minishell->env_exp;
-	split = ft_split_two(var_key, '=');
+	split = ft_split_two(var, '=');
 	if (!split || !split[0])
 	{
-		free_split(split);
+		free_matrix(split);
 		return ;
 	}
 	while (current != NULL)
@@ -62,5 +62,20 @@ void	put_new_value(t_mini *minishell, char *var_key)
 		}
 		current = current->next;
 	}
-	free_split(split);
+	free_matrix(split);
+}
+
+void	export(t_mini *minishell)
+{
+	while (minishell->token != NULL)
+	{
+		if ()//validar se a var é valida
+		{
+			if (var_exists(minishell->token->str) == 1)
+				put_new_value(minishell, minishell->token->str);
+			else
+				list_env(minishell->env_exp, minishell->token->str);
+		}
+		minishell->token = minishell->token->next;
+	}
 }

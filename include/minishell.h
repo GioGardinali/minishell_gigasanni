@@ -175,6 +175,9 @@ int				count_token_type(t_mini *minishell, int type_to_count);
 int				has_token_type(t_mini minishell, int type_to_find);
 int				find_etype(char *str);
 
+/*make_env_list*/
+void			list_env(t_env **env, char *split);
+
 /*normalize*/
 void			norme(t_mini *minishell, t_token *token);
 
