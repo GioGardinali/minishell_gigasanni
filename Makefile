@@ -40,6 +40,10 @@ sources/make_env_list.c\
 sources/expand_var_utils.c\
 sources/expand_var.c\
 sources/exec_redir.c\
+sources/heredoc_init.c\
+sources/heredoc_new_file.c\
+sources/heredoc_utils.c\
+free_heredocs.c\
 
 #--------------RULES----------------------------#
 
