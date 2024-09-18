@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   buit_in_export_utils.c                             :+:      :+:    :+:   */
+/*   built_in_export_utils.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 14:18:26 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/16 20:29:26 by asanni           ###   ########.fr       */
+/*   Updated: 2024/09/18 16:53:22 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,10 @@ void	put_new_value(t_mini *minishell, char *var)
 
 void	export(t_mini *minishell)
 {
+	minishell->token = minishell->token->next;
 	while (minishell->token != NULL)
 	{
-		if ()//validar se a var é valida
+		if (return_var(minishell->token->str, 0))
 		{
 			if (var_exists(minishell->token->str) == 1)
 				put_new_value(minishell, minishell->token->str);
