@@ -34,6 +34,7 @@ sources/built_ins.c \
 sources/expand_var_utils.c\
 sources/expand_var.c\
 sources/expand.c\
+sources/export_utils.c\
 sources/export.c\
 sources/exec_redir.c\
 sources/free_functions.c\

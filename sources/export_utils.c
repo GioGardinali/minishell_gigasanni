@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 14:18:26 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/21 08:32:36 by asanni           ###   ########.fr       */
+/*   Updated: 2024/09/21 10:22:00 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	var_exists(t_mini *minishell, t_cmd *cmd)
 	if (!split || !split[0])
 	{
 		free_matrix(split);
-		return ;
+		return (0);
 	}
 	while (current != NULL)
 	{
@@ -87,7 +87,7 @@ void	put_new_value(t_mini *minishell, char *var)
 	free_matrix(split);
 }
 
-void	export(t_mini *minishell, t_cmd *cmd)
+void	export_options(t_mini *minishell, t_cmd *cmd)
 {
 	int	i;
 
@@ -99,8 +99,24 @@ void	export(t_mini *minishell, t_cmd *cmd)
 			if (var_exists(minishell, cmd) == 1)
 				put_new_value(minishell, cmd->str);
 			else
-				list_env(minishell->env_exp, cmd->str);
+				list_env(&minishell->env_exp, cmd->str);
 		}
 		i++;
+	}
+}
+
+void	print_export(t_mini *minishell)
+{
+	t_env	*current;
+
+	current = minishell->env_exp;
+	sort_env_list(&minishell->env_exp);
+	while (current != NULL)
+	{
+		if (current->content != NULL)
+			ft_printf("declare -x %s=\"%s\"\n", current->key, current->content);
+		else
+			ft_printf("declare -x %s\n", current->key);
+		current = current->next;
 	}
 }
