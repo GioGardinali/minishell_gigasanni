@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 16:39:02 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/16 16:08:06 by asanni           ###   ########.fr       */
+/*   Updated: 2024/09/21 13:34:06 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,6 @@ static void	identify_type_cmd(t_token **token, t_cmd **cmd, char ***options,
 	}
 	else if ((*token)->type == HERE_DOC)
 	{
-		// if (!execute_heredoc((*token)->next->str, &count_cmd, ft_get_shell()->heredocs,
-		// 		(*token)->prev == NULL))
-		// {
-		// 	ft_putendl_fd("Heredoc error", 2);
-		// 	exit(EXIT_FAILURE);
-		// }
 		printf("quantidade de comandos: %d\n", *count_cmd);
 		*token = (*token)->next->next;
 	}

@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 14:18:26 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/21 10:22:00 by asanni           ###   ########.fr       */
+/*   Updated: 2024/09/21 15:16:16 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,12 +94,13 @@ void	export_options(t_mini *minishell, t_cmd *cmd)
 	i = 1;
 	while (cmd->options[i] != NULL)
 	{
+		printf("envs: %s\n", cmd->options[i]);
 		if (valid_var_name(cmd->options[i]) == 1)
 		{
 			if (var_exists(minishell, cmd) == 1)
-				put_new_value(minishell, cmd->str);
+				put_new_value(minishell, cmd->options[i]);
 			else
-				list_env(&minishell->env_exp, cmd->str);
+				list_env(&minishell->env_exp, cmd->options[i]);
 		}
 		i++;
 	}

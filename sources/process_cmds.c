@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 15:48:38 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/21 03:10:25 by asanni           ###   ########.fr       */
+/*   Updated: 2024/09/21 13:33:33 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,19 +29,31 @@ void	execute_command(t_mini minishell, int input_fd, int out_fd, t_cmd *cmd)
 		dup2(out_fd, STDOUT_FILENO);
 		close(out_fd);
 	}
-	apply_redirections(cmd->redirs);
-	free_token(&minishell.token);
-	free(minishell.input);
-	if (path != NULL)
-		execve(path, options, __environ);
+	if (is_built_in (cmd->str) != 0)
+	{
+		execute_built_in(&minishell, cmd);
+		return ;
+	}
+	else
+	{
+		apply_redirections(cmd->redirs);
+		free_token(&minishell.token);
+		free(minishell.input);
+		if (path != NULL)
+			execve(path, options, __environ);
+	}
 	exit(EXIT_FAILURE);
 }
 
-pid_t	fork_and_execute(
-	t_mini minishell, int input_fd, int out_fd, t_cmd *cmd)
+pid_t	fork_and_execute(t_mini minishell, int input_fd, int out_fd, t_cmd *cmd)
 {
 	pid_t	pid;
 
+	if (is_built_in(cmd->str) != 0 && out_fd == -1)
+	{
+		execute_built_in(&minishell, cmd);
+		return (0);
+	}
 	pid = fork();
 	if (pid == -1)
 		exit(EXIT_FAILURE);

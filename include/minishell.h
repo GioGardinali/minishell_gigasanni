@@ -197,6 +197,7 @@ int				find_etype(char *str);
 
 /*make_env_list*/
 void			list_env(t_env **env, char *split);
+t_env			*get_last_env(t_env **token);
 
 /*normalize*/
 void			norme(t_mini *minishell, t_token *token);

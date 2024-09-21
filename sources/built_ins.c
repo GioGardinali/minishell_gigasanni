@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 20:21:55 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/21 12:22:25 by asanni           ###   ########.fr       */
+/*   Updated: 2024/09/21 13:34:46 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,19 @@
 
 int	is_built_in(char *str)
 {
-	if (ft_strcmp(str, "echo"))
+	if (ft_strcmp(str, "echo") == 0)
 		return (ECHO);
-	if (ft_strcmp(str, "cd"))
+	if (ft_strcmp(str, "cd") == 0)
 		return (CD);
-	if (ft_strcmp(str, "pwd"))
+	if (ft_strcmp(str, "pwd") == 0)
 		return (PWD);
-	if (ft_strcmp(str, "export"))
+	if (ft_strcmp(str, "export") == 0)
 		return (EXPT);
-	if (ft_strcmp(str, "unset"))
+	if (ft_strcmp(str, "unset") == 0)
 		return (UNST);
-	if (ft_strcmp(str, "env"))
+	if (ft_strcmp(str, "env") == 0)
 		return (ENV);
-	if (ft_strcmp(str, "exit"))
+	if (ft_strcmp(str, "exit") == 0)
 		return (EXIT);
 	return (0);
 }
