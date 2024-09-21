@@ -145,8 +145,9 @@ void			free_matrix(char **matrix);
 void			error_function(char *str);
 void			exit_function(t_mini *minishell);
 
-/*expand*/
+/*export*/
 void			execute_export(t_mini *minishell, t_cmd *cmd);
+void			print_export(t_mini *minishell);
 
 /*expand_var_utils*/
 int				is_valid(char c, int position);

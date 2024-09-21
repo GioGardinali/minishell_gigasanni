@@ -1,42 +1,64 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   built_in_export_utils.c                            :+:      :+:    :+:   */
+/*   export_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 14:18:26 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/18 16:53:22 by asanni           ###   ########.fr       */
+/*   Updated: 2024/09/21 08:32:36 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int	var_exists(t_mini *minishell)
+int	valid_var_name(char *str)
 {
 	char	**split;
+	int		i;
 
-	while (minishell->token != NULL)
+	split = ft_split_two(str, '=');
+	if (split != NULL && split[0] != NULL)
 	{
-		if (minishell->token->type == EXPORT)
+		i = 0;
+		while (split[0][i] != '\0')
 		{
-			minishell->token = minishell->token->next;
-			if (minishell->token != NULL)
+			if (!is_valid(split[0][i], i))
 			{
-				split = ft_split_two(minishell->token->str, '=');
-				if (split != NULL && split[0] != NULL)
-				{
-					if (return_var(split[0], 0) != NULL)
-					{
-						free_split(split);
-						return (1);
-					}
-				}
-				free_split(split);
+				free_matrix(split);
+				return (0);
 			}
+			i++;
 		}
-		minishell->token = minishell->token->next;
+		free_matrix(split);
+		return (1);
 	}
+	free_matrix(split);
+	return (0);
+}
+
+int	var_exists(t_mini *minishell, t_cmd *cmd)
+{
+	t_env	*current;
+	char	**split;
+
+	current = minishell->env_exp;
+	split = ft_split_two(cmd->options[1], '=');
+	if (!split || !split[0])
+	{
+		free_matrix(split);
+		return ;
+	}
+	while (current != NULL)
+	{
+		if (ft_strcmp(current->key, split[0]) == 0)
+		{
+			free_matrix(split);
+			return (1);
+		}
+		current = current->next;
+	}
+	free_matrix(split);
 	return (0);
 }
 
@@ -65,18 +87,20 @@ void	put_new_value(t_mini *minishell, char *var)
 	free_matrix(split);
 }
 
-void	export(t_mini *minishell)
+void	export(t_mini *minishell, t_cmd *cmd)
 {
-	minishell->token = minishell->token->next;
-	while (minishell->token != NULL)
+	int	i;
+
+	i = 1;
+	while (cmd->options[i] != NULL)
 	{
-		if (return_var(minishell->token->str, 0))
+		if (valid_var_name(cmd->options[i]) == 1)
 		{
-			if (var_exists(minishell->token->str) == 1)
-				put_new_value(minishell, minishell->token->str);
+			if (var_exists(minishell, cmd) == 1)
+				put_new_value(minishell, cmd->str);
 			else
-				list_env(minishell->env_exp, minishell->token->str);
+				list_env(minishell->env_exp, cmd->str);
 		}
-		minishell->token = minishell->token->next;
+		i++;
 	}
 }
