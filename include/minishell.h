@@ -116,6 +116,16 @@ typedef enum e_type
 	EXPORT,
 }	t_type;
 
+typedef enum e_built
+{
+	ECHO = 1,
+	CD,
+	PWD,
+	EXPT,
+	ENV,
+	EXIT,
+}	t_built;
+
 //Functions
 
 /*adjust spaces*/
@@ -124,6 +134,10 @@ char			*adjust_spaces(char	*str);
 /*alphabetical_sort*/
 void			sort_env_list(t_env **env);
 
+/*built_ins*/
+int				is_built_in(char *str);
+void			execute_built_in(t_mini *minishell, t_cmd *cmd);
+
 /* error functions*/
 void			free_split(char **split);
 void			free_cmds(t_cmd **cmd);
@@ -131,11 +145,13 @@ void			free_matrix(char **matrix);
 void			error_function(char *str);
 void			exit_function(t_mini *minishell);
 
+/*expand*/
+void			execute_export(t_mini *minishell, t_cmd *cmd);
+
 /*expand_var_utils*/
 int				is_valid(char c, int position);
 int				var_len(char *str);
 char			*return_var(char *str, int add);
-// char			*return_var(char *str);
 char			*return_key_content(t_mini *minishell, char *var_key);
 int				add_variable_size(t_mini *minishell, char *token, int *i);
 
