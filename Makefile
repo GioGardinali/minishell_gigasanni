@@ -45,6 +45,7 @@ sources/make_cmds.c\
 sources/make_env_list.c\
 sources/make_token.c\
 sources/process_cmds.c\
+sources/unset.c\
 
 #--------------RULES----------------------------#
 

@@ -122,6 +122,7 @@ typedef enum e_built
 	CD,
 	PWD,
 	EXPT,
+	UNST,
 	ENV,
 	EXIT,
 }	t_built;
@@ -148,6 +149,7 @@ void			exit_function(t_mini *minishell);
 /*export_utils*/
 void			export_options(t_mini *minishell, t_cmd *cmd);
 void			print_export(t_mini *minishell);
+int				valid_var_name(char *str);
 
 /*export*/
 void			execute_export(t_mini *minishell, t_cmd *cmd);
@@ -201,6 +203,9 @@ void			norme(t_mini *minishell, t_token *token);
 
 /*process _cmds*/
 void			process_multiple_cmds(t_mini minishell, int prev_fd);
+
+/*unset*/
+void			execute_unset(t_mini *minishell, t_cmd *cmd);
 
 /*giovanna*/
 int				check_quotes_in_token(char *str);

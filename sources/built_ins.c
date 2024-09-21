@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 20:21:55 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/21 02:57:30 by asanni           ###   ########.fr       */
+/*   Updated: 2024/09/21 12:22:25 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ int	is_built_in(char *str)
 		return (PWD);
 	if (ft_strcmp(str, "export"))
 		return (EXPT);
+	if (ft_strcmp(str, "unset"))
+		return (UNST);
 	if (ft_strcmp(str, "env"))
 		return (ENV);
 	if (ft_strcmp(str, "exit"))
@@ -39,6 +41,8 @@ void	execute_built_in(t_mini *minishell, t_cmd *cmd)
 	// 	execute_pwd();
 	if (is_built_in(cmd->str) == EXPT)
 		execute_export(minishell, cmd);
+	if (is_built_in(cmd->str) == UNST)
+		execute_unset(minishell, cmd);
 	// if (is_built_in(cmd->str) == ENV)
 	// 	execute_env();
 	// if (is_built_in(cmd->str) == EXIT)
