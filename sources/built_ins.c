@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 20:21:55 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/21 13:34:46 by asanni           ###   ########.fr       */
+/*   Updated: 2024/09/22 17:32:50 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,10 @@ void	execute_built_in(t_mini *minishell, t_cmd *cmd)
 		execute_export(minishell, cmd);
 	if (is_built_in(cmd->str) == UNST)
 		execute_unset(minishell, cmd);
-	// if (is_built_in(cmd->str) == ENV)
-	// 	execute_env();
-	// if (is_built_in(cmd->str) == EXIT)
-	// 	execute_exit();
+	if (is_built_in(cmd->str) == ENV)
+		execute_env(minishell);
+	if (is_built_in(cmd->str) == EXIT)
+		exit_function(minishell);
 }
 
 /* BUILT INS

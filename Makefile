@@ -31,6 +31,7 @@ sources/adjust_spaces.c\
 sources/error_functions.c\
 sources/alphabetical_sort.c\
 sources/built_ins.c \
+sources/env.c\
 sources/expand_var_utils.c\
 sources/expand_var.c\
 sources/expand.c\
@@ -43,6 +44,7 @@ sources/heredoc_utils.c\
 sources/free_heredocs.c\
 sources/signal.c\
 sources/heredoc_loop.c\
+sources/exit.c\
 sources/free_functions.c\
 sources/normalize_input.c\
 sources/delete_later.c\

@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 14:18:26 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/21 15:16:16 by asanni           ###   ########.fr       */
+/*   Updated: 2024/09/22 17:07:30 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,13 @@ int	valid_var_name(char *str)
 	return (0);
 }
 
-int	var_exists(t_mini *minishell, t_cmd *cmd)
+int	var_exists(t_mini *minishell, char *str)
 {
 	t_env	*current;
 	char	**split;
 
 	current = minishell->env_exp;
-	split = ft_split_two(cmd->options[1], '=');
+	split = ft_split_two(str, '=');
 	if (!split || !split[0])
 	{
 		free_matrix(split);
@@ -97,7 +97,7 @@ void	export_options(t_mini *minishell, t_cmd *cmd)
 		printf("envs: %s\n", cmd->options[i]);
 		if (valid_var_name(cmd->options[i]) == 1)
 		{
-			if (var_exists(minishell, cmd) == 1)
+			if (var_exists(minishell, cmd->options[i]) == 1)
 				put_new_value(minishell, cmd->options[i]);
 			else
 				list_env(&minishell->env_exp, cmd->options[i]);

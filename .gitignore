@@ -5,3 +5,4 @@ escopo.txt
 .nfs*
 minishell
 teste.c
+*.a
