@@ -4,3 +4,4 @@ objs/
 escopo.txt
 .nfs*
 minishell
+teste.c

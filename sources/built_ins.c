@@ -5,12 +5,49 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/13 15:38:49 by asanni            #+#    #+#             */
-/*   Updated: 2024/07/14 11:49:42 by asanni           ###   ########.fr       */
+/*   Created: 2024/07/11 20:21:55 by asanni            #+#    #+#             */
+/*   Updated: 2024/09/21 13:34:46 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+
+int	is_built_in(char *str)
+{
+	if (ft_strcmp(str, "echo") == 0)
+		return (ECHO);
+	if (ft_strcmp(str, "cd") == 0)
+		return (CD);
+	if (ft_strcmp(str, "pwd") == 0)
+		return (PWD);
+	if (ft_strcmp(str, "export") == 0)
+		return (EXPT);
+	if (ft_strcmp(str, "unset") == 0)
+		return (UNST);
+	if (ft_strcmp(str, "env") == 0)
+		return (ENV);
+	if (ft_strcmp(str, "exit") == 0)
+		return (EXIT);
+	return (0);
+}
+
+void	execute_built_in(t_mini *minishell, t_cmd *cmd)
+{
+	// if (is_built_in(cmd->str) == ECHO)
+	// 	execute_echo(0);
+	// if (is_built_in(cmd->str) == CD)
+	// 	execute_cd();
+	// if (is_built_in(cmd->str) == PWD)
+	// 	execute_pwd();
+	if (is_built_in(cmd->str) == EXPT)
+		execute_export(minishell, cmd);
+	if (is_built_in(cmd->str) == UNST)
+		execute_unset(minishell, cmd);
+	// if (is_built_in(cmd->str) == ENV)
+	// 	execute_env();
+	// if (is_built_in(cmd->str) == EXIT)
+	// 	execute_exit();
+}
 
 /* BUILT INS
 ◦ echo with option -n
@@ -21,23 +58,3 @@
 ◦ env with no options or arguments
 ◦ exit with no options
 */
-
-// int	built_pwd(void)
-// {
-// 	char	*str;
-
-// 	str = getcwd(NULL, 0);
-// 	printf("%s\n", str);
-// 	return (0);
-// }
-
-// aqui vai chamar o que estiver apos o cd na linha
-//ex cd adedayo , a função vai ser built_cd(adedayo)
-int	built_cd(char *str)
-{
-	if (str != NULL)
-		return (1);
-	if (chdir(str) == -1)
-		return (1);
-	return (0);
-}

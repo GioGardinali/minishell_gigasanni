@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 18:52:55 by asanni            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/09/21 02:23:00 by gigardin         ###   ########.fr       */
+=======
+/*   Updated: 2024/09/21 14:52:16 by asanni           ###   ########.fr       */
+>>>>>>> 1d2d5319e22e26fa33fe1d4a23d32cb4a5d5977c
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +18,7 @@
 
 void	check_pid(t_mini *minishell)
 {
-	if (minishell->cmd->path != NULL)
-		process_multiple_cmds(*minishell, -1);
+	process_multiple_cmds(*minishell, -1);
 }
 
 static void	start_minishell(t_mini *minishell)
@@ -47,6 +50,7 @@ int	main(void)
 
 	minishell = (t_mini){0};
 	copy_env(&minishell);
+	// make_env_list(&minishell);
 	while (42)
 	{
 		start_minishell(&minishell);

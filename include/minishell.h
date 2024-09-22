@@ -117,6 +117,17 @@ typedef enum e_type
 	EXPORT,
 }	t_type;
 
+typedef enum e_built
+{
+	ECHO = 1,
+	CD,
+	PWD,
+	EXPT,
+	UNST,
+	ENV,
+	EXIT,
+}	t_built;
+
 //Functions
 
 /*adjust spaces*/
@@ -125,6 +136,10 @@ char			*adjust_spaces(char	*str);
 /*alphabetical_sort*/
 void			sort_env_list(t_env **env);
 
+/*built_ins*/
+int				is_built_in(char *str);
+void			execute_built_in(t_mini *minishell, t_cmd *cmd);
+
 /* error functions*/
 void			free_split(char **split);
 void			free_cmds(t_cmd **cmd);
@@ -132,11 +147,18 @@ void			free_matrix(char **matrix);
 void			error_function(char *str);
 void			exit_function(t_mini *minishell);
 
+/*export_utils*/
+void			export_options(t_mini *minishell, t_cmd *cmd);
+void			print_export(t_mini *minishell);
+int				valid_var_name(char *str);
+
+/*export*/
+void			execute_export(t_mini *minishell, t_cmd *cmd);
+
 /*expand_var_utils*/
 int				is_valid(char c, int position);
 int				var_len(char *str);
 char			*return_var(char *str, int add);
-// char			*return_var(char *str);
 char			*return_key_content(t_mini *minishell, char *var_key);
 int				add_variable_size(t_mini *minishell, char *token, int *i);
 
@@ -179,16 +201,25 @@ void			identify_type_cmd(t_token **token, t_cmd **cmd, char ***options,
 /*make_token*/
 t_token			*get_last_token(t_token **token);
 void			make_tokens(t_token **token, char *split);
-//void			make_tokens(t_mini *minishell, t_token **token, char *split);
 int				count_token_type(t_mini *minishell, int type_to_count);
 int				has_token_type(t_mini minishell, int type_to_find);
 int				find_etype(char *str);
+
+/*make_env_list*/
+void			list_env(t_env **env, char *split);
+t_env			*get_last_env(t_env **token);
 
 /*normalize*/
 void			norme(t_mini *minishell, t_token *token);
 
 /*make_env_list*/
 void			make_env_list(t_mini *minishell);
+
+/*process _cmds*/
+void			process_multiple_cmds(t_mini minishell, int prev_fd);
+
+/*unset*/
+void			execute_unset(t_mini *minishell, t_cmd *cmd);
 
 /*heredoc_init*/
 t_heredoc		*init_heredoc(t_mini *minishell);
@@ -235,6 +266,7 @@ void			print_cmds_r(t_cmd *cmd); //apagar
 //void	process_multiple_cmds(t_mini minishell);
 //void	prepare_split(char *str);
 //void	skip_quotes2(char *input, int *i, char *temp, int *j);
-//int				execute_heredoc(char *str_end, unsigned int index, t_heredoc *heredoc, int is_first);
+//int	execute_heredoc(char *str_end, unsigned int index,
+//		t_heredoc *heredoc, int is_first);
 
 #endif

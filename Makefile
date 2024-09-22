@@ -27,19 +27,17 @@ RL = readline
 SRC = sources/main.c \
 sources/get_path.c \
 sources/input_verif.c \
-sources/error_functions.c\
 sources/adjust_spaces.c\
-sources/normalize_input.c\
-sources/make_token.c\
-sources/make_cmds.c\
-sources/make_cmds_utils.c\
-sources/delete_later.c\
-sources/free_functions.c\
-sources/process_cmds.c\
-sources/make_env_list.c\
+sources/error_functions.c\
+sources/alphabetical_sort.c\
+sources/built_ins.c \
 sources/expand_var_utils.c\
 sources/expand_var.c\
+sources/expand.c\
+sources/export_utils.c\
+sources/export.c\
 sources/exec_redir.c\
+<<<<<<< HEAD
 sources/heredoc_init.c\
 sources/heredoc_new_file.c\
 sources/heredoc_utils.c\
@@ -48,6 +46,17 @@ sources/alphabetical_sort.c\
 sources/signal.c\
 sources/heredoc_loop.c\
 
+=======
+sources/free_functions.c\
+sources/normalize_input.c\
+sources/delete_later.c\
+sources/make_cmds_utils.c\
+sources/make_cmds.c\
+sources/make_env_list.c\
+sources/make_token.c\
+sources/process_cmds.c\
+sources/unset.c\
+>>>>>>> 1d2d5319e22e26fa33fe1d4a23d32cb4a5d5977c
 
 #--------------RULES----------------------------#
 
