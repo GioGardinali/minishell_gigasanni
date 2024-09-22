@@ -135,6 +135,8 @@ char			*adjust_spaces(char	*str);
 
 /*alphabetical_sort*/
 void			sort_env_list(t_env **env);
+int				compare_keys(char *key1, char *key2);
+void			insert_sorted(t_env **sorted, t_env *node);
 
 /*built_ins*/
 int				is_built_in(char *str);
@@ -220,6 +222,7 @@ void			process_multiple_cmds(t_mini minishell, int prev_fd);
 
 /*unset*/
 void			execute_unset(t_mini *minishell, t_cmd *cmd);
+void			unset_env(t_env **env, char *key);
 
 /*heredoc_init*/
 t_heredoc		*init_heredoc(t_mini *minishell);

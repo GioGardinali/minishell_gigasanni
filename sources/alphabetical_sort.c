@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   alphabetical_sort.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 16:29:45 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/21 13:59:33 by asanni           ###   ########.fr       */
+/*   Updated: 2024/09/22 17:32:53 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
 #include <stdlib.h>
-#include <string.h>
 
 int	compare_keys(char *key1, char *key2)
 {

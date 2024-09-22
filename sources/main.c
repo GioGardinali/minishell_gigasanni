@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 18:52:55 by asanni            #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2024/09/21 02:23:00 by gigardin         ###   ########.fr       */
-=======
-/*   Updated: 2024/09/21 14:52:16 by asanni           ###   ########.fr       */
->>>>>>> 1d2d5319e22e26fa33fe1d4a23d32cb4a5d5977c
+/*   Updated: 2024/09/22 17:34:50 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +33,6 @@ static void	start_minishell(t_mini *minishell)
 	}
 	else
 		add_history(minishell->input);
-	if (ft_strcmp(minishell->input, "exit") == 0)
-		exit_function(minishell);
 	make_env_list(minishell);
 	norme(minishell, token);
 	check_pid(minishell);

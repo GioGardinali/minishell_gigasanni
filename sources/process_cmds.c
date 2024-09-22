@@ -3,16 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   process_cmds.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 15:48:38 by asanni            #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2024/09/22 16:49:19 by gigardin         ###   ########.fr       */
-=======
-/*   Updated: 2024/09/21 13:33:33 by asanni           ###   ########.fr       */
->>>>>>> 1d2d5319e22e26fa33fe1d4a23d32cb4a5d5977c
+/*   Updated: 2024/09/22 17:21:51 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../include/minishell.h"
 
@@ -33,14 +30,12 @@ void	execute_command(t_mini minishell, int input_fd, int out_fd, t_cmd *cmd)
 		dup2(out_fd, STDOUT_FILENO);
 		close(out_fd);
 	}
-<<<<<<< HEAD
 	apply_heredoc(cmd);
 	apply_redirections(cmd->redirs);
 	free_token(&minishell.token);
 	free(minishell.input);
 	if (path != NULL)
 		execve(path, options, __environ);
-=======
 	if (is_built_in (cmd->str) != 0)
 	{
 		execute_built_in(&minishell, cmd);
@@ -54,7 +49,6 @@ void	execute_command(t_mini minishell, int input_fd, int out_fd, t_cmd *cmd)
 		if (path != NULL)
 			execve(path, options, __environ);
 	}
->>>>>>> 1d2d5319e22e26fa33fe1d4a23d32cb4a5d5977c
 	exit(EXIT_FAILURE);
 }
 
