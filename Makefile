@@ -48,6 +48,7 @@ sources/normalize_input.c\
 sources/delete_later.c\
 sources/make_cmds_utils.c\
 sources/make_cmds.c\
+sources/handle_cmds_redirects.c\
 sources/make_env_list.c\
 sources/make_token.c\
 sources/process_cmds.c\
