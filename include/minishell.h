@@ -17,6 +17,7 @@
 # include <unistd.h>
 # include <limits.h>
 # include <stdio.h>
+# include <string.h>
 # include <stdbool.h>
 # include <readline/history.h> // para adicionar no historico
 # include <readline/readline.h> // para fazer tudo funcionar
@@ -148,6 +149,9 @@ void			free_cmds(t_cmd **cmd);
 void			free_token_bc(t_token **token);
 void			free_env(t_env **env);
 
+/*free_heredocs*/
+void			clean_heredoc_files(t_cmd *cmd);
+
 /*get_path*/
 char			**copy_env(t_mini *minishell);
 char			*verify_path(t_mini *minishell, char *str);
@@ -166,6 +170,11 @@ int				search_options(t_token *token);
 void			make_cmds(t_cmd **cmd, t_token **token, t_mini *minishell);
 t_cmd			*get_last_cmd(t_cmd **cmd);
 void			process_multiple_cmds(t_mini minishell, int prev_fd);
+void			handle_heredoc(t_token **token, unsigned int *count_cmd,
+					t_cmd **cmd);
+void			handle_redirection(t_token **token, t_cmd **cmd);
+void			identify_type_cmd(t_token **token, t_cmd **cmd, char ***options,
+					unsigned int *count_cmd);
 
 /*make_token*/
 t_token			*get_last_token(t_token **token);
@@ -178,30 +187,39 @@ int				find_etype(char *str);
 /*normalize*/
 void			norme(t_mini *minishell, t_token *token);
 
-/*giovanna*/
-int				check_quotes_in_token(char *str);
-int unsigned	count_cmd(t_token *temp_token);
-int				check_heredocs(t_mini *minishell);
-t_file_heredoc	*new_file(char *file);
-t_file_heredoc	*get_last_file(t_file_heredoc *array_file);
-void			add_file(t_file_heredoc **array_file, t_file_heredoc *new_file);
-char			*remove_quotes(char *str_token);
-void			copy_heredoc(int signal);
-void			free_here_docs(t_heredoc **heredoc);
-void			ft_rlstnew(void *content);
-char			*get_file(int is_first);
-// t_mini			*ft_get_shell(void);
-void			clear_exit(t_mini *minishell, int to_exit);
+/*make_env_list*/
 void			make_env_list(t_mini *minishell);
-int				execute_heredoc(char *str_end, unsigned int index,
-					t_heredoc *heredoc, int is_first);
-void			loop_exec_heredoc(int fd, int quotes, char *str_end);
-void			write_file(char *file, int quotes, char *str_end);
+
+/*heredoc_init*/
 t_heredoc		*init_heredoc(t_mini *minishell);
+int				execute_heredoc(const char *delimiter, unsigned int count_cmd,
+					t_heredoc *heredocs, int is_first_cmd);
+int				handle_fork(char *filename, const char *delimiter);
+int				handle_filename(char *filename, t_heredoc *heredocs,
+					unsigned int count_cmd);
+void			setup_signals(void);
+
+/*heredoc_new_file*/
+void			write_file(char *file, int quotes, const char *str_end);
+void			add_file(t_file_heredoc **array_file, t_file_heredoc *new_file);
+t_file_heredoc	*get_last_file(t_file_heredoc *array_file);
+char			*get_file(int is_first);
+t_file_heredoc	*new_file(char *file);
+
+/*heredoc_loop*/
+void			loop_exec_heredoc(int fd, int quotes, const char *delimiter);
+
+/*heredoc_utils*/
+int				check_quotes_in_token(const char *str);
+char			*remove_quotes(const char *str_end);
+unsigned int	count_cmd(t_token *temp_token);
+void			apply_heredoc(t_cmd *cmd);
+
+/*signal*/
+void			copy_heredoc(int signal);
 
 /*execução redirect*/
 void			apply_redirections(t_redir *redirs);
-void			execute_cmd_redir(t_cmd *cmd, char **env_content);
 void			execute_cmds_redir(t_cmd *cmd, char **env_content);
 
 /*função perdida*/

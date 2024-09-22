@@ -45,6 +45,8 @@ sources/heredoc_new_file.c\
 sources/heredoc_utils.c\
 sources/free_heredocs.c\
 sources/alphabetical_sort.c\
+sources/signal.c\
+sources/heredoc_loop.c\
 
 
 #--------------RULES----------------------------#
