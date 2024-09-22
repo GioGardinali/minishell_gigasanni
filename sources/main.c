@@ -6,7 +6,11 @@
 /*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 18:52:55 by asanni            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/09/22 19:32:06 by gigardin         ###   ########.fr       */
+=======
+/*   Updated: 2024/09/22 19:31:26 by asanni           ###   ########.fr       */
+>>>>>>> 79bfbe319530ad571547ddf7b1aa3e6b6c3706e2
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +37,10 @@ static void	start_minishell(t_mini *minishell)
 	}
 	else
 		add_history(minishell->input);
+<<<<<<< HEAD
 	make_env_list(minishell);
+=======
+>>>>>>> 79bfbe319530ad571547ddf7b1aa3e6b6c3706e2
 	if (ft_strcmp(minishell->input, "exit") == 0)
 		exit_function(minishell);
 	norme(minishell, token);
