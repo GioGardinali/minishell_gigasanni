@@ -6,7 +6,7 @@
 /*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 16:39:02 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/16 19:47:23 by gigardin         ###   ########.fr       */
+/*   Updated: 2024/09/22 15:53:10 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,30 +14,35 @@
 
 void	add_redir(t_redir **redirs, int type, char *file);
 
-static void	identify_type_cmd(t_token **token, t_cmd **cmd, char ***options,
-	unsigned int *count_cmd)
+void	handle_redirection(t_token **token, t_cmd **cmd)
 {
 	int	type;
 
+	type = (*token)->type;
+	*token = (*token)->next;
+	if (*token != NULL)
+		add_redir(&(*cmd)->redirs, type, (*token)->str);
+	*token = (*token)->next;
+}
+
+void	handle_heredoc(t_token **token, unsigned int *count_cmd, t_cmd **cmd)
+{
+	if (!execute_heredoc((*token)->next->str, *count_cmd,
+			(*cmd)->heredocs, (*token)->prev == NULL))
+	{
+		ft_putendl_fd("Heredoc error", 2);
+		exit(EXIT_FAILURE);
+	}
+	*token = (*token)->next->next;
+}
+
+void	identify_type_cmd(t_token **token, t_cmd **cmd, char ***options,
+	unsigned int *count_cmd)
+{
 	if (find_redir(*token) == 1)
-	{
-		type = (*token)->type;
-		*token = (*token)->next;
-		if (*token != NULL)
-			add_redir(&(*cmd)->redirs, type, (*token)->str);
-		*token = (*token)->next;
-	}
+		handle_redirection(token, cmd);
 	else if ((*token)->type == HERE_DOC)
-	{
-		if (!execute_heredoc((*token)->next->str, *count_cmd,
-				(*cmd)->heredocs, (*token)->prev == NULL))
-		{
-			ft_putendl_fd("Heredoc error", 2);
-			exit(EXIT_FAILURE);
-		}
-		printf("quantidade de comandos: %d\n", *count_cmd);
-		*token = (*token)->next->next;
-	}
+		handle_heredoc(token, count_cmd, cmd);
 	else
 	{
 		**options = ft_strdup((*token)->str);
@@ -46,7 +51,8 @@ static void	identify_type_cmd(t_token **token, t_cmd **cmd, char ***options,
 	}
 }
 
-static char	**make_options(t_token **token, t_cmd **cmd, unsigned int *count_cmd)
+static char	**make_options(t_token **token, t_cmd **cmd,
+	unsigned int *count_cmd)
 {
 	char	**options;
 	char	**opt_bckp;
@@ -99,9 +105,9 @@ void	make_one_cmd(t_cmd **cmd, t_token **token, t_mini *minishell,
 	if (new_cmd == NULL)
 		return ;
 	new_cmd->str = ft_strdup(split [0]);
+	new_cmd->heredocs = init_heredoc(minishell);
 	new_cmd->options = make_options(token, &new_cmd, count_cmd);
 	new_cmd->path = verify_path(minishell, new_cmd->str);
-	new_cmd->heredocs = init_heredoc(minishell);
 	new_cmd->next = NULL;
 	new_cmd->prev = NULL;
 	if (!*cmd)

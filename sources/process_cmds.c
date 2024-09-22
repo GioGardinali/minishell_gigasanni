@@ -6,7 +6,7 @@
 /*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 15:48:38 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/13 23:16:54 by gigardin         ###   ########.fr       */
+/*   Updated: 2024/09/22 16:49:19 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	execute_command(t_mini minishell, int input_fd, int out_fd, t_cmd *cmd)
 		dup2(out_fd, STDOUT_FILENO);
 		close(out_fd);
 	}
+	apply_heredoc(cmd);
 	apply_redirections(cmd->redirs);
 	free_token(&minishell.token);
 	free(minishell.input);

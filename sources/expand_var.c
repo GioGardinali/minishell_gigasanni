@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_var.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 17:57:37 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/14 13:49:05 by asanni           ###   ########.fr       */
+/*   Updated: 2024/09/16 19:49:57 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	expand_variable(t_mini *minishell, t_aux *aux)
 	char	*var_key;
 	char	*var_value;
 
-	var_key = return_var(&aux->token[*aux->i + 1]);
+	var_key = return_var(&aux->token[*aux->i + 1], 1);
 	if (!var_key)
 	{
 		aux->result[(*aux->j)++] = '$';

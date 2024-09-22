@@ -6,7 +6,7 @@
 /*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 18:52:55 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/13 20:14:47 by gigardin         ###   ########.fr       */
+/*   Updated: 2024/09/21 02:23:00 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,6 @@ static void	start_minishell(t_mini *minishell)
 		exit_function(minishell);
 	make_env_list(minishell);
 	norme(minishell, token);
-	//execute_cmds_redir(minishell->cmd, minishell->env_content);
-	//print_cmds(minishell->cmd);
 	check_pid(minishell);
 }
 
@@ -53,7 +51,10 @@ int	main(void)
 	{
 		start_minishell(&minishell);
 		if (minishell.cmd != NULL)
+		{
+			clean_heredoc_files(minishell.cmd);
 			free_cmds(&minishell.cmd);
+		}
 		if (minishell.token != NULL)
 			free_token_bc(&minishell.token);
 		minishell.token = NULL;
