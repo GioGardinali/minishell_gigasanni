@@ -43,7 +43,9 @@ sources/exec_redir.c\
 sources/heredoc_init.c\
 sources/heredoc_new_file.c\
 sources/heredoc_utils.c\
-free_heredocs.c\
+sources/free_heredocs.c\
+sources/alphabetical_sort.c\
+
 
 #--------------RULES----------------------------#
 

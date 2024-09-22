@@ -113,12 +113,16 @@ typedef enum e_type
 	HERE_DOC,
 	QUOTES,
 	DOC,
+	EXPORT,
 }	t_type;
 
 //Functions
 
 /*adjust spaces*/
 char			*adjust_spaces(char	*str);
+
+/*alphabetical_sort*/
+void			sort_env_list(t_env **env);
 
 /* error functions*/
 void			free_split(char **split);
@@ -130,12 +134,13 @@ void			exit_function(t_mini *minishell);
 /*expand_var_utils*/
 int				is_valid(char c, int position);
 int				var_len(char *str);
-char			*return_var(char *str);
+char			*return_var(char *str, int add);
+// char			*return_var(char *str);
 char			*return_key_content(t_mini *minishell, char *var_key);
 int				add_variable_size(t_mini *minishell, char *token, int *i);
 
 /*expand_var*/
-char	*expand_token(t_mini *minishell, t_aux *aux);
+char			*expand_token(t_mini *minishell, t_aux *aux);
 
 /*free_functions*/
 void			free_token(t_token **token);
@@ -212,5 +217,6 @@ void			print_cmds_r(t_cmd *cmd); //apagar
 //void	process_multiple_cmds(t_mini minishell);
 //void	prepare_split(char *str);
 //void	skip_quotes2(char *input, int *i, char *temp, int *j);
+//int				execute_heredoc(char *str_end, unsigned int index, t_heredoc *heredoc, int is_first);
 
 #endif

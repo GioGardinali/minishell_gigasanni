@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 15:31:39 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/13 20:09:45 by asanni           ###   ########.fr       */
+/*   Updated: 2024/09/16 16:51:35 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	var_len(char *str)
 	return (len);
 }
 
-char	*return_var(char *str)
+char	*return_var(char *str, int add)
 {
 	char	*var;
 	int		len;
@@ -57,7 +57,7 @@ char	*return_var(char *str)
 		return (NULL);
 	i = 0;
 	j = 0;
-	while (str[i] != '\0' && is_valid(str[i], j + 1))
+	while (str[i] != '\0' && is_valid(str[i], j + add))
 	{
 		var[j] = str[i];
 		i++;
@@ -89,7 +89,7 @@ int	add_variable_size(t_mini *minishell, char *token, int *i)
 	char	*var_value;
 	int		size;
 
-	var_key = return_var(&token[*i + 1]);
+	var_key = return_var(&token[*i + 1], 1);
 	size = 0;
 	if (var_key)
 	{
