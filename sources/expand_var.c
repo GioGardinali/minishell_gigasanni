@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 17:57:37 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/22 17:51:35 by asanni           ###   ########.fr       */
+/*   Updated: 2024/09/22 20:35:19 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,21 +83,65 @@ int	is_variable_expandable(char *token, int pos)
 	return (1);
 }
 
+// char	*expand_token(t_mini *minishell, t_aux *aux)
+// {
+// 	int		i;
+// 	int		j;
+
+// 	aux->result = ft_calloc(1, (calculate_size(minishell, aux->token) + 1));
+// 	i = 0;
+// 	j = 0;
+// 	aux->i = &i;
+// 	aux->j = &j;
+// 	if (!aux->result)
+// 		return (NULL);
+// 	while (aux->token[i])
+// 	{
+// 		if (aux->token[i] == '$')
+// 		{
+// 			if (is_variable_expandable(aux->token, i + 1))
+// 				expand_variable(minishell, aux);
+// 			else
+// 			{
+// 				aux->result[j++] = '$';
+// 				i++;
+// 			}
+// 		}
+// 		else
+// 			aux->result[j++] = aux->token[i++];
+// 	}
+// 	return (aux->result);
+// }
+
 char	*expand_token(t_mini *minishell, t_aux *aux)
 {
 	int		i;
 	int		j;
+	int		in_double_quotes;
+	int		in_single_quotes;
 
 	aux->result = ft_calloc(1, (calculate_size(minishell, aux->token) + 1));
 	i = 0;
 	j = 0;
+	in_double_quotes = 0;
+	in_single_quotes = 0;
 	aux->i = &i;
 	aux->j = &j;
 	if (!aux->result)
 		return (NULL);
 	while (aux->token[i])
 	{
-		if (aux->token[i] == '$')
+		if (aux->token[i] == '\'' && !in_double_quotes)
+		{
+			in_single_quotes = !in_single_quotes;
+			i++;
+		}
+		else if (aux->token[i] == '"' && !in_single_quotes)
+		{
+			in_double_quotes = !in_double_quotes;
+			i++;
+		}
+		else if (aux->token[i] == '$' && !in_single_quotes)
 		{
 			if (is_variable_expandable(aux->token, i + 1))
 				expand_variable(minishell, aux);
