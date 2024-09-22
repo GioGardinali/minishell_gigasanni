@@ -6,7 +6,7 @@
 /*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 10:11:35 by gigardin          #+#    #+#             */
-/*   Updated: 2024/09/15 18:58:09 by gigardin         ###   ########.fr       */
+/*   Updated: 2024/09/22 16:09:42 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ t_file_heredoc	*new_file(char *file)
 	t_file_heredoc	*n_file;
 
 	n_file = ft_calloc(sizeof(t_file_heredoc), 1);
+	if (!n_file)
+		return (NULL);
 	n_file->file = file;
 	return (n_file);
 }
@@ -25,7 +27,7 @@ char	*get_file(int is_first)
 {
 	char				*file_name;
 	char				*tmp;
-	static int unsigned	number;
+	static unsigned int	number;
 
 	if (is_first)
 		number = 0;
@@ -34,6 +36,13 @@ char	*get_file(int is_first)
 	free(tmp);
 	number++;
 	return (file_name);
+}
+
+t_file_heredoc	*get_last_file(t_file_heredoc *array_file)
+{
+	while (array_file->next)
+		array_file = array_file->next;
+	return (array_file);
 }
 
 void	add_file(t_file_heredoc **array_file, t_file_heredoc *new_file)
@@ -46,22 +55,12 @@ void	add_file(t_file_heredoc **array_file, t_file_heredoc *new_file)
 		get_last_file(*array_file)->next = new_file;
 }
 
-void	write_file(char *file, int quotes, char *str_end)
+void	write_file(char *file, int quotes, const char *str_end)
 {
 	int	fd;
 
 	signal(SIGINT, copy_heredoc);
-	ft_rlstnew(str_end);
 	fd = open(file, O_CREAT | O_RDWR | O_TRUNC, 0644);
 	loop_exec_heredoc(fd, quotes, str_end);
 	close(fd);
-	ft_get_shell()->exit_status = 0; //(refatorar função)
-	clear_exit(ft_get_shell(), 1);
-}
-
-t_file_heredoc	*get_last_file(t_file_heredoc *array_file)
-{
-	while (array_file->next)
-		array_file = array_file->next;
-	return (array_file);
 }

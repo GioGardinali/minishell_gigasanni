@@ -6,7 +6,7 @@
 /*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 20:03:25 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/14 00:50:04 by gigardin         ###   ########.fr       */
+/*   Updated: 2024/09/21 16:49:01 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	find_redir(t_token *token)
 {
-	return ((token->type == APPEND) || (token->type == HERE_DOC)
-		|| (token->type == TRUNC) || (token->type == INPUT));
+	return ((token->type == APPEND) || (token->type == TRUNC)
+				|| (token->type == INPUT));
 }
 
 int	search_options(t_token *token)

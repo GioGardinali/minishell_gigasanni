@@ -6,113 +6,76 @@
 /*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 16:36:39 by gigardin          #+#    #+#             */
-/*   Updated: 2024/09/15 19:01:12 by gigardin         ###   ########.fr       */
+/*   Updated: 2024/09/22 15:59:43 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-static void	init_heredoc(t_mini *temp_minishell)
+t_heredoc	*init_heredoc(t_mini *minishell)
 {
 	t_heredoc	*heredoc;
 
 	heredoc = ft_calloc(sizeof(t_heredoc), 1);
-	heredoc->size = count_cmd(temp_minishell->token);
+	if (!heredoc)
+		return (NULL);
+	heredoc->size = count_cmd(minishell->token);
 	heredoc->array = ft_calloc(sizeof(t_file_heredoc *), heredoc->size);
-	ft_get_shell()->heredocs = heredoc;
-}
-
-void	loop_exec_heredoc(int fd, int quotes, char *str_end)
-{
-	char	*line;
-	char	*error;
-
-	while (1)
+	if (!heredoc->array)
 	{
-		line = readline("> ");
-		if (!line)
-		{
-			error = "error"; //"("(wanted `%s')"\n, "Minishell:", "warning:", "here-document delimited by end-of-file". + str_end)";
-			ft_putendl_fd(error, 2);
-			break ;
-		}
-		if (!ft_strcmp(line, str_end))
-		{
-			free(line);
-			break ;
-		}
-		if (!quotes)
-			line = "aplicar aqui a expand_vars\n";//expand_vars(line);
-		ft_putendl_fd(line, fd);
-		free(line);
+		free(heredoc);
+		return (NULL);
 	}
+	return (heredoc);
 }
 
-void	ft_rlstnew(void *content)
+void	setup_signals(void)
 {
-	t_gc	*new;
-
-	new = ft_calloc(1, sizeof(t_gc));
-	new->content = content;
-	new->next = ft_get_shell()->gc;
-	ft_get_shell()->gc = new;
-}
-
-int	execute_heredoc(char *str_end, unsigned int index, t_heredoc *heredoc,
-		int is_first)
-{
-	char		*file;
-	pid_t		pid;
-	int			exit_status;
-	int			validate;
-
-	validate = 0;
 	signal(SIGINT, SIG_IGN);
 	signal(SIGQUIT, SIG_IGN);
-	file = get_file(is_first);
-	add_file(&heredoc->array[index], new_file(file));
+}
+
+int	handle_filename(char *filename, t_heredoc *heredocs,
+	unsigned int count_cmd)
+{
+	if (!filename)
+	{
+		perror("get_file");
+		return (0);
+	}
+	add_file(&heredocs->array[count_cmd], new_file(filename));
+	return (1);
+}
+
+int	handle_fork(char *filename, const char *delimiter)
+{
+	pid_t	pid;
+	int		exit_status;
+
 	pid = fork();
 	if (pid == 0)
-		write_file(file, check_quotes_in_token(str_end),
-			remove_quotes(str_end));
+		write_file(filename, check_quotes_in_token(delimiter),
+			remove_quotes(delimiter));
 	waitpid(pid, &exit_status, 0);
-	exit_status = WEXITSTATUS(exit_status);
-	ft_get_shell()->exit_status = exit_status;
-	//função para atualizar status de saída do shell
+	return (WEXITSTATUS(exit_status));
+}
+
+int	execute_heredoc(const char *delimiter, unsigned int count_cmd,
+	t_heredoc *heredocs, int is_first_cmd)
+{
+	char	*filename;
+	int		exit_status;
+	int		validate;
+
+	validate = 0;
+	setup_signals();
+	filename = get_file(is_first_cmd);
+	if (!handle_filename(filename, heredocs, count_cmd))
+		return (0);
+	exit_status = handle_fork(filename, delimiter);
 	if (exit_status == 130)
 		return (validate);
 	else
 		validate = 1;
 	return (validate);
 }
-
-// int	check_heredocs(t_mini *minishell)
-// {
-// 	t_token	*temp_token;
-// 	t_mini	*temp_minishell;
-// 	int		validate;
-// 	int		cmd_index;   //para contabilizar todos cmds que tenho até chegar no hd
-
-// 	validate = 0;
-// 	cmd_index = 0;
-// 	temp_minishell = minishell;
-// 	temp_token = minishell->token;
-// 	init_heredoc(temp_minishell);
-// 	while (temp_token)
-// 	{
-// 		if (temp_token->type == PIPE)
-// 			cmd_index++;
-// 		else if (temp_token->type == HERE_DOC)
-// 		{
-// 			temp_minishell->heredocs->array[0] = new_file(temp_token->str);
-// 			printf("%s", temp_minishell->heredocs->array[0]->file);
-// 			if (!execute_heredoc(temp_token->next->str, cmd_index, minishell->heredocs, temp_token->prev == NULL))//função para executar o heredoc, chamar aqui e checando erro se não for o primeiro
-// 			{
-// 				validate = 1;
-// 				return (validate);
-// 			}
-// 		}
-// 		temp_token = temp_token->next;
-// 	}
-// 	return (validate);
-// }
