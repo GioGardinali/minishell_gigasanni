@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 18:52:55 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/22 17:51:43 by asanni           ###   ########.fr       */
+/*   Updated: 2024/09/22 19:32:06 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,9 @@ static void	start_minishell(t_mini *minishell)
 	}
 	else
 		add_history(minishell->input);
-<<<<<<< Updated upstream
 	make_env_list(minishell);
-=======
 	if (ft_strcmp(minishell->input, "exit") == 0)
 		exit_function(minishell);
->>>>>>> Stashed changes
 	norme(minishell, token);
 	check_pid(minishell);
 }
