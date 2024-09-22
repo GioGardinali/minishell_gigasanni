@@ -1,29 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_functions.c                                  :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/06 12:39:12 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/22 17:31:56 by asanni           ###   ########.fr       */
+/*   Created: 2024/09/22 17:10:59 by asanni            #+#    #+#             */
+/*   Updated: 2024/09/22 17:37:15 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	free_split(char **split)
+void	execute_env(t_mini *minishell)
 {
-	int	i;
+	t_env	*current;
 
-	i = -1;
-	while (split[++i])
-		free(split[i]);
-	free(split);
-}
-
-void	error_function(char *str)
-{
-	ft_putendl_fd(str, 2);
-	exit(EXIT_FAILURE);
+	current = minishell->env_exp;
+	while (current != NULL)
+	{
+		if (current->content)
+			ft_printf("%s=%s\n", current->key, current->content);
+		current = current->next;
+	}
 }

@@ -142,6 +142,9 @@ void			insert_sorted(t_env **sorted, t_env *node);
 int				is_built_in(char *str);
 void			execute_built_in(t_mini *minishell, t_cmd *cmd);
 
+/*env*/
+void			execute_env(t_mini *minishell);
+
 /* error functions*/
 void			free_split(char **split);
 void			free_cmds(t_cmd **cmd);

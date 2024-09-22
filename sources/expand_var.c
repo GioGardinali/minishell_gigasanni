@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_var.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 17:57:37 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/22 17:17:47 by gigardin         ###   ########.fr       */
+/*   Updated: 2024/09/22 17:51:35 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ char	*expand_token(t_mini *minishell, t_aux *aux)
 	int		i;
 	int		j;
 
-	aux->result = ft_calloc(1, calculate_size(minishell, aux->token));
+	aux->result = ft_calloc(1, (calculate_size(minishell, aux->token) + 1));
 	i = 0;
 	j = 0;
 	aux->i = &i;
