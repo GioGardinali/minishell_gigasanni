@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 20:21:11 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/21 14:01:03 by asanni           ###   ########.fr       */
+/*   Updated: 2024/09/24 19:49:17 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,6 @@ e cria os tokens com o resultado da split
 tenho que arrumar a parte que lida com os cmds para passar para a execv
 provavelmente melhor lidar com isso em outra função
 */
-
-void	expand_all_tokens(t_mini *minishell)
-{
-	t_token	*current;
-	t_aux	aux;
-
-	current = minishell->token;
-	while (current != NULL)
-	{
-		aux.token = current->str;
-		current->str = expand_token(minishell, &aux);
-		current = current->next;
-	}
-}
 
 void	norme(t_mini *minishell, t_token *token)
 {
@@ -56,7 +42,6 @@ void	norme(t_mini *minishell, t_token *token)
 		make_cmds(&minishell->cmd, &token, minishell);
 		if (token != NULL)
 			token = token->next;
-		print_cmds(minishell->cmd);
 	}
 	free_matrix(split);
 	free(input);

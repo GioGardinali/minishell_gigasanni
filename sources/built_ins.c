@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 20:21:55 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/22 19:53:00 by asanni           ###   ########.fr       */
+/*   Updated: 2024/09/24 19:31:20 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	is_built_in(char *str)
 {
-	// if (ft_strcmp(str, "echo") == 0)
-	// 	return (ECHO);
+	if (ft_strcmp(str, "echo") == 0)
+		return (ECHO);
 	if (ft_strcmp(str, "cd") == 0)
 		return (CD);
 	if (ft_strcmp(str, "pwd") == 0)
@@ -33,8 +33,8 @@ int	is_built_in(char *str)
 
 void	execute_built_in(t_mini *minishell, t_cmd *cmd)
 {
-	// if (is_built_in(cmd->str) == ECHO)
-	// 	execute_echo(0);
+	if (is_built_in(cmd->str) == ECHO)
+		execute_echo(cmd);
 	// if (is_built_in(cmd->str) == CD)
 	// 	execute_cd();
 	// if (is_built_in(cmd->str) == PWD)

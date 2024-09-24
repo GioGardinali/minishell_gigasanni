@@ -31,10 +31,11 @@ sources/adjust_spaces.c\
 sources/error_functions.c\
 sources/alphabetical_sort.c\
 sources/built_ins.c \
+sources/echo.c\
 sources/env.c\
-sources/expand_var_utils.c\
+sources/expand_var_utils1.c\
+sources/expand_var_utils2.c\
 sources/expand_var.c\
-sources/expand.c\
 sources/export_utils.c\
 sources/export.c\
 sources/exec_redir.c\
