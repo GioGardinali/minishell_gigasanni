@@ -24,38 +24,39 @@ LIBFT = $(P_LIBFT)libft.a
 LINCLUDES = -L./libft -lft
 RL = readline
 #--------------FILES----------------------------#
-SRC = sources/main.c \
-sources/get_path.c \
-sources/input_verif.c \
-sources/adjust_spaces.c\
-sources/error_functions.c\
+SRC = sources/adjust_spaces.c\
 sources/alphabetical_sort.c\
-sources/built_ins.c \
+sources/built_ins.c\
+sources/cd.c\
 sources/echo.c\
+sources/error_functions.c\
 sources/env.c\
+sources/exec_redir.c\
+sources/exit.c\
 sources/expand_var_utils1.c\
 sources/expand_var_utils2.c\
 sources/expand_var.c\
 sources/export_utils.c\
 sources/export.c\
-sources/exec_redir.c\
+sources/free_functions.c\
+sources/free_heredocs.c\
+sources/get_path.c \
+sources/handle_cmds_redirects.c\
 sources/heredoc_init.c\
+sources/heredoc_loop.c\
 sources/heredoc_new_file.c\
 sources/heredoc_utils.c\
-sources/free_heredocs.c\
-sources/signal.c\
-sources/heredoc_loop.c\
-sources/exit.c\
-sources/free_functions.c\
-sources/normalize_input.c\
-sources/delete_later.c\
+sources/input_verif.c \
+sources/main.c \
 sources/make_cmds_utils.c\
 sources/make_cmds.c\
-sources/handle_cmds_redirects.c\
 sources/make_env_list.c\
 sources/make_token.c\
+sources/normalize_input.c\
 sources/process_cmds.c\
+sources/signal.c\
 sources/unset.c\
+sources/delete_later.c\
 
 #--------------RULES----------------------------#
 

@@ -135,6 +135,9 @@ void			insert_sorted(t_env **sorted, t_env *node);
 int				is_built_in(char *str);
 void			execute_built_in(t_mini *minishell, t_cmd *cmd);
 
+/*cd*/
+int				execute_cd(t_cmd *cmd);
+
 /*echo*/
 void			execute_echo(t_cmd *cmd);
 
