@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 20:21:55 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/24 19:31:20 by asanni           ###   ########.fr       */
+/*   Updated: 2024/09/25 17:15:04 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ void	execute_built_in(t_mini *minishell, t_cmd *cmd)
 {
 	if (is_built_in(cmd->str) == ECHO)
 		execute_echo(cmd);
-	// if (is_built_in(cmd->str) == CD)
-	// 	execute_cd();
+	if (is_built_in(cmd->str) == CD)
+		execute_cd(cmd);
 	// if (is_built_in(cmd->str) == PWD)
 	// 	execute_pwd();
 	if (is_built_in(cmd->str) == EXPT)
@@ -50,11 +50,6 @@ void	execute_built_in(t_mini *minishell, t_cmd *cmd)
 }
 
 /* BUILT INS
-◦ echo with option -n
 ◦ cd with only a relative or absolute path
 ◦ pwd with no options
-◦ export with no options
-◦ unset with no options
-◦ env with no options or arguments
-◦ exit with no options
 */
