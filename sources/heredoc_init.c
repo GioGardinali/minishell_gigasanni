@@ -6,7 +6,7 @@
 /*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 16:36:39 by gigardin          #+#    #+#             */
-/*   Updated: 2024/09/22 15:59:43 by gigardin         ###   ########.fr       */
+/*   Updated: 2024/09/24 20:05:24 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int	handle_fork(char *filename, const char *delimiter)
 	pid_t	pid;
 	int		exit_status;
 
+	exit_status = 0;
 	pid = fork();
 	if (pid == 0)
 		write_file(filename, check_quotes_in_token(delimiter),
@@ -72,6 +73,7 @@ int	execute_heredoc(const char *delimiter, unsigned int count_cmd,
 	filename = get_file(is_first_cmd);
 	if (!handle_filename(filename, heredocs, count_cmd))
 		return (0);
+	exit_status = 0;
 	exit_status = handle_fork(filename, delimiter);
 	if (exit_status == 130)
 		return (validate);

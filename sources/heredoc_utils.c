@@ -6,7 +6,7 @@
 /*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 18:30:41 by gigardin          #+#    #+#             */
-/*   Updated: 2024/09/22 16:49:36 by gigardin         ###   ########.fr       */
+/*   Updated: 2024/09/24 20:09:01 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,22 +70,49 @@ unsigned int	count_cmd(t_token *temp_token)
 	return (count + 1); // add + 1 para contar ultimo comando que não é seguido por PIPE
 }
 
+// void	apply_heredoc(t_cmd *cmd)
+// {
+// 	int				heredoc_fd;
+// 	t_file_heredoc	*current_file;
+
+// 	current_file = cmd->heredocs->array[0];
+// 	while (current_file)
+// 	{
+// 		heredoc_fd = open(current_file->file, O_RDONLY);
+// 		if (heredoc_fd == -1)
+// 		{
+// 			perror("open heredoc");
+// 			exit(EXIT_FAILURE);
+// 		}
+// 		dup2(heredoc_fd, STDIN_FILENO);
+// 		close(heredoc_fd);
+// 		current_file = current_file->next;
+// 	}	
+// }
+
 void	apply_heredoc(t_cmd *cmd)
 {
 	int				heredoc_fd;
 	t_file_heredoc	*current_file;
+	unsigned int	i;
 
-	current_file = cmd->heredocs->array[0];
-	while (current_file)
+	i = 0;
+	while (i < cmd->heredocs->size)
 	{
-		heredoc_fd = open(current_file->file, O_RDONLY);
-		if (heredoc_fd == -1)
+		current_file = cmd->heredocs->array[i];
+		while (current_file)
 		{
-			perror("open heredoc");
-			exit(EXIT_FAILURE);
+			heredoc_fd = open(current_file->file, O_RDONLY);
+			if (heredoc_fd == -1)
+			{
+				perror("open heredoc");
+				exit(EXIT_FAILURE);
+			}
+			// Redireciona a entrada padrão para o arquivo do heredoc
+			dup2(heredoc_fd, STDIN_FILENO);
+			close(heredoc_fd);
+			current_file = current_file->next;
 		}
-		dup2(heredoc_fd, STDIN_FILENO);
-		close(heredoc_fd);
-		current_file = current_file->next;
-	}	
+		i++;
+	}
 }

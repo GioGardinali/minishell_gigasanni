@@ -6,7 +6,7 @@
 /*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 16:39:02 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/22 17:43:27 by gigardin         ###   ########.fr       */
+/*   Updated: 2024/09/22 19:51:45 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	identify_type_cmd(t_token **token, t_cmd **cmd, char ***options,
 	else if ((*token)->type == HERE_DOC)
 	{
 		handle_heredoc(token, count_cmd, cmd);
-		*token = (*token)->next->next;
 	}
 	else
 	{

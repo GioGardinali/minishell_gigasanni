@@ -6,7 +6,7 @@
 /*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 15:48:38 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/22 17:38:09 by gigardin         ###   ########.fr       */
+/*   Updated: 2024/09/24 20:07:40 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,6 @@ void	execute_command(t_mini minishell, int input_fd, int out_fd, t_cmd *cmd)
 	}
 	apply_heredoc(cmd);
 	apply_redirections(cmd->redirs);
-	free_token(&minishell.token);
-	free(minishell.input);
-	if (path != NULL)
-		execve(path, options, __environ);
 	if (is_built_in (cmd->str) != 0)
 	{
 		execute_built_in(&minishell, cmd);
@@ -42,7 +38,6 @@ void	execute_command(t_mini minishell, int input_fd, int out_fd, t_cmd *cmd)
 	}
 	else
 	{
-		apply_redirections(cmd->redirs);
 		free_token(&minishell.token);
 		free(minishell.input);
 		if (path != NULL)
