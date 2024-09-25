@@ -135,6 +135,9 @@ void			insert_sorted(t_env **sorted, t_env *node);
 int				is_built_in(char *str);
 void			execute_built_in(t_mini *minishell, t_cmd *cmd);
 
+/*echo*/
+void			execute_echo(t_cmd *cmd);
+
 /*env*/
 void			execute_env(t_mini *minishell);
 
@@ -153,15 +156,23 @@ int				valid_var_name(char *str);
 /*export*/
 void			execute_export(t_mini *minishell, t_cmd *cmd);
 
-/*expand_var_utils*/
+/*expand_var_utils1*/
 int				is_valid(char c, int position);
 int				var_len(char *str);
 char			*return_var(char *str, int add);
 char			*return_key_content(t_mini *minishell, char *var_key);
 int				add_variable_size(t_mini *minishell, char *token, int *i);
 
+/*expand_var_utils2*/
+int				calculate_size(t_mini *minishell, char *token);
+void			append_to_result(char *result, char *str, int *j);
+char			*get_env_value(t_env *env_list, const char *key);
+int				expand_variable(t_mini *minishell, t_aux *aux);
+int				is_variable_expandable(char *token, int pos);
+
 /*expand_var*/
 char			*expand_token(t_mini *minishell, t_aux *aux);
+void			expand_all_tokens(t_mini *minishell);
 
 /*free_functions*/
 void			free_token(t_token **token);
