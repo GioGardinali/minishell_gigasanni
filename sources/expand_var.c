@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   expand_var.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 17:57:37 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/24 19:46:30 by asanni           ###   ########.fr       */
+/*   Updated: 2024/09/25 19:27:25 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-char	*expand_token(t_mini *minishell, t_aux *aux)
+char	*expand_token(t_mini *minishell, t_aux *aux, int quotes)
 {
 	int		i;
 	int		j;
@@ -30,19 +30,19 @@ char	*expand_token(t_mini *minishell, t_aux *aux)
 		return (NULL);
 	while (aux->token[i])
 	{
-		if (aux->token[i] == '\'' && !in_double_quotes)
+		if (quotes == 0 && aux->token[i] == '\'' && !in_double_quotes)
 		{
 			in_single_quotes = !in_single_quotes;
 			i++;
 		}
-		else if (aux->token[i] == '"' && !in_single_quotes)
+		else if (quotes == 0 && aux->token[i] == '"' && !in_single_quotes)
 		{
 			in_double_quotes = !in_double_quotes;
 			i++;
 		}
 		else if (aux->token[i] == '$' && !in_single_quotes)
 		{
-			if (is_variable_expandable(aux->token, i + 1))
+			if (is_variable_expandable(aux->token, i + 1, quotes))
 				expand_variable(minishell, aux);
 			else
 			{
@@ -65,7 +65,7 @@ void	expand_all_tokens(t_mini *minishell)
 	while (current != NULL)
 	{
 		aux.token = current->str;
-		current->str = expand_token(minishell, &aux);
+		current->str = expand_token(minishell, &aux, 0);
 		current = current->next;
 	}
 }
