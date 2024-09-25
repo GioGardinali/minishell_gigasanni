@@ -57,6 +57,7 @@ sources/process_cmds.c\
 sources/signal.c\
 sources/unset.c\
 sources/delete_later.c\
+sources/pwd.c\
 
 #--------------RULES----------------------------#
 

@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 20:21:55 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/25 17:15:04 by asanni           ###   ########.fr       */
+/*   Updated: 2024/09/25 19:52:16 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ void	execute_built_in(t_mini *minishell, t_cmd *cmd)
 	if (is_built_in(cmd->str) == ECHO)
 		execute_echo(cmd);
 	if (is_built_in(cmd->str) == CD)
-		execute_cd(cmd);
-	// if (is_built_in(cmd->str) == PWD)
-	// 	execute_pwd();
+		execute_cd(minishell);
+	if (is_built_in(cmd->str) == PWD)
+		execute_pwd();
 	if (is_built_in(cmd->str) == EXPT)
 		execute_export(minishell, cmd);
 	if (is_built_in(cmd->str) == UNST)
