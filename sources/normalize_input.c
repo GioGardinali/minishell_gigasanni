@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   normalize_input.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 20:21:11 by asanni            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/09/25 19:58:23 by gigardin         ###   ########.fr       */
+=======
+/*   Updated: 2024/09/25 19:51:51 by asanni           ###   ########.fr       */
+>>>>>>> 9021295b26141e9f977f88ce08d258220a673d98
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +47,6 @@ void	norme(t_mini *minishell, t_token *token)
 		make_cmds(&minishell->cmd, &token, minishell);
 		if (token != NULL)
 			token = token->next;
-		//print_cmds(minishell->cmd);
 	}
 	free(input);
 }
