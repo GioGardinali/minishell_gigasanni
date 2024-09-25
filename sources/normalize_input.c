@@ -6,7 +6,7 @@
 /*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 20:21:11 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/25 16:44:12 by gigardin         ###   ########.fr       */
+/*   Updated: 2024/09/25 19:58:23 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	norme(t_mini *minishell, t_token *token)
 	while (split[i] != NULL)
 		make_tokens(&minishell->token, split[i++]);
 	expand_all_tokens(minishell);
+	free_matrix(split);
 	token = minishell->token;
 	while (token != NULL)
 	{
@@ -44,6 +45,5 @@ void	norme(t_mini *minishell, t_token *token)
 			token = token->next;
 		//print_cmds(minishell->cmd);
 	}
-	free_matrix(split);
 	free(input);
 }
