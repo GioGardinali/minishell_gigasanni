@@ -56,8 +56,8 @@ typedef struct s_token
 
 typedef struct s_redir
 {
-	int				type; // Tipo de redirecionamento: REDIR_INPUT, REDIR_OUTPUT, REDIR_APPEND
-	char			*file; // Nome do arquivo
+	int				type;
+	char			*file;
 	struct s_redir	*next;
 }	t_redir;
 
@@ -81,16 +81,10 @@ typedef struct s_cmd
 	char			**options;
 	char			*path;
 	t_heredoc		*heredocs;
-	t_redir			*redirs; // List redirects
+	t_redir			*redirs;
 	struct s_cmd	*next;
 	struct s_cmd	*prev;
 }	t_cmd;
-
-typedef struct s_gc
-{
-	void				*content;
-	struct s_gc			*next;
-}						t_gc;
 
 typedef struct s_mini
 {
@@ -99,7 +93,6 @@ typedef struct s_mini
 	t_token		*token;
 	t_cmd		*cmd;
 	t_env		*env_exp;
-	t_gc		*gc;
 	int			exit_status;
 }	t_mini;
 
