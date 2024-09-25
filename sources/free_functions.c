@@ -6,7 +6,7 @@
 /*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 15:45:06 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/13 20:06:20 by gigardin         ###   ########.fr       */
+/*   Updated: 2024/09/25 19:53:18 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	free_cmds(t_cmd **cmd)
 		if ((*cmd)->path)
 			free((*cmd)->path);
 		free_matrix((*cmd)->options);
+		free((*cmd)->str);
 		free(*cmd);
 		(*cmd) = temp;
 	}

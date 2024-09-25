@@ -6,7 +6,7 @@
 /*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 18:52:55 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/25 19:10:40 by gigardin         ###   ########.fr       */
+/*   Updated: 2024/09/25 19:54:56 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int	main(void)
 		}
 		if (minishell.token != NULL)
 			free_token_bc(&minishell.token);
+		free_cmds(&minishell.cmd);
 		minishell.token = NULL;
 	}
 	free_cmds(&minishell.cmd);

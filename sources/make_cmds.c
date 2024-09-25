@@ -6,7 +6,7 @@
 /*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 16:39:02 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/22 19:51:45 by gigardin         ###   ########.fr       */
+/*   Updated: 2024/09/25 19:44:52 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ void	make_one_cmd(t_cmd **cmd, t_token **token, t_mini *minishell,
 	if (new_cmd == NULL)
 		return ;
 	new_cmd->str = ft_strdup(split [0]);
+	free_matrix(split);
 	new_cmd->heredocs = init_heredoc(minishell);
 	new_cmd->options = make_options(token, &new_cmd, count_cmd);
 	new_cmd->path = verify_path(minishell, new_cmd->str);
@@ -74,7 +75,6 @@ void	make_one_cmd(t_cmd **cmd, t_token **token, t_mini *minishell,
 	temp = get_last_cmd(cmd);
 	temp->next = new_cmd;
 	new_cmd->prev = temp;
-	free_matrix(split);
 }
 
 void	make_cmds(t_cmd **cmd, t_token **token, t_mini *minishell)
