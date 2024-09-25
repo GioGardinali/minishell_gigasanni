@@ -6,7 +6,7 @@
 /*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 18:52:55 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/24 20:07:05 by gigardin         ###   ########.fr       */
+/*   Updated: 2024/09/25 19:10:40 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int	main(void)
 	minishell = (t_mini){0};
 	copy_env(&minishell);
 	make_env_list(&minishell);
+	ft_global_mini(&minishell);
 	while (42)
 	{
 		start_minishell(&minishell);

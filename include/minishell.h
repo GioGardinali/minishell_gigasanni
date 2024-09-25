@@ -123,6 +123,8 @@ typedef enum e_built
 
 //Functions
 
+t_mini	*ft_global_mini(t_mini *minishell);
+
 /*adjust spaces*/
 char			*adjust_spaces(char	*str);
 
@@ -172,10 +174,12 @@ int				calculate_size(t_mini *minishell, char *token);
 void			append_to_result(char *result, char *str, int *j);
 char			*get_env_value(t_env *env_list, const char *key);
 int				expand_variable(t_mini *minishell, t_aux *aux);
-int				is_variable_expandable(char *token, int pos);
+int				is_variable_expandable(char *token, int pos, int quotes);
+// int				is_variable_expandable(char *token, int pos);
 
 /*expand_var*/
-char			*expand_token(t_mini *minishell, t_aux *aux);
+// char			*expand_token(t_mini *minishell, t_aux *aux);
+char			*expand_token(t_mini *minishell, t_aux *aux, int quotes);
 void			expand_all_tokens(t_mini *minishell);
 
 /*free_functions*/

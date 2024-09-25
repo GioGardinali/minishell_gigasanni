@@ -6,7 +6,7 @@
 /*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 16:09:18 by gigardin          #+#    #+#             */
-/*   Updated: 2024/09/25 16:57:15 by gigardin         ###   ########.fr       */
+/*   Updated: 2024/09/25 19:16:49 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ void	loop_exec_heredoc(int fd, int quotes, const char *str_end, t_mini *minishel
 			free(line);
 			break ;
 		}
-		if (!quotes) // Apenas expande variáveis se não estiver entre aspas simples
+		if (!quotes) // Apenas expande variáveis se não estiver entre aspas
 		{
 			aux.token = line;
-			line = expand_token(minishell, &aux); // Expande a linha
+			line = expand_token(minishell, &aux, !quotes); // Expande a linha
 		}
 		ft_putendl_fd(line, fd); // Escreve no arquivo
 		free(line);

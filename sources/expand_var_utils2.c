@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_var_utils2.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 15:31:39 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/24 19:47:29 by asanni           ###   ########.fr       */
+/*   Updated: 2024/09/25 19:28:06 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int	expand_variable(t_mini *minishell, t_aux *aux)
 	return (1);
 }
 
-int	is_variable_expandable(char *token, int pos)
+int	is_variable_expandable(char *token, int pos, int quotes)
 {
 	int		i;
 	int		in_double_quotes;
@@ -86,9 +86,9 @@ int	is_variable_expandable(char *token, int pos)
 	in_single_quotes = 0;
 	while (i < pos)
 	{
-		if (token[i] == '"' && !in_single_quotes)
+		if (quotes == 0 && token[i] == '"' && !in_single_quotes)
 			in_double_quotes = !in_double_quotes;
-		else if (token[i] == '\'' && !in_double_quotes)
+		else if (quotes == 0 && token[i] == '\'' && !in_double_quotes)
 			in_single_quotes = !in_single_quotes;
 		i++;
 	}
