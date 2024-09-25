@@ -241,14 +241,16 @@ int				handle_filename(char *filename, t_heredoc *heredocs,
 void			setup_signals(void);
 
 /*heredoc_new_file*/
-void			write_file(char *file, int quotes, const char *str_end);
+void	write_file(char *file, int quotes, const char *str_end, t_mini *minishell);
+// void			write_file(char *file, int quotes, const char *str_end);
 void			add_file(t_file_heredoc **array_file, t_file_heredoc *new_file);
 t_file_heredoc	*get_last_file(t_file_heredoc *array_file);
 char			*get_file(int is_first);
 t_file_heredoc	*new_file(char *file);
 
 /*heredoc_loop*/
-void			loop_exec_heredoc(int fd, int quotes, const char *delimiter);
+//void			loop_exec_heredoc(int fd, int quotes, const char *delimiter);
+void			loop_exec_heredoc(int fd, int quotes, const char *str_end, t_mini *minishell);
 
 /*heredoc_utils*/
 int				check_quotes_in_token(const char *str);

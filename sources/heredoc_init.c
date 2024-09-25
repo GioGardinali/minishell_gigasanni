@@ -6,7 +6,7 @@
 /*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 16:36:39 by gigardin          #+#    #+#             */
-/*   Updated: 2024/09/24 20:05:24 by gigardin         ###   ########.fr       */
+/*   Updated: 2024/09/25 17:02:44 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,14 @@ int	handle_fork(char *filename, const char *delimiter)
 {
 	pid_t	pid;
 	int		exit_status;
+	t_mini	*minishell = NULL;
 
+	
 	exit_status = 0;
 	pid = fork();
 	if (pid == 0)
 		write_file(filename, check_quotes_in_token(delimiter),
-			remove_quotes(delimiter));
+			remove_quotes(delimiter), minishell);
 	waitpid(pid, &exit_status, 0);
 	return (WEXITSTATUS(exit_status));
 }
