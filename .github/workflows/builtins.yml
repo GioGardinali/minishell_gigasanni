@@ -1,0 +1,44 @@
+name: minishell tester >> builtins
+
+on:
+  push:
+    branches:
+    - main
+    - develop
+    - '**feature**'
+    - '**feat**'
+    - '**bugfix**'
+    - '**fix**'
+    - '**release**'
+  pull_request:
+    branches:
+    - main
+    - develop
+    - '**feature**'
+    - '**feat**'
+    - '**bugfix**'
+    - '**fix**'
+    - '**release**'
+
+jobs:
+  builtins:
+    runs-on: ubuntu-latest
+    timeout-minutes: 1
+    defaults:
+      run:
+        working-directory: ./
+    steps:
+      - name: Starting Github Actions
+        uses: actions/checkout@v4.1.4
+
+      - name: Building Program with MiniShell Makefile
+        run: make
+
+      - name: Submodule Init
+        run: git submodule init && git submodule update
+
+      - name: Running Tester for Builtins
+        run: cd minishell_tester && ./tester builtins
+
+# :: source minishell_tester repository ::
+# https://github.com/LucasKuhn/minishell_tester
