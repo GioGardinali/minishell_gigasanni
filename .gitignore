@@ -6,3 +6,4 @@ escopo.txt
 minishell
 teste.c
 *.a
+/minishell_tester
