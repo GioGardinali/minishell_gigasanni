@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 20:21:55 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/25 19:52:16 by asanni           ###   ########.fr       */
+/*   Updated: 2024/09/27 16:42:08 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,5 @@ void	execute_built_in(t_mini *minishell, t_cmd *cmd)
 	if (is_built_in(cmd->str) == ENV)
 		execute_env(minishell);
 	if (is_built_in(cmd->str) == EXIT)
-		exit_function(minishell);
+		execute_exit(minishell);
 }
-
-/* BUILT INS
-◦ cd with only a relative or absolute path
-◦ pwd with no options
-*/

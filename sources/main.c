@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 18:52:55 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/26 20:58:58 by gigardin         ###   ########.fr       */
+/*   Updated: 2024/09/27 16:42:16 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@ static void	start_minishell(t_mini *minishell)
 	}
 	else
 		add_history(minishell->input);
-	if (ft_strcmp(minishell->input, "exit") == 0)
-		exit_function(minishell);
 	norme(minishell, token);
 	check_pid(minishell);
 }

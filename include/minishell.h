@@ -152,7 +152,9 @@ void			free_split(char **split);
 void			free_cmds(t_cmd **cmd);
 void			free_matrix(char **matrix);
 void			error_function(char *str);
-void			exit_function(t_mini *minishell);
+
+/*exit*/
+void			execute_exit(t_mini *minishell);
 
 /*export_utils*/
 void			export_options(t_mini *minishell, t_cmd *cmd);
@@ -283,6 +285,5 @@ void			print_matrix(char **matrix); // apagar
 void			print_cmds_r(t_cmd *cmd); //apagar
 //void	process_multiple_cmds(t_mini minishell);
 //void	prepare_split(char *str);
-
 
 #endif
