@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 18:52:55 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/27 19:23:38 by asanni           ###   ########.fr       */
+/*   Updated: 2024/09/27 20:00:32 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,13 @@
 
 void	check_pid(t_mini *minishell)
 {
-	process_multiple_cmds(*minishell, -1);
+	if ((!is_built_in(minishell->cmd->str)) && minishell->cmd->path == NULL)
+	{
+		ft_putstr_fd("Command not found \n", 2);
+		return ;
+	}
+	else
+		process_multiple_cmds(*minishell, -1);
 }
 
 static void	start_minishell(t_mini *minishell)

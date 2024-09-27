@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_init.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 16:36:39 by gigardin          #+#    #+#             */
-/*   Updated: 2024/09/26 20:56:39 by gigardin         ###   ########.fr       */
+/*   Updated: 2024/09/27 20:10:48 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_heredoc	*init_heredoc(t_mini *minishell)
 	if (!heredoc)
 		return (NULL);
 	heredoc->size = count_cmd(minishell->token);
-	heredoc->array = ft_calloc(sizeof(t_file_heredoc *), heredoc->size + 1); // Ainda testando (aumentei 1 espaço)
+	heredoc->array = ft_calloc(sizeof(t_file_heredoc *), heredoc->size + 1);
 	if (!heredoc->array)
 	{
 		free(heredoc);

@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 16:39:02 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/27 19:26:28 by asanni           ###   ########.fr       */
+/*   Updated: 2024/09/27 20:02:26 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,7 @@ void	identify_type_cmd(t_token **token, t_cmd **cmd, char ***options,
 	if (find_redir(*token) == 1)
 		handle_redirection(token, cmd);
 	else if ((*token)->type == HERE_DOC)
-	{
 		handle_heredoc(token, count_cmd, cmd);
-	}
 	else
 	{
 		**options = ft_strdup((*token)->str);
@@ -43,9 +41,7 @@ static char	**make_options(t_token **token, t_cmd **cmd,
 	options = ft_calloc(sizeof(char *), (len + 1));
 	opt_bckp = options;
 	while (*token != NULL && (*token)->type != PIPE)
-	{
 		identify_type_cmd(token, cmd, &options, count_cmd);
-	}
 	return (opt_bckp);
 }
 
@@ -62,7 +58,6 @@ void	make_one_cmd(t_cmd **cmd, t_token **token, t_mini *minishell,
 		return ;
 	new_cmd->str = ft_strdup(split [0]);
 	free_matrix(split);
-	printf("cmd atual: %s\n", new_cmd->str);
 	if (!*cmd)
 		new_cmd->heredocs = init_heredoc(minishell);
 	new_cmd->options = make_options(token, &new_cmd, count_cmd);
