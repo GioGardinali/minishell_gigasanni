@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   make_cmds.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 16:39:02 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/26 21:00:10 by gigardin         ###   ########.fr       */
+/*   Updated: 2024/09/27 19:26:28 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ static char	**make_options(t_token **token, t_cmd **cmd,
 	return (opt_bckp);
 }
 
-// Projeto de função 100% experimental
 void	make_one_cmd(t_cmd **cmd, t_token **token, t_mini *minishell,
 	unsigned int *count_cmd)
 {
@@ -63,10 +62,9 @@ void	make_one_cmd(t_cmd **cmd, t_token **token, t_mini *minishell,
 		return ;
 	new_cmd->str = ft_strdup(split [0]);
 	free_matrix(split);
+	printf("cmd atual: %s\n", new_cmd->str);
 	if (!*cmd)
-		new_cmd->heredocs = init_heredoc(minishell); // checar para não mallocar em cada comando? if (!*cmd) [usar cmd->prev como base]
-	else
-		new_cmd->heredocs = (*cmd)->prev->heredocs;
+		new_cmd->heredocs = init_heredoc(minishell);
 	new_cmd->options = make_options(token, &new_cmd, count_cmd);
 	new_cmd->path = verify_path(minishell, new_cmd->str);
 	new_cmd->next = NULL;
@@ -79,6 +77,7 @@ void	make_one_cmd(t_cmd **cmd, t_token **token, t_mini *minishell,
 	temp = get_last_cmd(cmd);
 	temp->next = new_cmd;
 	new_cmd->prev = temp;
+	new_cmd->heredocs = new_cmd->prev->heredocs;
 }
 
 void	make_cmds(t_cmd **cmd, t_token **token, t_mini *minishell)

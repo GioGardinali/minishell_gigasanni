@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_path.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 19:23:18 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/26 20:48:08 by gigardin         ###   ########.fr       */
+/*   Updated: 2024/09/27 19:48:10 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,11 +86,6 @@ char	*verify_path(t_mini *minishell, char *str)
 		if (result != 0)
 			free(path);
 		i++;
-	}
-	if (result == -1)
-	{
-		free(path);
-		return (NULL);
 	}
 	free_matrix(str_path);
 	return (path);
