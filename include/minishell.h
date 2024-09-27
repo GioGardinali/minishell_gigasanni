@@ -175,10 +175,8 @@ void			append_to_result(char *result, char *str, int *j);
 char			*get_env_value(t_env *env_list, const char *key);
 int				expand_variable(t_mini *minishell, t_aux *aux);
 int				is_variable_expandable(char *token, int pos, int quotes);
-// int				is_variable_expandable(char *token, int pos);
 
 /*expand_var*/
-// char			*expand_token(t_mini *minishell, t_aux *aux);
 char			*expand_token(t_mini *minishell, t_aux *aux, int quotes);
 void			expand_all_tokens(t_mini *minishell);
 
@@ -216,7 +214,7 @@ void			identify_type_cmd(t_token **token, t_cmd **cmd, char ***options,
 					unsigned int *count_cmd);
 
 /*make_token*/
-t_token			*get_last_token(t_token *token)
+t_token			*get_last_token(t_token *token);
 void			make_tokens(t_token **token, char *split);
 int				count_token_type(t_mini *minishell, int type_to_count);
 int				has_token_type(t_mini minishell, int type_to_find);
@@ -249,16 +247,16 @@ int				handle_filename(char *filename, t_heredoc *heredocs,
 void			setup_signals(void);
 
 /*heredoc_new_file*/
-void	write_file(char *file, int quotes, const char *str_end, t_mini *minishell);
-// void			write_file(char *file, int quotes, const char *str_end);
+void			write_file(char *file, int quotes, const char *str_end,
+					t_mini *minishell);
 void			add_file(t_file_heredoc **array_file, t_file_heredoc *new_file);
 t_file_heredoc	*get_last_file(t_file_heredoc *array_file);
 char			*get_file(int is_first);
 t_file_heredoc	*new_file(char *file);
 
 /*heredoc_loop*/
-//void			loop_exec_heredoc(int fd, int quotes, const char *delimiter);
-void			loop_exec_heredoc(int fd, int quotes, const char *str_end, t_mini *minishell);
+void			loop_exec_heredoc(int fd, int quotes, const char *str_end,
+					t_mini *minishell);
 
 /*heredoc_utils*/
 int				check_quotes_in_token(const char *str);
@@ -285,8 +283,6 @@ void			print_matrix(char **matrix); // apagar
 void			print_cmds_r(t_cmd *cmd); //apagar
 //void	process_multiple_cmds(t_mini minishell);
 //void	prepare_split(char *str);
-//void	skip_quotes2(char *input, int *i, char *temp, int *j);
-//int	execute_heredoc(char *str_end, unsigned int index,
-//		t_heredoc *heredoc, int is_first);
+
 
 #endif
