@@ -6,7 +6,7 @@
 /*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 16:09:18 by gigardin          #+#    #+#             */
-/*   Updated: 2024/09/25 19:16:49 by gigardin         ###   ########.fr       */
+/*   Updated: 2024/09/27 19:51:24 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,17 @@ void	loop_exec_heredoc(int fd, int quotes, const char *str_end, t_mini *minishel
 			ft_putendl_fd(error, 2); // Mensagem de erro
 			break ;
 		}
-		if (ft_strcmp(line, str_end) == 0) // Se o final do here-doc foi encontrado
+		if (ft_strcmp(line, str_end) == 0)
 		{
 			free(line);
 			break ;
 		}
-		if (!quotes) // Apenas expande variáveis se não estiver entre aspas
+		if (!quotes)
 		{
 			aux.token = line;
-			line = expand_token(minishell, &aux, !quotes); // Expande a linha
+			line = expand_token(minishell, &aux, !quotes);
 		}
-		ft_putendl_fd(line, fd); // Escreve no arquivo
+		ft_putendl_fd(line, fd);
 		free(line);
 	}
 }
