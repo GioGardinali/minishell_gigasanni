@@ -6,7 +6,7 @@
 /*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 16:39:02 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/25 19:44:52 by gigardin         ###   ########.fr       */
+/*   Updated: 2024/09/26 21:00:10 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ static char	**make_options(t_token **token, t_cmd **cmd,
 	return (opt_bckp);
 }
 
+// Projeto de função 100% experimental
 void	make_one_cmd(t_cmd **cmd, t_token **token, t_mini *minishell,
 	unsigned int *count_cmd)
 {
@@ -62,7 +63,10 @@ void	make_one_cmd(t_cmd **cmd, t_token **token, t_mini *minishell,
 		return ;
 	new_cmd->str = ft_strdup(split [0]);
 	free_matrix(split);
-	new_cmd->heredocs = init_heredoc(minishell);
+	if (!*cmd)
+		new_cmd->heredocs = init_heredoc(minishell); // checar para não mallocar em cada comando? if (!*cmd) [usar cmd->prev como base]
+	else
+		new_cmd->heredocs = (*cmd)->prev->heredocs;
 	new_cmd->options = make_options(token, &new_cmd, count_cmd);
 	new_cmd->path = verify_path(minishell, new_cmd->str);
 	new_cmd->next = NULL;

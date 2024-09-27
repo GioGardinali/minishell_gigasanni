@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   make_token.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 16:32:48 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/16 16:46:33 by asanni           ###   ########.fr       */
+/*   Updated: 2024/09/26 21:03:51 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-t_token	*get_last_token(t_token **token)
+t_token	*get_last_token(t_token *token)
 {
 	t_token	*temp;
 
-	temp = *token;
+	temp = token;
 	while (temp->next)
 		temp = temp->next;
 	return (temp);
@@ -39,7 +39,7 @@ void	make_tokens(t_token **token, char *split)
 		*token = new_token;
 		return ;
 	}
-	temp = get_last_token(token);
+	temp = get_last_token(*token);
 	temp->next = new_token;
 	new_token->prev = temp;
 }

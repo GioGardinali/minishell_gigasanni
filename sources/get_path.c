@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_path.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 19:23:18 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/01 17:18:35 by asanni           ###   ########.fr       */
+/*   Updated: 2024/09/26 20:48:08 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ char	*verify_path(t_mini *minishell, char *str)
 			break ;
 		path = append_slash(str_path[i], str);
 		result = access(path, F_OK | R_OK);
+		if (result != 0)
+			free(path);
 		i++;
 	}
 	if (result == -1)

@@ -6,7 +6,7 @@
 /*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 16:36:39 by gigardin          #+#    #+#             */
-/*   Updated: 2024/09/25 19:11:27 by gigardin         ###   ########.fr       */
+/*   Updated: 2024/09/26 20:56:39 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_heredoc	*init_heredoc(t_mini *minishell)
 	if (!heredoc)
 		return (NULL);
 	heredoc->size = count_cmd(minishell->token);
-	heredoc->array = ft_calloc(sizeof(t_file_heredoc *), heredoc->size);
+	heredoc->array = ft_calloc(sizeof(t_file_heredoc *), heredoc->size + 1); // Ainda testando (aumentei 1 espaço)
 	if (!heredoc->array)
 	{
 		free(heredoc);
@@ -55,18 +55,30 @@ t_mini	*ft_global_mini(t_mini *minishell)
 		shell = minishell;
 	return (shell);
 }
+
 int	handle_fork(char *filename, const char *delimiter)
 {
 	pid_t	pid;
 	int		exit_status;
-	t_mini	*minishell = ft_global_mini(NULL);
+	t_mini	*minishell;
 
+	minishell = ft_global_mini(NULL);
 	exit_status = 0;
 	pid = fork();
 	if (pid == 0)
 	{
 		write_file(filename, check_quotes_in_token(delimiter),
 			remove_quotes(delimiter), minishell);
+		free(filename);
+		free(minishell->input);
+		free(minishell->env_content);
+		free_token(&minishell->token);
+		free_env(&minishell->env_exp);
+	// *******  Esses Comentados não ajudam em nada no momento ********
+		// free_token(&minishell->token);
+		// free_cmds(&minishell->cmd);
+		//free_heredocs(heredocs);
+		// clean_heredoc_files(minishell->cmd);
 		exit(0);
 	}
 	waitpid(pid, &exit_status, 0);

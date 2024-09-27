@@ -6,7 +6,7 @@
 /*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 18:52:55 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/25 19:54:56 by gigardin         ###   ########.fr       */
+/*   Updated: 2024/09/26 20:58:58 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	start_minishell(t_mini *minishell)
 
 int	main(void)
 {
-	t_mini		minishell;
+	t_mini	minishell;
 
 	minishell = (t_mini){0};
 	copy_env(&minishell);
@@ -56,7 +56,7 @@ int	main(void)
 			free_cmds(&minishell.cmd);
 		}
 		if (minishell.token != NULL)
-			free_token_bc(&minishell.token);
+			free_token(&minishell.token);
 		free_cmds(&minishell.cmd);
 		minishell.token = NULL;
 	}

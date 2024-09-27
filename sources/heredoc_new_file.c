@@ -6,7 +6,7 @@
 /*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 10:11:35 by gigardin          #+#    #+#             */
-/*   Updated: 2024/09/25 17:00:17 by gigardin         ###   ########.fr       */
+/*   Updated: 2024/09/26 20:57:47 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,14 @@ void	add_file(t_file_heredoc **array_file, t_file_heredoc *new_file)
 		get_last_file(*array_file)->next = new_file;
 }
 
-void	write_file(char *file, int quotes, const char *str_end, t_mini *minishell)
+void	write_file(char *file, int quotes, const char *str_end,
+	t_mini *minishell)
 {
 	int	fd;
 
 	signal(SIGINT, copy_heredoc);
 	fd = open(file, O_CREAT | O_RDWR | O_TRUNC, 0644);
 	loop_exec_heredoc(fd, quotes, str_end, minishell);
+	free((void *)str_end);
 	close(fd);
 }

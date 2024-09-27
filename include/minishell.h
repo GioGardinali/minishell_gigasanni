@@ -123,7 +123,7 @@ typedef enum e_built
 
 //Functions
 
-t_mini	*ft_global_mini(t_mini *minishell);
+t_mini			*ft_global_mini(t_mini *minishell);
 
 /*adjust spaces*/
 char			*adjust_spaces(char	*str);
@@ -216,7 +216,7 @@ void			identify_type_cmd(t_token **token, t_cmd **cmd, char ***options,
 					unsigned int *count_cmd);
 
 /*make_token*/
-t_token			*get_last_token(t_token **token);
+t_token			*get_last_token(t_token *token)
 void			make_tokens(t_token **token, char *split);
 int				count_token_type(t_mini *minishell, int type_to_count);
 int				has_token_type(t_mini minishell, int type_to_find);

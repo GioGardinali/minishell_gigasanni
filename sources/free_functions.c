@@ -6,7 +6,7 @@
 /*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 15:45:06 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/25 19:53:18 by gigardin         ###   ########.fr       */
+/*   Updated: 2024/09/26 20:46:34 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,9 @@ void	free_env(t_env **env)
 	while (temp != NULL)
 	{
 		temp = (*env)->next;
-		free(env);
+		free((*env)->key);
+		free((*env)->content);
+		free(*env);
 		(*env) = temp;
 	}
 	env = NULL;
@@ -52,6 +54,7 @@ void	free_token(t_token **token)
 	while (temp != NULL)
 	{
 		temp = (*token)->next;
+		free((*token)->str);
 		free(*token);
 		(*token) = temp;
 	}
@@ -82,6 +85,7 @@ void	free_token_bc(t_token **token)
 	while (temp != NULL)
 	{
 		temp = (*token)->prev;
+		free((*token)->str);
 		free(*token);
 		(*token) = temp;
 	}
