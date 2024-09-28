@@ -6,7 +6,7 @@
 /*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 15:52:20 by gigardin          #+#    #+#             */
-/*   Updated: 2024/09/27 21:18:03 by gigardin         ###   ########.fr       */
+/*   Updated: 2024/09/28 02:09:07 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,12 @@
 // 		//clear_exit(shell, TRUE);
 // 	}
 // }
+
+void	setup_signals_heredoc(void)
+{
+	signal(SIGINT, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
+}
 
 void	copy_heredoc(int signal)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_init.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 16:36:39 by gigardin          #+#    #+#             */
-/*   Updated: 2024/09/27 20:10:48 by asanni           ###   ########.fr       */
+/*   Updated: 2024/09/28 02:08:51 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,6 @@ t_heredoc	*init_heredoc(t_mini *minishell)
 		return (NULL);
 	}
 	return (heredoc);
-}
-
-void	setup_signals(void)
-{
-	signal(SIGINT, SIG_IGN);
-	signal(SIGQUIT, SIG_IGN);
 }
 
 int	handle_filename(char *filename, t_heredoc *heredocs,
@@ -93,7 +87,7 @@ int	execute_heredoc(const char *delimiter, unsigned int count_cmd,
 	int		validate;
 
 	validate = 0;
-	setup_signals();
+	setup_signals_heredoc();
 	filename = get_file(is_first_cmd);
 	if (!handle_filename(filename, heredocs, count_cmd))
 		return (0);

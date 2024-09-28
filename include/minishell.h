@@ -239,6 +239,12 @@ void			process_multiple_cmds(t_mini minishell, int prev_fd);
 void			execute_unset(t_mini *minishell, t_cmd *cmd);
 void			unset_env(t_env **env, char *key);
 
+/*signal*/
+void			setup_signals_heredoc(void);
+void			copy_heredoc(int signal);
+void			init_signals(void);
+void			redonimation_readline(int signal);
+
 /*heredoc_init*/
 t_heredoc		*init_heredoc(t_mini *minishell);
 int				execute_heredoc(const char *delimiter, unsigned int count_cmd,
@@ -246,7 +252,6 @@ int				execute_heredoc(const char *delimiter, unsigned int count_cmd,
 int				handle_fork(char *filename, const char *delimiter);
 int				handle_filename(char *filename, t_heredoc *heredocs,
 					unsigned int count_cmd);
-void			setup_signals(void);
 
 /*heredoc_new_file*/
 void			write_file(char *file, int quotes, const char *str_end,
@@ -267,11 +272,6 @@ int				check_quotes_in_token(const char *str);
 char			*remove_quotes(const char *str_end);
 unsigned int	count_cmd(t_token *temp_token);
 void			apply_heredoc(t_cmd *cmd);
-
-/*signal*/
-void			copy_heredoc(int signal);
-void			init_signals(void);
-void			redonimation_readline(int signal);
 
 /*execução redirect*/
 void			apply_redirections(t_redir *redirs);
