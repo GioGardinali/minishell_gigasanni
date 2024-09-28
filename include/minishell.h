@@ -257,8 +257,10 @@ char			*get_file(int is_first);
 t_file_heredoc	*new_file(char *file);
 
 /*heredoc_loop*/
+void			process_line(char *line, int fd, int quotes, t_mini *minishell);
 void			loop_exec_heredoc(int fd, int quotes, const char *str_end,
 					t_mini *minishell);
+int				print_error_heredoc(int i, const char *eof);
 
 /*heredoc_utils*/
 int				check_quotes_in_token(const char *str);
@@ -268,6 +270,8 @@ void			apply_heredoc(t_cmd *cmd);
 
 /*signal*/
 void			copy_heredoc(int signal);
+void			init_signals(void);
+void			redonimation_readline(int signal);
 
 /*execução redirect*/
 void			apply_redirections(t_redir *redirs);
