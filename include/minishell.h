@@ -234,6 +234,8 @@ void			make_env_list(t_mini *minishell);
 
 /*process _cmds*/
 void			process_multiple_cmds(t_mini minishell, int prev_fd);
+/*process _cmds_utils*/
+void			setup_file_descriptors(int input_fd, int out_fd);
 
 /*unset*/
 void			execute_unset(t_mini *minishell, t_cmd *cmd);

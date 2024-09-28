@@ -54,6 +54,7 @@ sources/make_env_list.c\
 sources/make_token.c\
 sources/normalize_input.c\
 sources/process_cmds.c\
+sources/process_cmds_utils.c\
 sources/signal.c\
 sources/unset.c\
 sources/delete_later.c\

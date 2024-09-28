@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process_cmds.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 15:48:38 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/27 19:41:12 by asanni           ###   ########.fr       */
+/*   Updated: 2024/09/28 02:31:44 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,7 @@ void	execute_command(t_mini minishell, int input_fd, int out_fd, t_cmd *cmd)
 
 	path = cmd->path;
 	options = cmd->options;
-	if (input_fd != -1)
-	{
-		dup2(input_fd, STDIN_FILENO);
-		close(input_fd);
-	}
-	if (out_fd != -1)
-	{
-		dup2(out_fd, STDOUT_FILENO);
-		close(out_fd);
-	}
+	setup_file_descriptors(input_fd, out_fd);
 	apply_heredoc(cmd);
 	apply_redirections(cmd->redirs);
 	if (is_built_in (cmd->str) != 0)
