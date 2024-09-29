@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 14:18:26 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/28 21:12:51 by asanni           ###   ########.fr       */
+/*   Updated: 2024/09/28 22:45:33 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,11 +107,12 @@ int	export_options(t_mini *minishell, t_cmd *cmd)
 		}
 		else
 		{
-			ft_putstr_fd("it is not a valid identifier", 2);
+			print_error(cmd->options[i], ": is not a valid option");
 			status = 1;
 		}
 		i++;
 	}
+	return (status);
 }
 
 int	print_export(t_mini *minishell)

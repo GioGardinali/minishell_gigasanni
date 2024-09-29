@@ -144,10 +144,10 @@ int				execute_cd(t_mini *minishell);
 int				execute_pwd(void);
 
 /*echo*/
-void			execute_echo(t_cmd *cmd);
+int				execute_echo(t_cmd *cmd);
 
 /*env*/
-void			execute_env(t_mini *minishell);
+int				execute_env(t_mini *minishell);
 
 /* error functions*/
 void			free_split(char **split);
@@ -156,15 +156,15 @@ void			free_matrix(char **matrix);
 void			error_function(char *str);
 
 /*exit*/
-void			execute_exit(t_mini *minishell);
+int				execute_exit(t_mini *minishell, t_cmd *cmd);
 
 /*export_utils*/
-void			export_options(t_mini *minishell, t_cmd *cmd);
-void			print_export(t_mini *minishell);
+int				export_options(t_mini *minishell, t_cmd *cmd);
+int				print_export(t_mini *minishell);
 int				valid_var_name(char *str);
 
 /*export*/
-void			execute_export(t_mini *minishell, t_cmd *cmd);
+int				execute_export(t_mini *minishell, t_cmd *cmd);
 
 /*expand_var_utils1*/
 int				is_valid(char c, int position);
@@ -240,7 +240,7 @@ void			process_multiple_cmds(t_mini minishell, int prev_fd);
 void			setup_file_descriptors(int input_fd, int out_fd);
 
 /*unset*/
-void			execute_unset(t_mini *minishell, t_cmd *cmd);
+int				execute_unset(t_mini *minishell, t_cmd *cmd);
 void			unset_env(t_env **env, char *key);
 
 /*signal*/
@@ -269,7 +269,7 @@ t_file_heredoc	*new_file(char *file);
 void			process_line(char *line, int fd, int quotes, t_mini *minishell);
 void			loop_exec_heredoc(int fd, int quotes, const char *str_end,
 					t_mini *minishell);
-int				print_error_heredoc(int i, const char *eof);
+void			print_error_heredoc(int i, const char *eof);
 
 /*heredoc_utils*/
 int				check_quotes_in_token(const char *str);
@@ -283,6 +283,8 @@ void			execute_cmds_redir(t_cmd *cmd, char **env_content);
 
 /*função perdida*/
 int				build_pwd(void);
+
+void	print_error(char *var, char *msg);
 
 /*delete_later*/
 void			print_env_list(t_env *env_list);

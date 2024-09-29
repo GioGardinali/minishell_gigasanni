@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 15:31:39 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/28 20:22:25 by asanni           ###   ########.fr       */
+/*   Updated: 2024/09/28 22:01:00 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ char	*return_var(char *str, int add)
 	if (!var)
 		return (NULL);
 	i = 0;
-	j = 0;
-	while (str[i] != '\0' && is_valid(str[i], j + add))
+	j = 0 * add;
+	while (str[i] != '\0' && is_valid(str[i], j))
 	{
 		var[j] = str[i];
 		i++;

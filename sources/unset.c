@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/21 11:58:15 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/21 12:22:41 by asanni           ###   ########.fr       */
+/*   Updated: 2024/09/28 21:25:08 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,17 +41,23 @@ void	unset_env(t_env **env, char *key)
 	}
 }
 
-void	execute_unset(t_mini *minishell, t_cmd *cmd)
+int	execute_unset(t_mini *minishell, t_cmd *cmd)
 {
 	int	i;
+	int	status;
 
 	i = 1;
+	status = 0;
 	while (cmd->options[i] != NULL)
 	{
 		if (valid_var_name(cmd->options[i]) == 1)
-		{
 			unset_env(&minishell->env_exp, cmd->options[i]);
+		else
+		{
+			ft_putstr_fd("it is not a valid identifier", 2);
+			status = 1;
 		}
 		i++;
 	}
+	return (status);
 }

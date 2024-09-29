@@ -3,20 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_loop.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 16:09:18 by gigardin          #+#    #+#             */
-/*   Updated: 2024/09/28 01:39:54 by gigardin         ###   ########.fr       */
+/*   Updated: 2024/09/28 22:57:49 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int	print_error_heredoc(int i, const char *eof)
+void	print_error_heredoc(int i, const char *eof)
 {
-	ft_printf("Minishelby: warning: here-document at line %d ", i);
-	ft_printf("delimited by end-of-file (wanted `%s')\n", eof);
-	return (2);
+	write(2, "Minishelby: warning: here-document at line ", 43);
+	ft_putnbr_fd(i, 2);
+	write(2, " delimited by end-of-file (wanted `", 35);
+	while (*eof)
+	{
+		write(2, eof, 1);
+		eof++;
+	}
+	write(2, "')\n", 4);
 }
 
 void	loop_exec_heredoc(int fd, int quotes, const char *str_end,

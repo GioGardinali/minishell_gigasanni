@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 15:48:38 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/28 20:14:41 by asanni           ###   ########.fr       */
+/*   Updated: 2024/09/28 23:07:48 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,16 +92,21 @@ void	process_multiple_cmds(t_mini minishell, int prev_fd)
 	int			fd[2];
 	const int	mock_fd[] = {0, -1};
 	t_cmd		*current_cmd;
+	int			*pids;
+	int			i;
 
 	current_cmd = minishell.cmd;
+	pids = malloc(sizeof(int) * (count_cmd(minishell.token) + 1));
+	i = 0;
 	while (current_cmd != NULL)
 	{
 		if (current_cmd->next != NULL)
 			create_pipe(fd);
 		if (current_cmd->next == NULL)
-			fork_and_execute(minishell, prev_fd, (int *) mock_fd, current_cmd);
+			pids[i] = fork_and_execute(minishell, prev_fd, (int *) mock_fd,
+					current_cmd);
 		else
-			fork_and_execute(minishell, prev_fd, fd, current_cmd);
+			pids[i] = fork_and_execute(minishell, prev_fd, fd, current_cmd);
 		if (current_cmd->next != NULL)
 			close_unused_fds(prev_fd, fd);
 		else
@@ -111,7 +116,13 @@ void	process_multiple_cmds(t_mini minishell, int prev_fd)
 		else
 			prev_fd = -1;
 		current_cmd = current_cmd->next;
+		i++;
 	}
-	while (wait(NULL) > 0)
-		;
+	pids[i] = -42;
+	i = 0;
+	while (pids[i] != -42)
+	{
+		waitpid(pids[i], &minishell.exit_status, 0);
+		
+	}
 }

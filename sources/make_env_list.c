@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 19:27:26 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/28 20:26:56 by asanni           ###   ########.fr       */
+/*   Updated: 2024/09/28 21:42:54 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void	make_env_list(t_mini *minishell)
 
 	i = 0;
 	list_env(&minishell->env_exp, "?=0");
+	printf("key: '%s'\tContent: '%s'\n", minishell->env_exp->key, minishell->env_exp->content);
 	while (minishell->env_content[i] != NULL)
 	{
 		list_env(&minishell->env_exp, minishell->env_content[i]);

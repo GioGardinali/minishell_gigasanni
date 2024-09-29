@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 20:21:55 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/28 20:45:22 by asanni           ###   ########.fr       */
+/*   Updated: 2024/09/28 21:30:03 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,5 @@ void	execute_built_in(t_mini *minishell, t_cmd *cmd)
 	if (is_built_in(cmd->str) == ENV)
 		minishell->exit_status = execute_env(minishell);
 	if (is_built_in(cmd->str) == EXIT)
-		minishell->exit_status = execute_exit(minishell);
+		minishell->exit_status = execute_exit(minishell, cmd);
 }

@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 17:31:29 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/28 21:00:42 by asanni           ###   ########.fr       */
+/*   Updated: 2024/09/28 21:28:42 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	execute_exit(t_mini *minishell, t_cmd *cmd)
 	t_cmd	*current;
 	int		status;
 
+	current = cmd;
 	if (current->options[1])
 	{
 		//validar se esta dentro do range long max e min e se é numero
