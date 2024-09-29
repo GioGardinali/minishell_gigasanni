@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 19:47:52 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/25 19:51:07 by asanni           ###   ########.fr       */
+/*   Updated: 2024/09/28 21:15:17 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,6 @@ int	execute_pwd(void)
 
 	str = getcwd(NULL, 0);
 	printf("%s\n", str);
+	free (str);
 	return (0);
 }

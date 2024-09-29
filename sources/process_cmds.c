@@ -3,29 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   process_cmds.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 15:48:38 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/28 02:31:44 by gigardin         ###   ########.fr       */
+/*   Updated: 2024/09/28 20:14:41 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	execute_command(t_mini minishell, int input_fd, int out_fd, t_cmd *cmd)
+void	execute_command(t_mini minishell, int input_fd, int *out_fd, t_cmd *cmd)
 {
 	char	*path;
 	char	**options;
 
 	path = cmd->path;
 	options = cmd->options;
-	setup_file_descriptors(input_fd, out_fd);
+	close(minishell.std_in);
+	close(minishell.std_out);
+	if (cmd->prev == NULL)
+		close(out_fd[0]);
+	setup_file_descriptors(input_fd, out_fd[1]);
 	apply_heredoc(cmd);
 	apply_redirections(cmd->redirs);
 	if (is_built_in (cmd->str) != 0)
 	{
+		if (out_fd[1] != -1)
+			close(out_fd[1]);
+		if (input_fd != -1)
+			close(input_fd);
 		execute_built_in(&minishell, cmd);
-		return ;
+		close(0);
+		close(1);
+		close(2);
+		exit(0); //exit status da built in
 	}
 	else
 	{
@@ -37,13 +48,18 @@ void	execute_command(t_mini minishell, int input_fd, int out_fd, t_cmd *cmd)
 	exit(EXIT_FAILURE);
 }
 
-pid_t	fork_and_execute(t_mini minishell, int input_fd, int out_fd, t_cmd *cmd)
+pid_t	fork_and_execute(t_mini minishell, int input_fd, int *out_fd, t_cmd *cmd)
 {
 	pid_t	pid;
 
-	if (is_built_in(cmd->str) != 0 && out_fd == -1)
+	if (is_built_in(cmd->str) != 0 && out_fd[1] == -1)
 	{
+		apply_redirections(cmd->redirs);
 		execute_built_in(&minishell, cmd);
+		dup2(minishell.std_in, 0);
+		dup2(minishell.std_out, 1);
+		close(minishell.std_in);
+		close(minishell.std_out);
 		return (0);
 	}
 	pid = fork();
@@ -73,8 +89,9 @@ void	close_unused_fds(int input_fd, int *fd)
 
 void	process_multiple_cmds(t_mini minishell, int prev_fd)
 {
-	int		fd[2];
-	t_cmd	*current_cmd;
+	int			fd[2];
+	const int	mock_fd[] = {0, -1};
+	t_cmd		*current_cmd;
 
 	current_cmd = minishell.cmd;
 	while (current_cmd != NULL)
@@ -82,9 +99,9 @@ void	process_multiple_cmds(t_mini minishell, int prev_fd)
 		if (current_cmd->next != NULL)
 			create_pipe(fd);
 		if (current_cmd->next == NULL)
-			fork_and_execute(minishell, prev_fd, -1, current_cmd);
+			fork_and_execute(minishell, prev_fd, (int *) mock_fd, current_cmd);
 		else
-			fork_and_execute(minishell, prev_fd, fd[1], current_cmd);
+			fork_and_execute(minishell, prev_fd, fd, current_cmd);
 		if (current_cmd->next != NULL)
 			close_unused_fds(prev_fd, fd);
 		else

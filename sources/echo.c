@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 16:47:40 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/24 19:35:18 by asanni           ###   ########.fr       */
+/*   Updated: 2024/09/28 20:44:53 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,11 @@ void	echo_nl(t_cmd *cmd)
 	}
 }
 
-void	execute_echo(t_cmd *cmd)
+int	execute_echo(t_cmd *cmd)
 {
 	if (cmd->options[1] != NULL && ft_strcmp(cmd->options[1], "-n") == 0)
 		echo_nl(cmd);
 	else
 		echo(cmd);
+	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 18:52:55 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/27 21:22:30 by gigardin         ###   ########.fr       */
+/*   Updated: 2024/09/28 20:18:37 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ int	main(void)
 	ft_global_mini(&minishell);
 	while (42)
 	{
+		minishell.std_in = dup(STDIN_FILENO);
+		minishell.std_out = dup(STDOUT_FILENO);
 		init_signals();
 		start_minishell(&minishell);
 		if (minishell.cmd != NULL)
@@ -64,6 +66,8 @@ int	main(void)
 			free_token(&minishell.token);
 		free_cmds(&minishell.cmd);
 		minishell.token = NULL;
+		close(minishell.std_in);
+		close(minishell.std_out);
 	}
 	free_cmds(&minishell.cmd);
 	free(minishell.env_content);

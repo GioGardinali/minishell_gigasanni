@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 20:21:55 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/27 16:42:08 by asanni           ###   ########.fr       */
+/*   Updated: 2024/09/28 20:45:22 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,17 @@ int	is_built_in(char *str)
 void	execute_built_in(t_mini *minishell, t_cmd *cmd)
 {
 	if (is_built_in(cmd->str) == ECHO)
-		execute_echo(cmd);
+		minishell->exit_status = execute_echo(cmd);
 	if (is_built_in(cmd->str) == CD)
-		execute_cd(minishell);
+		minishell->exit_status = execute_cd(minishell);
 	if (is_built_in(cmd->str) == PWD)
-		execute_pwd();
+		minishell->exit_status = execute_pwd();
 	if (is_built_in(cmd->str) == EXPT)
-		execute_export(minishell, cmd);
+		minishell->exit_status = execute_export(minishell, cmd);
 	if (is_built_in(cmd->str) == UNST)
-		execute_unset(minishell, cmd);
+		minishell->exit_status = execute_unset(minishell, cmd);
 	if (is_built_in(cmd->str) == ENV)
-		execute_env(minishell);
+		minishell->exit_status = execute_env(minishell);
 	if (is_built_in(cmd->str) == EXIT)
-		execute_exit(minishell);
+		minishell->exit_status = execute_exit(minishell);
 }

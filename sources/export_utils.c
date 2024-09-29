@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 14:18:26 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/22 17:07:30 by asanni           ###   ########.fr       */
+/*   Updated: 2024/09/28 21:12:51 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int	valid_var_name(char *str)
 	char	**split;
 	int		i;
 
+	if (str[0] == '?')
+		return (0);
 	split = ft_split_two(str, '=');
 	if (split != NULL && split[0] != NULL)
 	{
@@ -87,14 +89,15 @@ void	put_new_value(t_mini *minishell, char *var)
 	free_matrix(split);
 }
 
-void	export_options(t_mini *minishell, t_cmd *cmd)
+int	export_options(t_mini *minishell, t_cmd *cmd)
 {
 	int	i;
+	int	status;
 
 	i = 1;
+	status = 0;
 	while (cmd->options[i] != NULL)
 	{
-		printf("envs: %s\n", cmd->options[i]);
 		if (valid_var_name(cmd->options[i]) == 1)
 		{
 			if (var_exists(minishell, cmd->options[i]) == 1)
@@ -102,16 +105,22 @@ void	export_options(t_mini *minishell, t_cmd *cmd)
 			else
 				list_env(&minishell->env_exp, cmd->options[i]);
 		}
+		else
+		{
+			ft_putstr_fd("it is not a valid identifier", 2);
+			status = 1;
+		}
 		i++;
 	}
 }
 
-void	print_export(t_mini *minishell)
+int	print_export(t_mini *minishell)
 {
 	t_env	*current;
 
 	current = minishell->env_exp;
 	sort_env_list(&minishell->env_exp);
+	current = current->next;
 	while (current != NULL)
 	{
 		if (current->content != NULL)
@@ -120,4 +129,5 @@ void	print_export(t_mini *minishell)
 			ft_printf("declare -x %s\n", current->key);
 		current = current->next;
 	}
+	return (0);
 }

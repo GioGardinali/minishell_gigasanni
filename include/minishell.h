@@ -94,6 +94,8 @@ typedef struct s_mini
 	t_cmd		*cmd;
 	t_env		*env_exp;
 	int			exit_status;
+	int			std_in;
+	int			std_out;
 }	t_mini;
 
 typedef enum e_type

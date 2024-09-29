@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   make_env_list.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 19:27:26 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/26 21:01:32 by gigardin         ###   ########.fr       */
+/*   Updated: 2024/09/28 20:26:56 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	make_env_list(t_mini *minishell)
 	int	i;
 
 	i = 0;
+	list_env(&minishell->env_exp, "?=0");
 	while (minishell->env_content[i] != NULL)
 	{
 		list_env(&minishell->env_exp, minishell->env_content[i]);
