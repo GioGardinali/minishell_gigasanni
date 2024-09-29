@@ -284,7 +284,7 @@ void			execute_cmds_redir(t_cmd *cmd, char **env_content);
 /*função perdida*/
 int				build_pwd(void);
 
-void	print_error(char *var, char *msg);
+void			print_error(char *var, char *msg);
 
 /*delete_later*/
 void			print_env_list(t_env *env_list);

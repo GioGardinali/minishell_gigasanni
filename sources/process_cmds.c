@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 15:48:38 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/28 23:07:48 by asanni           ###   ########.fr       */
+/*   Updated: 2024/09/29 00:00:23 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,6 @@ void	process_multiple_cmds(t_mini minishell, int prev_fd)
 	while (pids[i] != -42)
 	{
 		waitpid(pids[i], &minishell.exit_status, 0);
-		
+		i++;
 	}
 }
