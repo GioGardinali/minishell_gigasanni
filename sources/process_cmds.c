@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 15:48:38 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/29 00:00:23 by asanni           ###   ########.fr       */
+/*   Updated: 2024/09/29 03:04:52 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ pid_t	fork_and_execute(t_mini minishell, int input_fd, int *out_fd, t_cmd *cmd)
 	{
 		apply_redirections(cmd->redirs);
 		execute_built_in(&minishell, cmd);
+		printf("não eu entrei aqui\n");
+		printf("exit status: %d\n", minishell.exit_status);
 		dup2(minishell.std_in, 0);
 		dup2(minishell.std_out, 1);
 		close(minishell.std_in);

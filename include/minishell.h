@@ -157,6 +157,7 @@ void			error_function(char *str);
 
 /*exit*/
 int				execute_exit(t_mini *minishell, t_cmd *cmd);
+void			update_exit_status(t_mini *minishell);
 
 /*export_utils*/
 int				export_options(t_mini *minishell, t_cmd *cmd);
