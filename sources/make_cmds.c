@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   make_cmds.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 16:39:02 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/28 17:26:49 by asanni           ###   ########.fr       */
+/*   Updated: 2024/09/29 06:41:10 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ void	identify_type_cmd(t_token **token, t_cmd **cmd, char ***options,
 {
 	if (find_redir(*token) == 1)
 		handle_redirection(token, cmd);
-	else if ((*token)->type == HERE_DOC)
+	if ((*token)->type == HERE_DOC)
 		handle_heredoc(token, count_cmd, cmd);
-	else
+	if (!(find_redir(*token) == 1 || (*token)->type == HERE_DOC))
 	{
 		**options = ft_strdup((*token)->str);
 		(*options)++;

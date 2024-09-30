@@ -6,7 +6,7 @@
 /*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 19:38:24 by gigardin          #+#    #+#             */
-/*   Updated: 2024/09/24 19:41:44 by gigardin         ###   ########.fr       */
+/*   Updated: 2024/09/29 06:47:33 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,12 @@ void	apply_redirection(int type, char *file)
 	else if (type == APPEND)
 		fd = open(file, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	else
-		return ;
+		return ; //heredoc irá ser tratado;
+	/*
+		um argumentos a mais, todos os heredocs criados
+		sera executado uma unidade de heredoc de todos que vieram
+		dar um jeito de avançar para o proximo heredoc
+	*/
 	if (fd < 0)
 	{
 		perror("open");

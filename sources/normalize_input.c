@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   normalize_input.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 20:21:11 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/28 17:42:31 by asanni           ###   ########.fr       */
+/*   Updated: 2024/09/30 20:35:44 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	norme(t_mini *minishell, t_token *token)
 {
-	int			i;
-	char		*input;
-	char		**split;
+	int		i;
+	char	*input;
+	char	**split;
 
 	i = 0;
 	if (check_input(minishell->input))
@@ -25,6 +25,7 @@ void	norme(t_mini *minishell, t_token *token)
 		return ;
 	input = adjust_spaces(minishell->input);
 	split = ft_split(input, -1);
+	free(input); // Colocar ela aqui é maravilhoso!! <3
 	while (split[i] != NULL)
 		make_tokens(&minishell->token, split[i++]);
 	expand_all_tokens(minishell);
@@ -36,5 +37,4 @@ void	norme(t_mini *minishell, t_token *token)
 		if (token != NULL)
 			token = token->next;
 	}
-	free(input);
-}
+

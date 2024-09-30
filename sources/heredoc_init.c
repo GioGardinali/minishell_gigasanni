@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_init.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 16:36:39 by gigardin          #+#    #+#             */
-/*   Updated: 2024/09/29 12:06:33 by asanni           ###   ########.fr       */
+/*   Updated: 2024/09/30 20:34:48 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ int	handle_fork(char *filename, const char *delimiter)
 	pid = fork();
 	if (pid == 0)
 	{
+		close(minishell->std_in); // Adicionado
+		close(minishell->std_out); // Adicionado
 		write_file(filename, check_quotes_in_token(delimiter),
 			remove_quotes(delimiter), minishell);
 		free(filename);
@@ -68,9 +70,9 @@ int	handle_fork(char *filename, const char *delimiter)
 		free(minishell->env_content);
 		free_token(&minishell->token);
 		free_env(&minishell->env_exp);
-		// ** Esses Comentados não ajudam em nada no momento **
+		free_cmds(&minishell->cmd); // Linha 100% inútil
+	// *******  Esses Comentados não ajudam em nada no momento ********
 		// free_token(&minishell->token);
-		// free_cmds(&minishell->cmd);
 		//free_heredocs(heredocs);
 		// clean_heredoc_files(minishell->cmd);
 		exit(0);

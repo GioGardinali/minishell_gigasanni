@@ -6,7 +6,7 @@
 /*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 18:30:41 by gigardin          #+#    #+#             */
-/*   Updated: 2024/09/26 21:12:29 by gigardin         ###   ########.fr       */
+/*   Updated: 2024/09/29 04:31:51 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ unsigned int	count_cmd(t_token *temp_token)
 			count++;
 		temp_token = temp_token->next;
 	}
-	return (count + 1); // add + 1 para contar ultimo comando que não é seguido por PIPE
+	return (count + 1);
 }
 
 void	apply_heredoc(t_cmd *cmd)
@@ -88,7 +88,6 @@ void	apply_heredoc(t_cmd *cmd)
 				perror("open heredoc");
 				exit(EXIT_FAILURE);
 			}
-			// Redireciona a entrada padrão para o arquivo do heredoc
 			dup2(heredoc_fd, STDIN_FILENO);
 			close(heredoc_fd);
 			current_file = current_file->next;

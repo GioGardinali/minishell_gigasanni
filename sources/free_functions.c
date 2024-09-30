@@ -3,14 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   free_functions.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 15:45:06 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/28 17:25:24 by asanni           ###   ########.fr       */
+/*   Updated: 2024/09/30 20:33:43 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+
+void	free_redirs(t_redir *redir)
+{
+	t_redir	*tmp;
+
+	while (redir)
+	{
+		tmp = redir->next;
+		free(redir->file);
+		free(redir);
+		redir = tmp;
+	}
+}
 
 void	free_cmds(t_cmd **cmd)
 {
@@ -22,6 +35,7 @@ void	free_cmds(t_cmd **cmd)
 		temp = (*cmd)->next;
 		if ((*cmd)->path)
 			free((*cmd)->path);
+		free_redirs((*cmd)->redirs); // Adicionado
 		free_matrix((*cmd)->options);
 		free((*cmd)->str);
 		free(*cmd);
