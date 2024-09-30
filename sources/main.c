@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 18:52:55 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/30 20:03:32 by asanni           ###   ########.fr       */
+/*   Updated: 2024/09/30 20:13:54 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	check_pid(t_mini *minishell)
 	else
 		process_multiple_cmds(minishell, -1);
 }
-
 
 static void	start_minishell(t_mini *minishell)
 {

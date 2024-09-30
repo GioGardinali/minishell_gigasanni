@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 15:48:38 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/30 20:00:00 by asanni           ###   ########.fr       */
+/*   Updated: 2024/09/30 20:14:13 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ void	execute_command(t_mini minishell, int input_fd, int *out_fd, t_cmd *cmd)
 	exit(EXIT_FAILURE);
 }
 
-pid_t	fork_and_execute(t_mini *minishell, int input_fd, int *out_fd, t_cmd *cmd)
+pid_t	fork_and_execute(t_mini *minishell, int input_fd,
+	int *out_fd, t_cmd *cmd)
 {
 	pid_t	pid;
 
