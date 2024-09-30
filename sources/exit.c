@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 17:31:29 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/29 00:31:35 by asanni           ###   ########.fr       */
+/*   Updated: 2024/09/30 19:58:39 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,18 +53,18 @@ int	execute_exit(t_mini *minishell, t_cmd *cmd)
 	exit(status);
 }
 
-void	update_exit_status(t_mini *minishell)
+void	update_exit_status(t_mini *minishell, int status)
 {
 	t_env	*current;
 
 	current = minishell->env_exp;
 	while (current != NULL)
 	{
-		if (ft_strcmp(current->key, "$?") == 0)
+		if (ft_strcmp(current->key, "?") == 0)
 		{
-			printf("cmd %s", current->key);
 			free (current->content);
-			current->content = ft_itoa(minishell->exit_status);
+			current->content = ft_itoa(status);
+			break ;
 		}
 		current = current->next;
 	}

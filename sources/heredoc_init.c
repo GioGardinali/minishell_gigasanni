@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_init.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 16:36:39 by gigardin          #+#    #+#             */
-/*   Updated: 2024/09/28 02:08:51 by gigardin         ###   ########.fr       */
+/*   Updated: 2024/09/29 12:06:33 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	handle_fork(char *filename, const char *delimiter)
 		free(minishell->env_content);
 		free_token(&minishell->token);
 		free_env(&minishell->env_exp);
-	// *******  Esses Comentados não ajudam em nada no momento ********
+		// ** Esses Comentados não ajudam em nada no momento **
 		// free_token(&minishell->token);
 		// free_cmds(&minishell->cmd);
 		//free_heredocs(heredocs);

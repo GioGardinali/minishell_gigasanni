@@ -157,7 +157,7 @@ void			error_function(char *str);
 
 /*exit*/
 int				execute_exit(t_mini *minishell, t_cmd *cmd);
-void			update_exit_status(t_mini *minishell);
+void			update_exit_status(t_mini *minishell, int status);
 
 /*export_utils*/
 int				export_options(t_mini *minishell, t_cmd *cmd);
@@ -211,7 +211,7 @@ int				search_options(t_token *token);
 /*make_cmd*/
 void			make_cmds(t_cmd **cmd, t_token **token, t_mini *minishell);
 t_cmd			*get_last_cmd(t_cmd **cmd);
-void			process_multiple_cmds(t_mini minishell, int prev_fd);
+// void			process_multiple_cmds(t_mini *minishell, int prev_fd);
 void			handle_heredoc(t_token **token, unsigned int *count_cmd,
 					t_cmd **cmd);
 void			handle_redirection(t_token **token, t_cmd **cmd);
@@ -236,7 +236,7 @@ void			norme(t_mini *minishell, t_token *token);
 void			make_env_list(t_mini *minishell);
 
 /*process _cmds*/
-void			process_multiple_cmds(t_mini minishell, int prev_fd);
+void			process_multiple_cmds(t_mini *minishell, int prev_fd);
 /*process _cmds_utils*/
 void			setup_file_descriptors(int input_fd, int out_fd);
 
