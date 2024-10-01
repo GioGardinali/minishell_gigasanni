@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   normalize_input.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 20:21:11 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/30 20:35:44 by gigardin         ###   ########.fr       */
+/*   Updated: 2024/10/01 17:06:43 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,4 @@ void	norme(t_mini *minishell, t_token *token)
 		if (token != NULL)
 			token = token->next;
 	}
-
+}

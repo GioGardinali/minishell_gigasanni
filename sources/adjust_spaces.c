@@ -6,13 +6,13 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 12:13:30 by asanni            #+#    #+#             */
-/*   Updated: 2024/07/29 15:31:06 by asanni           ###   ########.fr       */
+/*   Updated: 2024/10/01 19:07:34 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-static void	handle_quotes(char **input, char **res_ptr, bool *in_quotes)
+void	handle_quotes(char **input, char **res_ptr, bool *in_quotes)
 {
 	*in_quotes = !*in_quotes;
 	*(*res_ptr)++ = *(*input)++;

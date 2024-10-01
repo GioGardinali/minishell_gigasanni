@@ -6,13 +6,13 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 19:23:18 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/28 17:31:28 by asanni           ###   ########.fr       */
+/*   Updated: 2024/10/01 19:04:05 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-char	**copy_env(t_mini *minishell)
+char	**copy_env(t_mini *minishell, char **env_list)
 {
 	int		i;
 	int		size;
@@ -20,11 +20,11 @@ char	**copy_env(t_mini *minishell)
 
 	size = 0;
 	i = -1;
-	while (__environ[size])
+	while (env_list[size])
 		size++;
 	temp = malloc(sizeof(char *) * (size + 1));
 	while (++i < size)
-		temp[i] = __environ[i];
+		temp[i] = env_list[i];
 	temp[i] = NULL;
 	minishell->env_content = temp;
 	return (minishell->env_content);

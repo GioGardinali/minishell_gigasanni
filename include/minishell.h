@@ -129,6 +129,7 @@ t_mini			*ft_global_mini(t_mini *minishell);
 
 /*adjust spaces*/
 char			*adjust_spaces(char	*str);
+void			handle_quotes(char **input, char **res_ptr, bool *in_quotes);
 
 /*alphabetical_sort*/
 void			sort_env_list(t_env **env);
@@ -195,7 +196,7 @@ void			free_env(t_env **env);
 void			clean_heredoc_files(t_cmd *cmd);
 
 /*get_path*/
-char			**copy_env(t_mini *minishell);
+char			**copy_env(t_mini *minishell, char **env_list);
 char			*verify_path(t_mini *minishell, char *str);
 
 /*input_verif*/

@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 18:52:55 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/30 20:13:54 by asanni           ###   ########.fr       */
+/*   Updated: 2024/10/01 19:05:45 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,14 @@ static void	start_minishell(t_mini *minishell)
 	return ;
 }
 
-int	main(void)
+int	main(int argc, char **argv, char **env )
 {
 	t_mini	minishell;
 
 	minishell = (t_mini){0};
-	copy_env(&minishell);
+	(void) argc;
+	(void)	argv;
+	copy_env(&minishell, env);
 	make_env_list(&minishell);
 	ft_global_mini(&minishell);
 	while (42)
