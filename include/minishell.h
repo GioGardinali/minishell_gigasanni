@@ -158,7 +158,7 @@ void			error_function(char *str);
 
 /*exit*/
 int				execute_exit(t_mini *minishell, t_cmd *cmd);
-void			update_exit_status(t_mini *minishell, int status);
+int				update_exit_status(t_mini *minishell, int status);
 
 /*export_utils*/
 int				export_options(t_mini *minishell, t_cmd *cmd);
@@ -231,7 +231,7 @@ void			list_env(t_env **env, char *split);
 t_env			*get_last_env(t_env **token);
 
 /*normalize*/
-void			norme(t_mini *minishell, t_token *token);
+int				norme(t_mini *minishell, t_token *token);
 
 /*make_env_list*/
 void			make_env_list(t_mini *minishell);

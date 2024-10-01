@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 17:31:29 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/30 19:58:39 by asanni           ###   ########.fr       */
+/*   Updated: 2024/10/01 19:51:17 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	execute_exit(t_mini *minishell, t_cmd *cmd)
 	exit(status);
 }
 
-void	update_exit_status(t_mini *minishell, int status)
+int	update_exit_status(t_mini *minishell, int status)
 {
 	t_env	*current;
 
@@ -68,4 +68,5 @@ void	update_exit_status(t_mini *minishell, int status)
 		}
 		current = current->next;
 	}
+	return (0);
 }
