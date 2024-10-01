@@ -94,7 +94,7 @@ fclean: clean
 	@make fclean -C libft
 
 gdb:	all
-	gdb --tui -ex 'set follow-fork-mode child' -ex 'b main' -ex 'b make_one_cmd' -ex 'run' ./$(NAME)
+	gdb --tui -ex 'set follow-fork-mode child' -ex 'b main' -ex 'b add_redir' -ex 'run' ./$(NAME)
 
 re: fclean all
 .PHONY: all clean fclean re gdb

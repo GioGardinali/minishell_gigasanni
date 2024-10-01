@@ -6,7 +6,7 @@
 /*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 10:11:35 by gigardin          #+#    #+#             */
-/*   Updated: 2024/09/26 20:57:47 by gigardin         ###   ########.fr       */
+/*   Updated: 2024/10/01 19:58:25 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_file_heredoc	*new_file(char *file)
 	n_file = ft_calloc(sizeof(t_file_heredoc), 1);
 	if (!n_file)
 		return (NULL);
-	n_file->file = file;
+	n_file->file = ft_strdup(file);
 	return (n_file);
 }
 

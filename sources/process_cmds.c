@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process_cmds.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 15:48:38 by asanni            #+#    #+#             */
-/*   Updated: 2024/10/01 19:11:30 by asanni           ###   ########.fr       */
+/*   Updated: 2024/10/01 20:46:31 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	execute_command(t_mini minishell, int input_fd, int *out_fd, t_cmd *cmd)
 	if (cmd->prev == NULL)
 		close(out_fd[0]);
 	setup_file_descriptors(input_fd, out_fd[1]);
-	apply_heredoc(cmd);
+	// apply_heredoc(cmd);
 	apply_redirections(cmd->redirs);
 	if (is_built_in (cmd->str) != 0)
 	{
@@ -55,6 +55,7 @@ pid_t	fork_and_execute(t_mini *minishell, int input_fd,
 
 	if (is_built_in(cmd->str) != 0 && out_fd[1] == -1 && cmd->prev == NULL)
 	{
+		free(minishell->pids);
 		apply_redirections(cmd->redirs);
 		execute_built_in(minishell, cmd);
 		dup2(minishell->std_in, 0);
@@ -99,6 +100,7 @@ void	process_multiple_cmds(t_mini *minishell, int prev_fd)
 	current_cmd = minishell->cmd;
 	pids = malloc(sizeof(int) * (count_cmd(minishell->token) + 1));
 	i = 0;
+	minishell->pids = pids;
 	while (current_cmd != NULL)
 	{
 		if (current_cmd->next != NULL)
@@ -134,4 +136,5 @@ void	process_multiple_cmds(t_mini *minishell, int prev_fd)
 		update_exit_status(minishell, minishell->exit_status);
 		i++;
 	}
+	free(pids);
 }

@@ -6,7 +6,7 @@
 /*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 19:38:24 by gigardin          #+#    #+#             */
-/*   Updated: 2024/09/29 06:47:33 by gigardin         ###   ########.fr       */
+/*   Updated: 2024/10/01 20:47:15 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,11 @@ void	apply_redirection(int type, char *file)
 	if (fd < 0)
 	{
 		perror("open");
+		// Dar um monte de frees (Tudo que foi mallocado até aqui)
+		// dar close em todos os fds abertos (fecha os strandards)
 		exit(EXIT_FAILURE);
 	}
-	if (type == INPUT)
+	if (type == INPUT || type == HERE_DOC)
 		dup2(fd, STDIN_FILENO);
 	else
 		dup2(fd, STDOUT_FILENO);

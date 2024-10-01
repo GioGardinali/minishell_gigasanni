@@ -96,6 +96,7 @@ typedef struct s_mini
 	int			exit_status;
 	int			std_in;
 	int			std_out;
+	int			*pids;
 }	t_mini;
 
 typedef enum e_type
@@ -255,7 +256,7 @@ void			redonimation_readline(int signal);
 t_heredoc		*init_heredoc(t_mini *minishell);
 int				execute_heredoc(const char *delimiter, unsigned int count_cmd,
 					t_heredoc *heredocs, int is_first_cmd);
-int				handle_fork(char *filename, const char *delimiter);
+int				handle_fork(char *filename, const char *delimiter, t_heredoc *heredocs);
 int				handle_filename(char *filename, t_heredoc *heredocs,
 					unsigned int count_cmd);
 

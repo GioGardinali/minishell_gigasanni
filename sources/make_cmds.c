@@ -6,7 +6,7 @@
 /*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 16:39:02 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/29 06:41:10 by gigardin         ###   ########.fr       */
+/*   Updated: 2024/10/01 20:28:42 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,19 @@
 void	identify_type_cmd(t_token **token, t_cmd **cmd, char ***options,
 	unsigned int *count_cmd)
 {
+	t_token	*temp_save;
+
 	if (find_redir(*token) == 1)
+	{
+		temp_save = *token;
 		handle_redirection(token, cmd);
-	if ((*token)->type == HERE_DOC)
-		handle_heredoc(token, count_cmd, cmd);
-	if (!(find_redir(*token) == 1 || (*token)->type == HERE_DOC))
+		*token = temp_save;
+		if ((*token)->type == HERE_DOC)
+			handle_heredoc(token, count_cmd, cmd);
+		else
+			*token = (*token)->next;
+	}
+	else
 	{
 		**options = ft_strdup((*token)->str);
 		(*options)++;
@@ -38,7 +46,8 @@ static char	**make_options(t_token **token, t_cmd **cmd,
 	if (search_options(*token))
 		return (NULL);
 	len = return_len(*token);
-	options = ft_calloc(sizeof(char *), (len + 1));
+	options = ft_calloc(sizeof(char *), (len + 2));
+	(*cmd)->options = options;
 	opt_bckp = options;
 	while (*token != NULL && (*token)->type != PIPE)
 		identify_type_cmd(token, cmd, &options, count_cmd);
@@ -52,27 +61,30 @@ void	make_one_cmd(t_cmd **cmd, t_token **token, t_mini *minishell,
 	t_cmd	*temp;
 	char	**split;
 
-	split = ft_split((*token)->str, ' ');
 	new_cmd = ft_calloc(sizeof(t_cmd), 1);
 	if (new_cmd == NULL)
 		return ;
-	new_cmd->str = ft_strdup(split [0]);
-	free_matrix(split);
-	if (!*cmd)
-		new_cmd->heredocs = init_heredoc(minishell);
-	new_cmd->options = make_options(token, &new_cmd, count_cmd);
-	new_cmd->path = verify_path(minishell, new_cmd->str);
 	new_cmd->next = NULL;
 	new_cmd->prev = NULL;
 	if (!*cmd)
 	{
 		*cmd = new_cmd;
-		return ;
 	}
-	temp = get_last_cmd(cmd);
-	temp->next = new_cmd;
-	new_cmd->prev = temp;
-	new_cmd->heredocs = new_cmd->prev->heredocs;
+	else
+	{
+		temp = get_last_cmd(cmd);
+		temp->next = new_cmd;
+		new_cmd->prev = temp;
+	}
+	split = ft_split((*token)->str, ' ');
+	new_cmd->str = ft_strdup(split [0]);
+	free_matrix(split);
+	if (*cmd == new_cmd)
+		new_cmd->heredocs = init_heredoc(minishell);
+	else
+		new_cmd->heredocs = new_cmd->prev->heredocs;
+	new_cmd->options = make_options(token, &new_cmd, count_cmd);
+	new_cmd->path = verify_path(minishell, new_cmd->str);
 }
 
 void	make_cmds(t_cmd **cmd, t_token **token, t_mini *minishell)
