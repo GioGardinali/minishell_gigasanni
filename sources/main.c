@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 18:52:55 by asanni            #+#    #+#             */
-/*   Updated: 2024/10/01 20:19:32 by asanni           ###   ########.fr       */
+/*   Updated: 2024/10/02 17:33:33 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 
 void	check_pid(t_mini *minishell)
 {
-	if ((!is_built_in(minishell->cmd->str)) && minishell->cmd->path == NULL)
+	if (((!is_built_in(minishell->cmd->str)) && minishell->cmd->path == NULL)
+		|| (access(minishell->cmd->path, F_OK) == -1
+			&& ft_strcmp(minishell->cmd->str, "exit") != 0))
 	{
 		print_error(minishell->cmd->str, ": command not found");
 		update_exit_status(minishell, 127);
@@ -45,7 +47,7 @@ static void	start_minishell(t_mini *minishell)
 	return ;
 }
 
-int	main(int argc, char **argv, char **env )
+int	main(int argc, char **argv, char **env)
 {
 	t_mini	minishell;
 
