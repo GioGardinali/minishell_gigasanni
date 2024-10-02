@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 18:52:55 by asanni            #+#    #+#             */
-/*   Updated: 2024/10/02 19:00:52 by asanni           ###   ########.fr       */
+/*   Updated: 2024/10/02 20:00:31 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,21 +47,6 @@ static void	start_minishell(t_mini *minishell)
 	return ;
 }
 
-void	clean_minishell(t_mini *minishell)
-{
-	if (minishell->cmd != NULL)
-	{
-		clean_heredoc_files(minishell->cmd);
-		free_cmds(&minishell->cmd);
-	}
-	if (minishell->token != NULL)
-		free_token(&minishell->token);
-	free_cmds(&minishell->cmd);
-	minishell->token = NULL;
-	close(minishell->std_in);
-	close(minishell->std_out);
-}
-
 int	main(int argc, char **argv, char **env)
 {
 	t_mini	minishell;
@@ -78,18 +63,7 @@ int	main(int argc, char **argv, char **env)
 		minishell.std_out = dup(STDOUT_FILENO);
 		init_signals();
 		start_minishell(&minishell);
-		//clean_minishell(&minishell);
-		if (minishell.cmd != NULL)
-		{
-			clean_heredoc_files(minishell.cmd);
-			free_cmds(&minishell.cmd);
-		}
-		if (minishell.token != NULL)
-			free_token(&minishell.token);
-		free_cmds(&minishell.cmd);
-		minishell.token = NULL;
-		close(minishell.std_in);
-		close(minishell.std_out);
+		clean_minishell(&minishell);
 	}
 	free_cmds(&minishell.cmd);
 	free(minishell.env_content);

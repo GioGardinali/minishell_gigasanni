@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_functions.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 15:45:06 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/30 20:33:43 by gigardin         ###   ########.fr       */
+/*   Updated: 2024/10/02 20:04:38 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	free_cmds(t_cmd **cmd)
 		temp = (*cmd)->next;
 		if ((*cmd)->path)
 			free((*cmd)->path);
-		free_redirs((*cmd)->redirs); // Adicionado
+		free_redirs((*cmd)->redirs);
 		free_matrix((*cmd)->options);
 		free((*cmd)->str);
 		free(*cmd);
@@ -89,19 +89,4 @@ void	free_matrix(char **matrix)
 	}
 	if (matrix)
 		free(matrix);
-}
-
-void	free_token_bc(t_token **token)
-{
-	t_token	*temp;
-
-	temp = *token;
-	while (temp != NULL)
-	{
-		temp = (*token)->prev;
-		free((*token)->str);
-		free(*token);
-		(*token) = temp;
-	}
-	token = NULL;
 }

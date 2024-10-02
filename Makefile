@@ -39,6 +39,7 @@ sources/expand_var.c\
 sources/export_utils.c\
 sources/export.c\
 sources/free_functions.c\
+sources/free_functions2.c\
 sources/free_heredocs.c\
 sources/get_path.c \
 sources/handle_cmds_redirects.c\

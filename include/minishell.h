@@ -193,6 +193,10 @@ void			free_cmds(t_cmd **cmd);
 void			free_token_bc(t_token **token);
 void			free_env(t_env **env);
 
+/*free_functions2*/
+void			clean_minishell(t_mini *minishell);
+void			free_token_bc(t_token **token);
+
 /*free_heredocs*/
 void			clean_heredoc_files(t_cmd *cmd);
 
@@ -256,7 +260,8 @@ void			redonimation_readline(int signal);
 t_heredoc		*init_heredoc(t_mini *minishell);
 int				execute_heredoc(const char *delimiter, unsigned int count_cmd,
 					t_heredoc *heredocs, int is_first_cmd);
-int				handle_fork(char *filename, const char *delimiter, t_heredoc *heredocs);
+int				handle_fork(char *filename, const char *delimiter,
+					t_heredoc *heredocs);
 int				handle_filename(char *filename, t_heredoc *heredocs,
 					unsigned int count_cmd);
 
