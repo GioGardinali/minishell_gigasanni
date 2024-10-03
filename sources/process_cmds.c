@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process_cmds.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 15:48:38 by asanni            #+#    #+#             */
-/*   Updated: 2024/10/02 17:00:12 by asanni           ###   ########.fr       */
+/*   Updated: 2024/10/03 20:52:46 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	execute_command(t_mini minishell, int input_fd, int *out_fd, t_cmd *cmd)
 	options = cmd->options;
 	close(minishell.std_in);
 	close(minishell.std_out);
-	if (cmd->prev == NULL)
+	if (cmd->prev != NULL || cmd->next != NULL)
 		close(out_fd[0]);
 	setup_file_descriptors(input_fd, out_fd[1]);
 	apply_redirections(cmd->redirs);
@@ -32,10 +32,20 @@ void	execute_command(t_mini minishell, int input_fd, int *out_fd, t_cmd *cmd)
 		if (input_fd != -1)
 			close(input_fd);
 		execute_built_in(&minishell, cmd);
-		close(0);
-		close(1);
-		close(2);
-		exit(0);
+		//quita_esses_heredocs(minishell.cmd->heredocs);
+		int status = minishell.exit_status;
+		free(minishell.pids);
+		free(minishell.env_content);
+		free(minishell.input);
+		clean_heredoc_files(minishell.cmd);
+		free_cmds(&minishell.cmd);
+		free_env(&minishell.env_exp);
+		free_token(&minishell.token);
+		close(minishell.std_in);
+		close(minishell.std_out);
+		close(STDIN_FILENO);
+		close(STDOUT_FILENO);
+		exit(status);
 	}
 	else
 	{
@@ -123,6 +133,7 @@ void	process_multiple_cmds(t_mini *minishell, int prev_fd)
 	if (current_cmd->next == NULL && is_built_in(current_cmd->str) != 0)
 	{
 		update_exit_status(minishell, minishell->exit_status);
+		free(minishell->pids);
 		return ;
 	}
 	pids[i] = -42;

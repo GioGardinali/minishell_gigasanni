@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 17:31:29 by asanni            #+#    #+#             */
-/*   Updated: 2024/10/01 19:51:17 by asanni           ###   ########.fr       */
+/*   Updated: 2024/10/03 20:32:41 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int	execute_exit(t_mini *minishell, t_cmd *cmd)
 	else
 		status = minishell->exit_status;
 	ft_putendl_fd("exit", 1);
+	free(minishell->pids);
 	free(minishell->env_content);
 	free(minishell->input);
 	clean_heredoc_files(minishell->cmd);
@@ -50,6 +51,8 @@ int	execute_exit(t_mini *minishell, t_cmd *cmd)
 	free_token(&minishell->token);
 	close(minishell->std_in);
 	close(minishell->std_out);
+	close(STDIN_FILENO);
+	close(STDOUT_FILENO);
 	exit(status);
 }
 

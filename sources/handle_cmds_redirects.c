@@ -6,7 +6,7 @@
 /*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 17:42:06 by gigardin          #+#    #+#             */
-/*   Updated: 2024/10/01 20:47:54 by gigardin         ###   ########.fr       */
+/*   Updated: 2024/10/03 20:34:00 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	handle_redirection(t_token **token, t_cmd **cmd)
 void	handle_heredoc(t_token **token, unsigned int *count_cmd, t_cmd **cmd)
 {
 	if (!execute_heredoc((*token)->next->str, *count_cmd,
-			(*cmd)->heredocs, (*token)->prev == NULL))
+			(*cmd)->heredocs, *token))
 	{
 		ft_putendl_fd("Heredoc error", 2);
 		exit(EXIT_FAILURE);

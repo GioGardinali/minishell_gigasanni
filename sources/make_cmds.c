@@ -6,7 +6,7 @@
 /*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 16:39:02 by asanni            #+#    #+#             */
-/*   Updated: 2024/10/01 20:28:42 by gigardin         ###   ########.fr       */
+/*   Updated: 2024/10/03 20:42:34 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ void	identify_type_cmd(t_token **token, t_cmd **cmd, char ***options,
 	if (find_redir(*token) == 1)
 	{
 		temp_save = *token;
-		handle_redirection(token, cmd);
-		*token = temp_save;
 		if ((*token)->type == HERE_DOC)
+		{
 			handle_heredoc(token, count_cmd, cmd);
-		else
-			*token = (*token)->next;
+			*token = temp_save;
+		}
+		handle_redirection(token, cmd);
 	}
 	else
 	{

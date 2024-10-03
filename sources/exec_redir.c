@@ -6,7 +6,7 @@
 /*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 19:38:24 by gigardin          #+#    #+#             */
-/*   Updated: 2024/10/01 20:47:15 by gigardin         ###   ########.fr       */
+/*   Updated: 2024/10/03 20:30:57 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,31 @@
 
 void	apply_redirection(int type, char *file)
 {
-	int	fd;
+	int			fd;
+	t_mini		*minishell;
 
-	if (type == INPUT)
+	fd = 0;
+	if (type == INPUT || type == HERE_DOC)
 		fd = open(file, O_RDONLY);
 	else if (type == TRUNC)
 		fd = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	else if (type == APPEND)
 		fd = open(file, O_WRONLY | O_CREAT | O_APPEND, 0644);
-	else
-		return ; //heredoc irá ser tratado;
-	/*
-		um argumentos a mais, todos os heredocs criados
-		sera executado uma unidade de heredoc de todos que vieram
-		dar um jeito de avançar para o proximo heredoc
-	*/
 	if (fd < 0)
 	{
-		perror("open");
-		// Dar um monte de frees (Tudo que foi mallocado até aqui)
-		// dar close em todos os fds abertos (fecha os strandards)
+		perror(file);
+		minishell = ft_global_mini(NULL);
+		free(minishell->pids);
+		free(minishell->env_content);
+		free(minishell->input);
+		clean_heredoc_files(minishell->cmd);
+		free_cmds(&minishell->cmd);
+		free_env(&minishell->env_exp);
+		free_token(&minishell->token);
+		close(minishell->std_in);
+		close(minishell->std_out);
+		close(STDIN_FILENO);
+		close(STDOUT_FILENO);
 		exit(EXIT_FAILURE);
 	}
 	if (type == INPUT || type == HERE_DOC)

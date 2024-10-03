@@ -6,7 +6,7 @@
 /*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 16:36:39 by gigardin          #+#    #+#             */
-/*   Updated: 2024/10/01 20:08:29 by gigardin         ###   ########.fr       */
+/*   Updated: 2024/10/03 20:50:55 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 t_heredoc	*init_heredoc(t_mini *minishell)
 {
 	t_heredoc	*heredoc;
+	// int			gambs;
 
 	heredoc = ft_calloc(sizeof(t_heredoc), 1);
 	if (!heredoc)
@@ -26,6 +27,8 @@ t_heredoc	*init_heredoc(t_mini *minishell)
 		free(heredoc);
 		return (NULL);
 	}
+	// gambs = heredoc->size;
+	// while (gambs--)
 	return (heredoc);
 }
 
@@ -70,7 +73,6 @@ void	quita_esses_heredocs(t_heredoc *heredocs)
 		while (current_file)
 		{
 			next_file = current_file->next;
-			unlink(current_file->file);
 			free(current_file->file);
 			free(current_file);
 			current_file = next_file;
@@ -92,19 +94,19 @@ int	handle_fork(char *filename, const char *delimiter, t_heredoc *heredocs)
 	pid = fork();
 	if (pid == 0)
 	{
-		close(minishell->std_in); // Adicionado
-		close(minishell->std_out); // Adicionado
+		close(minishell->std_in);
+		close(minishell->std_out);
 		write_file(filename, check_quotes_in_token(delimiter),
 			remove_quotes(delimiter), minishell);
-		quita_esses_heredocs(heredocs); // Dar um free em todos os conteúdos em cada index de heredocs, só então dar free no array
-		free(filename);
+		free((char *)delimiter);
+		quita_esses_heredocs(heredocs);
 		free(minishell->input);
 		free(minishell->env_content);
-		t_token    *next = minishell->token->next;
+		t_token	*next = minishell->token->next;
 		free_token_bc(&minishell->token);
 		free_token(&next);
 		free_env(&minishell->env_exp);
-		free_cmds(&minishell->cmd); // Linha 100% inútil
+		free_cmds(&minishell->cmd);
 		exit(0);
 	}
 	waitpid(pid, &exit_status, 0);
@@ -112,20 +114,24 @@ int	handle_fork(char *filename, const char *delimiter, t_heredoc *heredocs)
 }
 
 int	execute_heredoc(const char *delimiter, unsigned int count_cmd,
-	t_heredoc *heredocs, int is_first_cmd)
+	t_heredoc *heredocs, t_token *token)
 {
 	char	*filename;
 	int		exit_status;
 	int		validate;
+	int		is_first_cmd = (token->prev == NULL);
 
 	validate = 0;
+	delimiter = ft_strdup(delimiter);
 	setup_signals_heredoc();
 	filename = get_file(is_first_cmd);
+	free(token->next->str);
+	token->next->str = filename;
 	if (!handle_filename(filename, heredocs, count_cmd))
 		return (0);
 	exit_status = 0;
 	exit_status = handle_fork(filename, delimiter, heredocs);
-	free(filename);
+	free((char *)delimiter);
 	if (exit_status == 130)
 		return (validate);
 	else

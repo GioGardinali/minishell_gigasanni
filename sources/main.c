@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 18:52:55 by asanni            #+#    #+#             */
-/*   Updated: 2024/10/02 20:00:31 by asanni           ###   ########.fr       */
+/*   Updated: 2024/10/03 20:40:09 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,16 @@
 
 void	check_pid(t_mini *minishell)
 {
-	if (((!is_built_in(minishell->cmd->str)) && minishell->cmd->path == NULL)
+	if (is_built_in(minishell->cmd->str) || minishell->cmd->path != NULL)
+	{
+		process_multiple_cmds(minishell, -1);
+	}
+	else
+	{
+		print_error(minishell->cmd->str, ": command not found");
+		update_exit_status(minishell, 127);
+	}
+/*     if (((!is_built_in(minishell->cmd->str)) && minishell->cmd->path == NULL)
 		|| (access(minishell->cmd->path, F_OK) == -1
 			&& ft_strcmp(minishell->cmd->str, "exit") != 0))
 	{
@@ -24,6 +33,7 @@ void	check_pid(t_mini *minishell)
 	}
 	else
 		process_multiple_cmds(minishell, -1);
+*/
 }
 
 static void	start_minishell(t_mini *minishell)

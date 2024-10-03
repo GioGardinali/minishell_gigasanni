@@ -259,7 +259,7 @@ void			redonimation_readline(int signal);
 /*heredoc_init*/
 t_heredoc		*init_heredoc(t_mini *minishell);
 int				execute_heredoc(const char *delimiter, unsigned int count_cmd,
-					t_heredoc *heredocs, int is_first_cmd);
+					t_heredoc *heredocs, t_token *token);
 int				handle_fork(char *filename, const char *delimiter,
 					t_heredoc *heredocs);
 int				handle_filename(char *filename, t_heredoc *heredocs,
