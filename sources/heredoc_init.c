@@ -6,7 +6,7 @@
 /*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 16:36:39 by gigardin          #+#    #+#             */
-/*   Updated: 2024/10/03 20:50:55 by gigardin         ###   ########.fr       */
+/*   Updated: 2024/10/05 17:17:46 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	quita_esses_heredocs(t_heredoc *heredocs)
 		free(heredocs);
 		return ;
 	}
-	while (heredocs->array[i])
+	while (heredocs->array[i++])
 	{
 		current_file = heredocs->array[i];
 		while (current_file)
@@ -77,7 +77,6 @@ void	quita_esses_heredocs(t_heredoc *heredocs)
 			free(current_file);
 			current_file = next_file;
 		}
-		i++;
 	}
 	free(heredocs->array);
 	free(heredocs);
@@ -88,25 +87,22 @@ int	handle_fork(char *filename, const char *delimiter, t_heredoc *heredocs)
 	pid_t	pid;
 	int		exit_status;
 	t_mini	*minishell;
+	t_token	*next;
 
 	minishell = ft_global_mini(NULL);
 	exit_status = 0;
 	pid = fork();
 	if (pid == 0)
 	{
-		close(minishell->std_in);
-		close(minishell->std_out);
+		close_std_int_and_out(minishell);
 		write_file(filename, check_quotes_in_token(delimiter),
 			remove_quotes(delimiter), minishell);
 		free((char *)delimiter);
 		quita_esses_heredocs(heredocs);
 		free(minishell->input);
 		free(minishell->env_content);
-		t_token	*next = minishell->token->next;
-		free_token_bc(&minishell->token);
-		free_token(&next);
-		free_env(&minishell->env_exp);
-		free_cmds(&minishell->cmd);
+		next = minishell->token->next;
+		clean_fork_heredoc(minishell);
 		exit(0);
 	}
 	waitpid(pid, &exit_status, 0);

@@ -204,6 +204,7 @@ void			clean_exec_comand(t_mini *minishell);
 
 /*free_heredocs*/
 void			clean_heredoc_files(t_cmd *cmd);
+void			clean_fork_heredoc(t_mini *minishell);
 
 /*get_path*/
 char			**copy_env(t_mini *minishell, char **env_list);

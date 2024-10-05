@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_heredocs.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 18:49:58 by gigardin          #+#    #+#             */
-/*   Updated: 2024/09/27 19:29:36 by asanni           ###   ########.fr       */
+/*   Updated: 2024/10/05 17:16:24 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,12 @@ void	clean_heredoc_files(t_cmd *cmd)
 	}
 	free(current_cmd->heredocs->array);
 	free(current_cmd->heredocs);
+}
+
+void	clean_fork_heredoc(t_mini *minishell)
+{
+	free_token_bc(&minishell->token);
+	free_token(&minishell->token);
+	free_env(&minishell->env_exp);
+	free_cmds(&minishell->cmd);
 }
