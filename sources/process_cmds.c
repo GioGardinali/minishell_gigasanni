@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process_cmds.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 15:48:38 by asanni            #+#    #+#             */
-/*   Updated: 2024/10/05 15:12:01 by gigardin         ###   ########.fr       */
+/*   Updated: 2024/10/05 16:22:31 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ void	execute_command(t_mini minishell, int input_fd, int *out_fd, t_cmd *cmd)
 		execve_function(&minishell, path, options);
 	exit(EXIT_FAILURE);
 }
+
+/*verificar se o path é válido no process cmds*/
 
 pid_t	fork_and_execute(t_mini *minishell, int input_fd,
 	int *out_fd, t_cmd *cmd)
