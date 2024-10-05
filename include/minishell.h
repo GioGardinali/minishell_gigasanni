@@ -219,6 +219,7 @@ char			*check_path(t_mini *minishell);
 int				find_redir(t_token *token);
 int				return_len(t_token *token);
 int				search_options(t_token *token);
+void			last_cmd(t_cmd *temp, t_cmd **cmd, t_cmd *new_cmd);
 
 /*make_cmd*/
 void			make_cmds(t_cmd **cmd, t_token **token, t_mini *minishell);

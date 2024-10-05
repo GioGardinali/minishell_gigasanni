@@ -6,7 +6,7 @@
 /*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 16:39:02 by asanni            #+#    #+#             */
-/*   Updated: 2024/10/03 20:42:34 by gigardin         ###   ########.fr       */
+/*   Updated: 2024/10/05 18:10:19 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ void	make_one_cmd(t_cmd **cmd, t_token **token, t_mini *minishell,
 	t_cmd	*temp;
 	char	**split;
 
+	temp = NULL;
 	new_cmd = ft_calloc(sizeof(t_cmd), 1);
 	if (new_cmd == NULL)
 		return ;
@@ -71,11 +72,7 @@ void	make_one_cmd(t_cmd **cmd, t_token **token, t_mini *minishell,
 		*cmd = new_cmd;
 	}
 	else
-	{
-		temp = get_last_cmd(cmd);
-		temp->next = new_cmd;
-		new_cmd->prev = temp;
-	}
+		last_cmd(temp, cmd, new_cmd);
 	split = ft_split((*token)->str, ' ');
 	new_cmd->str = ft_strdup(split [0]);
 	free_matrix(split);
