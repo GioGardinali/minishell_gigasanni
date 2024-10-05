@@ -6,7 +6,7 @@
 /*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 16:36:39 by gigardin          #+#    #+#             */
-/*   Updated: 2024/10/05 17:17:46 by gigardin         ###   ########.fr       */
+/*   Updated: 2024/10/05 17:21:50 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,30 +107,4 @@ int	handle_fork(char *filename, const char *delimiter, t_heredoc *heredocs)
 	}
 	waitpid(pid, &exit_status, 0);
 	return (WEXITSTATUS(exit_status));
-}
-
-int	execute_heredoc(const char *delimiter, unsigned int count_cmd,
-	t_heredoc *heredocs, t_token *token)
-{
-	char	*filename;
-	int		exit_status;
-	int		validate;
-	int		is_first_cmd = (token->prev == NULL);
-
-	validate = 0;
-	delimiter = ft_strdup(delimiter);
-	setup_signals_heredoc();
-	filename = get_file(is_first_cmd);
-	free(token->next->str);
-	token->next->str = filename;
-	if (!handle_filename(filename, heredocs, count_cmd))
-		return (0);
-	exit_status = 0;
-	exit_status = handle_fork(filename, delimiter, heredocs);
-	free((char *)delimiter);
-	if (exit_status == 130)
-		return (validate);
-	else
-		validate = 1;
-	return (validate);
 }
