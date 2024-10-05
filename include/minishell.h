@@ -157,6 +157,10 @@ void			free_cmds(t_cmd **cmd);
 void			free_matrix(char **matrix);
 void			error_function(char *str);
 
+/*exec_aux_cmds*/
+void			close_std_int_and_out(t_mini *minishell);
+void			execve_function(t_mini *minihell, char *path, char **options);
+
 /*exit*/
 int				execute_exit(t_mini *minishell, t_cmd *cmd);
 int				update_exit_status(t_mini *minishell, int status);
@@ -198,8 +202,6 @@ void			clean_minishell(t_mini *minishell);
 void			free_token_bc(t_token **token);
 void			clean_exec_comand(t_mini *minishell);
 
-void			close_std_int_and_out(t_mini *minishell);
-void			execve_function(t_mini *minihell, char *path, char **options);
 /*free_heredocs*/
 void			clean_heredoc_files(t_cmd *cmd);
 

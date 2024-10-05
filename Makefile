@@ -60,6 +60,7 @@ sources/signal.c\
 sources/unset.c\
 sources/delete_later.c\
 sources/pwd.c\
+sources/exec_aux_cmds.c\
 
 #--------------RULES----------------------------#
 

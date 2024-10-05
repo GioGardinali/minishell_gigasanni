@@ -6,7 +6,7 @@
 /*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 20:01:07 by asanni            #+#    #+#             */
-/*   Updated: 2024/10/05 15:11:25 by gigardin         ###   ########.fr       */
+/*   Updated: 2024/10/05 15:52:18 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,16 +54,4 @@ void	clean_exec_comand(t_mini *minishell)
 	close(minishell->std_out);
 	close(STDIN_FILENO);
 	close(STDOUT_FILENO);
-}
-void	execve_function(t_mini *minihell, char *path, char **options)
-{
-	free_token(&minihell->token);
-	free(minihell->input);
-	if (path != NULL)
-		execve(path, options, minihell->env_content);
-}
-void	close_std_int_and_out(t_mini *minishell)
-{
-	close(minishell->std_in);
-	close(minishell->std_out);
 }
