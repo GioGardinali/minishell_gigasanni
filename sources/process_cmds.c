@@ -6,7 +6,7 @@
 /*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 15:48:38 by asanni            #+#    #+#             */
-/*   Updated: 2024/10/03 20:52:46 by gigardin         ###   ########.fr       */
+/*   Updated: 2024/10/05 14:11:29 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	execute_command(t_mini minishell, int input_fd, int *out_fd, t_cmd *cmd)
 {
 	char	*path;
 	char	**options;
+	int		status;
 
 	path = cmd->path;
 	options = cmd->options;
@@ -33,18 +34,8 @@ void	execute_command(t_mini minishell, int input_fd, int *out_fd, t_cmd *cmd)
 			close(input_fd);
 		execute_built_in(&minishell, cmd);
 		//quita_esses_heredocs(minishell.cmd->heredocs);
-		int status = minishell.exit_status;
-		free(minishell.pids);
-		free(minishell.env_content);
-		free(minishell.input);
-		clean_heredoc_files(minishell.cmd);
-		free_cmds(&minishell.cmd);
-		free_env(&minishell.env_exp);
-		free_token(&minishell.token);
-		close(minishell.std_in);
-		close(minishell.std_out);
-		close(STDIN_FILENO);
-		close(STDOUT_FILENO);
+		status = minishell.exit_status;
+		clean_exec_comand(&minishell);
 		exit(status);
 	}
 	else

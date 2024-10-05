@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_functions2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 20:01:07 by asanni            #+#    #+#             */
-/*   Updated: 2024/10/02 20:06:36 by asanni           ###   ########.fr       */
+/*   Updated: 2024/10/05 14:09:18 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,19 @@ void	free_token_bc(t_token **token)
 		(*token) = temp;
 	}
 	token = NULL;
+}
+
+void	clean_exec_comand(t_mini *minishell)
+{
+	free(minishell->pids);
+	free(minishell->env_content);
+	free(minishell->input);
+	clean_heredoc_files(minishell->cmd);
+	free_cmds(&minishell->cmd);
+	free_env(&minishell->env_exp);
+	free_token(&minishell->token);
+	close(minishell->std_in);
+	close(minishell->std_out);
+	close(STDIN_FILENO);
+	close(STDOUT_FILENO);
 }

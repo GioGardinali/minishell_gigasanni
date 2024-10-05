@@ -196,6 +196,7 @@ void			free_env(t_env **env);
 /*free_functions2*/
 void			clean_minishell(t_mini *minishell);
 void			free_token_bc(t_token **token);
+void			clean_exec_comand(t_mini *minishell);
 
 /*free_heredocs*/
 void			clean_heredoc_files(t_cmd *cmd);
@@ -285,7 +286,7 @@ char			*remove_quotes(const char *str_end);
 unsigned int	count_cmd(t_token *temp_token);
 void			apply_heredoc(t_cmd *cmd);
 
-/*execução redirect*/
+/*exec redirect*/
 void			apply_redirections(t_redir *redirs);
 void			execute_cmds_redir(t_cmd *cmd, char **env_content);
 
