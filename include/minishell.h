@@ -269,6 +269,7 @@ int				handle_fork(char *filename, const char *delimiter,
 					t_heredoc *heredocs);
 int				handle_filename(char *filename, t_heredoc *heredocs,
 					unsigned int count_cmd);
+void			quita_esses_heredocs(t_heredoc *heredocs);
 
 /*heredoc_new_file*/
 void			write_file(char *file, int quotes, const char *str_end,
