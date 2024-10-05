@@ -6,7 +6,7 @@
 /*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 20:01:07 by asanni            #+#    #+#             */
-/*   Updated: 2024/10/05 14:09:18 by gigardin         ###   ########.fr       */
+/*   Updated: 2024/10/05 14:22:19 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ void	clean_exec_comand(t_mini *minishell)
 	free(minishell->pids);
 	free(minishell->env_content);
 	free(minishell->input);
-	clean_heredoc_files(minishell->cmd);
 	free_cmds(&minishell->cmd);
 	free_env(&minishell->env_exp);
 	free_token(&minishell->token);
