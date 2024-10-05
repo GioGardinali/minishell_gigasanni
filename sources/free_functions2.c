@@ -6,7 +6,7 @@
 /*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 20:01:07 by asanni            #+#    #+#             */
-/*   Updated: 2024/10/05 15:52:18 by gigardin         ###   ########.fr       */
+/*   Updated: 2024/10/05 16:56:16 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	free_token_bc(t_token **token)
 
 void	clean_exec_comand(t_mini *minishell)
 {
+	quita_esses_heredocs(minishell->cmd->heredocs);
 	free(minishell->pids);
 	free(minishell->env_content);
 	free(minishell->input);

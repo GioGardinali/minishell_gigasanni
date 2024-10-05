@@ -6,7 +6,7 @@
 /*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 19:38:24 by gigardin          #+#    #+#             */
-/*   Updated: 2024/10/05 16:22:09 by gigardin         ###   ########.fr       */
+/*   Updated: 2024/10/05 16:58:35 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,18 +28,7 @@ void	apply_redirection(int type, char *file)
 	{
 		perror(file);
 		minishell = ft_global_mini(NULL);
-		free(minishell->pids);
-		free(minishell->env_content);
-		free(minishell->input);
-		quita_esses_heredocs(minishell->cmd->heredocs);
-		// clean_heredoc_files(minishell->cmd);
-		free_cmds(&minishell->cmd);
-		free_env(&minishell->env_exp);
-		free_token(&minishell->token);
-		close(minishell->std_in);
-		close(minishell->std_out);
-		close(STDIN_FILENO);
-		close(STDOUT_FILENO);
+		clean_exec_comand(minishell);
 		exit(EXIT_FAILURE);
 	}
 	if (type == INPUT || type == HERE_DOC)

@@ -6,7 +6,7 @@
 /*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 15:48:38 by asanni            #+#    #+#             */
-/*   Updated: 2024/10/05 16:30:23 by gigardin         ###   ########.fr       */
+/*   Updated: 2024/10/05 16:55:57 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void	execute_command(t_mini minishell, int input_fd, int *out_fd, t_cmd *cmd)
 		if (input_fd != -1)
 			close(input_fd);
 		execute_built_in(&minishell, cmd);
-		quita_esses_heredocs(minishell.cmd->heredocs);
 		status = minishell.exit_status;
 		clean_exec_comand(&minishell);
 		exit(status);
