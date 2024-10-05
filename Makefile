@@ -44,7 +44,7 @@ sources/free_heredocs.c\
 sources/get_path.c \
 sources/handle_cmds_redirects.c\
 sources/heredoc_init.c\
-sources/heredoc_loop.c\
+sources/heredoc_execution.c\
 sources/heredoc_new_file.c\
 sources/heredoc_utils.c\
 sources/input_verif.c \
