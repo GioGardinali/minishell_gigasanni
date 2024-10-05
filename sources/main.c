@@ -6,22 +6,11 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 18:52:55 by asanni            #+#    #+#             */
-/*   Updated: 2024/10/05 17:30:04 by asanni           ###   ########.fr       */
+/*   Updated: 2024/10/05 20:16:32 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
-void	check_pid(t_mini *minishell)
-{
-	if (is_built_in(minishell->cmd->str) || minishell->cmd->path != NULL)
-		process_multiple_cmds(minishell, -1);
-	else
-	{
-		print_error(minishell->cmd->str, ": command not found");
-		update_exit_status(minishell, 127);
-	}
-}
 
 static void	start_minishell(t_mini *minishell)
 {
@@ -40,7 +29,7 @@ static void	start_minishell(t_mini *minishell)
 	else
 		add_history(minishell->input);
 	if (norme(minishell, token) == 0)
-		check_pid(minishell);
+		process_multiple_cmds(minishell, -1);
 	return ;
 }
 
