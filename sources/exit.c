@@ -6,7 +6,7 @@
 /*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 17:31:29 by asanni            #+#    #+#             */
-/*   Updated: 2024/10/03 20:32:41 by gigardin         ###   ########.fr       */
+/*   Updated: 2024/10/05 16:34:32 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@ int	exit_options(char *options)
 	long int	nbr;
 
 	nbr = ft_atol(options);
-	if (ft_isdigit(options[0]) != 0)
+	if (ft_isdigit(options[0]) == 0 && ft_isdigit(options[1]) == 0)
 	{
 		print_error(options, ":requires a numeric argument");
 		return (2);
 	}
 	if (nbr < LONG_MAX || nbr > LONG_MIN)
-		return (nbr % 255);
+		return (nbr);
 	else
 	{
 		print_error(options, ":requires a numeric argument");
@@ -38,7 +38,7 @@ int	execute_exit(t_mini *minishell, t_cmd *cmd)
 
 	current = cmd;
 	if (current->options[1])
-		return (exit_options(current->options[1]));
+		exit (exit_options(current->options[1]));
 	else
 		status = minishell->exit_status;
 	ft_putendl_fd("exit", 1);
