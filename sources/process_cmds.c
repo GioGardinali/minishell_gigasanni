@@ -6,7 +6,7 @@
 /*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 15:48:38 by asanni            #+#    #+#             */
-/*   Updated: 2024/10/05 14:11:29 by gigardin         ###   ########.fr       */
+/*   Updated: 2024/10/05 15:12:01 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,7 @@ void	execute_command(t_mini minishell, int input_fd, int *out_fd, t_cmd *cmd)
 
 	path = cmd->path;
 	options = cmd->options;
-	close(minishell.std_in);
-	close(minishell.std_out);
+	close_std_int_and_out(&minishell);
 	if (cmd->prev != NULL || cmd->next != NULL)
 		close(out_fd[0]);
 	setup_file_descriptors(input_fd, out_fd[1]);
@@ -33,18 +32,12 @@ void	execute_command(t_mini minishell, int input_fd, int *out_fd, t_cmd *cmd)
 		if (input_fd != -1)
 			close(input_fd);
 		execute_built_in(&minishell, cmd);
-		//quita_esses_heredocs(minishell.cmd->heredocs);
 		status = minishell.exit_status;
 		clean_exec_comand(&minishell);
 		exit(status);
 	}
 	else
-	{
-		free_token(&minishell.token);
-		free(minishell.input);
-		if (path != NULL)
-			execve(path, options, minishell.env_content);
-	}
+		execve_function(&minishell, path, options);
 	exit(EXIT_FAILURE);
 }
 

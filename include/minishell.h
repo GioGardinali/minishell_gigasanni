@@ -198,6 +198,8 @@ void			clean_minishell(t_mini *minishell);
 void			free_token_bc(t_token **token);
 void			clean_exec_comand(t_mini *minishell);
 
+void			close_std_int_and_out(t_mini *minishell);
+void			execve_function(t_mini *minihell, char *path, char **options);
 /*free_heredocs*/
 void			clean_heredoc_files(t_cmd *cmd);
 
