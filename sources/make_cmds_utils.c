@@ -6,7 +6,7 @@
 /*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 20:03:25 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/29 06:37:00 by gigardin         ###   ########.fr       */
+/*   Updated: 2024/10/05 18:07:19 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,11 @@ t_cmd	*get_last_cmd(t_cmd **cmd)
 	while (temp->next)
 		temp = temp->next;
 	return (temp);
+}
+
+void	last_cmd(t_cmd *temp, t_cmd **cmd, t_cmd *new_cmd)
+{
+		temp = get_last_cmd(cmd);
+		temp->next = new_cmd;
+		new_cmd->prev = temp;
 }
