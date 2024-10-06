@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 19:12:09 by asanni            #+#    #+#             */
-/*   Updated: 2024/10/06 17:15:00 by asanni           ###   ########.fr       */
+/*   Updated: 2024/10/06 17:30:43 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,7 @@ int	check_redirects(char *str)
 		skip_quotes (str, &i);
 		if (str[i] == '>' || str[i] == '<')
 		{
-			redir = str[i];
-			i++;
+			redir = str[i++];
 			if ((str[i] == '>' || str[i] == '<') && str[i - 1] != str[i])
 				return (1);
 			if (str[i] == redir)
@@ -51,7 +50,8 @@ int	check_redirects(char *str)
 			if (str[i] == 0 || str[i] == '|' || str[i] == '>' || str[i] == '<')
 				validate = 1;
 		}
-		i++;
+		if (str[i] != '\0')
+			i++;
 	}
 	return (validate);
 }
@@ -78,7 +78,8 @@ int	check_pipes(char *str)
 			if (str[i] == '\0' || str[i] == '|')
 				validate = 1;
 		}
-		i++;
+		if (str[i] != '\0')
+			i++;
 	}
 	return (validate);
 }
