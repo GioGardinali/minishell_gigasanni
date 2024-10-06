@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 17:31:29 by asanni            #+#    #+#             */
-/*   Updated: 2024/10/06 16:26:51 by asanni           ###   ########.fr       */
+/*   Updated: 2024/10/06 16:34:19 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	execute_exit(t_mini *minishell, t_cmd *cmd)
 	int		status;
 
 	current = cmd;
-	if (current->options)
+	if (current->options[1])
 		exit (exit_options(current->options));
 	else
 		status = minishell->exit_status;
