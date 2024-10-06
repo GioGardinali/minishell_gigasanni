@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 14:18:26 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/29 04:41:52 by asanni           ###   ########.fr       */
+/*   Updated: 2024/10/06 15:29:43 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	valid_var_name(char *str)
 	if (str[0] == '?')
 		return (0);
 	split = ft_split_two(str, '=');
-	if (split != NULL && split[0] != NULL)
+	if (split != NULL && split[0][0] != '\0')
 	{
 		i = 0;
 		while (split[0][i] != '\0')
@@ -35,6 +35,8 @@ int	valid_var_name(char *str)
 		free_matrix(split);
 		return (1);
 	}
+	else
+		return (0);
 	free_matrix(split);
 	return (0);
 }
