@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 17:57:37 by asanni            #+#    #+#             */
-/*   Updated: 2024/10/05 17:19:48 by asanni           ###   ########.fr       */
+/*   Updated: 2024/10/06 20:03:17 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,34 +55,6 @@ char	*expand_token(t_mini *minishell, t_aux *aux, int quotes)
 	}
 	return (aux->result);
 }
-
-// char	*expand_token(t_mini *minishell, t_aux *aux, int quotes)
-// {
-// 	int	i;
-// 	int	j;
-// 	int	in_double_quotes;
-// 	int	in_single_quotes;
-
-// 	i = 0;
-// 	j = 0;
-// 	in_double_quotes = 0;
-// 	in_single_quotes = 0;
-// 	aux->result = ft_calloc(1, (calculate_size(minishell, aux->token) + 1));
-// 	if (!aux->result)
-// 		return (NULL);
-// 	aux->i = &i;
-// 	aux->j = &j;
-// 	while (aux->token[i])
-// 	{
-// 		if (!handle_quotes(aux->token, &i, &in_double_quotes,
-// 				&in_single_quotes, quotes)
-// 			&& !handle_dollar_sign(minishell, aux, quotes, &in_single_quotes))
-// 		{
-// 			aux->result[j++] = aux->token[i++];
-// 		}
-// 	}
-// 	return (aux->result);
-// }
 
 void	expand_all_tokens(t_mini *minishell)
 {
