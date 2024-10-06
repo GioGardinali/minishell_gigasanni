@@ -6,20 +6,23 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 19:12:09 by asanni            #+#    #+#             */
-/*   Updated: 2024/10/01 19:43:13 by asanni           ###   ########.fr       */
+/*   Updated: 2024/10/06 17:15:00 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	skip_quotes(char	*str, int	*i)
+void	skip_quotes(char *str, int *i)
 {
 	char	quote;
 
 	if (str[(*i)] == 34 || str[(*i)] == 39)
 	{
 		quote = str[(*i)];
-		while (str[(*i)] != quote)
+		(*i)++;
+		while (str[(*i)] != '\0' && str[(*i)] != quote)
+			(*i)++;
+		if (str[(*i)] == quote)
 			(*i)++;
 	}
 }
