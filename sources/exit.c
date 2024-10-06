@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 17:31:29 by asanni            #+#    #+#             */
-/*   Updated: 2024/10/06 16:34:19 by asanni           ###   ########.fr       */
+/*   Updated: 2024/10/06 20:45:06 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,5 +80,5 @@ int	update_exit_status(t_mini *minishell, int status)
 		}
 		current = current->next;
 	}
-	return (0);
+	return (status);
 }

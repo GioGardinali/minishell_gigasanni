@@ -150,6 +150,7 @@ int				execute_pwd(void);
 
 /*echo*/
 int				execute_echo(t_cmd *cmd);
+// int				execute_echo(t_cmd *cmd, t_mini *minishell);
 
 /*env*/
 int				execute_env(t_mini *minishell);
