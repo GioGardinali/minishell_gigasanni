@@ -29,6 +29,9 @@
 
 # define HERE_DOC_FILE "/tmp/heredoc"
 
+# define FAIL 1
+# define SUCCESS 0
+
 //Structs
 typedef struct s_env
 {
@@ -294,7 +297,7 @@ unsigned int	count_cmd(t_token *temp_token);
 void			apply_heredoc(t_cmd *cmd);
 
 /*exec redirect*/
-void			apply_redirections(t_redir *redirs);
+int			apply_redirections(t_redir *redirs);
 void			execute_cmds_redir(t_cmd *cmd, char **env_content);
 
 /*função perdida*/

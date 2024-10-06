@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process_cmds.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 15:48:38 by asanni            #+#    #+#             */
-/*   Updated: 2024/10/05 20:18:52 by asanni           ###   ########.fr       */
+/*   Updated: 2024/10/06 19:40:08 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,19 @@ void	execute_command(t_mini minishell, int input_fd, int *out_fd, t_cmd *cmd)
 	if (cmd->prev != NULL || cmd->next != NULL)
 		close(out_fd[0]);
 	setup_file_descriptors(input_fd, out_fd[1]);
-	apply_redirections(cmd->redirs);
-	if (is_built_in (cmd->str) != 0)
+	if (apply_redirections(cmd->redirs) == FAIL)
+	{
+		if (is_built_in(cmd->str))
+		{
+			if (out_fd[1] != -1)
+				close(out_fd[1]);
+			if (input_fd != -1)
+				close(input_fd);
+		}
+		clean_exec_comand(&minishell);
+		minishell.exit_status = 1;
+	}
+	else if (is_built_in (cmd->str) != 0)
 	{
 		if (out_fd[1] != -1)
 			close(out_fd[1]);
@@ -48,10 +59,12 @@ pid_t	fork_and_execute(t_mini *minishell, int input_fd,
 {
 	pid_t	pid;
 
-	if (is_built_in(cmd->str) != 0 && out_fd[1] == -1 && cmd->prev == NULL)
+	if (is_built_in(cmd->str) != 0 && out_fd[1] == -1)// && cmd->prev == NULL)
 	{
-		apply_redirections(cmd->redirs);
-		execute_built_in(minishell, cmd);
+		if (apply_redirections(cmd->redirs) == SUCCESS)
+			execute_built_in(minishell, cmd);
+		else
+			minishell->exit_status = 1;
 		dup2(minishell->std_in, 0);
 		dup2(minishell->std_out, 1);
 		close(minishell->std_in);
