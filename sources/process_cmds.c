@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process_cmds.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 15:48:38 by asanni            #+#    #+#             */
-/*   Updated: 2024/10/06 19:40:08 by gigardin         ###   ########.fr       */
+/*   Updated: 2024/10/07 15:50:21 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	execute_command(t_mini minishell, int input_fd, int *out_fd, t_cmd *cmd)
 {
 	char	*path;
 	char	**options;
-	int		status;
 
 	path = cmd->path;
 	options = cmd->options;
@@ -43,23 +42,19 @@ void	execute_command(t_mini minishell, int input_fd, int *out_fd, t_cmd *cmd)
 		if (input_fd != -1)
 			close(input_fd);
 		execute_built_in(&minishell, cmd);
-		status = minishell.exit_status;
 		clean_exec_comand(&minishell);
-		exit(status);
 	}
 	else
 		execve_function(&minishell, path, options);
 	exit(minishell.exit_status);
 }
 
-/*verificar se o path é válido no process cmds*/
-
 pid_t	fork_and_execute(t_mini *minishell, int input_fd,
 	int *out_fd, t_cmd *cmd)
 {
 	pid_t	pid;
 
-	if (is_built_in(cmd->str) != 0 && out_fd[1] == -1)// && cmd->prev == NULL)
+	if (is_built_in(cmd->str) != 0 && out_fd[1] == -1 && cmd->prev == NULL)
 	{
 		if (apply_redirections(cmd->redirs) == SUCCESS)
 			execute_built_in(minishell, cmd);

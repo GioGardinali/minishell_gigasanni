@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 19:23:18 by asanni            #+#    #+#             */
-/*   Updated: 2024/10/01 19:04:05 by asanni           ###   ########.fr       */
+/*   Updated: 2024/10/07 15:48:46 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ char	*verify_path(t_mini *minishell, char *str)
 	int		result;
 	int		i;
 
-	if (ft_strchr(str, '/') != NULL)
+	if (ft_strchr(str, '/') != NULL || str == NULL)
 		return (ft_strdup(str));
 	path_line = search_path(minishell->env_content, "PATH");
 	str_path = ft_split(remove_path(path_line), ':');

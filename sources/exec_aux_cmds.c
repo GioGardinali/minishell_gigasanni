@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 15:51:49 by gigardin          #+#    #+#             */
-/*   Updated: 2024/10/05 20:17:36 by asanni           ###   ########.fr       */
+/*   Updated: 2024/10/07 15:48:10 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	execve_function(t_mini *minishell, char *path, char **options)
 	status = 0;
 	free_token(&minishell->token);
 	free(minishell->input);
+	minishell->input = NULL;
 	status = check_file_path_access(path, X_OK, options);
 	if (status == 0)
 	{
@@ -54,7 +55,10 @@ void	execve_function(t_mini *minishell, char *path, char **options)
 		minishell->exit_status = 1;
 	}
 	else
+	{
+		clean_exec_comand(minishell);
 		minishell->exit_status = status;
+	}
 	close(0);
 	close(1);
 }

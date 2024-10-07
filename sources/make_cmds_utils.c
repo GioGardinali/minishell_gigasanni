@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   make_cmds_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 20:03:25 by asanni            #+#    #+#             */
-/*   Updated: 2024/10/05 18:07:19 by gigardin         ###   ########.fr       */
+/*   Updated: 2024/10/07 15:49:21 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	find_redir(t_token *token)
 int	search_options(t_token *token)
 {
 	return (token == NULL || token->str == NULL
-		|| (ft_strcmp(token->str, "|") == 0));
+		|| token->type == PIPE);
 }
 
 int	return_len(t_token *token)

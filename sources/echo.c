@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 16:47:40 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/28 20:44:53 by asanni           ###   ########.fr       */
+/*   Updated: 2024/10/07 15:45:18 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ void	echo(t_cmd *cmd)
 	i = 1;
 	while (cmd->options[i] != NULL)
 	{
-		printf("%s", cmd->options[i]);
+		write(1, cmd->options[i], ft_strlen(cmd->options[i]));
 		if (cmd->options[i + 1] != NULL)
-			printf(" ");
+			write(1, " ", 1);
 		i++;
 	}
-	printf("\n");
+	write(1, "\n", 1);
 }
 
 void	echo_nl(t_cmd *cmd)
@@ -36,9 +36,9 @@ void	echo_nl(t_cmd *cmd)
 		i++;
 	while (cmd->options[i] != NULL)
 	{
-		printf("%s", cmd->options[i]);
+		write(1, cmd->options[i], ft_strlen(cmd->options[i]));
 		if (cmd->options[i + 1] != NULL)
-			printf(" ");
+			write(1, " ", 1);
 		i++;
 	}
 }
