@@ -331,14 +331,4 @@ int				build_pwd(void);
 
 void			print_error(char *var, char *msg);
 
-/*delete_later*/
-void			print_env_list(t_env *env_list);
-void			print_cmds(t_cmd *cmd); //apagar
-void			print_options(char **options); //apagar
-void			print_tokens(t_token *token); //apagar
-void			print_matrix(char **matrix); // apagar
-void			print_cmds_r(t_cmd *cmd); //apagar
-//void	process_multiple_cmds(t_mini minishell);
-//void	prepare_split(char *str);
-
 #endif
