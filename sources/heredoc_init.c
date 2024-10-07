@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_init.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 16:36:39 by gigardin          #+#    #+#             */
-/*   Updated: 2024/10/05 17:21:50 by gigardin         ###   ########.fr       */
+/*   Updated: 2024/10/07 15:54:51 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 t_heredoc	*init_heredoc(t_mini *minishell)
 {
 	t_heredoc	*heredoc;
-	// int			gambs;
 
 	heredoc = ft_calloc(sizeof(t_heredoc), 1);
 	if (!heredoc)
@@ -27,8 +26,6 @@ t_heredoc	*init_heredoc(t_mini *minishell)
 		free(heredoc);
 		return (NULL);
 	}
-	// gambs = heredoc->size;
-	// while (gambs--)
 	return (heredoc);
 }
 
@@ -53,7 +50,7 @@ t_mini	*ft_global_mini(t_mini *minishell)
 	return (shell);
 }
 
-void	quita_esses_heredocs(t_heredoc *heredocs)
+void	quit_heredocs(t_heredoc *heredocs)
 {
 	int				i;
 	t_file_heredoc	*current_file;
@@ -98,7 +95,7 @@ int	handle_fork(char *filename, const char *delimiter, t_heredoc *heredocs)
 		write_file(filename, check_quotes_in_token(delimiter),
 			remove_quotes(delimiter), minishell);
 		free((char *)delimiter);
-		quita_esses_heredocs(heredocs);
+		quit_heredocs(heredocs);
 		free(minishell->input);
 		free(minishell->env_content);
 		next = minishell->token->next;

@@ -150,7 +150,6 @@ int				execute_pwd(void);
 
 /*echo*/
 int				execute_echo(t_cmd *cmd);
-// int				execute_echo(t_cmd *cmd, t_mini *minishell);
 
 /*env*/
 int				execute_env(t_mini *minishell);
@@ -275,7 +274,7 @@ int				handle_fork(char *filename, const char *delimiter,
 					t_heredoc *heredocs);
 int				handle_filename(char *filename, t_heredoc *heredocs,
 					unsigned int count_cmd);
-void			quita_esses_heredocs(t_heredoc *heredocs);
+void			quit_heredocs(t_heredoc *heredocs);
 
 /*heredoc_new_file*/
 void			write_file(char *file, int quotes, const char *str_end,
@@ -298,7 +297,7 @@ unsigned int	count_cmd(t_token *temp_token);
 void			apply_heredoc(t_cmd *cmd);
 
 /*exec redirect*/
-int			apply_redirections(t_redir *redirs);
+int				apply_redirections(t_redir *redirs);
 void			execute_cmds_redir(t_cmd *cmd, char **env_content);
 
 /*função perdida*/

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_functions2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 20:01:07 by asanni            #+#    #+#             */
-/*   Updated: 2024/10/05 17:16:09 by gigardin         ###   ########.fr       */
+/*   Updated: 2024/10/07 15:55:00 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	free_token_bc(t_token **token)
 
 void	clean_exec_comand(t_mini *minishell)
 {
-	quita_esses_heredocs(minishell->cmd->heredocs);
+	quit_heredocs(minishell->cmd->heredocs);
 	free(minishell->pids);
 	free(minishell->env_content);
 	free(minishell->input);

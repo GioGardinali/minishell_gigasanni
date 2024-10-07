@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 15:52:20 by gigardin          #+#    #+#             */
-/*   Updated: 2024/10/05 18:15:47 by gigardin         ###   ########.fr       */
+/*   Updated: 2024/10/07 15:52:18 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	copy_heredoc(int signal)
 	minishell = ft_global_mini(NULL);
 	if (signal == SIGINT)
 	{
-		//printf("\nHeredoc interrupted by Ctrl+C\n");
 		clean_heredoc_files(minishell->cmd);
 		exit(EXIT_FAILURE);
 	}

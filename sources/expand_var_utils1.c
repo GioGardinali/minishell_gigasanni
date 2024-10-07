@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 15:31:39 by asanni            #+#    #+#             */
-/*   Updated: 2024/10/06 20:47:48 by asanni           ###   ########.fr       */
+/*   Updated: 2024/10/07 15:52:31 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	var_len(char *str)
 	while (str[i] != '\0' && is_valid(str[i], len))
 	{
 		if (str[0] == '?' && i > 0)
-			break;
+			break ;
 		len++;
 		i++;
 	}
