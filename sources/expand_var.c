@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   expand_var.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 17:57:37 by asanni            #+#    #+#             */
-/*   Updated: 2024/10/07 17:14:08 by asanni           ###   ########.fr       */
+/*   Updated: 2024/10/07 19:40:29 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	init_vars(t_mini *minishell, t_aux *aux, t_ints *ints )
+static void	init_vars(t_mini *minishell, t_aux *aux, t_ints *ints )
 {
 	aux->result = ft_calloc(1, (calculate_size(minishell, aux->token) + 1));
 	ints->i = -1;

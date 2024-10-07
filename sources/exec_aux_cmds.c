@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   exec_aux_cmds.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 15:51:49 by gigardin          #+#    #+#             */
-/*   Updated: 2024/10/07 15:48:10 by asanni           ###   ########.fr       */
+/*   Updated: 2024/10/07 19:35:26 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int	check_file_path_access(char *path, int permission, char **options)
+static int	check_file_path_access(char *path, int permission, char **options)
 {
 	struct stat	path_stat;
 

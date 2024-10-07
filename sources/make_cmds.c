@@ -6,7 +6,7 @@
 /*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 16:39:02 by asanni            #+#    #+#             */
-/*   Updated: 2024/10/05 18:10:19 by gigardin         ###   ########.fr       */
+/*   Updated: 2024/10/07 19:52:21 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static char	**make_options(t_token **token, t_cmd **cmd,
 	return (opt_bckp);
 }
 
-void	make_one_cmd(t_cmd **cmd, t_token **token, t_mini *minishell,
+static void	make_one_cmd(t_cmd **cmd, t_token **token, t_mini *minishell,
 	unsigned int *count_cmd)
 {
 	t_cmd	*new_cmd;

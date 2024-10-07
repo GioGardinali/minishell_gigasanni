@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 16:47:40 by asanni            #+#    #+#             */
-/*   Updated: 2024/10/07 15:45:18 by asanni           ###   ########.fr       */
+/*   Updated: 2024/10/07 19:33:57 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	echo(t_cmd *cmd)
+static void	echo(t_cmd *cmd)
 {
 	int	i;
 
@@ -27,7 +27,7 @@ void	echo(t_cmd *cmd)
 	write(1, "\n", 1);
 }
 
-void	echo_nl(t_cmd *cmd)
+static void	echo_nl(t_cmd *cmd)
 {
 	int	i;
 

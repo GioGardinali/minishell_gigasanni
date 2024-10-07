@@ -19,13 +19,13 @@
 # include <stdio.h>
 # include <string.h>
 # include <stdbool.h>
-# include <readline/history.h> // para adicionar no historico
-# include <readline/readline.h> // para fazer tudo funcionar
-# include <sys/wait.h> // usar waitpid
-# include "../libft/libft.h" // libft
-# include <signal.h> // fuction signal
-# include <fcntl.h> // function open, close
-# include <sys/stat.h> // criação de diretórios
+# include <readline/history.h>
+# include <readline/readline.h>
+# include <sys/wait.h>
+# include "../libft/libft.h"
+# include <signal.h>
+# include <fcntl.h>
+# include <sys/stat.h>
 
 # define HERE_DOC_FILE "/tmp/heredoc"
 
@@ -136,9 +136,6 @@ typedef enum e_built
 }	t_built;
 
 //Functions
-
-t_mini			*ft_global_mini(t_mini *minishell);
-
 /*adjust spaces*/
 char			*adjust_spaces(char	*str);
 void			handle_quotes(char **input, char **res_ptr, bool *in_quotes);
@@ -154,7 +151,6 @@ void			execute_built_in(t_mini *minishell, t_cmd *cmd);
 
 /*cd*/
 int				execute_cd(t_mini *minishell);
-int				execute_pwd(void);
 
 /*echo*/
 int				execute_echo(t_cmd *cmd);
@@ -164,25 +160,21 @@ int				execute_env(t_mini *minishell);
 
 /* error functions*/
 void			free_split(char **split);
-void			free_cmds(t_cmd **cmd);
-void			free_matrix(char **matrix);
+void			print_error(char *var, char *msg);
 void			error_function(char *str);
 
 /*exec_aux_cmds*/
 void			close_std_int_and_out(t_mini *minishell);
 void			execve_function(t_mini *minihell, char *path, char **options);
 
+/*exec_redir*/
+int				apply_redirection(int type, char *file);
+int				apply_redirections(t_redir *redirs);
+
 /*exit*/
+int				exit_options(char **options);
 int				execute_exit(t_mini *minishell, t_cmd *cmd);
 int				update_exit_status(t_mini *minishell, int status);
-
-/*export_utils*/
-int				export_options(t_mini *minishell, t_cmd *cmd);
-int				print_export(t_mini *minishell);
-int				valid_var_name(char *str);
-
-/*export*/
-int				execute_export(t_mini *minishell, t_cmd *cmd);
 
 /*expand_var_utils1*/
 int				is_valid(char c, int position);
@@ -202,10 +194,19 @@ int				is_variable_expandable(char *token, int pos, int quotes);
 char			*expand_token(t_mini *minishell, t_aux *aux, int quotes);
 void			expand_all_tokens(t_mini *minishell);
 
+/*export_utils*/
+int				export_options(t_mini *minishell, t_cmd *cmd);
+int				print_export(t_mini *minishell);
+int				valid_var_name(char *str);
+
+/*export*/
+int				execute_export(t_mini *minishell, t_cmd *cmd);
+
 /*free_functions*/
+void			free_redirs(t_redir *redir);
 void			free_token(t_token **token);
 void			free_cmds(t_cmd **cmd);
-void			free_token_bc(t_token **token);
+void			free_matrix(char **matrix);
 void			free_env(t_env **env);
 
 /*free_functions2*/
@@ -221,64 +222,23 @@ void			clean_fork_heredoc(t_mini *minishell);
 char			**copy_env(t_mini *minishell, char **env_list);
 char			*verify_path(t_mini *minishell, char *str);
 
-/*input_verif*/
-void			skip_quotes(char	*str, int	*i);
-int				check_input(char *input);
-char			*check_path(t_mini *minishell);
-
-/*make_cmds_utils*/
-int				find_redir(t_token *token);
-int				return_len(t_token *token);
-int				search_options(t_token *token);
-void			last_cmd(t_cmd *temp, t_cmd **cmd, t_cmd *new_cmd);
-
-/*make_cmd*/
-void			make_cmds(t_cmd **cmd, t_token **token, t_mini *minishell);
-t_cmd			*get_last_cmd(t_cmd **cmd);
-// void			process_multiple_cmds(t_mini *minishell, int prev_fd);
+/*handle_cmds_redirects*/
+void			add_redir(t_redir **redirs, int type, char *file);
+void			handle_redirection(t_token **token, t_cmd **cmd);
 void			handle_heredoc(t_token **token, unsigned int *count_cmd,
 					t_cmd **cmd);
-void			handle_redirection(t_token **token, t_cmd **cmd);
-void			identify_type_cmd(t_token **token, t_cmd **cmd, char ***options,
-					unsigned int *count_cmd);
 
-/*make_token*/
-t_token			*get_last_token(t_token *token);
-void			make_tokens(t_token **token, char *split);
-int				count_token_type(t_mini *minishell, int type_to_count);
-int				has_token_type(t_mini minishell, int type_to_find);
-int				find_etype(char *str);
-
-/*make_env_list*/
-void			list_env(t_env **env, char *split);
-t_env			*get_last_env(t_env **token);
-
-/*normalize*/
-int				norme(t_mini *minishell, t_token *token);
-
-/*make_env_list*/
-void			make_env_list(t_mini *minishell);
-
-/*process _cmds*/
-void			process_multiple_cmds(t_mini *minishell, int prev_fd);
-/*process _cmds_utils*/
-void			setup_file_descriptors(int input_fd, int out_fd);
-void			close_fds(int *out_fd, int input_fd);
-
-/*unset*/
-int				execute_unset(t_mini *minishell, t_cmd *cmd);
-void			unset_env(t_env **env, char *key);
-
-/*signal*/
-void			setup_signals_heredoc(void);
-void			copy_heredoc(int signal);
-void			init_signals(void);
-void			redonimation_readline(int signal);
-
-/*heredoc_init*/
-t_heredoc		*init_heredoc(t_mini *minishell);
+/*heredoc_execution*/
+void			process_line(char *line, int fd, int quotes, t_mini *minishell);
+void			loop_exec_heredoc(int fd, int quotes, const char *str_end,
+					t_mini *minishell);
+void			print_error_heredoc(int i, const char *eof);
 int				execute_heredoc(const char *delimiter, unsigned int count_cmd,
 					t_heredoc *heredocs, t_token *token);
+
+/*heredoc_init*/
+t_mini			*ft_global_mini(t_mini *minishell);
+t_heredoc		*init_heredoc(t_mini *minishell);
 int				handle_fork(char *filename, const char *delimiter,
 					t_heredoc *heredocs);
 int				handle_filename(char *filename, t_heredoc *heredocs,
@@ -293,17 +253,68 @@ t_file_heredoc	*get_last_file(t_file_heredoc *array_file);
 char			*get_file(int is_first);
 t_file_heredoc	*new_file(char *file);
 
-/*heredoc_loop*/
-void			process_line(char *line, int fd, int quotes, t_mini *minishell);
-void			loop_exec_heredoc(int fd, int quotes, const char *str_end,
-					t_mini *minishell);
-void			print_error_heredoc(int i, const char *eof);
-
 /*heredoc_utils*/
 int				check_quotes_in_token(const char *str);
 char			*remove_quotes(const char *str_end);
 unsigned int	count_cmd(t_token *temp_token);
 void			apply_heredoc(t_cmd *cmd);
+
+/*input_verif*/
+void			skip_quotes(char	*str, int	*i);
+int				check_input(char *input);
+int				check_redirects(char *str);
+int				check_pipes(char *str);
+int				check_quotes(char *str);
+
+/*main*/
+int				main(int argc, char **argv, char **env);
+
+/*make_cmds_utils*/
+int				find_redir(t_token *token);
+int				return_len(t_token *token);
+t_cmd			*get_last_cmd(t_cmd **cmd);
+int				search_options(t_token *token);
+void			last_cmd(t_cmd *temp, t_cmd **cmd, t_cmd *new_cmd);
+
+/*make_cmd*/
+void			make_cmds(t_cmd **cmd, t_token **token, t_mini *minishell);
+void			identify_type_cmd(t_token **token, t_cmd **cmd, char ***options,
+					unsigned int *count_cmd);
+
+/*make_env_list*/
+void			list_env(t_env **env, char *split);
+t_env			*get_last_env(t_env **token);
+void			make_env_list(t_mini *minishell);
+
+/*make_token*/
+t_token			*get_last_token(t_token *token);
+void			make_tokens(t_token **token, char *split);
+int				count_token_type(t_mini *minishell, int type_to_count);
+int				has_token_type(t_mini minishell, int type_to_find);
+int				find_etype(char *str);
+
+/*normalize*/
+int				norme(t_mini *minishell, t_token *token);
+
+/*process _cmds*/
+void			process_multiple_cmds(t_mini *minishell, int prev_fd);
+
+/*process _cmds_utils*/
+void			setup_file_descriptors(int input_fd, int out_fd);
+void			close_fds(int *out_fd, int input_fd);
+
+/*pwd*/
+int				execute_pwd(void);
+
+/*unset*/
+int				execute_unset(t_mini *minishell, t_cmd *cmd);
+void			unset_env(t_env **env, char *key);
+
+/*signal*/
+void			setup_signals_heredoc(void);
+void			copy_heredoc(int signal);
+void			init_signals(void);
+void			redonimation_readline(int signal);
 
 /*exec redirect*/
 int				apply_redirections(t_redir *redirs);
