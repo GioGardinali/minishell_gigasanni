@@ -6,52 +6,48 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 17:57:37 by asanni            #+#    #+#             */
-/*   Updated: 2024/10/06 20:06:00 by asanni           ###   ########.fr       */
+/*   Updated: 2024/10/07 17:14:08 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
+void	init_vars(t_mini *minishell, t_aux *aux, t_ints *ints )
+{
+	aux->result = ft_calloc(1, (calculate_size(minishell, aux->token) + 1));
+	ints->i = -1;
+	ints->j = 0;
+	ints->double_q = 0;
+	ints->single_q = 0;
+	aux->j = &ints->j;
+	aux->i = &ints->i;
+}
+
 char	*expand_token(t_mini *minishell, t_aux *aux, int quotes)
 {
-	int		i;
-	int		j;
-	int		in_double_quotes;
-	int		in_single_quotes;
+	t_ints	ints;
 
-	aux->result = ft_calloc(1, (calculate_size(minishell, aux->token) + 1));
-	i = 0;
-	j = 0;
-	in_double_quotes = 0;
-	in_single_quotes = 0;
-	aux->i = &i;
-	aux->j = &j;
+	init_vars (minishell, aux, &ints);
 	if (!aux->result)
 		return (NULL);
-	while (aux->token[i])
+	while (aux->token[++ints.i])
 	{
-		if (quotes == 0 && aux->token[i] == '\'' && !in_double_quotes)
+		if (quotes == 0 && aux->token[ints.i] == '\'' && !ints.double_q)
+			ints.single_q = !ints.single_q;
+		else if (quotes == 0 && aux->token[ints.i] == '"' && !ints.single_q)
+			ints.double_q = !ints.double_q;
+		else if (aux->token[ints.i] == '$' && !ints.single_q)
 		{
-			in_single_quotes = !in_single_quotes;
-			i++;
-		}
-		else if (quotes == 0 && aux->token[i] == '"' && !in_single_quotes)
-		{
-			in_double_quotes = !in_double_quotes;
-			i++;
-		}
-		else if (aux->token[i] == '$' && !in_single_quotes)
-		{
-			if (is_variable_expandable(aux->token, i + 1, quotes))
-				expand_variable(minishell, aux);
-			else
+			if (is_variable_expandable(aux->token, ints.i + 1, quotes))
 			{
-				aux->result[j++] = '$';
-				i++;
+				expand_variable(minishell, aux);
+				ints.i--;
 			}
+			else
+				aux->result[ints.j++] = '$';
 		}
 		else
-			aux->result[j++] = aux->token[i++];
+			aux->result[ints.j++] = aux->token[ints.i];
 	}
 	return (aux->result);
 }

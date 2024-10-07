@@ -49,6 +49,14 @@ typedef struct s_aux
 	int		*j;
 }t_aux;
 
+typedef struct s_ints
+{
+	int		double_q;
+	int		single_q;
+	int		i;
+	int		j;
+}t_ints;
+
 typedef struct s_token
 {
 	char			*str;
@@ -255,6 +263,7 @@ void			make_env_list(t_mini *minishell);
 void			process_multiple_cmds(t_mini *minishell, int prev_fd);
 /*process _cmds_utils*/
 void			setup_file_descriptors(int input_fd, int out_fd);
+void			close_fds(int *out_fd, int input_fd);
 
 /*unset*/
 int				execute_unset(t_mini *minishell, t_cmd *cmd);

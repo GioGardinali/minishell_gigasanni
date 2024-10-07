@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/05 15:48:38 by asanni            #+#    #+#             */
-/*   Updated: 2024/10/07 15:50:21 by asanni           ###   ########.fr       */
+/*   Created: 2024/10/07 17:24:12 by asanni            #+#    #+#             */
+/*   Updated: 2024/10/07 17:25:00 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,21 +26,13 @@ void	execute_command(t_mini minishell, int input_fd, int *out_fd, t_cmd *cmd)
 	if (apply_redirections(cmd->redirs) == FAIL)
 	{
 		if (is_built_in(cmd->str))
-		{
-			if (out_fd[1] != -1)
-				close(out_fd[1]);
-			if (input_fd != -1)
-				close(input_fd);
-		}
+			close_fds(out_fd, input_fd);
 		clean_exec_comand(&minishell);
 		minishell.exit_status = 1;
 	}
 	else if (is_built_in (cmd->str) != 0)
 	{
-		if (out_fd[1] != -1)
-			close(out_fd[1]);
-		if (input_fd != -1)
-			close(input_fd);
+		close_fds(out_fd, input_fd);
 		execute_built_in(&minishell, cmd);
 		clean_exec_comand(&minishell);
 	}
