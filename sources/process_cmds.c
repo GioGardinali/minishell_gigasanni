@@ -6,13 +6,14 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 17:24:12 by asanni            #+#    #+#             */
-/*   Updated: 2024/10/07 20:01:30 by asanni           ###   ########.fr       */
+/*   Updated: 2024/10/07 20:19:22 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	execute_command(t_mini minishell, int input_fd, int *out_fd, t_cmd *cmd)
+static void	execute_command(t_mini minishell, int input_fd, int *out_fd,
+	t_cmd *cmd)
 {
 	char	*path;
 	char	**options;
@@ -66,13 +67,13 @@ pid_t	fork_and_execute(t_mini *minishell, int input_fd,
 	return (pid);
 }
 
-void	create_pipe(int *fd)
+static void	create_pipe(int *fd)
 {
 	if (pipe(fd) == -1)
 		exit(EXIT_FAILURE);
 }
 
-void	close_unused_fds(int input_fd, int *fd, t_cmd *cmd)
+static void	close_unused_fds(int input_fd, int *fd, t_cmd *cmd)
 {
 	if (input_fd != -1)
 		close(input_fd);

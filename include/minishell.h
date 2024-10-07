@@ -135,7 +135,7 @@ typedef enum e_built
 	EXIT,
 }	t_built;
 
-//Functions
+//******************************Functions********************************//
 /*adjust spaces*/
 char			*adjust_spaces(char	*str);
 void			handle_quotes(char **input, char **res_ptr, bool *in_quotes);
@@ -305,6 +305,7 @@ pid_t			fork_and_execute(t_mini *minishell, int input_fd,
 void			setup_file_descriptors(int input_fd, int out_fd);
 void			close_fds(int *out_fd, int input_fd);
 void			wait_and_update_exit_status(t_mini *minishell, int *pids);
+int				is_first_and_builtin(t_mini *minishell);
 int				return_pid(t_mini *minishell, t_cmd *cmd, int prev_fd,
 					int fd[]);
 
@@ -320,15 +321,5 @@ void			setup_signals_heredoc(void);
 void			copy_heredoc(int signal);
 void			init_signals(void);
 void			redonimation_readline(int signal);
-
-/*exec redirect*/
-int				apply_redirections(t_redir *redirs);
-void			execute_cmds_redir(t_cmd *cmd, char **env_content);
-int				is_first_and_builtin(t_mini *minishell);
-
-/*função perdida*/
-int				build_pwd(void);
-
-void			print_error(char *var, char *msg);
 
 #endif
