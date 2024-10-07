@@ -298,10 +298,15 @@ int				norme(t_mini *minishell, t_token *token);
 
 /*process _cmds*/
 void			process_multiple_cmds(t_mini *minishell, int prev_fd);
+pid_t			fork_and_execute(t_mini *minishell, int input_fd,
+					int *out_fd, t_cmd *cmd);
 
 /*process _cmds_utils*/
 void			setup_file_descriptors(int input_fd, int out_fd);
 void			close_fds(int *out_fd, int input_fd);
+void			wait_and_update_exit_status(t_mini *minishell, int *pids);
+int				return_pid(t_mini *minishell, t_cmd *cmd, int prev_fd,
+					int fd[]);
 
 /*pwd*/
 int				execute_pwd(void);
@@ -319,6 +324,7 @@ void			redonimation_readline(int signal);
 /*exec redirect*/
 int				apply_redirections(t_redir *redirs);
 void			execute_cmds_redir(t_cmd *cmd, char **env_content);
+int				is_first_and_builtin(t_mini *minishell);
 
 /*função perdida*/
 int				build_pwd(void);

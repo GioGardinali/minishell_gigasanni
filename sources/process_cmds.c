@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 17:24:12 by asanni            #+#    #+#             */
-/*   Updated: 2024/10/07 17:25:00 by asanni           ###   ########.fr       */
+/*   Updated: 2024/10/07 20:01:30 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,11 +72,11 @@ void	create_pipe(int *fd)
 		exit(EXIT_FAILURE);
 }
 
-void	close_unused_fds(int input_fd, int *fd)
+void	close_unused_fds(int input_fd, int *fd, t_cmd *cmd)
 {
 	if (input_fd != -1)
 		close(input_fd);
-	if (fd != NULL)
+	if (cmd->next != NULL)
 	{
 		close(fd[1]);
 		input_fd = fd[0];
@@ -86,7 +86,6 @@ void	close_unused_fds(int input_fd, int *fd)
 void	process_multiple_cmds(t_mini *minishell, int prev_fd)
 {
 	int			fd[2];
-	const int	mock_fd[] = {0, -1};
 	t_cmd		*current_cmd;
 	int			*pids;
 	int			i;
@@ -99,37 +98,16 @@ void	process_multiple_cmds(t_mini *minishell, int prev_fd)
 	{
 		if (current_cmd->next != NULL)
 			create_pipe(fd);
-		if (current_cmd->next == NULL)
-			pids[i] = fork_and_execute(minishell, prev_fd, (int *) mock_fd,
-					current_cmd);
-		else
-			pids[i] = fork_and_execute(minishell, prev_fd, fd, current_cmd);
-		if (current_cmd->next != NULL)
-			close_unused_fds(prev_fd, fd);
-		else
-			close_unused_fds(prev_fd, NULL);
+		pids[i++] = return_pid(minishell, current_cmd, prev_fd, fd);
+		close_unused_fds(prev_fd, fd, current_cmd);
 		if (current_cmd->next != NULL)
 			prev_fd = fd[0];
 		else
 			prev_fd = -1;
 		current_cmd = current_cmd->next;
-		i++;
 	}
-	current_cmd = minishell->cmd;
-	if (current_cmd->next == NULL && is_built_in(current_cmd->str) != 0)
-	{
-		update_exit_status(minishell, minishell->exit_status);
-		free(minishell->pids);
+	if (is_first_and_builtin(minishell) == 1)
 		return ;
-	}
 	pids[i] = -42;
-	i = 0;
-	while (pids[i] != -42)
-	{
-		waitpid(pids[i], &minishell->exit_status, 0);
-		minishell->exit_status = WEXITSTATUS(minishell->exit_status);
-		update_exit_status(minishell, minishell->exit_status);
-		i++;
-	}
-	free(pids);
+	wait_and_update_exit_status(minishell, pids);
 }
