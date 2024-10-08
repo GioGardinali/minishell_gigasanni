@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 19:27:26 by asanni            #+#    #+#             */
-/*   Updated: 2024/09/29 04:38:06 by asanni           ###   ########.fr       */
+/*   Updated: 2024/10/08 19:03:32 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,6 @@ void	make_env_list(t_mini *minishell)
 		list_env(&minishell->env_exp, minishell->env_content[i]);
 		i++;
 	}
+	free(minishell->env_content);
+	minishell->env_content = NULL;
 }

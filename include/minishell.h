@@ -221,6 +221,9 @@ void			clean_fork_heredoc(t_mini *minishell);
 /*get_path*/
 char			**copy_env(t_mini *minishell, char **env_list);
 char			*verify_path(t_mini *minishell, char *str);
+char			*search_path(char **s, char *str);
+char			*remove_path(char *str);
+char			*return_path(char *path_line, char *str);
 
 /*handle_cmds_redirects*/
 void			add_redir(t_redir **redirs, int type, char *file);
@@ -309,6 +312,9 @@ int				is_first_and_builtin(t_mini *minishell);
 int				return_pid(t_mini *minishell, t_cmd *cmd, int prev_fd,
 					int fd[]);
 
+/*process_cmds_utils1*/
+void			fill_env_content(t_mini *minishell);
+
 /*pwd*/
 int				execute_pwd(void);
 
@@ -321,5 +327,8 @@ void			setup_signals_heredoc(void);
 void			copy_heredoc(int signal);
 void			init_signals(void);
 void			redonimation_readline(int signal);
+
+/*verify_path*/
+char			*verify_path(t_mini *minishell, char *str);
 
 #endif

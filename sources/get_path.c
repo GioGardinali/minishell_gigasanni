@@ -6,7 +6,7 @@
 /*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 19:23:18 by asanni            #+#    #+#             */
-/*   Updated: 2024/10/07 15:48:46 by asanni           ###   ########.fr       */
+/*   Updated: 2024/10/08 20:22:41 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,10 @@ char	**copy_env(t_mini *minishell, char **env_list)
 	return (minishell->env_content);
 }
 
-static char	*search_path(char **s, char *str)
+char	*search_path(char **s, char *str)
 {
+	if (s == NULL || *s == NULL)
+		return (NULL);
 	while (*s != NULL)
 	{
 		if (ft_strncmp(*s, str, 4) == 0)
@@ -41,7 +43,7 @@ static char	*search_path(char **s, char *str)
 	return (NULL);
 }
 
-static char	*remove_path(char *str)
+char	*remove_path(char *str)
 {
 	char	*path;
 
@@ -64,18 +66,16 @@ static char	*append_slash(char *path, char *cmd)
 	return (new_str);
 }
 
-char	*verify_path(t_mini *minishell, char *str)
+char	*return_path(char *path_line, char *str)
 {
 	char	**str_path;
-	char	*path_line;
 	char	*path;
 	int		result;
 	int		i;
 
-	if (ft_strchr(str, '/') != NULL || str == NULL)
-		return (ft_strdup(str));
-	path_line = search_path(minishell->env_content, "PATH");
 	str_path = ft_split(remove_path(path_line), ':');
+	if (!str_path)
+		return (NULL);
 	result = 1;
 	i = 0;
 	while (result != 0)

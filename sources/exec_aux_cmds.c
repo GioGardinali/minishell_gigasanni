@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_aux_cmds.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 15:51:49 by gigardin          #+#    #+#             */
-/*   Updated: 2024/10/07 19:35:26 by gigardin         ###   ########.fr       */
+/*   Updated: 2024/10/08 19:38:08 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void	execve_function(t_mini *minishell, char *path, char **options)
 	status = check_file_path_access(path, X_OK, options);
 	if (status == 0)
 	{
+		fill_env_content(minishell);
 		execve(path, options, minishell->env_content);
 		minishell->exit_status = 1;
 	}

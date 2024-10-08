@@ -56,10 +56,12 @@ sources/make_token.c\
 sources/normalize_input.c\
 sources/process_cmds.c\
 sources/process_cmds_utils.c\
+sources/process_cmds_utils1.c\
+sources/pwd.c\
 sources/signal.c\
 sources/unset.c\
-sources/pwd.c\
 sources/exec_aux_cmds.c\
+sources/verify_path.c\
 
 #--------------RULES----------------------------#
 

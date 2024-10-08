@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 14:18:26 by asanni            #+#    #+#             */
-/*   Updated: 2024/10/07 19:41:05 by gigardin         ###   ########.fr       */
+/*   Updated: 2024/10/08 18:18:36 by asanni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ static void	put_new_value(t_mini *minishell, char *var)
 
 	current = minishell->env_exp;
 	split = ft_split_two(var, '=');
-	if (!split || !split[0])
+	if (!split || !split[0] || !split[1])
 	{
 		free_matrix(split);
 		return ;
