@@ -41,6 +41,20 @@ void	unset_env(t_env **env, char *key)
 	}
 }
 
+int	exclude_valid_var_name(char *name)
+{
+	int	i;
+
+	i = 0;
+	while (name[i] != '\0')
+	{
+		if (!is_valid(name[i], i))
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 int	execute_unset(t_mini *minishell, t_cmd *cmd)
 {
 	int	i;
@@ -50,11 +64,11 @@ int	execute_unset(t_mini *minishell, t_cmd *cmd)
 	status = 0;
 	while (cmd->options[i] != NULL)
 	{
-		if (valid_var_name(cmd->options[i]) == 1)
+		if (exclude_valid_var_name(cmd->options[i]) == 1)
 			unset_env(&minishell->env_exp, cmd->options[i]);
 		else
 		{
-			ft_putstr_fd("it is not a valid identifier", 2);
+			print_error(cmd->options[i], ": is not a valid option");
 			status = 1;
 		}
 		i++;

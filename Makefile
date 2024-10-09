@@ -79,7 +79,7 @@ comp_lib:
 $(OBJFOLDER):
 	@mkdir $(OBJFOLDER)
 
-$(NAME): $(OBJFILES)
+$(NAME): $(OBJFILES) $(LIBFT)
 	$(CC) $(OBJFILES) $(H_LIB) $(LIBFT) $(LINCLUDES) $(CFLAGS) -o $(NAME) -g -l $(RL)
 
 $(OBJFOLDER)%.o : $(SOURCES)%.c

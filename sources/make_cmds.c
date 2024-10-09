@@ -16,6 +16,7 @@ void	identify_type_cmd(t_token **token, t_cmd **cmd, char ***options,
 	unsigned int *count_cmd)
 {
 	t_token	*temp_save;
+	char	**split;
 
 	if (find_redir(*token) == 1)
 	{
@@ -29,6 +30,12 @@ void	identify_type_cmd(t_token **token, t_cmd **cmd, char ***options,
 	}
 	else
 	{
+		if ((*cmd)->str == NULL)
+		{
+			split = ft_split((*token)->str, ' ');
+			(*cmd)->str = ft_strdup(split [0]);
+			free_matrix(split);
+		}
 		**options = ft_strdup((*token)->str);
 		(*options)++;
 		*token = (*token)->next;
@@ -59,7 +66,6 @@ static void	make_one_cmd(t_cmd **cmd, t_token **token, t_mini *minishell,
 {
 	t_cmd	*new_cmd;
 	t_cmd	*temp;
-	char	**split;
 
 	temp = NULL;
 	new_cmd = ft_calloc(sizeof(t_cmd), 1);
@@ -73,9 +79,6 @@ static void	make_one_cmd(t_cmd **cmd, t_token **token, t_mini *minishell,
 	}
 	else
 		last_cmd(temp, cmd, new_cmd);
-	split = ft_split((*token)->str, ' ');
-	new_cmd->str = ft_strdup(split [0]);
-	free_matrix(split);
 	if (*cmd == new_cmd)
 		new_cmd->heredocs = init_heredoc(minishell);
 	else

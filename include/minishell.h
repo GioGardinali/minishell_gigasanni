@@ -164,14 +164,15 @@ void			print_error(char *var, char *msg);
 void			error_function(char *str);
 
 /*exec_aux_cmds*/
+void			execve_function(t_mini *minishell, char *path, char **options);
 void			close_std_int_and_out(t_mini *minishell);
-void			execve_function(t_mini *minihell, char *path, char **options);
 
 /*exec_redir*/
 int				apply_redirection(int type, char *file);
 int				apply_redirections(t_redir *redirs);
 
 /*exit*/
+int				kill_all(t_mini *minishell, int status);
 int				exit_options(char **options);
 int				execute_exit(t_mini *minishell, t_cmd *cmd);
 int				update_exit_status(t_mini *minishell, int status);
@@ -195,11 +196,13 @@ char			*expand_token(t_mini *minishell, t_aux *aux, int quotes);
 void			expand_all_tokens(t_mini *minishell);
 
 /*export_utils*/
-int				export_options(t_mini *minishell, t_cmd *cmd);
-int				print_export(t_mini *minishell);
 int				valid_var_name(char *str);
+t_env			*duplicate_env(t_env *env_exp);
+int				export_options(t_mini *minishell, t_cmd *cmd);
+void			put_new_value(t_mini *minishell, char *var);
 
 /*export*/
+int				print_export(t_mini *minishell);
 int				execute_export(t_mini *minishell, t_cmd *cmd);
 
 /*free_functions*/

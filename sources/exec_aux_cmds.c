@@ -18,6 +18,8 @@ static int	check_file_path_access(char *path, int permission, char **options)
 
 	if (!path)
 	{
+		if (!options || !*options)
+			return (2);
 		print_error(options[0], ": Command not found");
 		return (127);
 	}

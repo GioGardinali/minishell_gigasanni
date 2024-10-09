@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asanni <asanni@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gigardin <gigardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 14:18:26 by asanni            #+#    #+#             */
-/*   Updated: 2024/10/08 18:18:36 by asanni           ###   ########.fr       */
+/*   Updated: 2024/10/09 19:10:41 by gigardin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static int	var_exists(t_mini *minishell, char *str)
 	return (0);
 }
 
-static void	put_new_value(t_mini *minishell, char *var)
+void	put_new_value(t_mini *minishell, char *var)
 {
 	t_env	*current;
 	char	**split;
@@ -117,20 +117,23 @@ int	export_options(t_mini *minishell, t_cmd *cmd)
 	return (status);
 }
 
-int	print_export(t_mini *minishell)
+t_env	*duplicate_env(t_env *env_exp)
 {
-	t_env	*current;
+	t_env	*start;
+	char	var[10000];
 
-	current = minishell->env_exp;
-	sort_env_list(&minishell->env_exp);
-	current = current->next;
-	while (current != NULL)
+	start = NULL;
+	while (env_exp)
 	{
-		if (current->content != NULL)
-			ft_printf("declare -x %s=\"%s\"\n", current->key, current->content);
-		else
-			ft_printf("declare -x %s\n", current->key);
-		current = current->next;
+		ft_memmove(var, env_exp->key, ft_strlen(env_exp->key) + 1);
+		if (env_exp->content)
+		{
+			ft_memmove(&var[ft_strlen(var)], "=", 2);
+			ft_memmove(&var[ft_strlen(var)], env_exp->content,
+				ft_strlen(env_exp->content) + 1);
+		}
+		list_env(&start, var);
+		env_exp = env_exp->next;
 	}
-	return (0);
+	return (start);
 }
