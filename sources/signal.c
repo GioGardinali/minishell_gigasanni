@@ -18,15 +18,23 @@ void	setup_signals_heredoc(void)
 	signal(SIGQUIT, SIG_IGN);
 }
 
-void	copy_heredoc(int signal)
+void	sig_quit_handle(int signal)
 {
-	t_mini	*minishell;
+	(void)signal;
+	ft_putstr_fd("Quit (core dumped)\n", 1);
+}
 
-	minishell = ft_global_mini(NULL);
-	if (signal == SIGINT)
+void	execution_signals(int pid)
+{
+	if (pid == 0)
 	{
-		clean_heredoc_files(minishell->cmd);
-		exit(EXIT_FAILURE);
+		signal(SIGINT, SIG_DFL);
+		signal(SIGQUIT, SIG_DFL);
+	}
+	else
+	{
+		signal(SIGQUIT, sig_quit_handle);
+		signal(SIGINT, SIG_IGN);
 	}
 }
 
@@ -34,7 +42,6 @@ void	init_signals(void)
 {
 	signal(SIGINT, redonimation_readline);
 	signal(SIGQUIT, SIG_IGN);
-	signal(SIGPIPE, SIG_IGN);
 }
 
 void	redonimation_readline(int signal)

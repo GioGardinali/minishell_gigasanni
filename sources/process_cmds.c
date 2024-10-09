@@ -60,6 +60,7 @@ pid_t	fork_and_execute(t_mini *minishell, int input_fd,
 		return (minishell->exit_status);
 	}
 	pid = fork();
+	execution_signals(pid);
 	if (pid == -1)
 		exit(EXIT_FAILURE);
 	if (pid == 0)

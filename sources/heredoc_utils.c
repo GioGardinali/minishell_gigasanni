@@ -95,3 +95,15 @@ void	apply_heredoc(t_cmd *cmd)
 		i++;
 	}
 }
+
+void	copy_heredoc(int signal)
+{
+	t_mini	*minishell;
+
+	minishell = ft_global_mini(NULL);
+	if (signal == SIGINT)
+	{
+		clean_heredoc_files(minishell->cmd);
+		exit(EXIT_FAILURE);
+	}
+}

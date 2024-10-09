@@ -23,8 +23,7 @@ static int	check_file_path_access(char *path, int permission, char **options)
 		print_error(options[0], ": Command not found");
 		return (127);
 	}
-	stat(path, &path_stat);
-	if (access(path, F_OK) != 0)
+	if (stat(path, &path_stat) || access(path, F_OK) != 0)
 	{
 		print_error(options[0], ": No such file or directory");
 		return (127);

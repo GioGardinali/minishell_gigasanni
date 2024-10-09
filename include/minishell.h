@@ -330,6 +330,7 @@ void			setup_signals_heredoc(void);
 void			copy_heredoc(int signal);
 void			init_signals(void);
 void			redonimation_readline(int signal);
+void			execution_signals(int pid);
 
 /*verify_path*/
 char			*verify_path(t_mini *minishell, char *str);
